@@ -1,0 +1,64 @@
+{
+    "columns": [
+        {
+            "category": "Common Actions",
+            "columnid": "col1",
+            "sections": [
+                { 
+                    "subcategory": "Google - lilogia", 
+                    "links": [
+                        { 
+                            "title": "Mail",
+                            "url": "https://mail.google.com/mail/u/0/"
+                        },
+                        { 
+                            "title": "Calendar",
+                            "url": "https://calendar.google.com/calendar/b/0/"
+                        },
+                        {
+                            "title": "Drive",
+                            "url": "https://drive.google.com/u/0/"
+                        }
+                    ]
+                },
+                { 
+                    "subcategory": "Google - linh.hong.sg", 
+                    "links": [
+                        { 
+                            "title": "Mail",
+                            "url": "https://mail.google.com/mail/u/1/"
+                        },
+                        { 
+                            "title": "Calendar",
+                            "url": "https://calendar.google.com/calendar/b/1/"
+                        },
+                        {
+                            "title": "Drive",
+                            "url": "https://drive.google.com/u/1/"
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
+            "category": "Workshop - IT",
+            "columnid": "col2",
+            "sections": [
+                {
+                    "subcategory": "IT News",
+                    "links": [
+                        {
+                            "title": "Dzone",
+                            "url": "https://dzone.com/"
+                        },
+                        {
+                            "title": "The New Stack",
+                            "url": "https://thenewstack.io/category/frontend-dev/"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
