@@ -8,24 +8,45 @@ function loadPage(pageConfig) {
     for (let col of pageConfig.columns) {
         let elemColumn = document.getElementById(col.columnid);
         elemColumn.innerHTML = "";
-        elemColumn.appendChild(document.createTextNode(col.category));
-        let ul = document.createElement('ul');
-        elemColumn.append(ul);
+
+        // Show Category
+        const divCard = document.createElement('div');
+        divCard.className = "card";
+        divCard.innerHTML = `
+            <div class='card-header text-bg-info'>
+                <h5 class='card-title'>${col.category}</h5>
+            </div>
+        `;
+
+        // Show each Sub category & List
         for (let section of col.sections) {
-            ul.appendChild(document.createTextNode(section.subcategory));
+            const divCardBody = document.createElement('div');
+            divCardBody.className = "card-body";
+            let innerHTMLForCardBody= `
+                <h6 class='card-title'>${section.subcategory}</h6>
+                <ul class='list-group list-group-flush'>`;
+                
             for (let link of section.links) {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a>`;
-                ul.append(li);
+                innerHTMLForCardBody += `
+                    <li class='list-group-item'>
+                        <a href="${link.url}" target="_blank">${link.title}</a>
+                    </li>`;
             }
             
+            innerHTMLForCardBody += `
+                </ul>`;
+
+            divCardBody.innerHTML = innerHTMLForCardBody;
+            divCard.append(divCardBody);
         }
+
+        elemColumn.append(divCard);
     }
 }
 
 window.onload = () => {
     loadPage(myPage);
-    setTimeout(loadPageConfig, 0);
+    setTimeout(loadPageConfig, 2000);
 }        
 
 function loadPageConfig() {
