@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  script="window.onload = function () { loadPage(myPage, true); setTimeout(loadPageConfig, 0, true); }"
+  div(class='container-fluid')
+    form(name="onepage")
+      div(class='row')
+        div(class='col-6', id='col0')
+          div(class='card')
+            div(class='card-header text-bg-primary')
+              h5(class='card-title')="Category"
+            div(class='card-body')
+              h6(class='card-title')="Sub category 1"
+              ul(class='list-group')
+                li(class='list-group-item')
+                  a(href='http://vnexpress.net')="Vnexpress.net"
+                li(class='list-group-item')="A second item"
+                li(class='list-group-item')="A third item"
+                li(class='list-group-item')="A fourth item"
+                li(class='list-group-item')="And a fifth one"
+            div(class='card-body')
+              h6(class='card-title')="Sub category 1"
+              ul(class='list-group')
+                li(class='list-group-item')
+                  a(href='http://vnexpress.net')="Vnexpress.net"
+                li(class='list-group-item')="A second item"
+                li(class='list-group-item')="A third item"
+                li(class='list-group-item')="A fourth item"
+                li(class='list-group-item')="And a fifth one"
+        div(class='col-6', id='col1')
+        div(class='col-6', id='col2')
+        div(class='col-6', id='col3')
+        div(class='col-6', id='col4')
+  form(name="addNewLinkForm")
+    div(class="modal fade", id="addNewLinkModal", data-bs-backdrop="static", data-bs-keyboard="false", tabindex="-1", aria-labelledby="addNewLinkModal_Label", aria-hidden="true")
+      div(class="modal-dialog")
+        div(class="modal-content")
+          div(class="modal-header")
+            h1(class="modal-title fs-5", id="addNewLinkModal_Label")="Add New Link"
+            button(type="button", class="btn-close", data-bs-dismiss="modal", aria-label="Close")
+          div(class="modal-body")
+            form
+              div(class="mb-3")
+                label(class="col-form-label", for="title")="Title:"
+                input(class="form-control", name="title", type="text", value="vnexpress.net")
+              div(class="mb-3")
+                label(class="col-form-label", for="link")="Link:"
+                input(class="form-control", name="link", type="text", placeholder="http://", value="https://vnexpress.net")
+          div(class="modal-footer")
+            button(type="button", class="btn btn-light", data-bs-dismiss="modal")="Close"
+            button(type="button", class="btn btn-primary", name="addNewLinkModal_SaveBut", data-bs-dismiss="modal")="Save"

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const editRouter = require('./routes/edit');
 const usersRouter = require('./routes/users');
 const pageConfigRouter = require('./routes/pageConfig');
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/edit', editRouter);
 app.use('/pageconfig', pageConfigRouter);
 app.use('/users', usersRouter);
 
