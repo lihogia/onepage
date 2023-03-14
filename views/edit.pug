@@ -31,21 +31,22 @@ block content
         div(class='col-6', id='col2')
         div(class='col-6', id='col3')
         div(class='col-6', id='col4')
-  form(name="addNewLinkForm")
-    div(class="modal fade", id="addNewLinkModal", data-bs-backdrop="static", data-bs-keyboard="false", tabindex="-1", aria-labelledby="addNewLinkModal_Label", aria-hidden="true")
-      div(class="modal-dialog")
-        div(class="modal-content")
-          div(class="modal-header")
-            h1(class="modal-title fs-5", id="addNewLinkModal_Label")="Add New Link"
-            button(type="button", class="btn-close", data-bs-dismiss="modal", aria-label="Close")
-          div(class="modal-body")
-            form
-              div(class="mb-3")
-                label(class="col-form-label", for="title")="Title:"
-                input(class="form-control", name="title", type="text", value="vnexpress.net")
-              div(class="mb-3")
-                label(class="col-form-label", for="link")="Link:"
-                input(class="form-control", name="link", type="text", placeholder="http://", value="https://vnexpress.net")
-          div(class="modal-footer")
-            button(type="button", class="btn btn-light", data-bs-dismiss="modal")="Close"
-            button(type="button", class="btn btn-primary", name="addNewLinkModal_SaveBut", data-bs-dismiss="modal")="Save"
+  div(id="forms")
+    form(name="addNewLinkForm")
+      div(class="modal fade", id="addNewLinkModal", data-bs-backdrop="static", data-bs-keyboard="false", tabindex="-1", aria-labelledby="addNewLinkModal_Label", aria-hidden="true")
+        div(class="modal-dialog")
+          div(class="modal-content")
+            div(class="modal-header")
+              h1(class="modal-title fs-5", id="addNewLinkModal_Label")="Add New Link"
+              button(type="button", class="btn-close", data-bs-dismiss="modal", aria-label="Close")
+            div(class="modal-body")
+              form
+                div(class="mb-3")
+                  label(class="col-form-label", for="title")="Title:"
+                  input(class="form-control", name="title", type="text", value="vnexpress.net")
+                div(class="mb-3")
+                  label(class="col-form-label", for="link")="Link:"
+                  input(class="form-control", name="link", type="text", placeholder="http://", value="https://vnexpress.net")
+            div(class="modal-footer")
+              button(type="button", class="btn btn-light", data-bs-dismiss="modal")="Close"
+              button(type="button", class="btn btn-primary", name="addNewLinkModal_SaveBut", data-bs-dismiss="modal")="Save"

@@ -76,7 +76,8 @@ class Section {
         this.uiSectionElement.innerHTML = `
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Sub category" name="${this.uiSectionElement.id}_subcategory" value="${this.subcategory}">
-                <a class="btn btn-outline-primary" href="#" role="button" data-bs-toggle="modal" data-bs-target="#addNewLinkModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-file-earmark-plus fs-5"></i></a>   
+                <a class="btn btn-outline-primary" href="#" role="button" data-bs-toggle="modal" data-bs-target="#addNewLinkModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-file-earmark-plus fs-5"></i></a>
+                <a class="btn btn-outline-primary" href="#" role="button" data-bs-toggle="modal" data-bs-target="#addNewLinkModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-trash fs-5"></i></a>
             </div>
             <ul class='list-group list-group-flush' id='${this.uiSectionElement.id}_ul'></ul>`;
         this.pushLinks(this.links);
@@ -120,7 +121,7 @@ class Column {
             <div class="card-header text-bg-primary d-flex justify-content-between align-items-center">
                 <input type="text" class="form-control m-1" placeholder="Category" value="${this.category}">
                 <span class="badge bg-primary rounded-pill">
-                    <a class="btn btn-primary " href="#" role="button"><i class="bi bi-save fs-5"></i></a>
+                    <a class="btn btn-primary " href="#" role="button" data-bs-toggle="modal" data-bs-target="#saveOnePageModal"><i class="bi bi-save fs-5"></i></a>
                     <a class="btn btn-primary " href="#" role="button" title="More Section"><i class="bi bi-file-earmark-plus fs-5"></i></a>
                     <a class="btn btn-primary " href="#" role="button"><i class="bi bi-trash fs-5"></i></a>
                 </span>
@@ -164,6 +165,40 @@ class OnePage {
             }
             this.columns.push(new Column(col.columnid, col.category, sections));
         }
+    }
+
+    stringify() { // create a pure JSON object
+        const pureOnePage = {
+            columns: []
+        };
+
+        for (let col of this.columns) {
+            const pureSections = [];
+            for (let sec of col.sections) {
+                const pureLinks = [];
+                for (let link of sec.links) {
+                    const pureLink = {
+                        title: link.title,
+                        url: link.url
+                    };
+                    pureLinks.push(pureLink);
+                }
+                const pureSection = {
+                    subcategory: sec.subcategory,
+                    links: pureLinks
+                };
+                pureSections.push(pureSection);
+            }
+            const pureCol = {
+                category: col.category,
+                columnid: col.columnid,
+                sections: pureSections
+            }
+            pureOnePage.columns.push(pureCol);
+        }
+
+        console.log(pureOnePage);
+        return JSON.stringify(pureOnePage);
     }
 
     load() {
@@ -212,9 +247,51 @@ class OnePage {
                 elemColumn.append(col.uiColumnElement);
             }
             activateAddLinkModal('addNewLinkModal');
+            createSaveForm();
         }
     }
 
+}
+
+function createSaveForm() {
+    const saveForm = document.createElement('form');
+    saveForm.name = "SaveOnePageForm";
+    /*saveForm.method = "POST";
+    saveForm.enctype= "multipart/form-data";
+    saveForm.action = "/pageconfig";*/
+    saveForm.innerHTML = `
+        <div class="modal fade" id="saveOnePageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="saveOnePage_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Are you sure to Save the current data?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </div>
+                    <div class="modal-body">
+                        The current data will be stored in the config file.
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" readonly name="saveOnePageForm_onePageData">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" name="saveOnePageForm_yesBut">Yes</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+    const yesBut = saveForm.elements["saveOnePageForm_yesBut"];
+    yesBut.onclick = function() {
+        console.log("Yes is clicked !");
+        const dataToPost = saveForm.elements.saveOnePageForm_onePageData;
+        
+        dataToPost.value = myPage.stringify();
+        //console.log(dataToPost.value);
+        //saveForm.submit();
+        savePageConfig(saveForm);
+    }
+    const forms = document.getElementById("forms");
+    forms.append(saveForm);
 }
 
 function insert(arr, index = 0, item) {
@@ -343,10 +420,28 @@ function loadPage(onePage, isEdit = false) {
     }     
 }
 
-function loadPageConfig(isEdit = false) {
-    const url = "http://localhost:3030/pageconfig";
+const URL_PAGE_CONFIG = "http://localhost:3030/pageconfig";
 
-    const promise = fetch(url)
+function savePageConfig(form) {
+    const formData = new FormData(form);
+
+    const promise = fetch(URL_PAGE_CONFIG, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.info(`Save successful! ${result.status}`);
+            console.info(result);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function loadPageConfig(isEdit = false) {
+
+    const promise = fetch(URL_PAGE_CONFIG)
         .then(response => response.json())
         .then(result => {
             console.info('Successful load JSON data');
@@ -362,5 +457,29 @@ function loadPageConfig(isEdit = false) {
 const EMPTY_PAGE = {
     columns: []
 };
+
+const TEST_PAGE = {
+    columns: [
+        {
+            "category": "Test Category",
+            "columnid": "col0",
+            "sections": [
+                {
+                    "subcategory": "sub test",
+                    "links": [
+                        {
+                            "title": "Dzone",
+                            "url": "https://dzone.com/"
+                        },
+                        {
+                            "title": "The New Stack",
+                            "url": "https://thenewstack.io/category/frontend-dev/"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
 
 let myPage = new OnePage(EMPTY_PAGE);
