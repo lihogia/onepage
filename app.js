@@ -8,6 +8,8 @@ const indexRouter = require('./routes/index');
 const editRouter = require('./routes/edit');
 const usersRouter = require('./routes/users');
 const pageConfigRouter = require('./routes/pageConfig');
+const randomRouterV1 = require('./routes/random_v1');
+const randomRouter = require('./routes/random');
 
 const app = express();
 
@@ -26,12 +28,12 @@ app.use('/', indexRouter);
 app.use('/edit', editRouter);
 app.use('/pageconfig', pageConfigRouter);
 app.use('/users', usersRouter);
+app.use('/api/random', randomRouter);
+app.use('/api/random/v1', randomRouterV1);
 
-
-
-app.use('/test', function(req, res) {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello, world");
+app.use('/test', function(req, res, next) {
+  console.log('this is to error.');
+  next();
 });
 
 

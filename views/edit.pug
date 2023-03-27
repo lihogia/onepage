@@ -2,10 +2,10 @@ extends layout
 
 block content
   script="window.onload = function () { loadPage(myPage, true); setTimeout(loadPageConfig, 0, true); }"
-  div(class='container-fluid')
+  div(class='container-op')
     form(name="onepage")
       div(class='row')
-        div(class='col-6', id='col0')
+        div(class='col-op-e', id='col0')
           div(class='card')
             div(class='card-header text-bg-primary')
               h5(class='card-title')="Category"
@@ -27,10 +27,10 @@ block content
                 li(class='list-group-item')="A third item"
                 li(class='list-group-item')="A fourth item"
                 li(class='list-group-item')="And a fifth one"
-        div(class='col-6', id='col1')
-        div(class='col-6', id='col2')
-        div(class='col-6', id='col3')
-        div(class='col-6', id='col4')
+        div(class='col-op-e', id='col1')
+        div(class='col-op-e', id='col2')
+        div(class='col-op-e', id='col3')
+        div(class='col-op-e', id='col4')
   div(id="forms")
     form(name="addNewLinkForm")
       div(class="modal fade", id="addNewLinkModal", data-bs-backdrop="static", data-bs-keyboard="false", tabindex="-1", aria-labelledby="addNewLinkModal_Label", aria-hidden="true")

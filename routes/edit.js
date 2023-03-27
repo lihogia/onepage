@@ -5,7 +5,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   try {
-    res.render('edit', { title: 'One Page Editing'});
+    res.render('edit', { title: 'One Page Editing', isEditActive: ' active'});
   }catch (err) {
     next(createError(500));
   }
