@@ -59,7 +59,7 @@ class Link {
                 <input type="text" name="${this.uiLinkElement.id}_title" class="form-control" placeholder="Link Title" aria-label="Link Title" value="${this.title}">
                 <span class="input-group-text"><i class="bi bi-link fs-5"></i></span>
                 <input type="text" name="${this.uiLinkElement.id}_url" class="form-control" placeholder="http://www.xyz.com" aria-label="Link" value="${this.url}">
-                <a class="btn btn-outline-success" href="#" role="button" id="${this.uiLinkElement.id}_a" data-bs-link-id="${this.uiLinkElement.id}" data-bs-toggle="modal" data-bs-target="#deleteALinkFormModal"><i class="bi bi-trash fs-6"></i></a>
+                <a class="btn btn-outline-success" href="#" role="button" title="Remove this Link" id="${this.uiLinkElement.id}_a" data-bs-link-id="${this.uiLinkElement.id}" data-bs-toggle="modal" data-bs-target="#deleteALinkFormModal"><i class="bi bi-trash fs-6"></i></a>
                 
             </div>`;
 
@@ -94,8 +94,8 @@ class Section {
         this.uiSectionElement.innerHTML = `
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Sub category" name="${this.uiSectionElement.id}_subcategory" value="${this.subcategory}">
-                <a class="btn btn-outline-success" href="#" role="button" data-bs-toggle="modal" data-bs-target="#addNewLinkModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-file-earmark-plus fs-5"></i></a>
-                <a class="btn btn-outline-success" href="#" role="button" data-bs-toggle="modal" data-bs-target="#deleteASectionFormModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-trash fs-5"></i></a>
+                <a class="btn btn-outline-success" href="#" role="button" title="Add new Link" data-bs-toggle="modal" data-bs-target="#addNewLinkModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-file-earmark-plus fs-5"></i></a>
+                <a class="btn btn-outline-success" href="#" role="button" title="Remove this Section" data-bs-toggle="modal" data-bs-target="#deleteASectionFormModal" data-bs-section-id="${this.uiSectionElement.id}"><i class="bi bi-trash fs-5"></i></a>
             </div>
             <ul class='list-group list-group-flush' id='${this.uiSectionElement.id}_ul'></ul>`;
         this.pushLinks(this.links);
@@ -107,8 +107,6 @@ class Section {
             const [cindex, sindex] = parseUIIDs(sectionid);
             myPage.columns[cindex].sections[sindex].subcategory = this.value;
         }
-
-        
     }
 
     pushLinks(links) {
@@ -146,13 +144,21 @@ class Column {
         this.uiColumnElement.className = "card";
         this.uiColumnElement.innerHTML = `
             <div class="card-header-op-e">
-                <input type="text" class="form-control m-1" placeholder="Category" value="${this.category}">
+                <input type="text" class="form-control m-1" placeholder="Category" name="${this.columnid}_category" value="${this.category}">
                 <span class="badge-e">
-                    <a class="button-e" href="#" role="button" data-bs-toggle="modal" data-bs-target="#saveOnePageFormModal"><i class="icon-save-big"></i></a>
-                    <a class="button-e" href="#" role="button" title="More Section" data-bs-toggle="modal" data-bs-target="#addNewSectionFormModal" data-bs-column-id="${this.columnid}"><i class="icon-add-big"></i></a>
-                    <a class="button-e" href="#" role="button"><i class="icon-delete-big"></i></a>
+                    <a class="button-e" href="#" role="button" title="Add new Section" data-bs-toggle="modal" data-bs-target="#addNewSectionFormModal" data-bs-column-id="${this.columnid}"><i class="icon-add-big"></i></a>
+                    <a class="button-e" href="#" role="button" title="Remove this Column" data-bs-toggle="modal" data-bs-target="#deleteAColumnFormModal" data-bs-column-id="${this.columnid}"><i class="icon-delete-big"></i></a>
                 </span>
             </div>`;
+
+        const textElement = this.uiColumnElement.querySelector("div > input");
+        textElement.onchange = function() {
+            const index = this.name.indexOf('_category');
+            const colid = this.name.substring(0, index);
+            const [cindex] = parseUIIDs(colid);
+            myPage.columns[cindex].category = this.value;
+        }
+    
         for (let section of this.sections) {
             this.uiColumnElement.append(section.uiSectionElement);
         }
@@ -160,9 +166,12 @@ class Column {
 
     insertSection(index = -1, section) {
         this.sections = insert(this.sections, index, section);
+        this.uiColumnElement.append(section.uiSectionElement);
     }
 
     removeSection(index = -1) {
+        const sec = this.sections[index];
+        this.uiColumnElement.removeChild(sec.uiSectionElement);
         this.sections = remove(this.sections, index);
     }
 }
@@ -192,6 +201,30 @@ class OnePage {
             }
             this.columns.push(new Column(col.columnid, col.category, sections));
         }
+    }
+
+    insertColumn() {
+        const numOfCol = this.columns.length;
+        const newCol = new Column(`col${numOfCol}`, "");
+        myPage.columns.push(newCol);
+
+        const onlyRow = document.getElementById("onlyRow");
+        const wrapCol = document.createElement("div");
+        wrapCol.className = "col-op-e";
+        wrapCol.id = `${newCol.columnid}`;
+        wrapCol.innerHTML = "";
+        wrapCol.append(newCol.uiColumnElement);
+        onlyRow.append(wrapCol);
+    
+    }
+
+    removeColumn(index = -1) {
+        const column = this.columns[index];
+        
+        const onlyRow = document.getElementById("onlyRow");
+        const wrapCol = document.getElementById(`col${index}`);
+        onlyRow.removeChild(wrapCol);
+        this.columns = remove(this.columns, index);
     }
 
     stringify() { // create a pure JSON object
@@ -268,12 +301,61 @@ class OnePage {
             }
     
         }else {
+            const onlyRow = document.getElementById("onlyRow");
             for (let col of this.columns) {
-                const elemColumn = document.getElementById(col.columnid);
-                elemColumn.innerHTML = "";
-                elemColumn.append(col.uiColumnElement);
+                const wrapCol = document.createElement("div");
+                wrapCol.className = "col-op-e";
+                wrapCol.id = `${col.columnid}`;
+                wrapCol.innerHTML = "";
+                wrapCol.append(col.uiColumnElement);
+                onlyRow.append(wrapCol);
             }
             activateAddLinkModal('addNewLinkModal');
+
+            // confirm for Delete a column deleteAColumnFormModal
+            createConfirmForm({
+                isSubmit: false,
+                name: "deleteAColumnForm", 
+                title: "Are you sure to Delete this column?",
+                description: "The column will be removed from this page.",
+                actionWhenShow: function(event) {
+                    console.log("Delete column confirm showing");
+                    
+                    const customData = event.relatedTarget;
+                    const columnid = customData.getAttribute('data-bs-column-id');
+                    
+                    const form = document.forms[this.name];
+                    form.reset();
+
+                    form.elements[`${this.name}_id`].value = columnid;
+                    console.log(`columnid = ${columnid}`);
+            
+                    },
+                action: function(form) {
+                        console.log("Delete Yes of Column is clicked !");
+                        console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
+                        const [cindex] = parseUIIDs(form.elements[`${form.name}_id`].value);
+                        myPage.removeColumn(cindex);
+                    }
+                });
+
+            // confirm for Add a new column addNewColumnFormModal
+            createConfirmForm({
+                isSubmit: false,
+                name: "addNewColumnForm", 
+                title: "Are you sure to add a new Column into this page?",
+                description: "The column will be added right of the rightest column.",
+                actionWhenShow: function(event) {
+                    console.log("Add a new column confirm showing");
+                    
+            
+                    },
+                action: function(form) {
+                        console.log("Add a new Column is clicked !");
+                        myPage.insertColumn();
+                    }
+                });
+
 
             // confirm for Saving
             createConfirmForm({
@@ -317,13 +399,13 @@ class OnePage {
                     },
                 action: function(form) {
                         console.log("Add a new Section is clicked !");
-                        //const hiddenField = form.elements[`${form.name}_id`]; 
-                        //console.log(hiddenField.value);
-                        console.log(`Going to add ${form.elements[`${form.name}_id`].value}`);
-                        //removeSectionUI(form.elements[`${form.name}_id`].value);
+                        const [colindex] = parseUIIDs(form.elements[`${form.name}_id`].value);
+                        const col = myPage.columns[colindex];
+                        const initSection = new Section("", [], colindex, col.sections.length);
+                        col.insertSection(col.sections.length, initSection);
+                        console.log(myPage);
                     }
                 });
-
 
             // confirm for Delete a Section
             createConfirmForm({
@@ -354,6 +436,7 @@ class OnePage {
                         //const hiddenField = form.elements[`${form.name}_id`]; 
                         //console.log(hiddenField.value);
                         console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
+                        removeSectionUI(form.elements[`${form.name}_id`].value);
                         //removeSectionUI(form.elements[`${form.name}_id`].value);
                     }
                 });
@@ -493,6 +576,13 @@ function remove(arr, index = 0) {
     return newArr;
 }
 
+function removeSectionUI(sectionid) {
+    const sec = document.getElementById(sectionid);
+    console.log(sec);
+    const [colid, secid] = parseUIIDs(sectionid);
+    console.log(`${colid} - ${secid}`);
+    myPage.columns[colid].removeSection(secid);
+}
 
 function removeLinkUI(linkid) {
     const li = document.getElementById(linkid);
