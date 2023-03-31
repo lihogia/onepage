@@ -57,9 +57,15 @@ body {
     margin-top: 10px;
 }
 
+.col-op:first-child {
+    @extend .col-sm-2;
+    @extend .ps-2;
+    @extend .pe-2;
+}
 .col-op {
     @extend .col-sm-2;
-    @extend .pb-2;
+    @extend .ps-0;
+    @extend .pe-2;
 }
 
 .col-op-e {
@@ -109,7 +115,21 @@ body {
     @extend .fs-6;
 }
 
+.card-title-op-cate {
+    @extend .fs-6;
+    @extend .fw-semibold;
+    @extend .card-title;
+    @extend .p-0;
+    @extend .m-0;
+}
 
+.card-title-op-subcate {
+    @extend .fs-6;
+    @extend .fw-medium;
+    @extend .card-title;
+    @extend .p-0;
+    @extend .m-0;
+}
 .card-title-op {
     @extend .card-title;
     @extend .pb-0;

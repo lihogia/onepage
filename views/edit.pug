@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  script="window.onload = function () { loadPage(myPage, true); setTimeout(loadPageConfig, 0, true); }"
+  script="window.onload = function () { loadPage(true); }"
   div(class='container-op')
     form(name="onepage")
       div(class='row', id='onlyRow')
@@ -17,10 +17,10 @@ block content
               form
                 div(class="mb-3")
                   label(class="col-form-label", for="title")="Title:"
-                  input(class="form-control", name="title", type="text", value="vnexpress.net")
+                  input(class="form-control", name="title", type="text", value="trithucvn.org")
                 div(class="mb-3")
                   label(class="col-form-label", for="link")="Link:"
-                  input(class="form-control", name="link", type="text", placeholder="http://", value="https://vnexpress.net")
+                  input(class="form-control", name="link", type="text", placeholder="http://", value="https://trithucvn.org/")
             div(class="modal-footer")
               button(type="button", class="btn btn-light", data-bs-dismiss="modal")="Close"
               button(type="button", class="btn btn-primary", name="addNewLinkModal_SaveBut", data-bs-dismiss="modal")="Save"

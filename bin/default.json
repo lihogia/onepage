@@ -2,7 +2,6 @@
   "columns": [
     {
       "category": "Common Actions",
-      "columnid": "col0",
       "sections": [
         {
           "subcategory": "Google - lilogia",
@@ -42,7 +41,6 @@
     },
     {
       "category": "Workshop - IT",
-      "columnid": "col1",
       "sections": [
         {
           "subcategory": "IT News",

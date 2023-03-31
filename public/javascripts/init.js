@@ -135,19 +135,20 @@ class Section {
 }
 
 class Column {
-    constructor(columnid = "col0", category = "", sections = []) {
-        this.columnid = columnid;
+    constructor(colid = 0, category = "", sections = []) {
         this.category = category;
         this.sections = sections;
+
+        const columnid = createUIIDs(colid);
 
         this.uiColumnElement = document.createElement('div');
         this.uiColumnElement.className = "card";
         this.uiColumnElement.innerHTML = `
             <div class="card-header-op-e">
-                <input type="text" class="form-control m-1" placeholder="Category" name="${this.columnid}_category" value="${this.category}">
+                <input type="text" class="form-control m-1" placeholder="Category" name="${columnid}_category" value="${this.category}">
                 <span class="badge-e">
-                    <a class="button-e" href="#" role="button" title="Add new Section" data-bs-toggle="modal" data-bs-target="#addNewSectionFormModal" data-bs-column-id="${this.columnid}"><i class="icon-add-big"></i></a>
-                    <a class="button-e" href="#" role="button" title="Remove this Column" data-bs-toggle="modal" data-bs-target="#deleteAColumnFormModal" data-bs-column-id="${this.columnid}"><i class="icon-delete-big"></i></a>
+                    <a class="button-e" href="#" role="button" title="Add new Section" data-bs-toggle="modal" data-bs-target="#addNewSectionFormModal" data-bs-column-id="${columnid}"><i class="icon-add-big"></i></a>
+                    <a class="button-e" href="#" role="button" title="Remove this Column" data-bs-toggle="modal" data-bs-target="#deleteAColumnFormModal" data-bs-column-id="${columnid}"><i class="icon-delete-big"></i></a>
                 </span>
             </div>`;
 
@@ -162,6 +163,7 @@ class Column {
         for (let section of this.sections) {
             this.uiColumnElement.append(section.uiSectionElement);
         }
+
     }
 
     insertSection(index = -1, section) {
@@ -199,7 +201,7 @@ class OnePage {
                 }
                 sections.push(new Section(sec.subcategory, links, colindex, secindex));
             }
-            this.columns.push(new Column(col.columnid, col.category, sections));
+            this.columns.push(new Column(colindex, col.category, sections));
         }
     }
 
@@ -211,7 +213,7 @@ class OnePage {
         const onlyRow = document.getElementById("onlyRow");
         const wrapCol = document.createElement("div");
         wrapCol.className = "col-op-e";
-        wrapCol.id = `${newCol.columnid}`;
+        wrapCol.id = `${createUIIDs(numOfCol)}`;
         wrapCol.innerHTML = "";
         wrapCol.append(newCol.uiColumnElement);
         onlyRow.append(wrapCol);
@@ -251,28 +253,37 @@ class OnePage {
             }
             const pureCol = {
                 category: col.category,
-                columnid: col.columnid,
                 sections: pureSections
             }
             pureOnePage.columns.push(pureCol);
         }
 
-        console.log(pureOnePage);
+        //console.log(pureOnePage);
         return JSON.stringify(pureOnePage);
     }
 
     load() {
         if (!this.isEdit) {
+            let colindex = -1;
+
+            const onlyRowComp = document.getElementById("onlyRow");
+            if (!onlyRowComp) {
+                console.log(`Cannot find the Component`);
+                return;
+            }
+
             for (let col of this.columns) {
-                let elemColumn = document.getElementById(col.columnid);
-                elemColumn.innerHTML = "";
+                colindex ++;
+                let elemColumn = document.createElement("div");
+                elemColumn.className = "col-op";
+                elemColumn.id = `${createUIIDs(colindex)}`;
         
                 // Show Category
                 const divCard = document.createElement('div');
                 divCard.className = "card";      
                 divCard.innerHTML = `
                     <div class='card-header-op'>
-                        <h5 class='card-title-op'>${col.category}</h5>
+                        <p class='card-title-op-cate'>${col.category}</p>
                     </div>
                 `;
     
@@ -281,7 +292,7 @@ class OnePage {
                     const divCardBody = document.createElement('div');
                     divCardBody.className = "card-body-op";
                     let innerHTMLForCardBody= `
-                        <h6 class='card-title'>${section.subcategory}</h6>
+                        <p class='card-title-op-subcate'>${section.subcategory}</p>
                         <ul class='list-group-op'>`;
                         
                     for (let link of section.links) {
@@ -298,14 +309,17 @@ class OnePage {
                     divCard.append(divCardBody);
                 }
                 elemColumn.append(divCard);
+                onlyRowComp.append(elemColumn);
             }
     
         }else {
             const onlyRow = document.getElementById("onlyRow");
+            let cindex = -1;
             for (let col of this.columns) {
+                cindex ++;
                 const wrapCol = document.createElement("div");
                 wrapCol.className = "col-op-e";
-                wrapCol.id = `${col.columnid}`;
+                wrapCol.id = `${createUIIDs(cindex)}`;
                 wrapCol.innerHTML = "";
                 wrapCol.append(col.uiColumnElement);
                 onlyRow.append(wrapCol);
@@ -319,7 +333,7 @@ class OnePage {
                 title: "Are you sure to Delete this column?",
                 description: "The column will be removed from this page.",
                 actionWhenShow: function(event) {
-                    console.log("Delete column confirm showing");
+                    //console.log("Delete column confirm showing");
                     
                     const customData = event.relatedTarget;
                     const columnid = customData.getAttribute('data-bs-column-id');
@@ -328,12 +342,12 @@ class OnePage {
                     form.reset();
 
                     form.elements[`${this.name}_id`].value = columnid;
-                    console.log(`columnid = ${columnid}`);
+                    //console.log(`columnid = ${columnid}`);
             
                     },
                 action: function(form) {
-                        console.log("Delete Yes of Column is clicked !");
-                        console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
+                        //console.log("Delete Yes of Column is clicked !");
+                        //console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
                         const [cindex] = parseUIIDs(form.elements[`${form.name}_id`].value);
                         myPage.removeColumn(cindex);
                     }
@@ -346,12 +360,12 @@ class OnePage {
                 title: "Are you sure to add a new Column into this page?",
                 description: "The column will be added right of the rightest column.",
                 actionWhenShow: function(event) {
-                    console.log("Add a new column confirm showing");
+                    //console.log("Add a new column confirm showing");
                     
             
                     },
                 action: function(form) {
-                        console.log("Add a new Column is clicked !");
+                        //console.log("Add a new Column is clicked !");
                         myPage.insertColumn();
                     }
                 });
@@ -364,10 +378,10 @@ class OnePage {
                 title: "Are you sure to Save the current data?",
                 description: "The current data will be stored in the config file.",
                 actionWhenShow: function(event) {
-                    console.log("Save confirm showing...");                    
+                    //console.log("Save confirm showing...");                    
                 },
                 action: function(form) {
-                    console.log("Yes is clicked !");
+                    //console.log("Yes is clicked !");
                     const dataToPost = form.elements[`${form.name}_onePageData`];
                     dataToPost.value = myPage.stringify();
                     savePageConfig(form);
@@ -381,11 +395,11 @@ class OnePage {
                 title: "Are you sure to add a new Section into this column?",
                 description: "The section will be added at the bottom of this column.",
                 actionWhenShow: function(event) {
-                    console.log("Add a new section confirm showing");
+                    //console.log("Add a new section confirm showing");
                     
                     const customData = event.relatedTarget;
                     const columnid = customData.getAttribute('data-bs-column-id');
-                    console.log(`${columnid}`);
+                    //console.log(`${columnid}`);
                     const form = document.forms[this.name];
                     form.reset();
 
@@ -398,12 +412,12 @@ class OnePage {
             
                     },
                 action: function(form) {
-                        console.log("Add a new Section is clicked !");
+                        //console.log("Add a new Section is clicked !");
                         const [colindex] = parseUIIDs(form.elements[`${form.name}_id`].value);
                         const col = myPage.columns[colindex];
                         const initSection = new Section("", [], colindex, col.sections.length);
                         col.insertSection(col.sections.length, initSection);
-                        console.log(myPage);
+                        //console.log(myPage);
                     }
                 });
 
@@ -414,7 +428,7 @@ class OnePage {
                 title: "Are you sure to Delete this section?",
                 description: "The section will be removed from this column.",
                 actionWhenShow: function(event) {
-                    console.log("Delete section confirm showing");
+                    //console.log("Delete section confirm showing");
                     
                     const customData = event.relatedTarget;
                     const sectionid = customData.getAttribute('data-bs-section-id');
@@ -424,7 +438,7 @@ class OnePage {
                     form.reset();
 
                     form.elements[`${this.name}_id`].value = sectionid;
-                    console.log(`sectionid = ${sectionid}`);
+                    //console.log(`sectionid = ${sectionid}`);
                     
                     //const uiConfirmModal = document.getElementById(`${this.name}Modal`);
                     //const modalTitle = uiConfirmModal.querySelector('.modal-title');
@@ -432,10 +446,10 @@ class OnePage {
             
                     },
                 action: function(form) {
-                        console.log("Delete Yes of Section is clicked !");
+                        //console.log("Delete Yes of Section is clicked !");
                         //const hiddenField = form.elements[`${form.name}_id`]; 
                         //console.log(hiddenField.value);
-                        console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
+                        //console.log(`Going to remove ${form.elements[`${form.name}_id`].value}`);
                         removeSectionUI(form.elements[`${form.name}_id`].value);
                         //removeSectionUI(form.elements[`${form.name}_id`].value);
                     }
@@ -448,7 +462,7 @@ class OnePage {
                 title: "Are you sure to Delete this link?",
                 description: "The link will be removed from this section.",
                 actionWhenShow: function(event) {
-                    console.log("Delete confirm showing");
+                    //console.log("Delete confirm showing");
                     
                     const customData = event.relatedTarget;
                     const linkid = customData.getAttribute('data-bs-link-id');
@@ -457,7 +471,7 @@ class OnePage {
                     form.reset();
 
                     form.elements[`${this.name}_id`].value = linkid;
-                    console.log(`linkid = ${linkid}`);
+                    //console.log(`linkid = ${linkid}`);
                     
                     //const uiConfirmModal = document.getElementById(`${this.name}Modal`);
                     //const modalTitle = uiConfirmModal.querySelector('.modal-title');
@@ -465,7 +479,7 @@ class OnePage {
             
                     },
                 action: function(form) {
-                        console.log("Delete Yes is clicked !");
+                        //console.log("Delete Yes is clicked !");
                         //const hiddenField = form.elements[`${form.name}_id`]; 
                         //console.log(hiddenField.value);
                         removeLinkUI(form.elements[`${form.name}_id`].value);
@@ -578,18 +592,14 @@ function remove(arr, index = 0) {
 
 function removeSectionUI(sectionid) {
     const sec = document.getElementById(sectionid);
-    console.log(sec);
     const [colid, secid] = parseUIIDs(sectionid);
-    console.log(`${colid} - ${secid}`);
     myPage.columns[colid].removeSection(secid);
 }
 
 function removeLinkUI(linkid) {
     const li = document.getElementById(linkid);
-    console.log(li);
     const ul = li.parentNode;
     const [colid, secid, liid] = parseUIIDs(linkid);
-    console.log(`${colid} - ${secid} - ${liid}`);
     myPage.columns[colid].sections[secid].removeLink(liid);
 }
 
@@ -621,49 +631,6 @@ function activateAddLinkModal(id) {
     });
 }
 
-function loadPage(onePage, isEdit = false) {
-    if (isEdit) {
-        onePage.load();
-    }else {
-        for (let col of onePage.columns) {
-            let elemColumn = document.getElementById(col.columnid);
-            elemColumn.innerHTML = "";
-    
-            // Show Category
-            const divCard = document.createElement('div');
-            divCard.className = "card";      
-            divCard.innerHTML = `
-                <div class='card-header text-bg-info'>
-                    <h5 class='card-title'>${col.category}</h5>
-                </div>
-            `;
-
-            // Show each Sub category & List
-            for (let section of col.sections) {
-                const divCardBody = document.createElement('div');
-                divCardBody.className = "card-body";
-                let innerHTMLForCardBody= `
-                    <h6 class='card-title'>${section.subcategory}</h6>
-                    <ul class='list-group list-group-flush'>`;
-                    
-                for (let link of section.links) {
-                    innerHTMLForCardBody += `
-                        <li class='list-group-item'>
-                            <a href="${link.url}" target="_blank">${link.title}</a>
-                        </li>`;
-                }
-                
-                innerHTMLForCardBody += `
-                    </ul>`;
-
-                divCardBody.innerHTML = innerHTMLForCardBody;
-                divCard.append(divCardBody);
-            }
-            elemColumn.append(divCard);
-        }
-    }     
-}
-
 const URL_PAGE_CONFIG = "http://localhost:3030/pageconfig";
 
 function savePageConfig(form) {
@@ -685,7 +652,7 @@ function savePageConfig(form) {
 
 function loadPageConfig(isEdit = false) {
 
-    const promise = fetch(URL_PAGE_CONFIG)
+    fetch(URL_PAGE_CONFIG)
         .then(response => response.json())
         .then(result => {
             console.info('Successful load JSON data');
@@ -698,6 +665,12 @@ function loadPageConfig(isEdit = false) {
         });
 }
 
+function loadPage(isEdit = false) {
+    //myPage.isEdit = isEdit;
+    //myPage.load();
+    setTimeout(loadPageConfig, 0, isEdit);
+}
+
 const EMPTY_PAGE = {
     columns: []
 };
@@ -706,7 +679,6 @@ const TEST_PAGE = {
     columns: [
         {
             "category": "Test Category",
-            "columnid": "col0",
             "sections": [
                 {
                     "subcategory": "sub test",

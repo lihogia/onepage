@@ -2,7 +2,6 @@
   "columns": [
     {
       "category": "Common Actions",
-      "columnid": "col0",
       "sections": [
         {
           "subcategory": "Google - lilogia",
@@ -42,7 +41,6 @@
     },
     {
       "category": "Workshop - IT",
-      "columnid": "col1",
       "sections": [
         {
           "subcategory": "IT News",
@@ -54,38 +52,6 @@
             {
               "title": "The New Stack",
               "url": "https://thenewstack.io/category/frontend-dev/"
-            },
-            {
-              "title": "vnexpress.net",
-              "url": "https://vnexpress.net"
-            }
-          ]
-        },
-        {
-          "subcategory": "dd123",
-          "links": [
-            {
-              "title": "vnexpress.net",
-              "url": "https://vnexpress.net"
-            },
-            {
-              "title": "vnexpress.net",
-              "url": "https://vnexpress.net"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "category": "bb",
-      "columnid": "col3",
-      "sections": [
-        {
-          "subcategory": "eeee",
-          "links": [
-            {
-              "title": "vnexpress.net",
-              "url": "https://vnexpress.net"
             }
           ]
         }
