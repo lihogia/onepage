@@ -630,7 +630,7 @@ function activateAddLinkModal(id) {
     });
 }
 
-const URL_PAGE_CONFIG = "http://localhost:3030/pageconfig";
+const URL_PAGE_CONFIG = "/pageconfig";
 
 function savePageConfig(form) {
     const formData = new FormData(form);
