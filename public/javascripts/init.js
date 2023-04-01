@@ -207,7 +207,7 @@ class OnePage {
 
     insertColumn() {
         const numOfCol = this.columns.length;
-        const newCol = new Column(`col${numOfCol}`, "");
+        const newCol = new Column(`${numOfCol}`, "");
         myPage.columns.push(newCol);
 
         const onlyRow = document.getElementById("onlyRow");
@@ -361,7 +361,6 @@ class OnePage {
                 description: "The column will be added right of the rightest column.",
                 actionWhenShow: function(event) {
                     //console.log("Add a new column confirm showing");
-                    
             
                     },
                 action: function(form) {
