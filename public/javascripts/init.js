@@ -635,7 +635,7 @@ const URL_PAGE_CONFIG = "/pageconfig";
 function savePageConfig(form) {
     const formData = new FormData(form);
 
-    const promise = fetch(URL_PAGE_CONFIG, {
+    fetch(URL_PAGE_CONFIG, {
             method: 'POST',
             body: formData
         })
