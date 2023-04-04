@@ -1,4 +1,44 @@
 'use strict';
+/**
+ * Variables
+ */
+
+const EMPTY_PAGE = {
+    columns: []
+};
+
+const TEST_PAGE = {
+    columns: [
+        {
+            "category": "Test Category",
+            "sections": [
+                {
+                    "subcategory": "sub test",
+                    "links": [
+                        {
+                            "title": "Dzone",
+                            "url": "https://dzone.com/"
+                        },
+                        {
+                            "title": "The New Stack",
+                            "url": "https://thenewstack.io/category/frontend-dev/"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+let DEFAULT_PAGE_CONFIG = EMPTY_PAGE;
+
+const INDEXED_DB = "dbOnePage";
+const INDEXED_DB_VERSION = 1;
+const CONFIG_STORE = "config";
+const URL_PAGE_CONFIG = "/pageconfig";
+const PAGE_CONFIG = {
+    id: 1,
+    config: DEFAULT_PAGE_CONFIG
+};
 
 /** 
  * Utilities 
@@ -383,7 +423,8 @@ class OnePage {
                     //console.log("Yes is clicked !");
                     const dataToPost = form.elements[`${form.name}_onePageData`];
                     dataToPost.value = myPage.stringify();
-                    savePageConfig(form);
+                    //savePageConfig(form);
+                    savePageConfigToIndexedDB(form);
                     }
                 });
 
@@ -630,7 +671,6 @@ function activateAddLinkModal(id) {
     });
 }
 
-const URL_PAGE_CONFIG = "/pageconfig";
 
 function savePageConfig(form) {
     const formData = new FormData(form);
@@ -649,52 +689,112 @@ function savePageConfig(form) {
         });
 }
 
-function loadPageConfig(isEdit = false) {
+function savePageConfigToIndexedDB(form) {
+    const dataToPost = form.elements[`${form.name}_onePageData`];
+    const confitToStore = JSON.parse(dataToPost.value);
+    console.log(confitToStore);
 
-    fetch(URL_PAGE_CONFIG)
-        .then(response => response.json())
-        .then(result => {
-            console.info('Successful load JSON data');
-            myPage = new OnePage(result, isEdit);
-            myPage.load();
-        })
-        .catch(error => {
-            console.error(error);
-            setTimeout(loadPageConfig, 2000, isEdit);
-        });
-}
+    let openRequest = indexedDB.open(INDEXED_DB, INDEXED_DB_VERSION);
 
-function loadPage(isEdit = false) {
-    //myPage.isEdit = isEdit;
-    //myPage.load();
-    setTimeout(loadPageConfig, 0, isEdit);
-}
+    openRequest.onerror = function() {
+        console.error("Error", openRequest.error);
+    }
 
-const EMPTY_PAGE = {
-    columns: []
-};
+    openRequest.onsuccess = function() {
+        let db = openRequest.result;
+        
+        if (db.objectStoreNames.contains(CONFIG_STORE)) {
+            let transaction = db.transaction(CONFIG_STORE, 'readwrite');
+            let configStore = transaction.objectStore(CONFIG_STORE);
 
-const TEST_PAGE = {
-    columns: [
-        {
-            "category": "Test Category",
-            "sections": [
-                {
-                    "subcategory": "sub test",
-                    "links": [
-                        {
-                            "title": "Dzone",
-                            "url": "https://dzone.com/"
-                        },
-                        {
-                            "title": "The New Stack",
-                            "url": "https://thenewstack.io/category/frontend-dev/"
-                        }
-                    ]
-                }
-            ]
+            let request = configStore.put({id: 1, config: confitToStore});
+
+            request.onsuccess = function() {
+                console.info(`Save successful! ${request.result}`);
+            }
+
+            request.onerror = function() {
+                console.error(request.error);
+            }
         }
-    ]
+    }
+
 }
 
-let myPage = new OnePage(EMPTY_PAGE);
+function loadPageConfigFromIndexedDB(isEdit = false) {
+    // find the config in indexedDB
+    let openRequest = indexedDB.open(INDEXED_DB, INDEXED_DB_VERSION);
+    openRequest.onupgradeneeded = function() {
+        console.log(`Not existing the DB ${INDEXED_DB}`);
+
+        let db = openRequest.result;
+        if (!db.objectStoreNames.contains(CONFIG_STORE)) {
+            console.log(`Start to create new ${CONFIG_STORE}`);
+            let configStore = db.createObjectStore(CONFIG_STORE, {keyPath: 'id'});
+            
+            let request = configStore.add({id: 1, config: DEFAULT_PAGE_CONFIG});
+            request.onsuccess = function() {
+                console.log('Save to Indexed DB successfully.');
+            }
+            request.onerror = function() {
+                console.error(`Error: ${request.error}`);
+            }
+        }
+    }
+
+    openRequest.onerror = function() {
+        console.error("Error", openRequest.error);
+    }
+
+    openRequest.onsuccess = function() {
+        let db = openRequest.result;
+        
+        if (db.objectStoreNames.contains(CONFIG_STORE)) {
+            let transaction = db.transaction(CONFIG_STORE, 'readonly');
+            let configStore = transaction.objectStore(CONFIG_STORE);
+
+            let request = configStore.get(IDBKeyRange.only(1));
+
+            request.onsuccess = function() {
+                const result = request.result;
+                myPage = new OnePage(result.config, isEdit);
+                myPage.load();
+            }
+
+            request.onerror = function() {
+                console.error(request.error);
+            }
+        }
+    }
+
+
+}
+
+function loadPageDefaultConfigFromFile() {
+    fetch(URL_PAGE_CONFIG)
+    .then(response => response.json())
+    .then(result => {
+        console.info('Successful load JSON data from server\'s file.');
+        DEFAULT_PAGE_CONFIG = result;
+        //console.log(DEFAULT_PAGE_CONFIG);
+    })
+    .catch(error => {
+        console.error(error);
+        //DEFAULT_PAGE_CONFIG = TEST_PAGE;
+    });
+}
+
+function loadPage(isEdit = false, isCalledAgain = false) {
+    if (!isCalledAgain) {
+        loadPageDefaultConfigFromFile();
+    }
+    if (DEFAULT_PAGE_CONFIG === EMPTY_PAGE) {
+        //console.log(DEFAULT_PAGE_CONFIG);
+        setTimeout(loadPage, 10, isEdit, true);
+    }else {
+        loadPageConfigFromIndexedDB(isEdit);
+    }
+}
+
+
+let myPage = new OnePage(TEST_PAGE);

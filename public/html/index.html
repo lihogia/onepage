@@ -10,6 +10,63 @@
          <link href="/stylesheets/custom.css" rel="stylesheet">
  
         <script scr="/javascript/init.js"></script>
+         <script>
+             console.log('Try and test the IndexedDB.');
+             let openRequest = indexedDB.open("db", 1);
+ 
+             let book = {
+                 name: 'Javascript IO',
+                 price: 15,
+                 created: new Date()
+                 };
+ 
+             openRequest.onupgradeneeded = function() {
+                 console.log('initialization...');
+ 
+                 let db = openRequest.result;
+                 let booksStore;
+                 if (!db.objectStoreNames.contains('books')) {
+                     console.log('books not existing... create one....');
+                     //booksStore = db.createObjectStore('books', {keyPath: 'id'});
+                     booksStore = db.createObjectStore('books', {autoIncrement: true});
+                     //let transaction = db.transaction('books', 'readwrite');
+                     //let books = transaction.objectStore("books");
+ 
+                     //console.log(`equals? ${booksStore === books}`);
+                     
+ 
+ 
+                 }else {
+                     booksStore = db.objectStoreNames('books');
+                     console.log(booksStore);
+                 }
+ 
+             }
+ 
+             openRequest.onerror = function() {
+                 console.error("Error", openRequest.error);
+             }
+ 
+             openRequest.onsuccess = function() {
+                 let db = openRequest.result;
+                 console.log('loading ... successfully');
+ 
+                 let transaction = db.transaction('books', 'readwrite');
+                 let books = transaction.objectStore("books");
+ 
+                 let request = books.put(book, 2);
+                 request.onsuccess = function() {
+                     console.log(`Book added to the store: ${request.result}`);
+                 }
+ 
+                 request.onerror = function() {
+                     console.log(`Error: ${request.error}`);
+                 }
+ 
+             }
+ 
+         </script>
+            
         <title>Index page</title>
     </head>
     <body>
