@@ -1,250 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="author" content="Linh Hong">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
--->       
-         <link href="/stylesheets/custom.css" rel="stylesheet">
- 
-        <script scr="/javascript/init.js"></script>
-         <script>
-             console.log('Try and test the IndexedDB.');
-             let openRequest = indexedDB.open("db", 1);
- 
-             let book = {
-                 name: 'Javascript IO',
-                 price: 15,
-                 created: new Date()
-                 };
- 
-             openRequest.onupgradeneeded = function() {
-                 console.log('initialization...');
- 
-                 let db = openRequest.result;
-                 let booksStore;
-                 if (!db.objectStoreNames.contains('books')) {
-                     console.log('books not existing... create one....');
-                     //booksStore = db.createObjectStore('books', {keyPath: 'id'});
-                     booksStore = db.createObjectStore('books', {autoIncrement: true});
-                     //let transaction = db.transaction('books', 'readwrite');
-                     //let books = transaction.objectStore("books");
- 
-                     //console.log(`equals? ${booksStore === books}`);
-                     
- 
- 
-                 }else {
-                     booksStore = db.objectStoreNames('books');
-                     console.log(booksStore);
-                 }
- 
-             }
- 
-             openRequest.onerror = function() {
-                 console.error("Error", openRequest.error);
-             }
- 
-             openRequest.onsuccess = function() {
-                 let db = openRequest.result;
-                 console.log('loading ... successfully');
- 
-                 let transaction = db.transaction('books', 'readwrite');
-                 let books = transaction.objectStore("books");
- 
-                 let request = books.put(book, 2);
-                 request.onsuccess = function() {
-                     console.log(`Book added to the store: ${request.result}`);
-                 }
- 
-                 request.onerror = function() {
-                     console.log(`Error: ${request.error}`);
-                 }
- 
-             }
- 
-         </script>
+        <script>
+
+            //let blob = new Blob(["<html>...</html>"], {type: 'text/html'});
+
+            //console.log(blob);
+
+            /* let hello = new Uint8Array([72, 101, 108, 108, 111]);
+            let blob = new Blob([hello, ' ', 'world'], {type: 'text/plain'});
+            console.log(blob);
+
+            let decoder = new TextDecoder();
+            console.log(blob.slice(0, 4, 'text/plain')); */
+
+
+/* 
+            const TYPE_OF_VIEW = Uint8Array; //Float64Array;//Uint16Array;//Uint8Array;//Uint32Array;
+
+            let uint8Array = new TYPE_OF_VIEW([0, 228, 189, 160, 229, 165, 189, 0]);
+                //[72, 101, 108, 108, 111]);
+
+            let decoder = new TextDecoder();
+            console.log(decoder.decode(uint8Array.subarray(1, -1)));
+
+
+            let encoder = new TextEncoder();
+            uint8Array = encoder.encode("Hello");
+            console.log(uint8Array);
+
+            console.log(encoder.encode("你好"));
+ */
+
+/*            function concat(arrays) {
+                if (arrays.length <= 0) return [];
+                const total_len = arrays.reduce((sum, item) => sum + item.length, 0);
+                console.log(total_len);
+                let view = new TYPE_OF_VIEW(total_len);
+
+                let offset = 0;
+                for (let array of arrays) {
+                    view.set(array, offset);
+                    offset += array.length;
+                }
+
+                return view;
+
+            }
+
+            console.log(`Testing...`);
+
+            const result = concat([[1, 3, 5, 7], [6, 2, 5], [12, 43]]);
+            console.log(result);
+*/
+
+/*
+            let buffer = new ArrayBuffer(9);
+            console.log(buffer.byteLength);
+            console.log(buffer);
+
             
-        <title>Index page</title>
+            let view = new TYPE_OF_VIEW(buffer);
+            view.concat = function(arrays) {
+                //console.log(`${view.length} - ${arrays.length}`);
+                let newView = new TYPE_OF_VIEW(new Array(view.length + arrays.length));
+                newView.set(view);
+                newView.set(arrays, view.length);
+                //sconsole.log(newView.length);
+                //console.log(newView);
+                return newView;
+            }
+
+
+
+            for (let index = 0; index < view.length; index++) {
+                view[index] = 30;
+            }
+            //console.log(view);
+            const result = view.concat([4, 67, 25]);
+            console.log(result);
+
+
+            
+            console.log(`${TYPE_OF_VIEW.name} - Number of bytes per element: ${TYPE_OF_VIEW.BYTES_PER_ELEMENT}`);
+            console.log(`length of this view: ${view.length}`);
+            console.log(`size in bytes: ${view.byteLength}`);
+
+            view[0] = 123456;
+            for (let num of view) {
+                console.log(num);
+            }
+            */
+        </script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mynavbar">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                        <a class="nav-link" href="/html/edit.html">Edit</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="Search">
-                        <button class="btn btn-primary" type="button">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <img src="data:image/png;base64,R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7">
+<!---        <a download="user.json" href='#' id="link">Download</a>
+-->
+        <script>
+            let user = {
+                name: 'Hong Gia Linh',
+                age: 45
+            }
 
-        <div class="container-op">
-            <div class="row">
-                <div class="col-op" id="col0">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="fs-6 fw-semibold card-title p-0 m-0">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="fs-6 fw-medium card-title p-0 m-0">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <h6 class="card-title">Sub category 2</h6>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="col-op" id="col1">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="card-title-op-cate">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 2</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
+            let link = document.createElement('a');
+            link.download = 'user.json';
 
-                </div>
-                <div class="col-op" id="col2">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="card-title-op-cate">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 2</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
+            let blob = new Blob([JSON.stringify(user, null, 2)], {type: 'application/json'});
+            let reader = new FileReader();
+            reader.readAsDataURL(blob);
 
-                </div>
-                <div class="col-op" id="col3">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="card-title-op-cate">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 2</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-
-                </div>
-                <div class="col-op" id="col4">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="card-title-op-cate">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 2</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-
-                </div>
-                <div class="col-op" id="col5">
-                    <div class="card">
-                        <div class="card-header-op">
-                            <p class="card-title-op-cate">Category</p>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 1</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://vnexpress.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.google.com">Google.com</a></li>
-                                <li class="list-group-item-op"><a href="http://www.yahoo.com">Yahoo.com</a></li>
-                            </ul>
-                        </div>
-                        <div class="card-body-op">
-                            <p class="card-title-op-subcate">Sub category 2</p>
-                            <ul class="list-group-op">
-                                <li class="list-group-item-op"><a href="http://trithucvn.net">Vnexpress.net</a></li>
-                                <li class="list-group-item-op"><a href="http://www.cnn.com">Google.com</a></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-
-                </div>
+            reader.onload = function() {
+                link.href = reader.result; // data url
+                link.click();
+            };
 
 
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+            
+//            link.href = URL.createObjectURL(blob);
+
+//            link.click();
+            //URL.revokeObjectURL(link.href);
+            </script>
     </body>
 </html>

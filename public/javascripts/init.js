@@ -82,6 +82,17 @@ function parseUIIDs(uiIDs) {
     return [];
 }
 
+function exportOnePageToJSON() {
+    let link = document.createElement('a');
+    link.download = 'onepage_config.json';
+
+    let blob = new Blob([myPage.stringify()], {type: 'application/json'});
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
+    console.log(`Export successfully ${link.download}.`);
+}
+
 /** 
  * Components 
  * **/
@@ -299,7 +310,7 @@ class OnePage {
         }
 
         //console.log(pureOnePage);
-        return JSON.stringify(pureOnePage);
+        return JSON.stringify(pureOnePage, null, 2);
     }
 
     load() {
@@ -415,7 +426,7 @@ class OnePage {
                 isSubmit: true,
                 name: "saveOnePageForm", 
                 title: "Are you sure to Save the current data?",
-                description: "The current data will be stored in the config file.",
+                description: "The current data will be stored into browser.",
                 actionWhenShow: function(event) {
                     //console.log("Save confirm showing...");                    
                 },
@@ -766,8 +777,6 @@ function loadPageConfigFromIndexedDB(isEdit = false) {
             }
         }
     }
-
-
 }
 
 function loadPageDefaultConfigFromFile() {
