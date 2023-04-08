@@ -6,7 +6,7 @@ const constants = require('fs');
 const format = require('util').format;
 const multiparty = require('multiparty');
 const DEFAULT_CONFIG = './bin/default.json';
-const SAVE_CONFIG = './bin/onepage.json';
+//const SAVE_CONFIG = './bin/onepage.json';
 
 /* Load default.json file */
 async function loadOnePage(filepath) {
@@ -19,15 +19,15 @@ async function loadOnePage(filepath) {
   }
 
 /** Save content to onepage.json file */
-async function saveOnePage(filepath, content) {
+/* async function saveOnePage(filepath, content) {
   try {
     await fs.writeFile(filepath, content);
   }catch (err) {
     throw err;
   }
 }
-
-async function setUseConfig() {
+ */
+/* async function setUseConfig() {
   try {
     await fs.access(USE_CONFIG, constants.F_OK, (err) => {
       if (err) {
@@ -39,10 +39,10 @@ async function setUseConfig() {
   }
 
 }
-
+ */
 /** Check which file to use to load the onepage config */
-let USE_CONFIG = SAVE_CONFIG;
-setUseConfig();
+let USE_CONFIG = DEFAULT_CONFIG;//SAVE_CONFIG;
+//setUseConfig();
 
 /** GET page config */
 router.get('/', function(req, res, next) {
@@ -57,7 +57,7 @@ router.get('/', function(req, res, next) {
 });
 
 /** POST onepage form */
-router.post('/', function(req, res, next) {
+/* router.post('/', function(req, res, next) {
   const form = new multiparty.Form();
 
   form.on('error', next);
@@ -83,5 +83,5 @@ router.post('/', function(req, res, next) {
   //res.send('Got a POST request at /pageConfig');
 
 });
-  
+ */  
 module.exports = router;
