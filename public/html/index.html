@@ -97,10 +97,37 @@
         </script>
     </head>
     <body>
-        <img src="data:image/png;base64,R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7">
-<!---        <a download="user.json" href='#' id="link">Download</a>
+        <input type="file" onchange="handle(this)">
+<!---        <img src="data:image/png;base64,R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7">
+        <a download="user.json" href='#' id="link">Download</a>
 -->
         <script>
+            function handle(input) {
+                let file = input.files[0];
+                let reader = new FileReader();
+                reader.readAsText(file);
+
+                reader.onload = function() {
+                    const content = reader.result;
+                    const json = JSON.parse(content);
+                    console.log(json);
+                }
+
+                reader.onerror = function() {
+                    console.log(reader.error);
+                }
+                
+                
+                /*
+                console.log(input.files);
+
+
+                console.log(`Filename: ${file.name}`);
+                console.log(`Last modified: ${file.lastModified}`);*/
+            }
+
+
+/*
             let user = {
                 name: 'Hong Gia Linh',
                 age: 45
@@ -115,9 +142,9 @@
 
             reader.onload = function() {
                 link.href = reader.result; // data url
-                link.click();
+                //link.click();
             };
-
+*/
 
 
             

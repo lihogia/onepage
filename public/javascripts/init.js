@@ -93,6 +93,19 @@ function exportOnePageToJSON() {
     console.log(`Export successfully ${link.download}.`);
 }
 
+function isConfig(pageConfig) {
+    let result = true;
+    if (!pageConfig.columns || pageConfig.columns.length == 0) {
+        result = false;
+    }
+    return result;
+}
+
+function importJSONToIndexedDB(content) {
+
+}
+
+
 /** 
  * Components 
  * **/
@@ -314,10 +327,13 @@ class OnePage {
     }
 
     load() {
+        activateImportConfigFileModal('importConfigFileModal');
+        const onlyRowComp = document.getElementById("onlyRow");
+        onlyRowComp.innerHTML = "";
+
         if (!this.isEdit) {
             let colindex = -1;
-
-            const onlyRowComp = document.getElementById("onlyRow");
+            
             if (!onlyRowComp) {
                 console.log(`Cannot find the Component`);
                 return;
@@ -364,7 +380,7 @@ class OnePage {
             }
     
         }else {
-            const onlyRow = document.getElementById("onlyRow");
+            const onlyRow = onlyRowComp; //document.getElementById("onlyRow");
             let cindex = -1;
             for (let col of this.columns) {
                 cindex ++;
@@ -682,7 +698,6 @@ function activateAddLinkModal(id) {
     });
 }
 
-
 function savePageConfig(form) {
     const formData = new FormData(form);
 
@@ -700,10 +715,64 @@ function savePageConfig(form) {
         });
 }
 
+function uploadFile(input) {
+    let file = input.files[0];
+    let reader = new FileReader();
+    reader.readAsText(file);
+
+    reader.onload = function() {
+        const content = reader.result;
+        let pageConfig;
+        try {
+            pageConfig = JSON.parse(content);
+        }catch (error) {
+            reader.onerror(Error('Not json file'));
+        }
+
+        if (!isConfig(pageConfig)) reader.onerror(Error('Not config format'));
+        console.log('Format of file is OK.');
+        const form = input.form;
+        const saveButton = form.elements['importConfigModal_SaveBut'];
+        
+        saveButton.disabled = false;
+        const dataToSave = form.elements[`${form.name}_onePageData`];
+        dataToSave.value = content;
+                
+    }
+
+    reader.onerror = function(error) {
+        console.log(error.message);
+        const form = input.form;
+        const saveButton = form.elements['importConfigModal_SaveBut'];
+        //console.log(saveButton);
+        saveButton.disabled = true;
+    }
+
+}
+
+function activateImportConfigFileModal(id) {
+    const importConfigModal = document.getElementById(id);
+    importConfigModal.addEventListener('show.bs.modal', event => {
+
+        const form = document.forms.importOnePageConfigFileForm;
+        form.reset();
+        const saveBut = form.elements['importConfigModal_SaveBut'];
+        saveBut.disabled = false;
+        saveBut.onclick = function() {
+            savePageConfigToIndexedDB(form);
+            const configData = JSON.parse(form.elements[`${form.name}_onePageData`].value);
+            //console.log(configData);
+            myPage = new OnePage(configData, myPage.isEdit);
+            myPage.load();
+        }
+    });
+
+}
+
 function savePageConfigToIndexedDB(form) {
     const dataToPost = form.elements[`${form.name}_onePageData`];
-    const confitToStore = JSON.parse(dataToPost.value);
-    console.log(confitToStore);
+    const configToStore = JSON.parse(dataToPost.value);
+    console.log(configToStore);
 
     let openRequest = indexedDB.open(INDEXED_DB, INDEXED_DB_VERSION);
 
@@ -718,7 +787,7 @@ function savePageConfigToIndexedDB(form) {
             let transaction = db.transaction(CONFIG_STORE, 'readwrite');
             let configStore = transaction.objectStore(CONFIG_STORE);
 
-            let request = configStore.put({id: 1, config: confitToStore});
+            let request = configStore.put({id: 1, config: configToStore});
 
             request.onsuccess = function() {
                 console.info(`Save successful! ${request.result}`);

@@ -1,10 +1,10 @@
 {
   "columns": [
     {
-      "category": "Common Actions",
+      "category": "Basic Sites",
       "sections": [
         {
-          "subcategory": "Google - lilogia",
+          "subcategory": "Google",
           "links": [
             {
               "title": "Mail",
@@ -17,41 +17,6 @@
             {
               "title": "Drive",
               "url": "https://drive.google.com/u/0/"
-            }
-          ]
-        },
-        {
-          "subcategory": "Google - linh.hong.sg",
-          "links": [
-            {
-              "title": "Mail",
-              "url": "https://mail.google.com/mail/u/1/"
-            },
-            {
-              "title": "Calendar",
-              "url": "https://calendar.google.com/calendar/b/1/"
-            },
-            {
-              "title": "Drive",
-              "url": "https://drive.google.com/u/1/"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "category": "Workshop - IT",
-      "sections": [
-        {
-          "subcategory": "IT News",
-          "links": [
-            {
-              "title": "Dzone",
-              "url": "https://dzone.com/"
-            },
-            {
-              "title": "The New Stack",
-              "url": "https://thenewstack.io/category/frontend-dev/"
             }
           ]
         }
