@@ -3,9 +3,9 @@ package-lock.json
 privatekey.pem
 request.pem
 /bin/onepage.json
-public/stylesheets/bootstrap-*
-public/stylesheets/custom.*
-public/stylesheets/fonts
+#public/stylesheets/bootstrap-*
+#public/stylesheets/custom.*
+#public/stylesheets/fonts
 
 
 
