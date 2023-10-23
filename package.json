@@ -1,6 +1,6 @@
 {
   "name": "onepage",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "author": "Linh Hong <linh.hong.sg@gmail.com>",
   "description": "OnePage a home page with list of bookmarks and some add-ons the owner uses frequently.",
@@ -21,6 +21,7 @@
     "morgan": "~1.9.1",
     "multiparty": "^4.2.3",
     "nodemon": "^2.0.20",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "sass": "^1.63.6"
   }
 }
