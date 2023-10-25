@@ -1,0 +1,31 @@
+.category {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid darkgreen;
+    background-color: yellow;
+    padding: 5px;
+  }
+  
+  .subcategory {
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed green;
+    padding: 5px;
+  }
+
+  .subcategory ul {
+    list-style-type: none;
+  }
+
+  .util_link {
+    background-color: greenyellow;
+    margin: 2px;
+  }
+  
+  .util_link a {
+    color: red;
+    text-decoration: underline
+  }
+
+  
+  

@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid green;
+}
+
+.util_link {
+  color: green;
+  text-decoration: line-through;
+}
