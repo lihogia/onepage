@@ -1,27 +1,24 @@
 {
-  "name": "onepage",
+  "name": "onepagealpha",
   "version": "0.1.0",
   "private": true,
-  "author": "Linh Hong <linh.hong.sg@gmail.com>",
-  "description": "OnePage a home page with list of bookmarks and some add-ons the owner uses frequently.",
   "scripts": {
-    "start": "nodemon ./bin/www"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:lihogia/onepage.git"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "bootstrap": "^5.3.0-alpha1",
-    "bootstrap-icons": "^1.10.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "multiparty": "^4.2.3",
-    "nodemon": "^2.0.20",
-    "pug": "2.0.0-beta11",
-    "sass": "^1.63.6"
+    "next": "13.5.6",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.8",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.6",
+    "typescript": "5.2.2"
   }
 }
