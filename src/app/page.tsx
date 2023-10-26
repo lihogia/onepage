@@ -1,18 +1,14 @@
 import styles from './page.module.css';
-import type { Categories, Category } from '@/app/data/types';
+import type { Category } from '@/app/data/types';
 import { template001 } from './data/config';
 import CategoryComponent from './components/category';
-
+import OnePage from '@/app/edit/onepage';
 
 export default function Home() {
   const cates = template001;
   return (
     <main className={styles.main}>
-      {cates.categories.length > 0 && cates.categories.map((element: Category, index) => {
-          return (
-            <CategoryComponent com={element} key={index} />
-          );  
-      })}
+      <OnePage categories={cates} isEdit={false} />
     </main>
   )
 }
