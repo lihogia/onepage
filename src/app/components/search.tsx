@@ -2,14 +2,14 @@ import styles from './component.module.css';
 import { SimpleSearch } from "@/app/data/types";
 import { useContext, useState } from 'react';
 import { EditContext } from '@/app/edit/EditContext';
-import EditUtilSimpleSearch from '@/app/edit/components/EditUtilSimpleSearch';
+import UtilSimpleSearchEditor from '@/app/edit/components/UtilSimpleSearchEditor';
 
 export default function UtilSimpleSearch({search}: {search: SimpleSearch}) {
     const isEdit = useContext(EditContext);
     const [utilSimpleSearch, setUtilSimpleSearch] = useState(search);
 
-    function updateSimpleSearch(uSearch: SimpleSearch) {
-        setUtilSimpleSearch(uSearch);
+    function updateSimpleSearch(pSearch: SimpleSearch) {
+        setUtilSimpleSearch(pSearch);
     }
 
     return (
@@ -17,7 +17,7 @@ export default function UtilSimpleSearch({search}: {search: SimpleSearch}) {
             {
          //   <img src={`${search.url.substring(0, search.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/> {search.title}
         }
-            {isEdit && <EditUtilSimpleSearch search={utilSimpleSearch} searchUpdateHandle={updateSimpleSearch}/>}
+            {isEdit && <UtilSimpleSearchEditor pSearch={utilSimpleSearch} handleUpdateSimpleSearch={updateSimpleSearch}/>}
             {!isEdit && <> {search.title}
                 <form method='get' target='_blank'>
                     <input type='text' className={styles.input_text} name={search.fieldname} />

@@ -35,7 +35,7 @@ export default function RootLayout({
         </header>
         {children}
         <footer>
-          Copyright linh.hong.sg@gmail.com
+          © 2023 <a href='mailto:lilogia@gmail.com'>lilogia</a>. All right reserved.
         </footer>
       </body>
     </html>
