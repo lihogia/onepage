@@ -1,6 +1,6 @@
 import styles from './component.module.css';
 import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import UtilLinkEditor from '@/app/edit/components/UtilLinkEditor';
 import UtilSimpleSearchEditor from '@/app/edit/components/UtilSimpleSearchEditor';
 
@@ -21,7 +21,7 @@ const DEFAULT_SIMPLE_SEARCH_REGEXP = {
     pattern: 'e.target.value|ig'
 };
 
-export default function CreateUtilEditor({handleCreateUtil}: {handleCreateUtil: Function}) {
+export default function CreateUtilEditor({handleCreateUtil, subIndex}: {handleCreateUtil: Function, subIndex: string}) {
     const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputable: false});
 
     function switchUtilType(pType: string) {

@@ -5,10 +5,8 @@ import CategoryComponent from './components/category';
 import OnePage from '@/app/edit/onepage';
 
 export default function Home() {
-  const cates = template001;
+  const cates = template001.categories;
   return (
-    <main className={styles.main}>
-      <OnePage categories={cates} isEdit={false} />
-    </main>
+    <OnePage categories={cates} isEdit={false} />
   )
 }

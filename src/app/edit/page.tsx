@@ -8,10 +8,7 @@ export default function EditPage() {
     return (
       <>
         <section className={styles.info}>Click on Text to Change<br/></section>
-        <main className={styles.main}>
-          
-          <OnePage categories={cates} isEdit={true} />
-        </main>
+        <OnePage categories={cates.categories} isEdit={true} />
       </>
     );
 }

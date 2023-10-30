@@ -23,6 +23,8 @@ export interface Category {
     subcategories: SubCategory[]
 }
 
+/*
 export interface Categories {
     categories: Category[] 
 }
+*/

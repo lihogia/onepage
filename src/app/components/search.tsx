@@ -4,12 +4,15 @@ import { useContext, useState } from 'react';
 import { EditContext } from '@/app/edit/EditContext';
 import UtilSimpleSearchEditor from '@/app/edit/components/UtilSimpleSearchEditor';
 
-export default function UtilSimpleSearch({search}: {search: SimpleSearch}) {
-    const isEdit = useContext(EditContext);
+export default function UtilSimpleSearch({search, utilIndex = ''}: {search: SimpleSearch, utilIndex: string}) {
+    const editContext = useContext(EditContext);
+    const isEdit = editContext.isEdit;
+
     const [utilSimpleSearch, setUtilSimpleSearch] = useState(search);
 
     function updateSimpleSearch(pSearch: SimpleSearch) {
         setUtilSimpleSearch(pSearch);
+        editContext.updateUtil(pSearch, utilIndex);
     }
 
     return (
@@ -24,7 +27,7 @@ export default function UtilSimpleSearch({search}: {search: SimpleSearch}) {
                     <input type='reset' className={styles.input_button} name='Reset' />
                     <input type='submit' className={styles.input_button} value='Search' name='Search' onClick={(e) => {
                     
-                        const form = e.target.form;
+                        const form = e.currentTarget.form;
                         const textElement = form.elements[0];
                         if (textElement.value.trim() === '') {
                             e.preventDefault();

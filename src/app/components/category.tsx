@@ -5,30 +5,33 @@ import SubCategoryComponent from './subcategory';
 import { useContext, useState } from 'react';
 import { EditContext } from '@/app/edit/EditContext';
 import NameEditor from '@/app/edit/components/NameEditor';
-import AddName from '@/app/edit/components/CreateNameButton';
 import CreateNameButton from '@/app/edit/components/CreateNameButton';
 
 
 export default function CategoryComponent(
-    {cate}:
-    {cate: Category}
+    {cate, index = -1}:
+    {cate: Category, index: number}
 ) {
-    const isEdit = useContext(EditContext);
+    const editContext = useContext(EditContext);
+    const isEdit = editContext.isEdit;
     //const [catename, setCateName] = useState(cate.name);
     const [category, setCategory] = useState(cate);
 
     function updateCategoryName(pName: string) {
         setCategory({...category, name: pName});
+        editContext.updateCategoryName(pName, index);
     }
 
-    function createNewSubCategory(pName: string) {
-        const newCategory = {...category};
+    function createNewSubCategory(cateIndex: number, pName: string) {
+        /*const newCategory = {...category};
         const newSubCategory = {
             name: pName,
             utils: []
         }
         newCategory.subcategories.push(newSubCategory);
-        setCategory(newCategory);
+        setCategory(newCategory);*/
+        //console.log('inside %d - %s', cateIndex, pName);
+        editContext.createSubCategory(cateIndex, pName);
     }
 
     return (
@@ -36,12 +39,12 @@ export default function CategoryComponent(
         <>
             {isEdit && <NameEditor pName={category.name} handleUpdateName={updateCategoryName}/>}
             {!isEdit && <span>{category.name}</span>}
-            {category.subcategories.length > 0 && category.subcategories.map((element, index) => {
+            {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
                 return (
-                    <SubCategoryComponent subcate={element} key={index} />
+                    <SubCategoryComponent subcate={element} key={subindex} subIndex={`${index}_${subindex}`}/>
                 );
             })}
-            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={createNewSubCategory} />}
+            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={createNewSubCategory} categoryIndex={index}/>}
         </>
         </section>
     );

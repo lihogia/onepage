@@ -1,12 +1,13 @@
-import UtilLink from './link';
+import UtilLinkComponent from './link';
 import UtilSimpleSearch from './search';
+import { Util, UtilLink } from '../data/types';
 
-export default function UtilComponent({util}) {
+export default function UtilComponent({util}: {util:Util|UtilLink}) {
     
     if (util.fieldname === undefined) {
         return (
             <>
-                <UtilLink link={util} />
+                <UtilLinkComponent link={util} />
             </>
         );
     }else {
