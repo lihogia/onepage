@@ -18,7 +18,7 @@ export default function NameEditor({pName, handleUpdateName}: {pName: string, ha
                 (e) => {
                     setEditorState({...editorState, isInputable: false});
                     handleUpdateName(editorState.name);
-                    e.stopPropagation();
+                    //e.stopPropagation();
         
             }}/><input type='button' name='butCancel' className={styles.input_button} value='Cancel' onClick={
                 (e) => {

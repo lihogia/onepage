@@ -16,11 +16,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-  function editClick() {
-    console.log('Edit click!');
-  }
-
-
   return (
     <html lang="en">
       <body className={inter.className}>

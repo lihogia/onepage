@@ -1,19 +1,21 @@
 import UtilLinkComponent from './link';
 import UtilSimpleSearch from './search';
-import { Util, UtilLink } from '../data/types';
+import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
 
-export default function UtilComponent({util}: {util:Util|UtilLink}) {
+export default function UtilComponent({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
     
-    if (util.fieldname === undefined) {
+    if (Object.keys(util).length == 2) {
+        const link: UtilLink = util;
         return (
             <>
-                <UtilLinkComponent link={util} />
+                <UtilLinkComponent util={link} stringIndex={stringIndex}/>
             </>
         );
     }else {
+        const search: SimpleSearch = util;
         return (
             <>
-                <UtilSimpleSearch search={util} />
+                <UtilSimpleSearch util={search} stringIndex={stringIndex}/>
             </>
         );
     }

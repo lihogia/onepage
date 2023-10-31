@@ -1,18 +1,20 @@
 import styles from './component.module.css';
 import { SimpleSearch } from "@/app/data/types";
 import { useContext, useState } from 'react';
-import { EditContext } from '@/app/edit/EditContext';
-import UtilSimpleSearchEditor from '@/app/edit/components/UtilSimpleSearchEditor';
+import { BoardContext } from './BoardContext';
 
-export default function UtilSimpleSearch({search, utilIndex = ''}: {search: SimpleSearch, utilIndex: string}) {
-    const editContext = useContext(EditContext);
-    const isEdit = editContext.isEdit;
+import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
 
+export default function UtilSimpleSearch({util, stringIndex = ''}: {util: SimpleSearch, stringIndex: string}) {
+    const boardContext = useContext(BoardContext);
+    const isEdit = boardContext.isEdit;
+
+    const search = util;
     const [utilSimpleSearch, setUtilSimpleSearch] = useState(search);
 
     function updateSimpleSearch(pSearch: SimpleSearch) {
         setUtilSimpleSearch(pSearch);
-        editContext.updateUtil(pSearch, utilIndex);
+        boardContext.updateUtil(pSearch, stringIndex);
     }
 
     return (
@@ -20,8 +22,8 @@ export default function UtilSimpleSearch({search, utilIndex = ''}: {search: Simp
             {
          //   <img src={`${search.url.substring(0, search.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/> {search.title}
         }
-            {isEdit && <UtilSimpleSearchEditor pSearch={utilSimpleSearch} handleUpdateSimpleSearch={updateSimpleSearch}/>}
-            {!isEdit && <> {search.title}
+            
+            {search.title}
                 <form method='get' target='_blank'>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
                     <input type='reset' className={styles.input_button} name='Reset' />
@@ -43,8 +45,6 @@ export default function UtilSimpleSearch({search, utilIndex = ''}: {search: Simp
                         }
                     }} />
                 </form>
-            </>
-            }
         </section>
     );
 }

@@ -3,8 +3,8 @@ import { SimpleSearch } from '@/app/data/types';
 import { useState } from 'react';
 
 export default function UtilSimpleSearchEditor(
-    {pSearch, handleUpdateSimpleSearch, showEditor = false, handleCancel = () => {}}: 
-    {pSearch: SimpleSearch, handleUpdateSimpleSearch: Function, showEditor: boolean, handleCancel: Function}) {
+    {pSearch, showEditor = false, handleSave, handleCancel = () => {}}: 
+    {pSearch: SimpleSearch, handleSave: Function, showEditor: boolean, handleCancel: Function}) {
     
     const [editorState, setEditorState] = useState({ search: pSearch, isInputable: showEditor});
 
@@ -42,8 +42,8 @@ export default function UtilSimpleSearchEditor(
                 <input type='button' name='butSave' className={styles.input_button} value='Save' onClick={
                     (e) => {
                         setEditorState({...editorState, isInputable: false});
-                        handleUpdateSimpleSearch(editorState.search);
-                        e.stopPropagation();
+                        handleSave(editorState.search);
+                        //e.stopPropagation();
                         }
                 }/><input type='button' name='butCancel' className={styles.input_button} value='Cancel' onClick={
                     (e) => {

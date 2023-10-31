@@ -1,53 +1,65 @@
+import { useContext, useState } from 'react';
 import styles from './component.module.css';
 import type { SubCategory, UtilLink, Util } from '@/app/data/types';
+import { BoardContext } from './BoardContext';
+import NameEditor from '@/app/components/edit/NameEditor';
+import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
+import UtilEditor from './edit/UtilEditor';
 import UtilComponent from './util';
-import { useContext, useState } from 'react';
-import { EditContext } from '@/app/edit/EditContext';
-import NameEditor from '@/app/edit/components/NameEditor';
-import CreateUtilEditor from '@/app/edit/components/CreateUtilEditor';
-import UtilLinkComponent from './link';
-import UtilSimpleSearch from './search';
 
 export default function SubCategoryComponent(
-    {subcate, subIndex = ''}: 
-    {subcate: SubCategory, subIndex: string}) {
+    {subcate, stringIndex = ''}: 
+    {subcate: SubCategory, stringIndex: string}) {
 
-    const editContext = useContext(EditContext);
-    const isEdit = editContext.isEdit;
-
-
-    const [subCategory, setSubCategory] = useState(subcate);
+    const boardContext = useContext(BoardContext);
+    const isEdit = boardContext.isEdit;
+    
+    const subCategory = subcate;
 
     function updateSubCategoryName(pName: string) {
-        setSubCategory({...subCategory, name: pName});
-        const [catIndex, subCatIndex] = subIndex.split('_');
-        editContext.updateSubCategoryName(Number.parseInt(catIndex), pName, Number.parseInt(subCatIndex));
+        boardContext.updateSubCategoryName(pName, stringIndex);
     }
 
     function createNewUtil(util: Util) {
-        const newUtils = [...subCategory.utils];
-        newUtils.push(util);
-        setSubCategory({...subCategory, utils: newUtils});
-        editContext.createUtil(util, subIndex);
+        boardContext.createUtil(util, stringIndex);
     }
 
-    return (
-        <section className={styles.subcategory}>
-            <ul>{isEdit && <NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName}/>}
-                {!isEdit && <span>{subCategory.name}</span>}
+    function deleteSubCategory() {
+        const ret = confirm('Are you sure? (OK = Yes)');
+        if (ret) {
+            boardContext.deleteSubCategory(stringIndex);
+        }
+    }
 
+    if (isEdit) {
+        return (
+            <section className={styles.subcategory}>
+                <ul><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName}/>
+                    <input type='button' value='Delete Sub Category' onClick={deleteSubCategory}/>
+                    {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
+                        return (
+                            <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
+                                <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
+                            </li>
+                        )
+                    })}
+                    <li className={styles.util_link} key={subCategory.utils.length}><CreateUtilEditor handleCreateUtil={createNewUtil} stringIndex={stringIndex}/></li>
+                </ul>
+            </section>
+        );
+    }else {
+        return (
+            <section className={styles.subcategory}>
+                <ul>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
-                    return (
-                        <li className={styles.util_link} key={index}>
-                            {element.fieldname === undefined && <UtilLinkComponent link={element} utilIndex={`${subIndex}_${index}`} />}
-                            {element.fieldname !== undefined && <UtilSimpleSearch search={element} utilIndex={`${subIndex}_${index}`}/>}
-                        </li>
-                    )
+                        return (
+                            <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
+                                <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
+                            </li>
+                        )
                 })}
-
-                {isEdit && <li className={styles.util_link} key={subCategory.utils.length}><CreateUtilEditor handleCreateUtil={createNewUtil} subIndex={subIndex}/></li>}
-
-            </ul>
-        </section>
-    );
+                </ul>
+            </section>
+        );
+    }
 }   

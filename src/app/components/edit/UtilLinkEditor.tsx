@@ -3,8 +3,8 @@ import { UtilLink } from '@/app/data/types';
 import { useState } from 'react';
 
 export default function UtilLinkEditor(
-    {pLink, handleUpdateLink, showEditor = false, handleCancel = () => {}}: 
-    {pLink: UtilLink, handleUpdateLink: Function, showEditor: boolean, handleCancel: Function}) {
+    {pLink, showEditor = false, handleSave, handleCancel}: 
+    {pLink: UtilLink, showEditor: boolean, handleSave: Function, handleCancel: Function}) {
     
     const [editorState, setEditorState] = useState({ link: pLink, isInputable: showEditor});
     return (
@@ -25,8 +25,8 @@ export default function UtilLinkEditor(
             }/><input type='button' name='butSave' className={styles.input_button} value='Save' onClick={
                 (e) => {
                     setEditorState({...editorState, isInputable: false});
-                    handleUpdateLink(editorState.link);
-                    e.stopPropagation();
+                    handleSave(editorState.link);
+                    //e.stopPropagation();
                 }
             }/><input type='button' name='butCancel' className={styles.input_button} value='Cancel' onClick={
                 (e) => {

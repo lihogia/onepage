@@ -1,8 +1,10 @@
+import { useState, useContext } from 'react';
 import styles from './component.module.css';
 import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
-import { useState, useContext } from 'react';
-import UtilLinkEditor from '@/app/edit/components/UtilLinkEditor';
-import UtilSimpleSearchEditor from '@/app/edit/components/UtilSimpleSearchEditor';
+
+import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
+import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
+import { BoardContext } from '../BoardContext';
 
 const DEFAULT_LINK = {
     title: 'New Title',
@@ -21,9 +23,13 @@ const DEFAULT_SIMPLE_SEARCH_REGEXP = {
     pattern: 'e.target.value|ig'
 };
 
-export default function CreateUtilEditor({handleCreateUtil, subIndex}: {handleCreateUtil: Function, subIndex: string}) {
-    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputable: false});
+export default function CreateUtilEditor(
+    {handleCreateUtil, stringIndex}: 
+    {handleCreateUtil: Function, stringIndex: string}) {
 
+    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputable: false});
+    const boardContext = useContext(BoardContext);
+    
     function switchUtilType(pType: string) {
         
         let newUtil: Util;
@@ -64,19 +70,19 @@ export default function CreateUtilEditor({handleCreateUtil, subIndex}: {handleCr
                 <option value='ssearch'>Simple Search</option>
                 <option value='ssearchregexp'>Simple Search with RegExp</option>
             </select>
-            {editorState.selected === 'link' && <UtilLinkEditor pLink={editorState.util} showEditor={true} handleUpdateLink={
+            {editorState.selected === 'link' && <UtilLinkEditor pLink={editorState.util} showEditor={true} handleSave={
                 (pLink: UtilLink) => {                    
                     setEditorState({...editorState, util: {...pLink}, isInputable: false});
                     handleCreateUtil(pLink);
                 }
             } handleCancel={handleCancelClick}/>}
-            {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleUpdateSimpleSearch={
+            {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}, isInputable: false});
                     handleCreateUtil(pSearch);
                 }
             } handleCancel={handleCancelClick} />}
-            {(editorState.selected === 'ssearchregexp') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleUpdateSimpleSearch={
+            {(editorState.selected === 'ssearchregexp') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}});
                     handleCreateUtil(pSearch);

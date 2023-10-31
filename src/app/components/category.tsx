@@ -1,51 +1,47 @@
 'use client';
 import styles from './component.module.css';
-import type { Util, SubCategory, Category } from '@/app/data/types';
+import { useContext } from 'react';
+import type { Category } from '@/app/data/types';
+import { BoardContext } from './BoardContext';
+import NameEditor from '@/app/components/edit/NameEditor';
+import CreateNameButton from '@/app/components/edit/CreateNameButton';
 import SubCategoryComponent from './subcategory';
-import { useContext, useState } from 'react';
-import { EditContext } from '@/app/edit/EditContext';
-import NameEditor from '@/app/edit/components/NameEditor';
-import CreateNameButton from '@/app/edit/components/CreateNameButton';
-
 
 export default function CategoryComponent(
     {cate, index = -1}:
     {cate: Category, index: number}
 ) {
-    const editContext = useContext(EditContext);
-    const isEdit = editContext.isEdit;
-    //const [catename, setCateName] = useState(cate.name);
-    const [category, setCategory] = useState(cate);
+    
+    const boardContext = useContext(BoardContext);
+    const isEdit = boardContext.isEdit;
+
+    const category = cate;
 
     function updateCategoryName(pName: string) {
-        setCategory({...category, name: pName});
-        editContext.updateCategoryName(pName, index);
+        boardContext.updateCategoryName(pName, index);
     }
 
-    function createNewSubCategory(cateIndex: number, pName: string) {
-        /*const newCategory = {...category};
-        const newSubCategory = {
-            name: pName,
-            utils: []
+    function deleteCategory() {
+        const ret = confirm('Are you sure? (OK = Yes)');
+        if (ret) {
+            boardContext.deleteCategory(index);
         }
-        newCategory.subcategories.push(newSubCategory);
-        setCategory(newCategory);*/
-        //console.log('inside %d - %s', cateIndex, pName);
-        editContext.createSubCategory(cateIndex, pName);
     }
 
     return (
         <section className={styles.category}>
-        <>
-            {isEdit && <NameEditor pName={category.name} handleUpdateName={updateCategoryName}/>}
+            {isEdit && <>
+                <NameEditor pName={category.name} handleUpdateName={updateCategoryName}/>
+                <input type='button' value='Delete Category' onClick={deleteCategory}/>
+                </>}
             {!isEdit && <span>{category.name}</span>}
             {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
                 return (
-                    <SubCategoryComponent subcate={element} key={subindex} subIndex={`${index}_${subindex}`}/>
+                    <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
                 );
             })}
-            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={createNewSubCategory} categoryIndex={index}/>}
-        </>
+            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/>}
+
         </section>
     );
 }

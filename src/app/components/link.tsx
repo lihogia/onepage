@@ -1,18 +1,23 @@
 import styles from './component.module.css';
 import type { UtilLink } from '@/app/data/types';
 import { useContext, useState } from 'react';
-import { EditContext } from '@/app/edit/EditContext';
-import UtilLinkEditor from '@/app/edit/components/UtilLinkEditor';
+import { BoardContext } from './BoardContext';
 
-export default function UtilLinkComponent({link, utilIndex = ''}: {link: UtilLink, utilIndex: string}) {
-    const editContext = useContext(EditContext);
-    const isEdit = editContext.isEdit;
+export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilLink, stringIndex: string}) {
+    const boardContext = useContext(BoardContext);
 
-    const [utilLink, setUtilLink] = useState(link);
+    const [utilLink, setUtilLink] = useState(util);
 
     function updateLink(ulink: UtilLink) {
         setUtilLink(ulink);
-        editContext.updateUtil(ulink, utilIndex);
+        boardContext.updateUtil(ulink, stringIndex);
+    }
+
+    function deleteUtil() {
+        const ret = confirm('Are you sure? (OK = Yes)');
+        if (ret) {
+            boardContext.deleteUtil(stringIndex);
+        }
     }
     
     return (
@@ -21,8 +26,7 @@ export default function UtilLinkComponent({link, utilIndex = ''}: {link: UtilLin
         //    <img src={`${link.url.substring(0, link.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/>
 
         }
-            {isEdit && <UtilLinkEditor pLink={utilLink} handleUpdateLink={updateLink} />}
-            {!isEdit && <a href={utilLink.url} target='_blank'>{utilLink.title}</a>}
+        <a href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );
 }
