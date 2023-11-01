@@ -38,7 +38,7 @@ export default function Header() {
             try {
                 boardConfig = JSON.parse(JSON.stringify(content));
                 // have to check the content
-                console.log(boardConfig);
+                console.log('Upload successfull.');
                 localStorage.setItem('onepage', boardConfig);
             }catch (error) {
                 reader.onerror(Error('Not json file'));
@@ -78,6 +78,7 @@ export default function Header() {
     */
         uploadForm.reset();
         uploadForm.className = `${styles.hideUploadModal}`;
+        document.location.reload();
     }
 
     function cancelUploadForm() {

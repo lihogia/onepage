@@ -8,7 +8,7 @@ import CreateNameButton from '@/app/components/edit/CreateNameButton';
 
 export function loadData() {
     //const data = loadLocalStorage();
-    const data = template001.categories;
+    const data = [];//template001.categories;
 
     return data;
 }
@@ -26,16 +26,37 @@ function loadLocalStorage() {
     return categories;
 }
 
+function saveLocalStorage(categories) {
+
+  const configOnePage = {
+    categories: categories
+  };
+  
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    localStorage.setItem('onepage', JSON.stringify(configOnePage));
+    console.log('Saved to localStorage.');
+  }
+
+}
+
 
 export default function Board({isEdit = false}) {
 
+   
     const cates = loadData();
     const [categories, setCategories] = useState(cates);
     //const sectionRef = useRef(null);
-    useEffect(() => {
-      const localCates = loadLocalStorage();
+    useEffect(() => { // need to run once after 1st render
+      let localCates = loadLocalStorage();
+
+      if (localCates.length == 0 ) {
+        localCates = template001.categories;
+        saveLocalStorage(localCates);
+      }
+
       setCategories([...localCates]);
-    }, [cates]);
+    }, []);
 
     const initBoardContext = (!isEdit) ? 
                              (prototypeBoardContext) : 

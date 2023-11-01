@@ -24,8 +24,11 @@ export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilL
         <>
         {
         //    <img src={`${link.url.substring(0, link.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/>
+        //<img src={`${util.url.substring(0, util.url.indexOf('/', 8)+1)}favicon.ico`} width='15' height='15'/>
 
         }
+        
+        &nbsp;
         <a href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );
