@@ -22,9 +22,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         {children}
-        <footer>
-          © 2023 <a href='mailto:lilogia@gmail.com'>lilogia</a>. All right reserved.
-        </footer>
       </body>
     </html>
   )
