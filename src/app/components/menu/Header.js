@@ -10,7 +10,7 @@ export default function Header() {
         let link = document.createElement('a');
         link.download = 'onepage_config.json';
     
-        let blob = new Blob([JSON.stringify(categories)], {type: 'application/json'});
+        let blob = new Blob([JSON.stringify(categories, undefined, 4)], {type: 'application/json'});
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
