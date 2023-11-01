@@ -50,7 +50,7 @@ export default function SubCategoryComponent(
     }else {
         return (
             <section className={styles.subcategory}>
-                <ul>
+                <ul><span>{subCategory.name}</span>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                         return (
                             <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
