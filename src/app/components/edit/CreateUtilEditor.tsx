@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import styles from './component.module.css';
-import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
+import { Util, UtilLink, SimpleSearch, getUtilTypeName } from '@/app/data/types';
 
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
@@ -32,7 +32,7 @@ export default function CreateUtilEditor(
     
     function switchUtilType(pType: string) {
         
-        let newUtil: Util;
+        let newUtil: any;//Util;
         switch (pType) {
             case 'ssearch':
                 newUtil = DEFAULT_SIMPLE_SEARCH;
@@ -60,7 +60,7 @@ export default function CreateUtilEditor(
             } />
         }
         {editorState.isInputable && <>
-            <label>Select the type of Util:</label><br/>
+            <label>Select the type of Util:</label>, {typeof editorState.util}<br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
                     switchUtilType(e.target.value);

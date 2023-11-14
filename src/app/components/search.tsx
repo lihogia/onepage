@@ -25,14 +25,18 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
         }
             
         &nbsp;
-            {search.title}
-                <form method='get' target='_blank'>
+            {search.title}123
+                <form method='get' target='_blank' name={`form_${stringIndex}`}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
                     <input type='reset' className={styles.input_button} name='Reset' />
                     <input type='submit' className={styles.input_button} value='Search' name='Search' onClick={(e) => {
-                    
-                        const form = e.currentTarget.form;
-                        const textElement = form.elements[0];
+                        
+                        const formName: any = `form_${stringIndex}`;
+                        const form = document.forms[formName]; //e.currentTarget.form;
+
+                        const textElementName: any = `${search.fieldname}`;
+                        const textElement: any = form.elements[textElementName];
+
                         if (textElement.value.trim() === '') {
                             e.preventDefault();
                         }
@@ -51,14 +55,3 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
     );
 }
 
-/**
- * 
- * 
- * 
- * export interface SimpleSearch {
-    title: string,
-    url: string,
-    fieldname: string,
-    pattern: string
-}
- */

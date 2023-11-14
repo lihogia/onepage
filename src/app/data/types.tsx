@@ -4,14 +4,21 @@ export interface UtilLink {
     url: string
 }
 
-export interface SimpleSearch {
-    title: string,
-    url: string,
+export interface SimpleSearch extends UtilLink {
     fieldname: string,
     pattern: string
 }
 
 export type Util = UtilLink | SimpleSearch;
+
+export function getUtilTypeName(util: Util) {
+    if ('fieldname' in util) {
+        return 'SimpleSearch';
+    }else {
+        return 'UtilLink';
+    }
+}
+
 
 export interface SubCategory {
     name: string,

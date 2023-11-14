@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function UtilSimpleSearchEditor(
     {pSearch, showEditor = false, handleSave, handleCancel = () => {}}: 
-    {pSearch: SimpleSearch, handleSave: Function, showEditor: boolean, handleCancel: Function}) {
+    {pSearch: any, handleSave: Function, showEditor: boolean, handleCancel: Function}) {
     
     const [editorState, setEditorState] = useState({ search: pSearch, isInputable: showEditor});
 
