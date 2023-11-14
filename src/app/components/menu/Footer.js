@@ -5,7 +5,7 @@ export default function Footer({isEdit}) {
     return (
     <>
         <footer className={styles.footer}>
-          © 2023 <a href='mailto:lilogia@gmail.com'>lilogia</a>. All right reserved.
+          © 2023. Any feedback, please send to <a href='mailto:lilogia@gmail.com'>lilogia</a>. All right reserved.
         </footer>
     </>
     );
