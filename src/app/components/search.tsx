@@ -25,12 +25,12 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
         }
             
         &nbsp;
-            {search.title}123
+            {search.title}
                 <form method='get' target='_blank' name={`form_${stringIndex}`}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
                     <input type='reset' className={styles.input_button} name='Reset' />
                     <input type='submit' className={styles.input_button} value='Search' name='Search' onClick={(e) => {
-                        
+
                         const formName: any = `form_${stringIndex}`;
                         const form = document.forms[formName]; //e.currentTarget.form;
 
