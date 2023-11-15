@@ -6,8 +6,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Onepage Alpha',
-  description: 'Alpha version'
+  title: `${process.env.productname}`,
+  description: `${process.env.tag}_${process.env.version}`
 }
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarningc>
         <Header />
         {children}
       </body>

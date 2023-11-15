@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const { name, tag, version } = require('./package.json');
 
-module.exports = nextConfig
+const nextConfig = {
+    env: {
+        productname: name,
+        tag,
+        version
+    }
+}
+
+module.exports = nextConfig;
