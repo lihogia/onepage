@@ -2,21 +2,23 @@
     display: flex;
     flex-direction: column;
     border: 1px dotted #5BA199;
-    background-color: #E5E3E4;
+    background-color: #ffff;
     padding: 5px;
     color: #469597;
     font-size: large;
+    min-width: 100px;
+    justify-content: flex-start;
+    align-items: center;
   }
   
   .subcategory {
     display: flex;
     flex-direction: column;
-    border: 1px dashed #5BA199;
-    
+    border: 1px dashed #5BA199;    
     background-color: #469597;
     padding: 5px;
-    color: #E5E3E4;
     font-size: medium;
+    color: black;
   }
 
   .subcategory ul {
@@ -43,16 +45,21 @@
 
   .input_text {
     border-radius: 3px;
-    border: 0;
-    height: 20px;
-    margin-top: 5px;
+    border: 1px solid black;
+    height: 30px;
+    margin: 3px;
     margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 2px;
+    padding: 5px;
+    flex-grow: 1;
   }
+
   .long {
-    width: 232px;
+    width: 220px;
   }
+  .longSubCategory {
+    width: 200px;
+  }
+
   .short {
     width: 60px;
   }
@@ -60,17 +67,82 @@
   .input_button {
     border-radius: 3px;
     border: 0;
-    height: 20px;
-    margin-top: 5px;
-    margin-right: 5px;
+    height: 30px;
+    margin: 1px;
     padding: 2px;
-
+    background-color: #ffff;
   }
 
   .input_button:hover {
-    background-color: #5BA199;
-    color: #E5E3E4;
+    background-color: #ffff;
+    color: #009bd6;
     cursor: pointer;
   }
   
+  .subCategoryNameEdit {
+    color: black;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3px;
+    width: 250px;
+  }
+
+  .subCategoryNameEdit span {
+    flex-grow: 8;
+  }  
+
+  .subCategoryNameEdit span:hover {
+    cursor: pointer;
+  }
+
+  .subCategoryNameEdit a {
+    text-decoration: none;
+    color: black;
+    margin-right: 1px;
+  }
+
+  .utilLinkEdit {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .utilLinkEdit a {
+    flex-grow: 8;
+  }
+
+  .utilLinkEditForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .utilLinkEditFormWithButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+.buttonAdd {
+  margin-top: 8px;
+  border: 0;
+  background-color: #ffff;
+}
+
+.actionIcons {
+  cursor: pointer;
+  width: 100;
+  height: 100;
+  margin: 2px;
+}
+
+.buttonAdd:hover {
+    cursor: pointer;
+}
+
   

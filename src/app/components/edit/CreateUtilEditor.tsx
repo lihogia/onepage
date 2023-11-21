@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import Image from 'next/image';
 import styles from './component.module.css';
 import { Util, UtilLink, SimpleSearch, getUtilTypeName } from '@/app/data/types';
 
@@ -53,14 +54,14 @@ export default function CreateUtilEditor(
 
     return (
     <>
-        {!editorState.isInputable && <input type='button' value='Add' className={styles.input_button} onClick={
+        {!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
                 (e) => {
                     setEditorState({...editorState, isInputable: true});
                 }
-            } />
+            }><Image src='/icons/addlinkico.png' alt='Add a Util' width={20} height={20}/></button>
         }
         {editorState.isInputable && <>
-            <label>Select the type of Util:</label>, {typeof editorState.util}<br/>
+            <label>Select the type of Util:</label><br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
                     switchUtilType(e.target.value);
@@ -75,7 +76,7 @@ export default function CreateUtilEditor(
                     setEditorState({...editorState, util: {...pLink}, isInputable: false});
                     handleCreateUtil(pLink);
                 }
-            } handleCancel={handleCancelClick}/>}
+            } handleCancel={handleCancelClick} handleDelete={() => {}}/>}
             {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}, isInputable: false});

@@ -26,10 +26,11 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
             
         &nbsp;
             {search.title}
-                <form method='get' target='_blank' name={`form_${stringIndex}`}>
+                <form method='get' target='_blank' name={`form_${stringIndex}`} className={styles.formView}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
-                    <input type='reset' className={styles.input_button} name='Reset' />
-                    <input type='submit' className={styles.input_button} value='Search' name='Search' onClick={(e) => {
+                    
+                    <button type='reset' className={styles.input_button}><i className="material-icons">&#xe863;</i></button>
+                    <button type='submit' className={styles.input_button} onClick={(e) => {
 
                         const formName: any = `form_${stringIndex}`;
                         const form = document.forms[formName]; //e.currentTarget.form;
@@ -39,6 +40,7 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
 
                         if (textElement.value.trim() === '') {
                             e.preventDefault();
+                            return;
                         }
 
                         if (textElement.name === 'regexp') {
@@ -49,7 +51,7 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
                         }else {
                             form.action = search.url;
                         }
-                    }} />
+                    }} ><i className="material-icons">&#xe8b6;</i></button>
                 </form>
         </section>
     );

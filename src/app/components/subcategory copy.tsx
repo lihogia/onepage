@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useContext, useState } from 'react';
 import styles from './component.module.css';
 import type { SubCategory, UtilLink, Util } from '@/app/data/types';
@@ -35,7 +34,8 @@ export default function SubCategoryComponent(
     if (isEdit) {
         return (
             <section className={styles.subcategory}>
-                <ul><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName} handleDeleteName={deleteSubCategory}/>
+                <ul><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName}/>
+                    <input type='button' value='Delete Sub Category' onClick={deleteSubCategory}/>
                     {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                         return (
                             <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
@@ -50,7 +50,7 @@ export default function SubCategoryComponent(
     }else {
         return (
             <section className={styles.subcategory}>
-                <ul><span className={styles.subcategoryLabel}>{subCategory.name}</span>
+                <ul><span>{subCategory.name}</span>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                         return (
                             <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>

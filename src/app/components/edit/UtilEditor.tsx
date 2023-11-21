@@ -23,12 +23,11 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     return (
     <>
         {Object.keys(util).length == 2 && <>
-            <UtilLinkEditor pLink={util} showEditor={false} handleSave={updateUtil} handleCancel={() => {}}/>
+            <UtilLinkEditor pLink={util} showEditor={false} handleSave={updateUtil} handleCancel={() => {}} handleDelete={deleteUtil}/>
         </>}
         {Object.keys(util).length > 2 && <>
             <UtilSimpleSearchEditor pSearch={util} showEditor={false} handleSave={updateUtil} handleCancel={() => {}}/>
         </>}
-        <input type='button' value='Delete Link' onClick={deleteUtil}/>
     </>
     );
 }

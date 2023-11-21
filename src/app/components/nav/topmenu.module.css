@@ -1,0 +1,146 @@
+.topMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    list-style-type: none;
+    padding: 3px;
+  }
+
+.topMenu li {
+    padding: 5px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.topMenuImg {
+    /* margin-top: 5px; */
+    /* border: 1px solid green; */
+}
+
+.topMenu li a {
+    text-decoration: none;
+    color: gray;
+    font-size: medium;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.topMenuIcon {
+
+}
+
+/* Submenu */
+.dropdown {
+    display: inline-block;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #E5E3E4;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 140px;
+}
+
+.dropdownContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+.dropdownContent a:hover {
+    background-color: #f1f1f1;
+}
+  
+.dropdown:hover .dropdownContent {
+    display: block;
+    list-style: none;
+  }
+
+  .hideUploadModal {
+    display: none;
+    border: 1px solid red;
+  }
+  
+  .showUploadModal {
+    position: fixed;
+    top: 20%;
+    left: 30%;
+
+    width: 500px;
+    height: 200px;
+    
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+    border: 3px solid #009bd6;
+    padding: 2px;
+    
+    background-color: #ffff;
+    padding: 5px;
+    color: #E5E3E4;
+    font-size: medium;
+  
+    z-index: 2;
+  }
+  
+  .showUploadModal ul {
+    list-style-type: none;
+    
+  }
+  
+  .showUploadModal li {
+    border-radius: 5px;
+    
+    margin: 5px;
+    padding: 5px;
+    font-size: medium;
+  }
+
+  .modalTitle {
+    color: #009bd6;
+    font-weight: bolder;
+  }
+
+  .input_file {
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #63b7d3;
+    width: 100%;
+    color: black;
+    
+  }
+
+  .input_text {
+    border-radius: 3px;
+    /* border: 1px solid black; */
+    height: 30px;
+    margin: 5px;
+    
+    padding: 5px;
+  }
+
+  .input_button {
+    border-radius: 5px;
+    border: 0;
+    margin: 5px;
+    padding: 10px;
+    font-size: medium;
+    color: #ffff;
+    background-color: #63b7d3;
+  }
+
+  .input_button:hover {
+    cursor: pointer;
+    background-color: #009bd6;
+  }
+
+  

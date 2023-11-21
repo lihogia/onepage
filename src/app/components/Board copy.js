@@ -6,9 +6,7 @@ import { prototypeBoardContext, createInitBoardContext, BoardContext } from './B
 import CategoryComponent from '@/app/components/category';
 import SubCategoryComponent from './subcategory';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
-import LeftBar from './nav/LeftBar';
-import TopMenu from './nav/TopMenu';
-
+import LeftBar from './board/LeftBar';
 
 export function loadData() {
     //const data = loadLocalStorage();
@@ -45,13 +43,13 @@ function saveLocalStorage(categories) {
 }
 
 
-//export default function Board({isEdit = false}) {
-export default function Board() {  
+export default function Board({isEdit = false}) {
+
    
     const cates = loadData();
     const [categories, setCategories] = useState(cates);
     const [categoryIndex, setCategoryIndex] = useState(0);
-    const [isEdit, setIsEdit] = useState(false);
+    const category = categories[categoryIndex];
 
     useEffect(() => { // need to run once after 1st render
       let localCates = loadLocalStorage();
@@ -64,7 +62,9 @@ export default function Board() {
       setCategories([...localCates]);
     }, []);
 
-    const initBoardContext = createInitBoardContext(categories, setCategories, isEdit, setIsEdit); // end of initBoardContext
+    const initBoardContext = (!isEdit) ? 
+                             (prototypeBoardContext) : 
+                             (createInitBoardContext(categories, setCategories)); // end of initBoardContext
 
     function selectACategory(categoryIndex) {
       setCategoryIndex(categoryIndex);
@@ -73,19 +73,38 @@ export default function Board() {
     return (
       <BoardContext.Provider value={initBoardContext}>
         <section className={styles.board}>
-          <LeftBar categories={categories} handleSelectACategory={selectACategory} selectedIndex={categoryIndex}/>
+          <LeftBar categories={categories} handleSelectACategory={selectACategory}/>
           <section className={styles.main}>
-            <section className={styles.topSection}>
-              <section className={styles.topAdSection}>
-                Ads
-              </section>
-              <TopMenu />
+            <section className={styles.topAdSection}>
+              Ads
             </section>
+            {isEdit && <>
+            <input type='button' className={styles.input_button} value='Save to Local' onClick={
+                  (e) => {
+                    //console.log(categories);
+                    const localStorage = window.localStorage;
+                    const configOnePage = {
+                      categories: categories
+                    };
+                    localStorage.setItem('onepage', JSON.stringify(configOnePage));
+                    console.log('Saved to localStorage.');
+                  }
+                }/>
+            </>}
 
             <main className={styles.mainContent}>
-              {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
-           
-              <section className={styles.categoryEmpty}></section>
+              {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
+                  return (
+                      <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
+                  );
+              })}
+
+              {categories.length > 0 && categories.map((element, index) => {
+                  return (
+                    <CategoryComponent cate={element} key={`${index}_${element.name}`} index={index}/>
+                  );
+                })}
+              {isEdit && <CreateNameButton pName='New Category' handleCreateName={initBoardContext.createCategory} categoryIndex={-1}/>}
               <section className={styles.rightBarAdSection}>
                 Ads
               </section>
