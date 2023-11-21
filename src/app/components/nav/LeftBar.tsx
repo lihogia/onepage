@@ -41,7 +41,9 @@ export default function LeftBar(
                 console.log('Saved to localStorage.');
                 boardContext.setIsEdit(false);
                 
-            }}/></li>}
+            }}/><i className={`material-icons ${styles.input_button}`} title='Cancel Edit' onClick={() => {
+                boardContext.setIsEdit(false);
+            }}>&#xe14c;</i></li>}
         {categories.map((element, index) => {
             if (isEdit) {
                 return (
