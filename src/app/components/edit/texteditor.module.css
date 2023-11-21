@@ -1,0 +1,30 @@
+.input_text {
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 30px;
+    margin: 3px;
+    margin-right: 10px;
+    padding: 5px;
+    flex-grow: 8;
+
+    width: 100%;
+
+  }
+
+  .input_button {
+    border-radius: 3px;
+    border: 0;
+    height: 30px;
+    margin-top: 3px;
+    margin-right: 5px;
+    padding: 2px;
+    background-color: #ffff;
+    flex-grow: 0;
+    
+    color: black;
+  }
+
+  .input_button:hover {
+    color: #009bd6;
+    cursor: pointer;
+  }

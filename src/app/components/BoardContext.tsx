@@ -3,6 +3,7 @@ import { Util, Category } from '@/app/data/types';
 
 export const prototypeBoardContext = {
     isEdit: false,
+    setIsEdit: (pIsEdit: boolean) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -21,9 +22,13 @@ function splitToNumber(stringOfIndex: string, separator: string) {
     return arrs;
   }  
 
-export function createInitBoardContext(categories: Category[], handleSetCategoryInState: Function) {
+export function createInitBoardContext(categories: Category[], handleSetCategoryInState: Function, isEdit: boolean, handleSetIsEdit: Function) {
     const initBoardContext = {
-        isEdit: true,
+        isEdit: isEdit,
+        setIsEdit: (pIsEdit: boolean) => {
+          isEdit = pIsEdit;
+          handleSetIsEdit(pIsEdit);
+        },
         createCategory: (pName: string) => {
           const newCates = [...categories];
           const newCate = {

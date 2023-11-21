@@ -30,18 +30,12 @@ export default function CategoryComponent(
 
     return (
         <section className={styles.category}>
-            {isEdit && <>
-                <NameEditor pName={category.name} handleUpdateName={updateCategoryName}/>
-                <input type='button' value='Delete Category' onClick={deleteCategory}/>
-                </>}
-            {!isEdit && <span>{category.name}</span>}
             {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
                 return (
                     <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
                 );
             })}
             {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/>}
-
         </section>
     );
 }

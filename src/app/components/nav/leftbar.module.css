@@ -1,0 +1,98 @@
+.leftbar {
+    display: flex;
+    flex-direction: column;
+    background-color: #009bd6;
+    color: #ffff;
+    min-width: 180px;
+}
+.leftbarEdit {
+    min-width: 250px;
+}
+
+.logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftbar ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.menuItem, .menuItemSelected, .menuItemSelectedEdit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 5px 0;
+    padding: 12px 0 12px 0;
+    cursor: pointer;
+}
+
+.menuItem span {
+    color: #ffff;
+}
+
+.menuItemSelected, .menuItemSelectedEdit {
+    background-color: #ffff;    
+    padding: 10px 0 10px 0;
+}
+
+.menuItemSelected span, .menuItemSelectedEdit span {
+    font-weight: bolder;
+    font-size: 14pt;
+    color: #009bd6;
+}
+
+.menuItemSelectedEdit {
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+.menuItemSelectedEdit span {
+    flex-grow: 2;
+}
+
+.actionTexts {
+    font-weight: normal;
+    font-size: 10pt;
+    color: #009bd6;
+}
+
+
+.categoryMenu {    
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.categoryMenuSelected { 
+    background-color: #ffff;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.leftbar a.selected {
+    font-weight: bolder;
+    font-size: 14pt;
+    color: #009bd6;
+}
+
+.leftbar a {
+    text-decoration: none;
+    color: #ffff;
+}
+
+.actionIcons:hover {
+    cursor: pointer;
+}
+
