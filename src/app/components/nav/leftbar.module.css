@@ -96,3 +96,22 @@
     cursor: pointer;
 }
 
+.input_button {
+    border-radius: 3px;
+    border: 0;
+    
+
+    background-color: #ffff;
+    flex-grow: 0;
+    
+    color: black;
+
+    font-size: 40px;
+    
+  }
+
+  .input_button:hover {
+    color: #009bd6;
+    cursor: pointer;
+  }
+
