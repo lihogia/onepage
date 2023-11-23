@@ -28,8 +28,6 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
             {search.title}
                 <form method='get' target='_blank' name={`form_${stringIndex}`} className={styles.formView}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
-                    
-                    <button type='reset' className={styles.input_button}><i className="material-icons">&#xe863;</i></button>
                     <button type='submit' className={styles.input_button} onClick={(e) => {
 
                         const formName: any = `form_${stringIndex}`;
