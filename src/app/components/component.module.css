@@ -15,12 +15,12 @@
 }
 
 .topSection {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 .topAdSection {
-  display:block;
+  display: block;
   width: 728px;
   height: 90px;
   flex-grow: 1;
@@ -29,7 +29,7 @@
 .rightBarAdSection {
   display:block;
   min-width: 336px;
-  height: 280px;
+  min-height: 280px;
 }
 
 .mainContent {
