@@ -25,10 +25,10 @@ const DEFAULT_SIMPLE_SEARCH_REGEXP = {
 };
 
 export default function CreateUtilEditor(
-    {handleCreateUtil, stringIndex, isInputable}: 
-    {handleCreateUtil: Function, stringIndex: string, isInputable: boolean}) {
+    {handleCreateUtil, stringIndex}: 
+    {handleCreateUtil: Function, stringIndex: string}) {
 
-    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputableIn: isInputable});
+    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputable: false});
     const boardContext = useContext(BoardContext);
     
     function switchUtilType(pType: string) {
@@ -49,18 +49,18 @@ export default function CreateUtilEditor(
     }
 
     function handleCancelClick() {
-        setEditorState({...editorState, isInputableIn: false});
+        setEditorState({...editorState, isInputable: false});
     }
 
     return (
     <>
-        {!editorState.isInputableIn && <button type='button' className={styles.input_button} onClick={
+        {!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
                 (e) => {
-                    setEditorState({...editorState, isInputableIn: true});
+                    setEditorState({...editorState, isInputable: true});
                 }
             }><Image src='/icons/addlinkico.png' alt='Add a Util' width={20} height={20}/></button>
         }
-        {editorState.isInputableIn && <>
+        {editorState.isInputable && <>
             <label>Select the type of Util:</label><br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
@@ -73,13 +73,13 @@ export default function CreateUtilEditor(
             </select>
             {editorState.selected === 'link' && <UtilLinkEditor pLink={editorState.util} showEditor={true} handleSave={
                 (pLink: UtilLink) => {                    
-                    setEditorState({...editorState, util: {...pLink}, isInputableIn: false});
+                    setEditorState({...editorState, util: {...pLink}, isInputable: false});
                     handleCreateUtil(pLink);
                 }
             } handleCancel={handleCancelClick} handleDelete={() => {}}/>}
             {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
                 (pSearch: SimpleSearch) => {
-                    setEditorState({...editorState, util: {...pSearch}, isInputableIn: false});
+                    setEditorState({...editorState, util: {...pSearch}, isInputable: false});
                     handleCreateUtil(pSearch);
                 }
             } handleCancel={handleCancelClick} />}
