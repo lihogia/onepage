@@ -35,7 +35,7 @@ export default function CategoryComponent(
                     <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
                 );
             })}
-            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/>}
+            {/* isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/> */}
         </section>
     );
 }

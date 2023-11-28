@@ -5,39 +5,31 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;  
-  
-  /* border: 1px solid green; */
-
 }
 
 .main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* border: 1px solid red; */
   flex-grow: 1;
 }
 
 .topSection {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 .topAdSection {
-  display:block;
+  display: block;
   width: 728px;
   height: 90px;
-  /* background-color: #f17718; */
   flex-grow: 1;
 }
-
-
 
 .rightBarAdSection {
   display:block;
   min-width: 336px;
-  height: 280px;
-  /* background-color: #f17718; */
+  min-height: 280px;
 }
 
 .mainContent {
@@ -45,89 +37,90 @@
   flex-direction: row;
   justify-content: flex-start;
   align-content: center;
-  /* border: 1px solid green; */
   border-top: 3px solid #009bd6;
 }
 
 .categoryEmpty {
   display: block;
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 .category {
-    display: flex;
-    flex-direction: row;
-    /* border: 1px dotted #5BA199; */
-    background-color: #ffff;
-    padding: 10px;
-    color: #469597;
-    font-size: large;
-  }
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  justify-content: space-around;
+  width: 100%;
+  padding-top: 10px;
+}
+ 
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffff;
+  padding: 0;
+  color: #0000;
+  font-size: medium;
+  margin: 10px;
+}
+
+.subcategory ul {
+  list-style-type: none;
+}
+
+.subcategoryLabel {
+  color: black;
+  font-weight: bold;
+}
+
+.util_link {
+  color: black;
+  margin: 0;
+  margin-top: 10px;
   
-  .subcategory {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border-right: 1px dashed #5BA199;
-    
-    background-color: #ffff;
-    padding: 10px;
-    color: #0000;
-    font-size: medium;
-  }
-
-  .subcategory ul {
-    list-style-type: none;
-  }
-
-  .subcategoryLabel {
-    color: black;
-    font-weight: bold;
-  }
-
-  .util_link {
-
-    color: black;
-    margin: 5px;
-    padding: 5px;
-    font-size: small;
-    border-bottom: 1px dashed #009bd6;
-  }
-
-  .edit {
-    padding: 10px;
-  }
-
-  .formView {
-    display: flex;
-    flex-direction: row;
-    
-  }
+  padding: 5px;
+  padding-left: 0;
+  font-size: small;
   
-  .util_link a {
-    color: black;
-    text-decoration-line: underline;
-    text-decoration-color: #009bd6;
-    text-decoration-style: dotted;
-  }
+}
 
-  .input_text {
-    border-radius: 3px;
-    border: 1px solid black;
-    height: 30px;
-    margin: 3px;
-    padding: 5px;
-  }
+.edit {
+  padding: 10px;
+}
 
-  .input_button {
-    border: 0;
-    height: 20px;
-    margin: 5px;
-    background-color: #ffff;
-  }
-  .input_button:hover {
-    color: #009bd6;
-    cursor: pointer;
-  }
+.formView {
+  display: flex;
+  flex-direction: row;
   
+}
+
+.util_link a {
+  color: black;
+  text-decoration: none;
+}
+
+.util_link a:hover {
+  border-bottom: 1px solid black; 
+}
+
+
+.input_text {
+  border-radius: 3px;
+  height: 30px;
+  margin: 3px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.input_button {
+  border: 0;
+  height: 20px;
+  margin: 5px;
+  background-color: #ffff;
+}
+.input_button:hover {
+  color: #009bd6;
+  cursor: pointer;
+}
+

@@ -83,9 +83,7 @@ export default function Board() {
             </section>
 
             <main className={styles.mainContent}>
-              {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
-           
-              <section className={styles.categoryEmpty}></section>
+                {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
               <section className={styles.rightBarAdSection}>
                 Ads
               </section>
