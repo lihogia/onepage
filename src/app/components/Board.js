@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
 import styles from './component.module.css';
 import { prototypeBoardContext, createInitBoardContext, BoardContext } from './BoardContext';
@@ -8,6 +9,11 @@ import SubCategoryComponent from './subcategory';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
 import LeftBar from './nav/LeftBar';
 import TopMenu from './nav/TopMenu';
+import Menu from '@/app/components/nav/Menu';
+import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
+import LargeRectangleAd from '@/app/components/ads/LargeRectangleAd';
+import Footer from '@/app/components/nav/Footer';
+
 
 
 export function loadData() {
@@ -44,8 +50,16 @@ function saveLocalStorage(categories) {
 
 }
 
-
-//export default function Board({isEdit = false}) {
+/** Board is container */
+/*
+ Layout: container [
+    Menu: grid1, grid1m, grid1m_sub (m is for mobile only)
+    Leaderboard Ad 728 x 90px (Header Ads): grid2
+    Content: grid3
+    Ad Large Rectangle 336 x 280: grid4
+    Footer (Copyright): grid5
+ ]
+*/
 export default function Board() {  
    
     const cates = loadData();
@@ -72,25 +86,15 @@ export default function Board() {
 
     return (
       <BoardContext.Provider value={initBoardContext}>
-        <section className={styles.board}>
-          <LeftBar categories={categories} handleSelectACategory={selectACategory} selectedIndex={categoryIndex}/>
-          <section className={styles.main}>
-            <section className={styles.topSection}>
-              <section className={styles.topAdSection}>
-                Ads
-              </section>
-              <TopMenu />
-            </section>
-
-            <main className={styles.mainContent}>
-                {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
-              <section className={styles.rightBarAdSection}>
-                Ads
-              </section>
-            </main>
-          </section>
-        </section>
-        
+        <div className="container" id="ContainerID">
+          <Menu categories={categories} handleSelectACategory={selectACategory} selectedIndex={categoryIndex}/>
+          <LeaderboardAd />
+          <div className="grid3">
+            {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
+          </div>
+          <LargeRectangleAd />
+          <Footer />
+        </div>        
       </BoardContext.Provider>
 );
 }

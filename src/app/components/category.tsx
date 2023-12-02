@@ -1,4 +1,3 @@
-'use client';
 import styles from './component.module.css';
 import { useContext } from 'react';
 import type { Category } from '@/app/data/types';
@@ -29,13 +28,24 @@ export default function CategoryComponent(
     }
 
     return (
-        <section className={styles.category}>
-            {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
-                return (
-                    <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
-                );
-            })}
-            {isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/>}
-        </section>
+        <>
+        {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
+            return (
+                <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
+            );
+        })}
+        </>
     );
 }
+
+/*
+
+<section className={styles.category}>
+{category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
+    return (
+        <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
+    );
+})}
+{isEdit && <CreateNameButton pName='New Sub Category' key={category.subcategories.length} handleCreateName={boardContext.createSubCategory} categoryIndex={index}/>}
+</section>
+*/

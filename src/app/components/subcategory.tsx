@@ -49,17 +49,27 @@ export default function SubCategoryComponent(
         );
     }else {
         return (
-            <section className={styles.subcategory}>
-                <ul><span className={styles.subcategoryLabel}>{subCategory.name}</span>
-                {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
-                        return (
-                            <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
-                                <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
-                            </li>
-                        )
-                })}
-                </ul>
-            </section>
+            <ul><span className="subcategory">{subCategory.name}</span>
+            {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
+                    return (
+                        <li key={`${element.title}_${stringIndex}_${index}`}>
+                            <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
+                        </li>
+                    )
+            })}
+            </ul>
         );
     }
 }   
+
+/**
+<ul><span class="subcategory">Google Suite</span>
+<li><a class="util" href="#">Mail</a></li>
+<li><a class="util" href="#">Calendar</a></li>
+<li><a class="util" href="#">Drive</a></li>
+<li><a class="util" href="#">Youtube</a></li>
+</ul>
+ 
+
+ * 
+ */

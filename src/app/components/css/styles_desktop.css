@@ -1,0 +1,94 @@
+@media only screen and (min-width: 992px) {
+    /* Desktop, Laptop */
+.container {
+    grid-template-columns: 180px 3fr 280px;
+    grid-template-rows: 100px auto 30px;
+    justify-content: space-between;
+}
+
+
+
+.grid2 {
+    grid-row: 1;
+    grid-column: 2 / span 2;
+}
+
+.grid5 {
+    grid-column: 2 / span 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+/* Menu */
+.grid1 {
+    grid-row: 1 / span 3;
+    
+}
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.menu {
+    padding: 0;
+    list-style-type: none;
+    flex-grow: 1;
+}
+.menuItem, .menuItemSelected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 5px 0;
+    padding: 12px 0 12px 0;
+    cursor: pointer;
+}
+.menuItemSelected {
+    background-color: #ffff;    
+    padding: 10px 0 10px 0;
+}
+
+.menuItem a, .menuItemBottom a {
+    text-decoration: none;
+    color: #ffff;
+}
+.menuItemSelected a {
+    text-decoration: none;
+    color: #009bd6;
+    font-weight: bolder;
+    font-size: 14pt;
+}
+
+.menuBottom {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    flex-wrap: wrap;
+    
+    justify-content: center;
+    padding: 0;
+
+}
+
+.menuItemBottom {
+    border-right: 1px solid #ffff;
+    padding: 4px;
+}
+.menuItemBottom:last-of-type {
+    border-right: 0;
+
+}
+.menuItemBottom a {
+    margin: 2px;
+}
+.menuItemBottom a:hover {
+    border-bottom: 1px solid #ffff;
+}
+
+
+
+}

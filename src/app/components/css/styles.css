@@ -1,0 +1,86 @@
+/*
+ Layout: container [
+    Menu: grid1, grid1m, grid1m_sub (m is for mobile only)
+    Leaderboard Ad 728 x 90px (Header Ads): grid2
+    Content: grid3
+    Ad Large Rectangle 336 x 280: grid4
+    Footer (Copyright): grid5
+ ]
+*/
+
+.container {
+    margin: 0;
+    display: grid;
+    min-height: 100vh;
+}
+
+.grid1, .grid1m, .grid2, .grid3, .grid4, .grid5 {
+    border: 0px solid gray;
+}
+
+/* Menu */
+.grid1, .grid1m {
+    background-color: #009bd6;
+}
+
+.grid1m, .grid1m_sub, .grid1m_sub_none {
+    display: none;
+}
+
+.grid1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuTitle {
+    display: none;
+}
+
+/****/
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.grid3 ul {
+    padding: 5px;
+    margin: 30px 20px 20px 20px;
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+.grid3 ul li {
+    margin: 8px;
+    margin-left: 0;
+    text-wrap: pretty;
+}
+.subcategory {
+    font-weight: bolder;
+    font-size: 14pt;    
+    margin-bottom: 5px;
+    text-wrap: pretty;
+}
+.util {
+    font-size: 12pt;
+    text-decoration: none;
+    color: black;
+            
+}
+.util:hover {
+    border-bottom: 1px solid black;
+}
+
+/* Footer */
+.grid5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    background-color: #63b7d3;
+    color: black;
+    font-size: 11pt;
+}
