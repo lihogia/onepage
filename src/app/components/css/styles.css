@@ -8,11 +8,15 @@
  ]
 */
 
-.container {
+.container, .container_6 {
     margin: 0;
     display: grid;
     min-height: 100vh;
 }
+.container_6 {
+    grid-template-rows: auto auto 100px auto 280px 40px;
+}    
+
 
 .grid1, .grid1m, .grid2, .grid3, .grid4, .grid5 {
     border: 0px solid gray;

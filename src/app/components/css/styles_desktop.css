@@ -11,6 +11,7 @@
 .grid2 {
     grid-row: 1;
     grid-column: 2 / span 2;
+    border-bottom: 2px solid #009bd6;
 }
 
 .grid5 {
@@ -49,7 +50,7 @@
 }
 .menuItemSelected {
     background-color: #ffff;    
-    padding: 10px 0 10px 0;
+    padding: 15px 0 15px 0;
 }
 
 .menuItem a, .menuItemBottom a {
