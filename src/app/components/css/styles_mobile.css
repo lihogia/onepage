@@ -8,6 +8,10 @@
         border-bottom: 2px solid #009bd6;
         
     }
+
+    .grid2 {
+        max-height: 100px;
+    }    
     
     .grid5 {
         
@@ -29,6 +33,7 @@
     }
     .grid1m {
         border-bottom: 1px solid #ffff;
+        max-height: 70px;
     }
     .logo {
         width: 60px;
