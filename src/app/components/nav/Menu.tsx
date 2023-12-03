@@ -93,7 +93,7 @@ export default function Menu(
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
             {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
-            {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
             <li className="menuItemBottom"><a href="#">Config</a></li>
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>

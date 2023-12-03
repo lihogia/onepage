@@ -115,25 +115,9 @@
         margin-left: 10px;
     }
     
-    .menuBottom {
-        display: flex;
-        flex-direction: row;
-        list-style-type: none;
-        flex-wrap: wrap;
-        
-        justify-content: center;
-        padding: 0;
-    
+/*    .menuBottom {    
     }
-    
-    .menuItemBottom {
-        border-right: 1px solid #ffff;
-        padding: 4px;
-    }
-    .menuItemBottom:last-of-type {
-        border-right: 0;
-    
-    }
+*/    
     .menuItemBottom a {
         margin: 2px;
         font-size: 10pt;

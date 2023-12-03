@@ -34,28 +34,25 @@ export default function SubCategoryComponent(
 
     if (isEdit) {
         return (
-            <section className={styles.subcategory}>
-                <ul><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName} handleDeleteName={deleteSubCategory}/>
-                    {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
-                        return (
-                            <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
-                                <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
-                            </li>
-                        )
-                    })}
-                    <li className={styles.util_link} key={subCategory.utils.length}><CreateUtilEditor handleCreateUtil={createNewUtil} stringIndex={stringIndex}/></li>
-                </ul>
-            </section>
+            <ul><span className="subcategory"><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName} handleDeleteName={deleteSubCategory}/></span>
+            {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
+                return (
+                    <li key={`${element.title}_${stringIndex}_${index}`}>
+                        <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
+                    </li>
+                )
+            })}
+            </ul>
         );
     }else {
         return (
             <ul><span className="subcategory">{subCategory.name}</span>
             {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
-                    return (
-                        <li key={`${element.title}_${stringIndex}_${index}`}>
-                            <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
-                        </li>
-                    )
+                return (
+                    <li key={`${element.title}_${stringIndex}_${index}`}>
+                        <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
+                    </li>
+                )
             })}
             </ul>
         );
@@ -70,6 +67,18 @@ export default function SubCategoryComponent(
 <li><a class="util" href="#">Youtube</a></li>
 </ul>
  
+            <section className={styles.subcategory}>
+                <ul><NameEditor pName={subCategory.name} handleUpdateName={updateSubCategoryName} handleDeleteName={deleteSubCategory}/>
+                    {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
+                        return (
+                            <li className={styles.util_link} key={`${element.title}_${stringIndex}_${index}`}>
+                                <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
+                            </li>
+                        )
+                    })}
+                    <li className={styles.util_link} key={subCategory.utils.length}><CreateUtilEditor handleCreateUtil={createNewUtil} stringIndex={stringIndex}/></li>
+                </ul>
+            </section>
 
  * 
  */
