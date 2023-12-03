@@ -4,68 +4,70 @@ export const template001 = {
             "name": "Common",
             "subcategories": [
                 {
-                    "name": "Google Suite",
+                    "name": "Office Tools",
                     "utils": [
                         {
-                            "title": "Mail",
+                            "title": "Google Mail",
                             "url": "https://mail.google.com/mail/u/0/"
                         },
                         {
-                            "title": "Calendar",
+                            "title": "Google Calendar",
                             "url": "https://calendar.google.com/calendar/b/0/"
                         },
                         {
-                            "title": "Drive",
+                            "title": "Google Drive",
                             "url": "https://drive.google.com/u/0/"
                         },
                         {
-                            "title": "Youtube",
-                            "url": "https://www.youtube.com"
+                            "title": "Microsoft Outlook",
+                            "url": "https://outlook.live.com/mail/0/"
+                        },
+                        {
+                            "title": "Outlook Calendar",
+                            "url": "https://outlook.live.com/calendar/0/view/month"
+                        },
+                        {
+                            "title": "OneDrive",
+                            "url": "https://onedrive.live.com"
+                        },
+                        {
+                            "title": "Yahoo! Mail",
+                            "url": "https://mail.yahoo.com/"
+                        },
+                        {
+                            "title": "Proton Mail",
+                            "url": "https://mail.proton.me/u/0/inbox"
                         }
                     ] 
                 },
                 {
-                    "name": "News",
-                    "utils": [
-                        {
-                            "title": "NBC",
-                            "url": "https://www.nbcnews.com/us-news"
-                        },
-                        {
-                            "title": "The Guardian",
-                            "url": "https://www.theguardian.com/us-news"
-                        },
-                        {
-                            "title": "CNN",
-                            "url": "https://edition.cnn.com/"
-                        },
-                    ] 
-                },
-            ]
-        },
-        {
-            "name": "Search",
-            "subcategories": [
-                {
-                    "name": "Websites",
+                    "name": "Search",
                     "utils": [
                         {
                             "title": "Google",
-                            "url": "https://www.google.com"
+                            "url": "https://www.google.com/search",
+                            "fieldname": "q"
                         },
                         {
                             "title": "Microsoft",
-                            "url": "https://www.bing.com/"
-                        },
-                        {
-                            "title": "DuckDuckGo",
-                            "url": "https://duckduckgo.com/"
+                            "url": "https://www.bing.com/search",
+                            "fieldname": "q"
                         },
                         {
                             "title": "Yahoo!",
-                            "url": "https://search.yahoo.com/"
+                            "url": "https://search.yahoo.com/",
+                            "fieldname": "p"
+                        },
+                        {
+                            "title": "DuckDuckGo",
+                            "url": "https://duckduckgo.com/",
+                            "fieldname": "q"
+                        },
+                        {
+                            "title": "百度",
+                            "url": "https://www.baidu.com/"
                         }
-                    ]
+                    ] 
                 },
                 {
                     "name": "Dictionaries",
@@ -86,6 +88,75 @@ export const template001 = {
                             "url": "https://www.regularcalligraphy.com/character/e.target.value.html",
                             "fieldname": "regexp",
                             "pattern": "e.target.value|ig"
+                        }
+                    ]
+                },
+            ]
+        },
+        {
+            "name": "News",
+            "subcategories": [
+                {
+                    "name": "US",
+                    "utils": [
+                        {
+                            "title": "CNN",
+                            "url": "https://edition.cnn.com/"
+                        },
+                        {
+                            "title": "Fox News",
+                            "url": "https://www.foxnews.com/"
+                        },
+                        {
+                            "title": "Reuters",
+                            "url": "https://www.reuters.com/"
+                        },
+                        {
+                            "title": "Nytimes",
+                            "url": "https://www.nytimes.com/"
+                        },
+                        {
+                            "title": "CBS News",
+                            "url": "https://www.cbsnews.com/"
+                        },
+                        {
+                            "title": "Time",
+                            "url": "https://time.com/"
+                        },
+                        {
+                            "title": "npr",
+                            "url": "https://www.npr.org/"
+                        },
+                        {
+                            "title": "NBC News",
+                            "url": "https://www.nbcnews.com/us-news"
+                        },
+                    ]
+                },
+                {
+                    "name": "Britain",
+                    "utils": [
+                        {
+                            "title": "BBC",
+                            "url": "https://bbc.co.uk/"
+                        },
+                        {
+                            "title": "The Guardian",
+                            "url": "https://www.theguardian.com/us-news"
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Entertainment",
+            "subcategories": [
+                {
+                    "name": "Videos",
+                    "utils": [
+                        {
+                            "title": "Youtube",
+                            "url": "https://www.youtube.com"
                         }
                     ]
                 }

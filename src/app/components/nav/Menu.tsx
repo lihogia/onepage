@@ -35,6 +35,10 @@ export default function Menu(
             menuElement.className = isOpen ? 'grid1m_sub' : 'grid1m_sub_none';
         }
     }
+
+    function handleEditClick(isEdit: boolean) {
+        boardContext.setIsEdit(isEdit);
+    }
         
     return (
     <>
@@ -56,7 +60,8 @@ export default function Menu(
         </ul>
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
-            <li className="menuItemBottom"><a href="#">Edit</a></li>
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
             <li className="menuItemBottom"><a href="#">Config</a></li>
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>    
@@ -87,7 +92,8 @@ export default function Menu(
         </ul>
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
-            <li className="menuItemBottom"><a href="#">Edit</a></li>
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
             <li className="menuItemBottom"><a href="#">Config</a></li>
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>
