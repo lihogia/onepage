@@ -2,16 +2,20 @@
     .container {
         grid-template-columns: auto;
         grid-template-rows: auto 100px auto 280px 40px;
+        row-gap: 0;
     }
     
     .grid2, .grid3, .grid4 {
         border-bottom: 2px solid #009bd6;
-        
     }
 
     .grid2 {
-        max-height: 100px;
+        height: 100px;
     }    
+
+    .grid4 {
+        max-height: 280px;
+    }
     
     .grid5 {
         
@@ -68,6 +72,7 @@
         flex-direction: column;
     
         border-bottom: 1px solid #ffff;
+        max-height: 100%;
     }
     .grid1m_sub ul.menu {
         flex-direction: column;
@@ -131,6 +136,7 @@
     }
     .menuItemBottom a {
         margin: 2px;
+        font-size: 10pt;
     }
     .menuItemBottom a:hover {
         border-bottom: 1px solid #ffff;
