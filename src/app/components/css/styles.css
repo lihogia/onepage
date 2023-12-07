@@ -53,9 +53,76 @@
     border-right: 0;
 }
 
+/* Menu Context Popup */
+.popupLi {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+.popupLiShow {
+    display: block;
+    position: static;
 
+    margin: 0;
+    padding: 0;
+}
 
-/****/
+ul.popup {
+    
+/*  position: relative;  
+    top: -40px;
+    left: -20px; */
+    background-color: #DFF0F9;
+    max-width: 200px;
+    margin: 0;
+    /*margin-top: 5px;*/
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 0px solid #5A5755;
+    list-style-type: none;
+    font-size: 11pt;
+    font-weight: normal;
+    color: #5A5755;
+}
+
+ul.popup li {
+    margin: 0;
+    padding: 0;
+}
+
+li.menuItemPopup, .menuItemPopup a {
+    margin: 0;
+    padding: 0;
+}
+
+li.menuItemPopup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    /*margin: 5px 0 5px 0;
+    padding: 0 5px 0 5px;*/
+}
+
+li.menuItemPopup a {
+    font-size: 9pt;
+    font-weight: normal;
+    text-decoration: none;
+    color: #5A5755;
+}
+
+.menuItemPopupSeparator {
+    width: 100%;
+    
+    border-bottom: 1px solid #5A5755;
+    margin-bottom: 1px;
+}
+
+/* Content */
 .grid3 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -76,12 +143,22 @@
     margin-left: 0;
     text-wrap: pretty;
 }
-.subcategory {
-    font-weight: bolder;
+.subcategory, .subcategoryInput, .subcategory a {
+    font-weight: bold;
     font-size: 14pt;    
-    margin-bottom: 5px;
-    text-wrap: pretty;
+    text-wrap: nowrap;
+    text-decoration: none;
+    color: black;
 }
+.subcategory {
+    margin-bottom: 5px;
+}
+.subcategoryInput {
+    padding: 5px;
+    border: 2px solid #009bd6;
+    margin-bottom: 15px;
+}
+
 .util {
     font-size: 12pt;
     text-decoration: none;
@@ -91,6 +168,55 @@
 .util:hover {
     border-bottom: 1px solid black;
 }
+
+/* Edit Mode */
+.utilEditSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.utilEditSectionWithButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputText, .inputTextLong, .inputTextShort {
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 30px;
+    margin: 3px;
+    margin-right: 5px;
+    padding: 5px;
+    flex-grow: 1;
+}
+
+.inputTextLong {
+    width: 220px;
+}
+
+.inputTextShort {
+    width: 60px;
+}
+
+.inputButton {
+    border-radius: 3px;
+    border: 0;
+    height: 30px;
+    margin: 1px;
+    padding: 2px;
+    background-color: #ffff;
+    color: black;
+  }
+
+  .inputButton:hover {
+    background-color: #ffff;
+    color: #009bd6;
+    cursor: pointer;
+  }
 
 /* Footer */
 .grid5 {

@@ -3,77 +3,80 @@ import { SimpleSearch } from '@/app/data/types';
 import { useState } from 'react';
 
 export default function UtilSimpleSearchEditor(
-    {pSearch, showEditor = false, handleSave, handleCancel = () => {}}: 
-    {pSearch: any, handleSave: Function, showEditor: boolean, handleCancel: Function}) {
-    
-    const [editorState, setEditorState] = useState({ search: pSearch, isInputable: showEditor});
+    {stringIndex, pSearch, handleUpdate, handleClose}:
+    {stringIndex: string, pSearch: any, handleUpdate: Function, handleClose: Function}) {
 
-    function updateSearchData(newSearch: SimpleSearch) {
-        setEditorState({...editorState, search: newSearch});
-    }
+    const [util, setUtil] = useState(pSearch);
 
     return (
         <>
-            <form onClick={(e) => {
-                setEditorState({...editorState, isInputable: true});
-            }}>
-                {!editorState.isInputable && <a href='#'>{editorState.search.title}</a>}
-                {editorState.isInputable && <section className={styles.utilLinkEditForm}><input type='text' name='txtUrl' className={`${styles.input_text} ${styles.long}`} defaultValue={editorState.search.url} onChange={
+            <section className='utilEditSection'>
+                <input type='text' name='txtUrl' className='inputTextLong' defaultValue={util.url} onChange={
                     (e) => {
-                        const newSearch = {...editorState.search, url: e.target.value};
-                        updateSearchData(newSearch);
+                        const newLink = {...util};
+                        newLink.url = e.target.value;
+                        setUtil(newLink);
                     }
-                }/><input type='text' name='txtTitle' className={`${styles.input_text} ${styles.long}`} defaultValue={editorState.search.title} onChange={
+                } />
+            </section>
+            <section className='utilEditSection'>
+                <input type='text' name='txtTitle' className='inputTextLong' defaultValue={util.title} onChange={
                     (e) => {
-                        const newSearch = {...editorState.search, title: e.target.value};
-                        updateSearchData(newSearch);
+                        const newLink = {...util};
+                        newLink.title = e.target.value;
+                        setUtil(newLink);
                     }
-                }/>{editorState.search.fieldname !== 'regexp' && <section className={styles.utilLinkEditFormWithButtons}><input type='text' name='txtFieldName' className={`${styles.input_text}`} defaultValue={editorState.search.fieldname} onChange={
+                } />
+            </section>
+            {util.fieldname !== 'regexp' && <section className='utilEditSectionWithButton'>
+                <input type='text' name='txtFieldName' className='inputText' defaultValue={util.fieldname} onChange={
                     (e) => {
-                        const newSearch = {...editorState.search, fieldname: e.target.value};
-                        updateSearchData(newSearch);
+                        const newLink = {...util};
+                        newLink.fieldname = e.target.value;
+                        setUtil(newLink);
                     }
-                }/><a href="#" className={styles.input_button} onClick={
+                }/>
+                <a href="#" className='inputButton' onClick={
                     (e) => {
-                        setEditorState({...editorState, isInputable: false});
-                        handleSave(editorState.search);
-                        //e.stopPropagation();
-                        }
-                }><i className="material-icons">&#xe86c;</i></a><a href="#" className={styles.input_button} onClick={
+                        handleUpdate(util);
+                        handleClose();
+                    }
+                }><i className="material-icons">&#xe86c;</i></a>
+                <a href="#" className='inputButton' onClick={
                     (e) => {
-                        setEditorState({search: {...pSearch}, isInputable: false});
-                        handleCancel();
+                        handleClose();
                         e.stopPropagation();
                     }
                 }><i className="material-icons">&#xe888;</i></a>
-                    </section>}
-                {editorState.search.fieldname === 'regexp' && <section className={styles.utilLinkEditFormWithButtons}><input type='text' name='txtFieldName' className={`${styles.input_text} ${styles.short}`} defaultValue={editorState.search.fieldname} onChange={
-                    (e) => {
-                        const newSearch = {...editorState.search, fieldname: e.target.value};
-                        updateSearchData(newSearch);
-                    }
-                }/><input type='text' name='txtPattern' className={`${styles.input_text} ${styles.short}`} defaultValue={editorState.search.pattern} onChange={
-                    (e) => {
-                        const newSearch = {...editorState.search, pattern: e.target.value};
-                        updateSearchData(newSearch);
-                    }
-                }/><a href="#" className={styles.input_button} onClick={
-                    (e) => {
-                        setEditorState({...editorState, isInputable: false});
-                        handleSave(editorState.search);
-                        //e.stopPropagation();
-                        }
-                }><i className="material-icons">&#xe86c;</i></a><a href="#" className={styles.input_button} onClick={
-                    (e) => {
-                        setEditorState({search: {...pSearch}, isInputable: false});
-                        handleCancel();
-                        e.stopPropagation();
-                    }
-                }><i className="material-icons">&#xe888;</i></a>
-                </section>}
             </section>}
-            </form>
-             
+            {util.fieldname === 'regexp' && <section className='utilEditSectionWithButton'>
+                <input type='text' name='txtFieldName' className='inputTextShort' defaultValue={util.fieldname} onChange={
+                    (e) => {
+                        const newLink = {...util};
+                        newLink.fieldname = e.target.value;
+                        setUtil(newLink);
+                    }
+                }/>
+                <input type='text' name='txtPattern' className='inputTextShort' defaultValue={util.pattern} onChange={
+                    (e) => {
+                        const newLink = {...util};
+                        newLink.pattern = e.target.value;
+                        setUtil(newLink);
+                    }
+                }/>
+                <a href="#" className='inputButton' onClick={
+                    (e) => {
+                        handleUpdate(util);
+                        handleClose();
+                    }
+                }><i className="material-icons">&#xe86c;</i></a>
+                <a href="#" className='inputButton' onClick={
+                    (e) => {
+                        handleClose();
+                        e.stopPropagation();
+                    }
+                }><i className="material-icons">&#xe888;</i></a>
+            </section>}             
         </>
     );
 }

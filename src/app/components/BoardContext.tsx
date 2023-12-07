@@ -12,10 +12,11 @@ export const prototypeBoardContext = {
     deleteSubCategory: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     createUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     updateUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
-    deleteUtil: (pStringIndex: string) => {} // pStringIndex = cateIndex_subCateIndex_utilIndex
+    deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
+    saveToStorage: () => {}
 };
 
-function splitToNumber(stringOfIndex: string, separator: string) {
+export function splitToNumber(stringOfIndex: string, separator: string) {
     const arrs = stringOfIndex.split(separator).map((item) => {
       return Number.parseInt(item);
     });
@@ -97,7 +98,19 @@ export function createInitBoardContext(categories: Category[], handleSetCategory
           newUtils.splice(utilIndex, 1);
           newSubCates[subCateIndex].utils = newUtils;
           handleSetCategoryInState(newCates);
-        } 
+        },
+        saveToStorage: () => {
+          const configOnePage = {
+            categories: categories
+          };
+          
+          if (typeof window !== 'undefined') {
+            // Perform localStorage action
+            localStorage.setItem('onepage', JSON.stringify(configOnePage));
+            console.log('Saved to localStorage.');
+          }
+        
+        }
     };
 
     return initBoardContext;

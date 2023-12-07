@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import type { Category } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
+import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
+import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
 
 export default function Menu(
     {categories, handleSelectACategory, selectedIndex}: 
@@ -24,6 +26,7 @@ export default function Menu(
         }
     }
 
+    /** Use in mobile view */
     function openMenu(isOpen: boolean) {
         const containerElement = document.getElementById('ContainerID');
         if (containerElement != null) {
@@ -40,21 +43,109 @@ export default function Menu(
         boardContext.setIsEdit(isEdit);
     }
         
+    const [changingName, setChangingName] = useState(false);
+    const stringIndex = `${selectedIndex}`;
+    const menuContextID = `menuCxtCate_${stringIndex}`;
+    const menuContextID_m = `${menuContextID}_m`;
+    const menuContextItems: MenuContextItem[]  = [
+        {
+            iconURL: '/icons/editico.png',
+            text: 'Edit Category',
+            tooltip: 'Edit Category',
+            handle: () => {
+                setChangingName(true);
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/deleteico.png',
+            text: 'Delete Category',
+            tooltip: 'Delete Category',
+            handle: () => {
+                boardContext.deleteCategory(selectedIndex);
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/addcatico.png',
+            text: 'Add Category',
+            tooltip: 'Add Category',
+            handle: () => {
+                boardContext.createCategory('New Category');
+            },
+            stringIndex: stringIndex
+        },
+        SEPARATOR,
+        {
+            iconURL: '/icons/addsubcatico.png',
+            text: 'Add Sub Category',
+            tooltip: 'Add Sub Category',
+            handle: () => {
+                boardContext.createSubCategory(selectedIndex, 'New Sub Category');
+            },
+            stringIndex: stringIndex
+        },
+        SEPARATOR,
+        {
+            iconURL: '/icons/saveico.png',
+            text: 'Save & Continue',
+            tooltip: 'Save to Local Storage',
+            handle: () => {
+                boardContext.saveToStorage();
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/saveico.png',
+            text: 'Save & Back to View',
+            tooltip: 'Save & Back to View',
+            handle: () => {
+                boardContext.saveToStorage();
+                boardContext.setIsEdit(false);
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/clickico.png',
+            text: 'Back to View',
+            tooltip: 'Back to View',
+            handle: () => {
+                boardContext.setIsEdit(false);
+            },
+            stringIndex: stringIndex
+        },
+
+
+    ];
+
     return (
     <>
     <div className="grid1">
         <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90"/></section>
         <ul className="menu">
             {categories.map((element, index) => {
-                return (
-                    <li key={`${index}_${element.name}`} className={`${index === selectedIndex ? 'menuItemSelected' : 'menuItem'}`}><a href="#" onClick={
-                        () => {
-                            if (index !== selectedIndex) {
+                 if (index === selectedIndex) {
+                    return (
+                        <li key={`${index}_${element.name}`} className='menuItemSelected'><a href="#" onClick={
+                            () => {
+                                showHideContextMenu(menuContextID);
+                            }
+                        }>{element.name}</a>
+                        {isEdit &&  <div className='popupLi' id={menuContextID} key={`menuCtxLi_${index}_${element.name}`}>
+                                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
+                            </div>}
+                        </li>
+                    );
+                }else {
+                    return (
+                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                            () => {
                                 handleSelectACategory(index);
                             }
-                        }
-                    }>{element.name}</a></li>    
-                );
+                        }>{element.name}</a></li>    
+                    );    
+                }
+                
             })
             }
         </ul>
@@ -77,18 +168,34 @@ export default function Menu(
     <div className="grid1m_sub_none" id="MenuID">
         <ul className="menu">
             {categories.map((element, index) => {
-                return (
-                    <li key={`${index}_${element.name}`} className={`${index === selectedIndex ? 'menuItemSelected' : 'menuItem'}`}><a href="#" className={`${index === selectedIndex ? 'menuItemSelected' : ''}`} onClick={
-                        () => {
-                            openMenu(false);
-                            if (index !== selectedIndex) {
+                 if (index === selectedIndex) {
+                    return (
+                        <li key={`${index}_${element.name}`} className='menuItemSelected'><a href="#" className='menuItemSelected' onClick={
+                            () => {
+                                showHideContextMenu(menuContextID_m);
+                            }
+                        }>{element.name}</a>
+                        {isEdit &&  <div className='popupLi' id={menuContextID_m} key={`menuCtxLi_${index}_${element.name}`}>
+                                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID_m} />
+                            </div>}
+                        </li>
+                    );
+                }else {
+                    return (
+                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                            () => {
+                                if (!isEdit) {
+                                    openMenu(false);
+                                }
                                 handleSelectACategory(index);
                             }
-                        }
-                    }>{element.name}</a></li>    
-                );
+                        }>{element.name}</a></li>    
+                    );    
+                }
+                
             })
             }
+
         </ul>
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
@@ -103,30 +210,6 @@ export default function Menu(
 
 }
 
-/**
- * 
-         <div class="grid1m">
-            <section class="logo"><img src='onepage.png' alt='OnePage' width="90" height="90"></section>
-            <ul class="menuTitle">
-                <li><a href="#">Categories</a></li>
-            </ul>
-        </div>
-        <div class="grid1m_sub">
-            <ul class="menu">
-                <li class="menuItem"><a href="#">Common</a></li>
-                <li class="menuItem"><a href="#">Languages</a></li>
-                <li class="menuItemSelected"><a href="#" class="menuItemSelected">Search</a></li>
-                <li class="menuItem"><a href="#">Business</a></li>
-                <li class="menuItem"><a href="#">Entertainment</a></li>
-                <li class="menuItem"><a href="#">IT</a></li>           
-            </ul>
-            <ul class="menuBottom">
-                <li class="menuItemBottom"><a href="#">About</a></li>
-                <li class="menuItemBottom"><a href="#">Edit</a></li>
-                <li class="menuItemBottom"><a href="#">Config</a></li>
-                <li class="menuItemBottom"><a href="#">Donate</a></li>
-            </ul>    
+/*
 
-        </div>
-
- */
+*/

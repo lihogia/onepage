@@ -1,13 +1,57 @@
 import styles from './component.module.css';
 import { useState } from 'react';
 import Image from 'next/image';
+import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
+import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
 
 export default function NameEditor(
-    {pName, handleUpdateName, handleDeleteName}: 
-    {pName: string, handleUpdateName: Function, handleDeleteName: Function}) {
+    {stringIndex, pName, handleUpdateName, closeHandle}: 
+    {stringIndex: string, pName: string, handleUpdateName: Function, closeHandle: Function }) {
 
-    const [editorState, setEditorState] = useState({ name: pName, isInputable: false});
+        const menuContextID = `menuCxtNameEditor_${stringIndex}`;
+        const [name, setName] = useState(pName);
+
+        const menuContextItems: MenuContextItem[]  = [
+            {
+                iconURL: '/icons/saveico.png',
+                text: 'OK',
+                tooltip: 'OK',
+                handle: () => {
+                    handleUpdateName(name);
+                    closeHandle();
+                },
+                stringIndex: stringIndex
+            },
+            {
+                iconURL: '/icons/deleteico.png',
+                text: 'Cancel',
+                tooltip: 'Cancel',
+                handle: () => {
+                    closeHandle();
+                },
+                stringIndex: stringIndex
+            }
+        ];
+
     return (
+        <form>
+            <input type='text' name='txtName' className='subcategoryInput' defaultValue={name} onChange={(e) => {
+                setName(e.target.value);
+            }} onKeyUp={(e) => {
+                
+                handleUpdateName(name);
+                closeHandle();
+            }}/>
+            <section className='popupLiShow' id={menuContextID} >
+                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
+            </section>
+
+        </form>
+    );
+}
+
+/*
+
         <>
             {!editorState.isInputable && <section className={styles.subCategoryNameEdit}>
                 <span onClick={(e) => {
@@ -39,5 +83,5 @@ export default function NameEditor(
                 }
             }><i className={`material-icons ${styles.input_button}`} >&#xe888;</i></a></section>}
         </>
-    );
-}
+
+*/

@@ -52,6 +52,7 @@
 .menuItemSelected {
     background-color: #ffff;    
     padding: 15px 0 15px 0;
+    flex-direction: column;
 }
 
 .menuItem a, .menuItemBottom a {
@@ -81,6 +82,31 @@
     font-size: 10pt;
 }
 
+/*Menu context*/
+.popupLiShow {
+    padding: 0;
+    margin: 5px 0 0 0;
+}
 
+ul.popup {
+    margin: 0;
+    padding: 2px 0 2px 0;
+    
+    list-style-type: none;
+}
+
+ul.popup li {
+    margin: 5px 0 5px 0;
+}
+
+.menuItemPopup img {
+    margin-left: 5px;
+}
+li.menuItemPopup, .menuItemPopup a {
+    
+    margin: 20;
+    padding: 0;
+    padding-right: 5px;
+}
 
 }
