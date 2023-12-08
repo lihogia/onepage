@@ -6,8 +6,6 @@
     min-height: 100vh;
 }
 
-
-
 .grid2 {
     grid-row: 1;
     grid-column: 2 / span 2;
@@ -108,5 +106,13 @@ li.menuItemPopup, .menuItemPopup a {
     padding: 0;
     padding-right: 5px;
 }
+
+    /* Edit */
+    .subcategoryInput {
+        width: 120px;
+    }    
+    a.inputButton {
+        color: black;
+    }
 
 }

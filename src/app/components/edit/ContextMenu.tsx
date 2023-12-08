@@ -1,4 +1,3 @@
-import styles from './modals.module.css';
 import Image from 'next/image';
 import type { MenuContextItem } from '@/app/data/menuContext';
 import { SEPARATOR } from '@/app/data/menuContext';

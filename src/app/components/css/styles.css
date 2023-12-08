@@ -125,11 +125,11 @@ li.menuItemPopup a {
 /* Content */
 .grid3 {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 .grid3 ul {
     padding: 5px;
-    margin: 30px 20px 20px 20px;
+    margin: 10px 10px 10px 10px;
     list-style-type: none;
 
     display: flex;
@@ -141,8 +141,10 @@ li.menuItemPopup a {
 .grid3 ul li {
     margin: 8px;
     margin-left: 0;
-    text-wrap: pretty;
+    text-wrap: wrap;
 }
+
+
 .subcategory, .subcategoryInput, .subcategory a {
     font-weight: bold;
     font-size: 14pt;    
@@ -153,9 +155,17 @@ li.menuItemPopup a {
 .subcategory {
     margin-bottom: 5px;
 }
+
+.nameEditorDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
 .subcategoryInput {
     padding: 5px;
-    border: 2px solid #009bd6;
+    border-radius: 3px;
+    border: 2px solid black;
     margin-bottom: 15px;
 }
 
@@ -189,9 +199,13 @@ li.menuItemPopup a {
     border: 1px solid black;
     height: 30px;
     margin: 3px;
-    margin-right: 5px;
+    margin-right: 8px;
     padding: 5px;
     flex-grow: 1;
+}
+
+.inputText:focus, .inputTextLong:focus, .inputTextShort:focus {
+    border: 2px solid #009bd6;
 }
 
 .inputTextLong {
@@ -204,10 +218,9 @@ li.menuItemPopup a {
 
 .inputButton {
     border-radius: 3px;
-    border: 0;
     height: 30px;
-    margin: 1px;
-    padding: 2px;
+    margin: 3px 1px 3px 1px;
+    padding: 5px 1px 5px 1px;
     background-color: #ffff;
     color: black;
   }

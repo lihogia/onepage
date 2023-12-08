@@ -6,6 +6,7 @@ import type { Category } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import CategoryOnMenu from '@/app/components/categoryOnMenu';
 
 export default function Menu(
     {categories, handleSelectACategory, selectedIndex}: 
@@ -120,21 +121,13 @@ export default function Menu(
 
     return (
     <>
-    <div className="grid1">
+    <div className={'grid1'}>
         <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90"/></section>
         <ul className="menu">
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItemSelected'><a href="#" onClick={
-                            () => {
-                                showHideContextMenu(menuContextID);
-                            }
-                        }>{element.name}</a>
-                        {isEdit &&  <div className='popupLi' id={menuContextID} key={`menuCtxLi_${index}_${element.name}`}>
-                                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
-                            </div>}
-                        </li>
+                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={false}/>
                     );
                 }else {
                     return (
@@ -170,15 +163,7 @@ export default function Menu(
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItemSelected'><a href="#" className='menuItemSelected' onClick={
-                            () => {
-                                showHideContextMenu(menuContextID_m);
-                            }
-                        }>{element.name}</a>
-                        {isEdit &&  <div className='popupLi' id={menuContextID_m} key={`menuCtxLi_${index}_${element.name}`}>
-                                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID_m} />
-                            </div>}
-                        </li>
+                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={true}/>
                     );
                 }else {
                     return (

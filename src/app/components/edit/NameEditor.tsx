@@ -8,45 +8,25 @@ export default function NameEditor(
     {stringIndex, pName, handleUpdateName, closeHandle}: 
     {stringIndex: string, pName: string, handleUpdateName: Function, closeHandle: Function }) {
 
-        const menuContextID = `menuCxtNameEditor_${stringIndex}`;
-        const [name, setName] = useState(pName);
-
-        const menuContextItems: MenuContextItem[]  = [
-            {
-                iconURL: '/icons/saveico.png',
-                text: 'OK',
-                tooltip: 'OK',
-                handle: () => {
-                    handleUpdateName(name);
-                    closeHandle();
-                },
-                stringIndex: stringIndex
-            },
-            {
-                iconURL: '/icons/deleteico.png',
-                text: 'Cancel',
-                tooltip: 'Cancel',
-                handle: () => {
-                    closeHandle();
-                },
-                stringIndex: stringIndex
-            }
-        ];
+    const [name, setName] = useState(pName);
 
     return (
-        <form>
+        <div className='nameEditorDiv'>
             <input type='text' name='txtName' className='subcategoryInput' defaultValue={name} onChange={(e) => {
                 setName(e.target.value);
-            }} onKeyUp={(e) => {
-                
-                handleUpdateName(name);
-                closeHandle();
-            }}/>
-            <section className='popupLiShow' id={menuContextID} >
-                <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
-            </section>
-
-        </form>
+            }}/><a href="#" className='inputButton' onClick={
+                (e) => {
+                    handleUpdateName(name);
+                    closeHandle();
+                }
+            }><i className="material-icons">&#xe86c;</i></a>
+            <a href="#" className='inputButton' onClick={
+                (e) => {
+                    closeHandle();
+                    e.stopPropagation();
+                }
+            }><i className="material-icons">&#xe888;</i></a>
+        </div>
     );
 }
 
