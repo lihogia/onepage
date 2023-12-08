@@ -71,24 +71,25 @@ export default function CreateUtilEditor(
                 <option value='ssearch'>Simple Search</option>
                 <option value='ssearchregexp'>Simple Search with RegExp</option>
             </select>
-            {editorState.selected === 'link' && <UtilLinkEditor pLink={editorState.util} showEditor={true} handleSave={
+
+            {editorState.selected === 'link' && <UtilLinkEditor stringIndex={stringIndex} pLink={editorState.util} handleUpdate={
                 (pLink: UtilLink) => {                    
                     setEditorState({...editorState, util: {...pLink}, isInputable: false});
                     handleCreateUtil(pLink);
                 }
-            } handleCancel={handleCancelClick} handleDelete={() => {}}/>}
-            {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
+            } handleClose={handleCancelClick}/>}
+            {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor stringIndex={stringIndex} pSearch={editorState.util} handleUpdate={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}, isInputable: false});
                     handleCreateUtil(pSearch);
                 }
-            } handleCancel={handleCancelClick} />}
-            {(editorState.selected === 'ssearchregexp') && <UtilSimpleSearchEditor pSearch={editorState.util} showEditor={true} handleSave={
+            } handleClose={handleCancelClick} />}
+            {(editorState.selected === 'ssearchregexp') && <UtilSimpleSearchEditor stringIndex={stringIndex} pSearch={editorState.util} handleUpdate={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}});
                     handleCreateUtil(pSearch);
                 }
-            } handleCancel={handleCancelClick} />}
+            } handleClose={handleCancelClick} />}
             
         </>
         }
