@@ -1,9 +1,14 @@
 import { createContext } from "react";
-import { Util, Category } from '@/app/data/types';
+import { Util, Category, BoardSettings } from '@/app/data/types';
 
 export const prototypeBoardContext = {
-    isEdit: false,
-    setIsEdit: (pIsEdit: boolean) => {},
+    boardSettings: {
+      categories: [],
+      isEdit: false,
+      selectedIndex: 0
+    }, 
+    setEdit: (isEdit: boolean) => {},
+    setSelectedCategoryIndex: (pCateIndex: number) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -23,85 +28,107 @@ export function splitToNumber(stringOfIndex: string, separator: string) {
     return arrs;
   }  
 
-export function createInitBoardContext(categories: Category[], handleSetCategoryInState: Function, isEdit: boolean, handleSetIsEdit: Function) {
+export function createInitBoardContext(boardSettings: BoardSettings, handleSetBoardSettings: Function) {
     const initBoardContext = {
-        isEdit: isEdit,
-        setIsEdit: (pIsEdit: boolean) => {
-          isEdit = pIsEdit;
-          handleSetIsEdit(pIsEdit);
+        boardSettings: boardSettings,
+        setEdit: (pIsEdit: boolean) => {
+          const newBoardSettings = {...boardSettings, isEdit: pIsEdit};
+          handleSetBoardSettings(newBoardSettings);
+        },
+        setSelectedCategoryIndex: (pCateIndex: number) => {
+          const newBoardSettings = {...boardSettings, selectedIndex: pCateIndex};
+          handleSetBoardSettings(newBoardSettings);
         },
         createCategory: (pName: string) => {
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newCate = {
             name: pName,
             subcategories: []
           };
           newCates.push(newCate);
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
         },
         updateCategoryName: (pName: string, pCateIndex: number) => {
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           newCates[pCateIndex].name = pName;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
         },
         deleteCategory: (pCateIndex: number) => {
-          const newCates = categories.filter((item, index) => index != pCateIndex);
-          handleSetCategoryInState(newCates);
+          const newCates = boardSettings.categories.filter((item, index) => index != pCateIndex);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          if (pCateIndex === newCates.length) {
+            newBoardSettings.selectedIndex = pCateIndex - 1;
+          }
+          handleSetBoardSettings(newBoardSettings);
+
         }, 
         createSubCategory: (pCateIndex: number, pSubCateName: string) => {
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCate = {
             name: pSubCateName,
             utils: []
           };
           newCates[pCateIndex].subcategories.push(newSubCate);
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
+
         },
         updateSubCategoryName: (pSubCateName: string, pStringIndex: string) => { //pStringIndex = cateIndex_subCateIndex
           const [cateIndex, subCateIndex] = splitToNumber(pStringIndex, '_');
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCates = [...newCates[cateIndex].subcategories];
           newSubCates[subCateIndex].name = pSubCateName;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
         },  
         deleteSubCategory: (pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex
           const [cateIndex, subCateIndex] = splitToNumber(pStringIndex, '_');
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCates = [...newCates[cateIndex].subcategories];
           newSubCates.splice(subCateIndex, 1);
           newCates[cateIndex].subcategories = newSubCates;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
         }, 
         createUtil: (util: Util, pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex
           const [cateIndex, subCateIndex] = splitToNumber(pStringIndex, '_');
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCates = [...newCates[cateIndex].subcategories];
           const newUtils = [...newSubCates[subCateIndex].utils];
           newUtils.push(util);
           newSubCates[subCateIndex].utils = newUtils;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
+
         }, 
         updateUtil: (util: Util, pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex_utilIndex
           const [cateIndex, subCateIndex, utilIndex] = splitToNumber(pStringIndex, '_');
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCates = [...newCates[cateIndex].subcategories];
           const newUtils = [...newSubCates[subCateIndex].utils];
           newUtils[utilIndex] = util;
           newSubCates[subCateIndex].utils = newUtils;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
+
         }, 
         deleteUtil: (pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex_utilIndex
           const [cateIndex, subCateIndex, utilIndex] = splitToNumber(pStringIndex, '_');
-          const newCates = [...categories];
+          const newCates = [...boardSettings.categories];
           const newSubCates = [...newCates[cateIndex].subcategories];
           const newUtils = [...newSubCates[subCateIndex].utils];
           newUtils.splice(utilIndex, 1);
           newSubCates[subCateIndex].utils = newUtils;
-          handleSetCategoryInState(newCates);
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          handleSetBoardSettings(newBoardSettings);
+
         },
         saveToStorage: () => {
           const configOnePage = {
-            categories: categories
+            categories: boardSettings.categories,
+            version: process.env.version
           };
           
           if (typeof window !== 'undefined') {

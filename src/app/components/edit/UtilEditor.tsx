@@ -41,13 +41,14 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             handle: deleteUtil,
             stringIndex: stringIndex
         },
+/*        SEPARATOR,
         {
             iconURL: '/icons/addlinkico.png',
             text: 'Add Util',
             tooltip: 'Add Util',
             handle: () => {},
             stringIndex: stringIndex
-        },
+        }, */
         SEPARATOR,
         {
             iconURL: '/icons/saveico.png',
@@ -64,7 +65,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -73,7 +74,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },

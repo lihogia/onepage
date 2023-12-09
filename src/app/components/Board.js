@@ -37,6 +37,7 @@ function loadLocalStorage() {
 }
 
 function saveLocalStorage(categories) {
+  
 
   const configOnePage = {
     categories: categories
@@ -63,6 +64,12 @@ function saveLocalStorage(categories) {
 export default function Board() {  
    
     const cates = loadData();
+
+    const [boardSettings, setBoardSettings] = useState({
+      categories: cates,
+      isEdit: false,
+      selectedIndex: 0
+    });
     const [categories, setCategories] = useState(cates);
     const [categoryIndex, setCategoryIndex] = useState(0);
     const [isEdit, setIsEdit] = useState(false);
@@ -72,13 +79,15 @@ export default function Board() {
 
       if (localCates.length == 0 ) {
         localCates = template001.categories;
-        saveLocalStorage(localCates);
+        //saveLocalStorage(localCates);
+        console.log('No data in local storage, auto load default data. Click Edit > Menu > Save to storage or Import from Config.');
       }
 
-      setCategories([...localCates]);
+      const newBoardSettings = {...boardSettings, categories: localCates};
+      setBoardSettings(newBoardSettings);
     }, []);
 
-    const initBoardContext = createInitBoardContext(categories, setCategories, isEdit, setIsEdit); // end of initBoardContext
+    const initBoardContext = createInitBoardContext(boardSettings, setBoardSettings); // end of initBoardContext
 
     function selectACategory(categoryIndex) {
       setCategoryIndex(categoryIndex);
@@ -87,10 +96,10 @@ export default function Board() {
     return (
       <BoardContext.Provider value={initBoardContext}>
         <div className="container" id="ContainerID">
-          <Menu categories={categories} handleSelectACategory={selectACategory} selectedIndex={categoryIndex}/>
+          <Menu categories={boardSettings.categories} handleSelectACategory={selectACategory} selectedIndex={boardSettings.selectedIndex}/>
           <LeaderboardAd />
           <div className="grid3">
-            {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
+            {boardSettings.categories.length > 0 && <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
           </div>
           <LargeRectangleAd />
           <Footer />

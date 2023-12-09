@@ -25,11 +25,10 @@ const DEFAULT_SIMPLE_SEARCH_REGEXP = {
 };
 
 export default function CreateUtilEditor(
-    {handleCreateUtil, stringIndex}: 
-    {handleCreateUtil: Function, stringIndex: string}) {
+    {stringIndex, handleCreateUtil, handleClose}: 
+    {stringIndex: string, handleCreateUtil: Function, handleClose: Function}) {
 
-    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link', isInputable: false});
-    const boardContext = useContext(BoardContext);
+    const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link'});
     
     function switchUtilType(pType: string) {
         
@@ -45,22 +44,18 @@ export default function CreateUtilEditor(
                 newUtil = DEFAULT_LINK;
                 break;
         }
-        setEditorState({...editorState, selected: pType, util: newUtil});
-    }
-
-    function handleCancelClick() {
-        setEditorState({...editorState, isInputable: false});
+        setEditorState({selected: pType, util: newUtil});
     }
 
     return (
-    <>
-        {!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
+    <li>
+        {/*!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
                 (e) => {
                     setEditorState({...editorState, isInputable: true});
                 }
             }><Image src='/icons/addlinkico.png' alt='Add a Util' width={20} height={20}/></button>
-        }
-        {editorState.isInputable && <>
+        */}
+        
             <label>Select the type of Util:</label><br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
@@ -74,25 +69,23 @@ export default function CreateUtilEditor(
 
             {editorState.selected === 'link' && <UtilLinkEditor stringIndex={stringIndex} pLink={editorState.util} handleUpdate={
                 (pLink: UtilLink) => {                    
-                    setEditorState({...editorState, util: {...pLink}, isInputable: false});
+                    setEditorState({...editorState, util: {...pLink}});
                     handleCreateUtil(pLink);
                 }
-            } handleClose={handleCancelClick}/>}
+            } handleClose={handleClose}/>}
             {(editorState.selected === 'ssearch') && <UtilSimpleSearchEditor stringIndex={stringIndex} pSearch={editorState.util} handleUpdate={
                 (pSearch: SimpleSearch) => {
-                    setEditorState({...editorState, util: {...pSearch}, isInputable: false});
+                    setEditorState({...editorState, util: {...pSearch}});
                     handleCreateUtil(pSearch);
                 }
-            } handleClose={handleCancelClick} />}
+            } handleClose={handleClose} />}
             {(editorState.selected === 'ssearchregexp') && <UtilSimpleSearchEditor stringIndex={stringIndex} pSearch={editorState.util} handleUpdate={
                 (pSearch: SimpleSearch) => {
                     setEditorState({...editorState, util: {...pSearch}});
                     handleCreateUtil(pSearch);
                 }
-            } handleClose={handleCancelClick} />}
+            } handleClose={handleClose} />}
             
-        </>
-        }
-    </>
+    </li>
     );
 }

@@ -30,8 +30,8 @@ export interface Category {
     subcategories: SubCategory[]
 }
 
-/*
-export interface Categories {
-    categories: Category[] 
+export interface BoardSettings {
+    categories: Category[],
+    isEdit: boolean,
+    selectedIndex: number
 }
-*/

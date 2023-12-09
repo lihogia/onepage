@@ -7,7 +7,7 @@ import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor
 
 export default function UtilSimpleSearch({util, stringIndex = ''}: {util: SimpleSearch, stringIndex: string}) {
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.isEdit;
+    const isEdit = boardContext.boardSettings.isEdit;
 
     const search = util;
     const [utilSimpleSearch, setUtilSimpleSearch] = useState(search);

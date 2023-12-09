@@ -16,9 +16,10 @@ export default function SubCategoryComponent(
     {subcate: SubCategory, stringIndex: string}) {
 
     const [changingName, setChangingName] = useState(false);
+    const [addingUtil, setAddingUtil] = useState(false);
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.isEdit;
+    const isEdit = boardContext.boardSettings.isEdit;
     
     const subCategory = subcate;
     
@@ -72,7 +73,7 @@ export default function SubCategoryComponent(
             text: 'Add Link',
             tooltip: 'Add Link',
             handle: () => {
-
+                setAddingUtil(true);
                 //boardContext.createUtil(util, stringIndex);
             },
             stringIndex: stringIndex
@@ -93,7 +94,7 @@ export default function SubCategoryComponent(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -102,7 +103,7 @@ export default function SubCategoryComponent(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -126,13 +127,17 @@ export default function SubCategoryComponent(
                         <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
                     </div>
                 </li>
-            {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
-                return (
-                    <li key={`${element.title}_${stringIndex}_${index}`}>
-                        <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
-                    </li>
-                )
-            })}
+                {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
+                    return (
+                        <li key={`${element.title}_${stringIndex}_${index}`}>
+                            <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
+                        </li>
+                    )
+                })}
+                {addingUtil && <CreateUtilEditor handleCreateUtil={createNewUtil} stringIndex={stringIndex} handleClose={() => {
+                    setAddingUtil(false);
+                }}/>
+                }
             </ul>
         );
     }else {

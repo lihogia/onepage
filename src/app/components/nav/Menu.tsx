@@ -13,7 +13,7 @@ export default function Menu(
     {categories: Category[], handleSelectACategory: Function, selectedIndex: number}) {
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.isEdit;
+    const isEdit = boardContext.boardSettings.isEdit;
 
     function updateCategoryName(pName: string) {
         boardContext.updateCategoryName(pName, selectedIndex);
@@ -23,7 +23,7 @@ export default function Menu(
         const ret = confirm('Are you sure? (OK = Yes)');
         if (ret) {
             boardContext.deleteCategory(selectedIndex);
-            handleSelectACategory(0);
+            boardContext.setSelectedCategoryIndex(0);
         }
     }
 
@@ -41,7 +41,7 @@ export default function Menu(
     }
 
     function handleEditClick(isEdit: boolean) {
-        boardContext.setIsEdit(isEdit);
+        boardContext.setEdit(isEdit);
     }
         
     const [changingName, setChangingName] = useState(false);
@@ -102,7 +102,7 @@ export default function Menu(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -111,7 +111,7 @@ export default function Menu(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -122,7 +122,7 @@ export default function Menu(
     return (
     <>
     <div className={'grid1'}>
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90"/></section>
+        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
         <ul className="menu">
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
@@ -133,12 +133,11 @@ export default function Menu(
                     return (
                         <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
                             () => {
-                                handleSelectACategory(index);
+                                boardContext.setSelectedCategoryIndex(index);
                             }
                         }>{element.name}</a></li>    
                     );    
                 }
-                
             })
             }
         </ul>
@@ -151,7 +150,7 @@ export default function Menu(
         </ul>    
     </div>
     <div className="grid1m">
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90"/></section>
+        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
         <ul className="menuTitle">
             <li><a href="#" onClick={() => {
                 openMenu(true);
@@ -172,7 +171,7 @@ export default function Menu(
                                 if (!isEdit) {
                                     openMenu(false);
                                 }
-                                handleSelectACategory(index);
+                                boardContext.setSelectedCategoryIndex(index);
                             }
                         }>{element.name}</a></li>    
                     );    

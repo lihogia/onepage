@@ -13,7 +13,7 @@ export default function CategoryOnMenu(
 ) {
     
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.isEdit;
+    const isEdit = boardContext.boardSettings.isEdit;
 
     function updateCategoryName(pName: string) {
         boardContext.updateCategoryName(pName, index);
@@ -84,7 +84,7 @@ export default function CategoryOnMenu(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
@@ -93,7 +93,7 @@ export default function CategoryOnMenu(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setIsEdit(false);
+                boardContext.setEdit(false);
             },
             stringIndex: stringIndex
         },
