@@ -147,7 +147,6 @@ export default function Menu(
             {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
             {!boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(true) }}>Config</a></li>}
             {boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(false)}}>Back to Categories</a></li>}
-
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>    
     </div>
