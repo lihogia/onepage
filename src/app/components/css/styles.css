@@ -231,6 +231,37 @@ li.menuItemPopup a {
     cursor: pointer;
   }
 
+  .inputButtonBox {
+    border-radius: 5px;
+    border: 0;
+    margin: 5px;
+    padding: 10px;
+    font-size: medium;
+    color: #ffff;
+    background-color: #63b7d3;
+  }
+
+  .inputButtonBox:hover {
+    cursor: pointer;
+    background-color: #009bd6;
+  }
+
+  /* Config */
+  .configSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  #formExportConfigFile {
+    margin: 30px 10px 30px 10px;
+  }
+
+  #formUploadConfigFile {
+    margin: 30px 10px 30px 10px;
+  }
+
+
 /* Footer */
 .grid5 {
     display: flex;

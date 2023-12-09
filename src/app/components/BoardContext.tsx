@@ -5,10 +5,12 @@ export const prototypeBoardContext = {
     boardSettings: {
       categories: [],
       isEdit: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      loadConfig: false
     }, 
     setEdit: (isEdit: boolean) => {},
     setSelectedCategoryIndex: (pCateIndex: number) => {},
+    setLoadConfig: (isConfig: boolean) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -37,6 +39,10 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
         },
         setSelectedCategoryIndex: (pCateIndex: number) => {
           const newBoardSettings = {...boardSettings, selectedIndex: pCateIndex};
+          handleSetBoardSettings(newBoardSettings);
+        },
+        setLoadConfig: (isConfig: boolean) => {
+          const newBoardSettings = {...boardSettings, loadConfig: isConfig};
           handleSetBoardSettings(newBoardSettings);
         },
         createCategory: (pName: string) => {

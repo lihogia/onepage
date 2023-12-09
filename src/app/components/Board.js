@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
 import styles from './component.module.css';
 import { prototypeBoardContext, createInitBoardContext, BoardContext } from './BoardContext';
+import Config from '@/app/components/config/config';
 import CategoryComponent from '@/app/components/category';
 import SubCategoryComponent from './subcategory';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
@@ -36,21 +37,6 @@ function loadLocalStorage() {
     return categories;
 }
 
-function saveLocalStorage(categories) {
-  
-
-  const configOnePage = {
-    categories: categories
-  };
-  
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    localStorage.setItem('onepage', JSON.stringify(configOnePage));
-    console.log('Saved to localStorage.');
-  }
-
-}
-
 /** Board is container */
 /*
  Layout: container [
@@ -68,11 +54,9 @@ export default function Board() {
     const [boardSettings, setBoardSettings] = useState({
       categories: cates,
       isEdit: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      loadConfig: false
     });
-    const [categories, setCategories] = useState(cates);
-    const [categoryIndex, setCategoryIndex] = useState(0);
-    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => { // need to run once after 1st render
       let localCates = loadLocalStorage();
@@ -98,8 +82,13 @@ export default function Board() {
         <div className="container" id="ContainerID">
           <Menu categories={boardSettings.categories} handleSelectACategory={selectACategory} selectedIndex={boardSettings.selectedIndex}/>
           <LeaderboardAd />
+          
+
           <div className="grid3">
-            {boardSettings.categories.length > 0 && <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
+            {boardSettings.loadConfig && <Config />}
+            {!boardSettings.loadConfig && boardSettings.categories.length > 0 && 
+                <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
+                key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
           </div>
           <LargeRectangleAd />
           <Footer />

@@ -145,7 +145,9 @@ export default function Menu(
             <li className="menuItemBottom"><a href="#">About</a></li>
             {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
             {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
-            <li className="menuItemBottom"><a href="#">Config</a></li>
+            {!boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(true) }}>Config</a></li>}
+            {boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(false)}}>Back to Categories</a></li>}
+
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>    
     </div>
@@ -185,7 +187,8 @@ export default function Menu(
             <li className="menuItemBottom"><a href="#">About</a></li>
             {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
             {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
-            <li className="menuItemBottom"><a href="#">Config</a></li>
+            {!boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(true) }}>Config</a></li>}
+            {boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { boardContext.setLoadConfig(false)}}>Back to Categories</a></li>}
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>
     </div>
