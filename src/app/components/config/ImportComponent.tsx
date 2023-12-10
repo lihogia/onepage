@@ -5,7 +5,7 @@ export default function ImportComponent() {
 
     const boardContext = useContext(BoardContext);
 
-    function resetUploadForm() {
+    function closeForm() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
         uploadForm.reset();
         boardContext.setLoadConfig(false);
@@ -37,7 +37,6 @@ export default function ImportComponent() {
         boardContext.setLoadConfig(false);
     }
 
-
     return (
         <form id='formUploadConfigFile'>
             <h3>Import to local storage</h3>
@@ -45,7 +44,7 @@ export default function ImportComponent() {
                 <li><span>Upload Json config file:</span></li>
                 <li><input type='file' name='fileJson' className='inputTextLong'/></li>
                 <li><input type='button' name='butUpload' value='Import' className='inputButtonBox' onClick={importFromJSON} />
-                <input type='button' name='butCancel' value='Cancel' className='inputButtonBox' onClick={resetUploadForm} /></li>
+                <input type='button' name='butCancel' value='Cancel' className='inputButtonBox' onClick={closeForm} /></li>
             </ul>
         </form>
     );

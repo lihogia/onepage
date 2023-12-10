@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { BoardContext } from '@/app/components/BoardContext';
 
 export default function ExportComponent() {
     const strVersion = process.env.version?.replaceAll('.', '_');
     const [fileName, setFilename] = useState(`onepage_${strVersion}.json`);
+
+    const boardContext = useContext(BoardContext);
+
+    function closeForm() {
+        const form = document.getElementById('formExportConfigFile');
+        form.reset();
+        boardContext.setLoadConfig(false);
+    }
 
     function exportToJSON() {
         const item = JSON.parse(localStorage.getItem('onepage'));
@@ -18,7 +27,6 @@ export default function ExportComponent() {
         console.log(`Export successfully ${link.download}.`);
     }
 
-
     return (
         <form id='formExportConfigFile'>
             <h3>Export from local storage</h3>
@@ -28,9 +36,8 @@ export default function ExportComponent() {
                     setFilename(e.target.value);
                 }}/></li>
                 <li><input type='button' name='butExport' value='Export' className='inputButtonBox' onClick={() => {exportToJSON()}} />
-                <input type='button' name='butCancel' value='Cancel' className='inputButtonBox' /></li>
+                <input type='button' name='butCancel' value='Cancel' className='inputButtonBox' onClick={() => {closeForm()}} /></li>
             </ul>
-
         </form>
     );
 }
