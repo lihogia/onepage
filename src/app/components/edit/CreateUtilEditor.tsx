@@ -52,6 +52,7 @@ export default function CreateUtilEditor(
         {/*!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
                 (e) => {
                     setEditorState({...editorState, isInputable: true});
+                    setEditorState({...editorState, isInputable: true});
                 }
             }><Image src='/icons/addlinkico.png' alt='Add a Util' width={20} height={20}/></button>
         */}
