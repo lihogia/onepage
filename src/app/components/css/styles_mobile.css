@@ -41,11 +41,13 @@
     }
     .logo {
         width: 60px;
+        padding-top: 4px;
+        margin-left: 2px;
     }
     .logo img {
         width: 100%;
         height: auto;
-        margin-left: 5px;
+        /*margin: 5px 0 4px 5px;*/
     }
     .grid1m ul.menuTitle {
         list-style-type: none;
