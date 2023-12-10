@@ -1,0 +1,275 @@
+/*
+ Layout: container [
+    Menu: grid1, grid1m, grid1m_sub (m is for mobile only)
+    Leaderboard Ad 728 x 90px (Header Ads): grid2
+    Content: grid3
+    Ad Large Rectangle 336 x 280: grid4
+    Footer (Copyright): grid5
+ ]
+*/
+
+.container, .container_6 {
+    margin: 0;
+    display: grid;
+    
+}
+.container_6 {
+    grid-template-rows: auto auto 100px auto 280px 40px;
+}    
+
+
+.grid1, .grid1m, .grid2, .grid3, .grid4, .grid5 {
+    /*border: 0px solid gray;*/
+}
+
+/* Menu */
+.grid1, .grid1m {
+    background-color: #009bd6;
+}
+
+.grid1m, .grid1m_sub, .grid1m_sub_none {
+    display: none;
+}
+
+.menuTitle {
+    display: none;
+}
+
+
+.menuBottom {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    flex-wrap: wrap;
+    
+    justify-content: center;
+    padding: 0;
+}
+.menuItemBottom {
+    border-right: 1px solid #ffff;
+    padding: 4px;
+}
+.menuItemBottom:last-of-type {
+    border-right: 0;
+}
+
+/* Menu Context Popup */
+.popupLi {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+.popupLiShow {
+    display: block;
+    position: static;
+
+    margin: 0;
+    padding: 0;
+}
+
+ul.popup {
+    
+/*  position: relative;  
+    top: -40px;
+    left: -20px; */
+    background-color: #DFF0F9;
+    max-width: 200px;
+    margin: 0;
+    /*margin-top: 5px;*/
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 0px solid #5A5755;
+    list-style-type: none;
+    font-size: 11pt;
+    font-weight: normal;
+    color: #5A5755;
+}
+
+ul.popup li {
+    margin: 0;
+    padding: 0;
+}
+
+li.menuItemPopup, .menuItemPopup a {
+    margin: 0;
+    padding: 0;
+}
+
+li.menuItemPopup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    /*margin: 5px 0 5px 0;
+    padding: 0 5px 0 5px;*/
+}
+
+li.menuItemPopup a {
+    font-size: 9pt;
+    font-weight: normal;
+    text-decoration: none;
+    color: #5A5755;
+}
+
+.menuItemPopupSeparator {
+    width: 100%;
+    
+    border-bottom: 1px solid #5A5755;
+    margin-bottom: 1px;
+}
+
+/* Content */
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.grid3 ul {
+    padding: 5px;
+    margin: 10px 10px 10px 10px;
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+.grid3 ul li {
+    margin: 8px;
+    margin-left: 0;
+    text-wrap: wrap;
+}
+
+
+.subcategory, .subcategoryInput, .subcategory a {
+    font-weight: bold;
+    font-size: 14pt;    
+    text-wrap: nowrap;
+    text-decoration: none;
+    color: black;
+}
+.subcategory {
+    margin-bottom: 5px;
+}
+
+.nameEditorDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.subcategoryInput {
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid black;
+    margin-bottom: 15px;
+}
+
+.util {
+    font-size: 12pt;
+    text-decoration: none;
+    color: black;
+            
+}
+.util:hover {
+    border-bottom: 1px solid black;
+}
+
+/* Edit Mode */
+.utilEditSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.utilEditSectionWithButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputText, .inputTextLong, .inputTextShort {
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 30px;
+    margin: 3px;
+    margin-right: 8px;
+    padding: 5px;
+    flex-grow: 1;
+}
+
+.inputText:focus, .inputTextLong:focus, .inputTextShort:focus {
+    border: 2px solid #009bd6;
+}
+
+.inputTextLong {
+    width: 220px;
+}
+
+.inputTextShort {
+    width: 60px;
+}
+
+.inputButton {
+    border-radius: 3px;
+    height: 30px;
+    margin: 3px 1px 3px 1px;
+    padding: 5px 1px 5px 1px;
+    background-color: #ffff;
+    color: black;
+  }
+
+  .inputButton:hover {
+    background-color: #ffff;
+    color: #009bd6;
+    cursor: pointer;
+  }
+
+  .inputButtonBox {
+    border-radius: 5px;
+    border: 0;
+    margin: 5px;
+    padding: 10px;
+    font-size: medium;
+    color: #ffff;
+    background-color: #63b7d3;
+  }
+
+  .inputButtonBox:hover {
+    cursor: pointer;
+    background-color: #009bd6;
+  }
+
+  /* Config */
+  .configSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  #formExportConfigFile {
+    margin: 30px 10px 30px 10px;
+  }
+
+  #formUploadConfigFile {
+    margin: 30px 10px 30px 10px;
+  }
+
+
+/* Footer */
+.grid5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    background-color: #63b7d3;
+    color: black;
+    font-size: 11pt;
+}

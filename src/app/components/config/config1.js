@@ -94,7 +94,7 @@ export default function ConfigMenu() {
             <li><a href="#" onClick={exportToJSON}>Export</a></li>
             <li><a href="#" onClick={showUploadForm}>Import</a></li>
         </ul>
-        <form id='formUploadConfigFile' className={styles.hideUploadModal}>
+        <form id='formUploadConfigFile'>
             <ul>
                 <li><span>Upload Json config file:</span></li>
                 <li><input type='file' name='fileJson' className={`${styles.input_text} ${styles.long}`}/></li>

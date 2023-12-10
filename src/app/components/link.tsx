@@ -29,8 +29,18 @@ export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilL
 
         }
         
-        &nbsp;
-        <a href={utilLink.url} target='_blank'>{utilLink.title}</a>
+        
+        <a className="util" href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );
 }
+
+/* 
+<ul><span class="subcategory">Google Suite</span>
+<li><a class="util" href="#">Mail</a></li>
+<li><a class="util" href="#">Calendar</a></li>
+<li><a class="util" href="#">Drive</a></li>
+<li><a class="util" href="#">Youtube</a></li>
+</ul>
+
+*/

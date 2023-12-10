@@ -1,13 +1,20 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
 import styles from './component.module.css';
 import { prototypeBoardContext, createInitBoardContext, BoardContext } from './BoardContext';
+import Config from '@/app/components/config/config';
 import CategoryComponent from '@/app/components/category';
 import SubCategoryComponent from './subcategory';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
 import LeftBar from './nav/LeftBar';
 import TopMenu from './nav/TopMenu';
+import Menu from '@/app/components/nav/Menu';
+import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
+import LargeRectangleAd from '@/app/components/ads/LargeRectangleAd';
+import Footer from '@/app/components/nav/Footer';
+
 
 
 export function loadData() {
@@ -30,41 +37,41 @@ function loadLocalStorage() {
     return categories;
 }
 
-function saveLocalStorage(categories) {
-
-  const configOnePage = {
-    categories: categories
-  };
-  
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    localStorage.setItem('onepage', JSON.stringify(configOnePage));
-    console.log('Saved to localStorage.');
-  }
-
-}
-
-
-//export default function Board({isEdit = false}) {
+/** Board is container */
+/*
+ Layout: container [
+    Menu: grid1, grid1m, grid1m_sub (m is for mobile only)
+    Leaderboard Ad 728 x 90px (Header Ads): grid2
+    Content: grid3
+    Ad Large Rectangle 336 x 280: grid4
+    Footer (Copyright): grid5
+ ]
+*/
 export default function Board() {  
    
     const cates = loadData();
-    const [categories, setCategories] = useState(cates);
-    const [categoryIndex, setCategoryIndex] = useState(0);
-    const [isEdit, setIsEdit] = useState(false);
+
+    const [boardSettings, setBoardSettings] = useState({
+      categories: cates,
+      isEdit: false,
+      selectedIndex: 0,
+      loadConfig: false
+    });
 
     useEffect(() => { // need to run once after 1st render
       let localCates = loadLocalStorage();
 
       if (localCates.length == 0 ) {
         localCates = template001.categories;
-        saveLocalStorage(localCates);
+        //saveLocalStorage(localCates);
+        console.log('No data in local storage, auto load default data. Click Edit > Menu > Save to storage or Import from Config.');
       }
 
-      setCategories([...localCates]);
+      const newBoardSettings = {...boardSettings, categories: localCates};
+      setBoardSettings(newBoardSettings);
     }, []);
 
-    const initBoardContext = createInitBoardContext(categories, setCategories, isEdit, setIsEdit); // end of initBoardContext
+    const initBoardContext = createInitBoardContext(boardSettings, setBoardSettings); // end of initBoardContext
 
     function selectACategory(categoryIndex) {
       setCategoryIndex(categoryIndex);
@@ -72,25 +79,20 @@ export default function Board() {
 
     return (
       <BoardContext.Provider value={initBoardContext}>
-        <section className={styles.board}>
-          <LeftBar categories={categories} handleSelectACategory={selectACategory} selectedIndex={categoryIndex}/>
-          <section className={styles.main}>
-            <section className={styles.topSection}>
-              <section className={styles.topAdSection}>
-                Ads
-              </section>
-              <TopMenu />
-            </section>
+        <div className="container" id="ContainerID">
+          <Menu categories={boardSettings.categories} handleSelectACategory={selectACategory} selectedIndex={boardSettings.selectedIndex}/>
+          <LeaderboardAd />
+          
 
-            <main className={styles.mainContent}>
-                {categories.length > 0 && <CategoryComponent cate={categories[categoryIndex]} key={`${categoryIndex}_${categories[categoryIndex].name}`} index={categoryIndex}/>}
-              <section className={styles.rightBarAdSection}>
-                Ads
-              </section>
-            </main>
-          </section>
-        </section>
-        
+          <div className="grid3">
+            {boardSettings.loadConfig && <Config />}
+            {!boardSettings.loadConfig && boardSettings.categories.length > 0 && 
+                <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
+                key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
+          </div>
+          <LargeRectangleAd />
+          <Footer />
+        </div>        
       </BoardContext.Provider>
 );
 }

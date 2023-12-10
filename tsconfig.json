@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/data/templates.js", "src/app/components/util.tsx", "src/app/edit/EditContext.tsx", "src/app/edit/page.js", "src/app/page.js", "src/app/components/Board.js", "src/app/components/config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/data/templates.js", "src/app/components/util.tsx", "src/app/edit/EditContext.tsx", "src/app/edit/page.js", "src/app/page.js", "src/app/components/Board.js", "src/app/components/config/config1.js", "src/app/components/config/config.js", "src/app/components/config/ExportComponent.js"],
   "exclude": ["node_modules"]
 }
