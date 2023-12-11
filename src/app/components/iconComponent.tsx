@@ -2,12 +2,17 @@
 export default function IconComponent({size, url}: {size: number, url: string}) {
     
     function getDomainUrl(url: string) {
-        const isHTTPS = url.includes('https://', 0);
-        const fIndex = isHTTPS ? 8 : 7;
-        const indexOfSlash = url.indexOf('/', fIndex);
-        const lIndex  = indexOfSlash < 0 ? url.length - 1 : indexOfSlash;
-
-        const domainUrl = url.substring(fIndex, lIndex);
+        const fIndex = 8;
+        
+        let lIndex = url.indexOf('/', fIndex);
+        if (lIndex < 0) {
+            lIndex = url.indexOf('?', fIndex);
+            if (lIndex < 0) {
+                lIndex = url.length;
+            }
+        }
+        
+        const domainUrl = url.substring(0, lIndex);
         return domainUrl;
     }
 
