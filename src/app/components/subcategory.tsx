@@ -145,7 +145,7 @@ export default function SubCategoryComponent(
             <ul><span className="subcategory">{subCategory.name}</span>
             {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                 return (
-                    <li key={`${element.title}_${stringIndex}_${index}`}>
+                    <li key={`${element.title}_${stringIndex}_${index}`} className='utilLi'>
                         <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
                     </li>
                 )

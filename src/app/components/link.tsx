@@ -3,6 +3,7 @@ import type { UtilLink } from '@/app/data/types';
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
 import Image from 'next/image';
+import Icon from '@/app/components/icon';
 
 export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilLink, stringIndex: string}) {
     const boardContext = useContext(BoardContext);
@@ -29,7 +30,7 @@ export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilL
 
         }
         
-        
+        <Icon size={32} url={util.url}/>
         <a className="util" href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );

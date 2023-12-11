@@ -8,6 +8,7 @@ export default function UtilComponent({util, stringIndex}: {util: any, stringInd
 
     //<img src={`${search.url.substring(0, search.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/> {search.title}
 
+
     //if (Object.keys(util).length == 2) {
     if (getUtilTypeName(util) === 'UtilLink') {
         const link: UtilLink = util;

@@ -2,6 +2,7 @@ import styles from './component.module.css';
 import { SimpleSearch } from "@/app/data/types";
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
+import Icon from '@/app/components/icon';
 
 import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
 
@@ -24,8 +25,8 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
          //<img src={`${util.url.substring(0, util.url.indexOf('/', 8)+1)}favicon.ico`} width='15' height='15'/>
         }
             
-        &nbsp;
-            {search.title}
+        
+            <section className='searchTitle'><Icon size={32} url={util.url}/><span className='utilTitle'>{search.title}</span></section>
                 <form method='get' target='_blank' name={`form_${stringIndex}`} className={styles.formView}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
                     <button type='submit' className={styles.input_button} onClick={(e) => {
