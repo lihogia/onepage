@@ -2,7 +2,7 @@ import styles from './component.module.css';
 import { SimpleSearch } from "@/app/data/types";
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
-import Icon from '@/app/components/icon';
+import Icon from '@/app/components/iconComponent';
 
 import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
 

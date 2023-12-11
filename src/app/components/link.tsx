@@ -3,7 +3,7 @@ import type { UtilLink } from '@/app/data/types';
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
 import Image from 'next/image';
-import Icon from '@/app/components/icon';
+import Icon from '@/app/components/iconComponent';
 
 export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilLink, stringIndex: string}) {
     const boardContext = useContext(BoardContext);
