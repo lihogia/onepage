@@ -49,14 +49,7 @@ export default function CreateUtilEditor(
 
     return (
     <li>
-        {/*!editorState.isInputable && <button type='button' className={styles.input_button} onClick={
-                (e) => {
-                    setEditorState({...editorState, isInputable: true});
-                    setEditorState({...editorState, isInputable: true});
-                }
-            }><Image src='/icons/addlinkico.png' alt='Add a Util' width={20} height={20}/></button>
-        */}
-        
+      
             <label>Select the type of Util:</label><br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
