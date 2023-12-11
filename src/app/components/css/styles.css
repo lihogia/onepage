@@ -180,28 +180,6 @@ li.menuItemPopup a {
     border-bottom: 1px solid black;
 }
 
-.utilLi, .searchTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-}
-
-.searchTitle {
-    justify-content: flex-start;
-    align-content: center;
-    padding-left: 2px;
-}
-.utilTitle {
-    margin-top: 5px;
-}
-
-.iconWrapper {
-    background-color: #F5F5F5;/*#F2F3F4;*/
-    border-radius: 50%;
-    padding: 2px;
-    border: 1px solid #009bd6;
-}
 
 /* Edit Mode */
 .utilEditSection {
