@@ -4,13 +4,12 @@ import { Util, Category, BoardSettings } from '@/app/data/types';
 export const prototypeBoardContext = {
     boardSettings: {
       categories: [],
-      isEdit: false,
       selectedIndex: 0,
-      loadConfig: false
+      mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
     }, 
-    setEdit: (isEdit: boolean) => {},
+    isEdit: () => { return false },
     setSelectedCategoryIndex: (pCateIndex: number) => {},
-    setLoadConfig: (isConfig: boolean) => {},
+    setMode: (mode: number) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -33,16 +32,15 @@ export function splitToNumber(stringOfIndex: string, separator: string) {
 export function createInitBoardContext(boardSettings: BoardSettings, handleSetBoardSettings: Function) {
     const initBoardContext = {
         boardSettings: boardSettings,
-        setEdit: (pIsEdit: boolean) => {
-          const newBoardSettings = {...boardSettings, isEdit: pIsEdit};
-          handleSetBoardSettings(newBoardSettings);
+        isEdit: () => {
+          return (boardSettings.mode === 1);
         },
         setSelectedCategoryIndex: (pCateIndex: number) => {
           const newBoardSettings = {...boardSettings, selectedIndex: pCateIndex};
           handleSetBoardSettings(newBoardSettings);
         },
-        setLoadConfig: (isConfig: boolean) => {
-          const newBoardSettings = {...boardSettings, loadConfig: isConfig};
+        setMode: (pMode: number) => {
+          const newBoardSettings = {...boardSettings, mode: pMode};
           handleSetBoardSettings(newBoardSettings);
         },
         createCategory: (pName: string) => {

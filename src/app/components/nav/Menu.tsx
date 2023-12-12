@@ -13,7 +13,8 @@ export default function Menu(
     {categories: Category[], handleSelectACategory: Function, selectedIndex: number}) {
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.boardSettings.isEdit;
+    const isEdit = boardContext.isEdit();
+    const isConfig = boardContext.boardSettings.mode === 3;
 
     function updateCategoryName(pName: string) {
         boardContext.updateCategoryName(pName, selectedIndex);
@@ -39,11 +40,7 @@ export default function Menu(
             menuElement.className = isOpen ? 'grid1m_sub' : 'grid1m_sub_none';
         }
     }
-
-    function handleEditClick(isEdit: boolean) {
-        boardContext.setEdit(isEdit);
-    }
-        
+    
     const [changingName, setChangingName] = useState(false);
     const stringIndex = `${selectedIndex}`;
     const menuContextID = `menuCxtCate_${stringIndex}`;
@@ -102,7 +99,7 @@ export default function Menu(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
@@ -111,7 +108,7 @@ export default function Menu(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
@@ -143,10 +140,10 @@ export default function Menu(
         </ul>
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
-            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
-            {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
-            {!boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(true) }}>Config</a></li>}
-            {boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(false)}}>Back to Categories</a></li>}
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(1) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(0) }}>Back to View</a></li>}
+            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
+            {isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>    
     </div>
@@ -184,10 +181,10 @@ export default function Menu(
         </ul>
         <ul className="menuBottom">
             <li className="menuItemBottom"><a href="#">About</a></li>
-            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { handleEditClick(true) }}>Edit</a></li>}
-            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { handleEditClick(false) }}>Back to View</a></li>}
-            {!boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setLoadConfig(true) }}>Config</a></li>}
-            {boardContext.boardSettings.loadConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { boardContext.setLoadConfig(false)}}>Back to Categories</a></li>}
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(1) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => { boardContext.setMode(0) }}>Back to View</a></li>}
+            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
+            {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottom' onClick={() => {boardContext.setMode(0) }}>Back to Categories</a></li>}
             <li className="menuItemBottom"><a href="#">Donate</a></li>
         </ul>
     </div>

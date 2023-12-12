@@ -55,7 +55,8 @@ export default function Board() {
       categories: cates,
       isEdit: false,
       selectedIndex: 0,
-      loadConfig: false
+      loadConfig: false,
+      mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
     });
 
     useEffect(() => { // need to run once after 1st render
@@ -85,8 +86,8 @@ export default function Board() {
           
 
           <div className="grid3">
-            {boardSettings.loadConfig && <Config />}
-            {!boardSettings.loadConfig && boardSettings.categories.length > 0 && 
+            {boardSettings.mode === 3 && <Config />}
+            {(boardSettings.mode === 0 || boardSettings.mode === 1) && boardSettings.categories.length > 0 && 
                 <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
                 key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
           </div>

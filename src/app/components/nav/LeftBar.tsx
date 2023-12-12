@@ -11,7 +11,7 @@ export default function LeftBar(
     {categories: Category[], handleSelectACategory: Function, selectedIndex: number}) {
     
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.boardSettings.isEdit;
+    const isEdit = boardContext.isEdit();
 
     function updateCategoryName(pName: string) {
         boardContext.updateCategoryName(pName, selectedIndex);
@@ -39,10 +39,10 @@ export default function LeftBar(
                 };
                 localStorage.setItem('onepage', JSON.stringify(configOnePage));
                 console.log('Saved to localStorage.');
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
                 
             }}/><i className={`material-icons ${styles.input_button}`} title='Cancel Edit' onClick={() => {
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             }}>&#xe14c;</i></li>}
         {categories.map((element, index) => {
             if (isEdit) {

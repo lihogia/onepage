@@ -19,7 +19,7 @@ export default function SubCategoryComponent(
     const [addingUtil, setAddingUtil] = useState(false);
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.boardSettings.isEdit;
+    const isEdit = boardContext.isEdit();
     
     const subCategory = subcate;
     
@@ -94,7 +94,7 @@ export default function SubCategoryComponent(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
@@ -103,7 +103,7 @@ export default function SubCategoryComponent(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },

@@ -8,7 +8,7 @@ export default function ImportComponent() {
     function closeForm() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
         uploadForm.reset();
-        boardContext.setLoadConfig(false);
+        boardContext.setMode(0);
     }
 
     function importFromJSON() {
@@ -34,7 +34,7 @@ export default function ImportComponent() {
         }
 
         uploadForm.reset();
-        boardContext.setLoadConfig(false);
+        boardContext.setMode(0);
     }
 
     return (

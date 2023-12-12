@@ -10,7 +10,7 @@ export default function ExportComponent() {
     function closeForm() {
         const form = document.getElementById('formExportConfigFile');
         form.reset();
-        boardContext.setLoadConfig(false);
+        boardContext.setMode(0);
     }
 
     function exportToJSON() {

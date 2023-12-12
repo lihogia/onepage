@@ -32,6 +32,6 @@ export interface Category {
 
 export interface BoardSettings {
     categories: Category[],
-    isEdit: boolean,
-    selectedIndex: number
+    selectedIndex: number,
+    mode: number
 }
