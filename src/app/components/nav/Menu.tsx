@@ -1,11 +1,8 @@
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useContext, useState } from 'react';
 import type { Category } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
-import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
 import CategoryOnMenu from '@/app/components/categoryOnMenu';
 
 export default function Menu(
@@ -15,18 +12,6 @@ export default function Menu(
     const boardContext = useContext(BoardContext);
     const isEdit = boardContext.isEdit();
     const isConfig = boardContext.boardSettings.mode === 3;
-
-    function updateCategoryName(pName: string) {
-        boardContext.updateCategoryName(pName, selectedIndex);
-    }
-
-    function deleteCategory() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteCategory(selectedIndex);
-            boardContext.setSelectedCategoryIndex(0);
-        }
-    }
 
     /** Use in mobile view */
     function openMenu(isOpen: boolean) {
@@ -41,81 +26,6 @@ export default function Menu(
         }
     }
     
-    const [changingName, setChangingName] = useState(false);
-    const stringIndex = `${selectedIndex}`;
-    const menuContextID = `menuCxtCate_${stringIndex}`;
-    const menuContextID_m = `${menuContextID}_m`;
-    const menuContextItems: MenuContextItem[]  = [
-        {
-            iconURL: '/icons/editico.png',
-            text: 'Edit Category',
-            tooltip: 'Edit Category',
-            handle: () => {
-                setChangingName(true);
-            },
-            stringIndex: stringIndex
-        },
-        {
-            iconURL: '/icons/deleteico.png',
-            text: 'Delete Category',
-            tooltip: 'Delete Category',
-            handle: () => {
-                boardContext.deleteCategory(selectedIndex);
-            },
-            stringIndex: stringIndex
-        },
-        {
-            iconURL: '/icons/addcatico.png',
-            text: 'Add Category',
-            tooltip: 'Add Category',
-            handle: () => {
-                boardContext.createCategory('New Category');
-            },
-            stringIndex: stringIndex
-        },
-        SEPARATOR,
-        {
-            iconURL: '/icons/addsubcatico.png',
-            text: 'Add Sub Category',
-            tooltip: 'Add Sub Category',
-            handle: () => {
-                boardContext.createSubCategory(selectedIndex, 'New Sub Category');
-            },
-            stringIndex: stringIndex
-        },
-        SEPARATOR,
-        {
-            iconURL: '/icons/saveico.png',
-            text: 'Save & Continue',
-            tooltip: 'Save to Local Storage',
-            handle: () => {
-                boardContext.saveToStorage();
-            },
-            stringIndex: stringIndex
-        },
-        {
-            iconURL: '/icons/saveico.png',
-            text: 'Save & Back to View',
-            tooltip: 'Save & Back to View',
-            handle: () => {
-                boardContext.saveToStorage();
-                boardContext.setMode(0);
-            },
-            stringIndex: stringIndex
-        },
-        {
-            iconURL: '/icons/clickico.png',
-            text: 'Back to View',
-            tooltip: 'Back to View',
-            handle: () => {
-                boardContext.setMode(0);
-            },
-            stringIndex: stringIndex
-        },
-
-
-    ];
-
     return (
     <>
     <div className={'grid1'}>
@@ -124,7 +34,7 @@ export default function Menu(
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
                     return (
-                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={false}/>
+                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={false} isLast={categories.length === 1}/>
                     );
                 }else {
                     return (
@@ -160,7 +70,7 @@ export default function Menu(
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
                     return (
-                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={true}/>
+                        <CategoryOnMenu category={element} index={index} key={`${index}_${element.name}`} isMobile={true} isLast={categories.length === 1}/>
                     );
                 }else {
                     return (

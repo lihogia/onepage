@@ -8,8 +8,8 @@ import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
 
 export default function CategoryOnMenu(
-    {category, index, isMobile}:
-    {category: Category, index: number, isMobile: boolean}
+    {category, index, isMobile, isLast}:
+    {category: Category, index: number, isMobile: boolean, isLast: boolean}
 ) {
     
     const boardContext = useContext(BoardContext);
@@ -30,7 +30,7 @@ export default function CategoryOnMenu(
     const [changingName, setChangingName] = useState(false);
     const menuContextID = `menuCxtCate_${index}`;
     const menuContextID_m = `${menuContextID}_m`;
-    const menuContextItems: MenuContextItem[]  = [
+    const menuContextItems1: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
             text: 'Edit Category',
@@ -39,7 +39,8 @@ export default function CategoryOnMenu(
                 setChangingName(true);
             },
             stringIndex: stringIndex
-        },
+        },];
+    const menuContextItems2: MenuContextItem[]  = [
         {
             iconURL: '/icons/deleteico.png',
             text: 'Delete Category',
@@ -48,7 +49,8 @@ export default function CategoryOnMenu(
                 deleteCategory();
             },
             stringIndex: stringIndex
-        },
+        },];
+    const menuContextItems3: MenuContextItem[]  = [
         {
             iconURL: '/icons/addcatico.png',
             text: 'Add Category',
@@ -98,6 +100,13 @@ export default function CategoryOnMenu(
             stringIndex: stringIndex
         },
     ];
+
+    let menuContextItems: MenuContextItem[];
+    if (isLast) {
+        menuContextItems = [...menuContextItems1, ...menuContextItems3];
+    }else {
+        menuContextItems = [...menuContextItems1,...menuContextItems2,...menuContextItems3];
+    }
 
 
     return (
