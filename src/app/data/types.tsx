@@ -35,3 +35,8 @@ export interface BoardSettings {
     selectedIndex: number,
     mode: number
 }
+
+export interface OnePageSettings {
+    categories: Category[],
+    version: string
+}
