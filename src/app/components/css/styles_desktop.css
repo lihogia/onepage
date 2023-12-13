@@ -122,6 +122,20 @@ li.menuItemPopup, .menuItemPopup a {
         align-content: center;
     }
 
+    /* grid3  */
+    .util {
+        font-size: 12pt;
+        text-decoration: none;
+        color: black;
+        border: 1px solid white;
+        padding: 0;
+        margin: 5px;
+    }
+    .util:hover {
+        border-bottom: 1px solid black;
+        /*text-decoration: underline;*/
+    }
+
     /* icon wrapper */
     .searchTitle {
         justify-content: flex-start;
