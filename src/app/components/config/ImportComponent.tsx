@@ -1,6 +1,7 @@
 'use client';
 import { useContext } from 'react';
 import { BoardContext } from '@/app/components/BoardContext';
+import type { BoardSettings, Category } from '@/app/data/types';
 export default function ImportComponent() {
 
     const boardContext = useContext(BoardContext);
@@ -24,17 +25,40 @@ export default function ImportComponent() {
             //console.log(content);
             let boardConfig;
             try {
-                boardConfig = JSON.parse(JSON.stringify(content));
-                // have to check the content
-                console.log(boardConfig);
-                localStorage.setItem('onepage', boardConfig);
+                boardConfig = JSON.parse(content);
+
+                const configOnePage = {
+                    categories: boardConfig.categories,
+                    version: process.env.version
+                  };
+                          
+                  if (typeof window !== 'undefined') {
+                    // Perform localStorage action
+                    localStorage.setItem('onepage', JSON.stringify(configOnePage));
+                    console.log('Saved to localStorage successfully.');
+                    uploadForm.reset();
+                    const bSettings: BoardSettings = {
+                        categories: configOnePage.categories,
+                        selectedIndex: 0,
+                        mode: 0
+                    };
+                    boardContext.updateBoardSettings(bSettings);
+                    console.log('Loaded from localStorage successfully.');
+                  }
+        
             }catch (error) {
-                reader.onerror(Error('Not json file'));
+                //reader.onerror(Error('Not json file'));
+                console.log(error);
             }
+            
+            
+            //boardContext.saveToStorage();
+
+            //uploadForm.reset();
+            //boardContext.setMode(0);
+
         }
 
-        uploadForm.reset();
-        boardContext.setMode(0);
     }
 
     return (

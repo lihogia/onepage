@@ -19,7 +19,10 @@ export const prototypeBoardContext = {
     createUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     updateUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
-    saveToStorage: () => {}
+    updateCategories: (pCategories: Category[]) => {},
+    updateBoardSettings: (pBoardSettings: BoardSettings) => {},
+    saveToStorage: () => {},
+    loadFromStorage: () => {},
 };
 
 export function splitToNumber(stringOfIndex: string, separator: string) {
@@ -129,11 +132,21 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
           handleSetBoardSettings(newBoardSettings);
 
         },
+        updateCategories: (pCategories: Category[]) => {
+          const newBoardSettings = {...boardSettings, categories: [...pCategories]};
+          handleSetBoardSettings(newBoardSettings);
+        },
+        updateBoardSettings: (pBoardSettings: BoardSettings) => {
+          const newBoardSettings = {...pBoardSettings};
+          handleSetBoardSettings(newBoardSettings);
+        },
         saveToStorage: () => {
           const configOnePage = {
             categories: boardSettings.categories,
             version: process.env.version
           };
+
+          //console.log(configOnePage.categories);
           
           if (typeof window !== 'undefined') {
             // Perform localStorage action
@@ -141,10 +154,20 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
             console.log('Saved to localStorage.');
           }
 
-          console.log('Load just saved data.');
-          const newBoardSettings = {...boardSettings, categories: boardSettings.categories};
+        },
+        loadFromStorage: () => {
+          let categories = [];
+          if (typeof window !== 'undefined') {
+              // Perform localStorage action
+              const lStorage: any = localStorage;
+              const item = JSON.parse(lStorage.getItem('onepage'));
+              
+              if (item != null && item.categories.length > 0) {
+                  categories = item.categories;
+              }
+            }
+          const newBoardSettings = {...boardSettings, categories: categories};
           handleSetBoardSettings(newBoardSettings);
-
         }
     };
 
