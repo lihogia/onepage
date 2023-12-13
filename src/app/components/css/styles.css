@@ -173,11 +173,13 @@ li.menuItemPopup a {
     font-size: 12pt;
     text-decoration: none;
     color: black;
-    border-bottom: 1px solid white;
-    padding-top: 5px;
+    border: 1px solid white;
+    padding: 0;
+    margin: 5px;
 }
 .util:hover {
     border-bottom: 1px solid black;
+    /*text-decoration: underline;*/
 }
 
 
