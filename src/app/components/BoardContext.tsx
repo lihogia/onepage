@@ -140,7 +140,11 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
             localStorage.setItem('onepage', JSON.stringify(configOnePage));
             console.log('Saved to localStorage.');
           }
-        
+
+          console.log('Load just saved data.');
+          const newBoardSettings = {...boardSettings, categories: boardSettings.categories};
+          handleSetBoardSettings(newBoardSettings);
+
         }
     };
 
