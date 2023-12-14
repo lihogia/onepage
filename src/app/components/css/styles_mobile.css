@@ -128,9 +128,21 @@
         font-size: 10pt;
     }
     .menuItemBottom a:hover {
-        border-bottom: 1px solid #ffff;
+        border-bottom: 1px solid white;
+        font-size: 10pt;
     }
-
+    
+    a.menuItemBottomSelected{
+        color: #009bd6;
+        background-color: white;
+        padding: 3px;
+        font-weight: bolder;
+        /*text-shadow: 2px 2px 3px white;*/
+    }
+    a.menuItemBottomSelected:hover{
+        border: 0;
+    }    
+    
     /* Menu Context */
     .popupLiShow {
         padding: 0;
