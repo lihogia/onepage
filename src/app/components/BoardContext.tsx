@@ -1,11 +1,19 @@
 import { createContext } from "react";
 import { Util, Category, BoardSettings } from '@/app/data/types';
 
+export const emptyBoardSettings = {
+  categories: [],
+  selectedIndex: 0,
+  mode: 0,
+  contextMenus: new Map(),
+};
+
 export const prototypeBoardContext = {
     boardSettings: {
       categories: [],
       selectedIndex: 0,
       mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
+      contextMenus: new Map(),
     }, 
     isEdit: () => { return false },
     setSelectedCategoryIndex: (pCateIndex: number) => {},
@@ -19,7 +27,7 @@ export const prototypeBoardContext = {
     createUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     updateUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
-    updateCategories: (pCategories: Category[]) => {},
+    updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
     updateBoardSettings: (pBoardSettings: BoardSettings) => {},
     saveToStorage: () => {},
     loadFromStorage: () => {},
@@ -132,8 +140,10 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
           handleSetBoardSettings(newBoardSettings);
 
         },
-        updateCategories: (pCategories: Category[]) => {
-          const newBoardSettings = {...boardSettings, categories: [...pCategories]};
+        updateContextMenus: (contextMenus: Map<String, boolean>) => {
+
+          const newContextMenus = new Map(contextMenus);
+          const newBoardSettings = {...boardSettings, contextMenus: newContextMenus};
           handleSetBoardSettings(newBoardSettings);
         },
         updateBoardSettings: (pBoardSettings: BoardSettings) => {
@@ -146,8 +156,6 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
             version: process.env.version
           };
 
-          //console.log(configOnePage.categories);
-          
           if (typeof window !== 'undefined') {
             // Perform localStorage action
             localStorage.setItem('onepage', JSON.stringify(configOnePage));

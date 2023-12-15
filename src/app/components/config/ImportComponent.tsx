@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { BoardContext } from '@/app/components/BoardContext';
+import { BoardContext, emptyBoardSettings } from '@/app/components/BoardContext';
 import type { BoardSettings, Category } from '@/app/data/types';
 import { saveToLocalStorage } from './LocalStorage';
 
@@ -32,11 +32,8 @@ export default function ImportComponent() {
                 saveToLocalStorage(boardConfig.categories);
                 console.log('Saved to localStorage successfully.');
                 uploadForm.reset();
-                const bSettings: BoardSettings = {
-                    categories: boardConfig.categories,
-                    selectedIndex: 0,
-                    mode: 0
-                };
+                const bSettings: BoardSettings = emptyBoardSettings;
+                bSettings.categories = boardConfig.categories;
                 boardContext.updateBoardSettings(bSettings);
                 console.log('Loaded from localStorage successfully.');
         

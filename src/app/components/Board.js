@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
 import styles from './component.module.css';
-import { prototypeBoardContext, createInitBoardContext, BoardContext } from './BoardContext';
+import { prototypeBoardContext, createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
 import Config from '@/app/components/config/config';
 import CategoryComponent from '@/app/components/category';
 import SubCategoryComponent from './subcategory';
@@ -51,13 +51,7 @@ export default function Board() {
    
     const cates = loadData();
 
-    const [boardSettings, setBoardSettings] = useState({
-      categories: cates,
-      isEdit: false,
-      selectedIndex: 0,
-      loadConfig: false,
-      mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
-    });
+    const [boardSettings, setBoardSettings] = useState(emptyBoardSettings);
 
     useEffect(() => { // need to run once after 1st render
       let localCates = loadLocalStorage();

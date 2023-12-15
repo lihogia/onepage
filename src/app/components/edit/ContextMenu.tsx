@@ -3,13 +3,36 @@ import type { MenuContextItem } from '@/app/data/menuContext';
 import { SEPARATOR } from '@/app/data/menuContext';
 
 
-export function showHideContextMenu(id: string) {
+export function showHideContextMenu(id: string, isShow: boolean) {
     const liElement = document.getElementById(id);
     if (liElement != null) {
-        liElement.className = liElement.className === 'popupLiShow' ? 'popupLi' : 'popupLiShow';
+        if (isShow) {
+            liElement.className = 'popupLiShow';
+        }else {
+            liElement.className = 'popupLi';
+        }
     }
-   
+}
 
+export function showHideOneAndCloseAllContextMenus(allContextMenus: Map<string, boolean>, id: string) {
+    const updateContextMenus = new Map(allContextMenus);
+    
+    allContextMenus.forEach((value, key) => {
+        if (key === id) {
+            const isShow = !value;
+            updateContextMenus.set(key, isShow);
+            showHideContextMenu(key, isShow);
+        }else {
+            updateContextMenus.set(key, false);
+            showHideContextMenu(key, false);
+        }
+    });
+    if (!updateContextMenus.has(id)) {
+        updateContextMenus.set(id, true);
+        showHideContextMenu(id, true);
+    }
+
+    return updateContextMenus;
 }
 
 export function ContextMenu(
@@ -29,7 +52,7 @@ export function ContextMenu(
                         <li className="menuItemPopup" key={`${menuContextID}_${index}`}>
                             <Image src={element.iconURL} width={15} height={15} alt={element.tooltip} title={element.tooltip}/>&nbsp;
                             <a href='#' onClick={(e) => {
-                                showHideContextMenu(menuContextID);
+                                showHideContextMenu(menuContextID, false);
                                 element.handle();
                             }}>{element.text}</a>
                         </li>

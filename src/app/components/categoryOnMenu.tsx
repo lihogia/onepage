@@ -5,7 +5,7 @@ import NameEditor from '@/app/components/edit/NameEditor';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
 import SubCategoryComponent from './subcategory';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 
 export default function CategoryOnMenu(
     {category, index, isMobile, isLast}:
@@ -108,12 +108,14 @@ export default function CategoryOnMenu(
         menuContextItems = [...menuContextItems1,...menuContextItems2,...menuContextItems3];
     }
 
-
-    return (
-        <li className='menuItemSelected'>
+    if (isEdit) {
+        return (
+            <li className='menuItemSelected'>
             {!changingName && <a href="#" className={isMobile ? 'menuItemSelected' : ''} onClick={
                     () => {
-                        showHideContextMenu(isMobile ? menuContextID_m : menuContextID);
+                        const currentMenuContextID: string = isMobile ? menuContextID_m : menuContextID;
+                        const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, currentMenuContextID);
+                        boardContext.updateContextMenus(contextMenusUpdated);
                     }
                 }>{category.name}</a>}
             {changingName && <NameEditor stringIndex={stringIndex} pName={category.name} handleUpdateName={updateCategoryName} closeHandle={() => {
@@ -122,7 +124,11 @@ export default function CategoryOnMenu(
             {isEdit &&  <div className='popupLi' id={isMobile ? menuContextID_m : menuContextID} key={`menuCtxLi_${index}_${category.name}`}>
                     <ContextMenu menuContextItems={menuContextItems} menuContextID={isMobile ? menuContextID_m : menuContextID} />
                 </div>}
-        </li>
-
-    );
+            </li>
+        );
+    }else {
+        return (
+            <li className='menuItemSelected'><a href="#" className={isMobile ? 'menuItemSelected' : ''}>{category.name}</a></li>
+        );
+    }
 }

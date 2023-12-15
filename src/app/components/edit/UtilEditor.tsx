@@ -6,7 +6,7 @@ import { BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/components/edit/ContextMenu';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
     const [changingUtil, setChangingUtil] = useState(false);
@@ -24,6 +24,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     }
 
     const menuContextID = `menuCxtUtil_${stringIndex}`;
+    
     const menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
@@ -86,7 +87,9 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     return (
     <>
         {!changingUtil && <a className="util" href="#" onClick={() => {
-            showHideContextMenu(menuContextID);
+            const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+            boardContext.updateContextMenus(contextMenusUpdated);
+
             }}>{util.title}</a>
         }
         {(changingUtil && Object.keys(util).length == 2) && <>

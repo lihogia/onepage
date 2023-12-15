@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './component.module.css';
 import type { SubCategory, UtilLink, Util } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
@@ -8,7 +8,7 @@ import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
 import UtilEditor from './edit/UtilEditor';
 import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 
 
 export default function SubCategoryComponent(
@@ -40,6 +40,7 @@ export default function SubCategoryComponent(
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;
+    
     const menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
@@ -107,8 +108,6 @@ export default function SubCategoryComponent(
             },
             stringIndex: stringIndex
         },
-
-
     ];
 
     if (isEdit) {
@@ -116,7 +115,9 @@ export default function SubCategoryComponent(
             <ul>
                 <li className="subcategory">
                     {!changingName && <a href="#" onClick={() => {
-                        showHideContextMenu(menuContextID);
+                        const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+                        boardContext.updateContextMenus(contextMenusUpdated);
+
                         }}>{subCategory.name}</a>
                     }
                     {changingName && <NameEditor stringIndex={stringIndex} pName={subCategory.name} handleUpdateName={updateSubCategoryName} closeHandle={() => {
