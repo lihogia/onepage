@@ -110,7 +110,7 @@ export default function CategoryOnMenu(
 
     if (isEdit) {
         return (
-            <li className='menuItemSelected'>
+            <li className='menuItemSelected' id={`#cate_${stringIndex}`}>
             {!changingName && <a href="#" className={isMobile ? 'menuItemSelected' : ''} onClick={
                     () => {
                         const currentMenuContextID: string = isMobile ? menuContextID_m : menuContextID;
@@ -122,7 +122,7 @@ export default function CategoryOnMenu(
                     setChangingName(false);
                 }}/>}            
             {isEdit &&  <div className='popupLi' id={isMobile ? menuContextID_m : menuContextID} key={`menuCtxLi_${index}_${category.name}`}>
-                    <ContextMenu menuContextItems={menuContextItems} menuContextID={isMobile ? menuContextID_m : menuContextID} />
+                    <ContextMenu menuContextItems={menuContextItems} menuContextID={isMobile ? menuContextID_m : menuContextID} anchorId={`#cate_${stringIndex}`}/>
                 </div>}
             </li>
         );

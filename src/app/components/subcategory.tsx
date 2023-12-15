@@ -113,8 +113,8 @@ export default function SubCategoryComponent(
     if (isEdit) {
         return (            
             <ul>
-                <li className="subcategory">
-                    {!changingName && <a href="#" onClick={() => {
+                <li className="subcategory" id={`subcate_${stringIndex}`}>
+                    {!changingName && <a href={`#subcate_${stringIndex}`} onClick={() => {
                         const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
                         boardContext.updateContextMenus(contextMenusUpdated);
 
@@ -125,12 +125,12 @@ export default function SubCategoryComponent(
                     }}/>}
 
                     <div className='popupLi' id={menuContextID} >
-                        <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
+                        <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`#subcate_${stringIndex}`}/>
                     </div>
                 </li>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                     return (
-                        <li key={`${element.title}_${stringIndex}_${index}`}>
+                        <li key={`${element.title}_${stringIndex}_${index}`} id={`util_${stringIndex}_${index}`}>
                             <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
                         </li>
                     )

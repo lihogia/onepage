@@ -86,7 +86,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     return (
     <>
-        {!changingUtil && <a className="util" href="#" onClick={() => {
+        {!changingUtil && <a className="util" href={`#util_${stringIndex}`} onClick={() => {
             const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
             boardContext.updateContextMenus(contextMenusUpdated);
 
@@ -103,7 +103,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             }} />
         </>}
         <section className='popupLi' id={menuContextID} >
-            <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
+            <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`util_${stringIndex}`}/>
         </section>
     </>
     );
