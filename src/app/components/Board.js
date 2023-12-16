@@ -1,21 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
-import styles from './component.module.css';
-import { prototypeBoardContext, createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
+import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
+import About from '@/app/components/about/about';
 import Config from '@/app/components/config/config';
 import CategoryComponent from '@/app/components/category';
-import SubCategoryComponent from './subcategory';
-import CreateNameButton from '@/app/components/edit/CreateNameButton';
-import LeftBar from './nav/LeftBar';
-import TopMenu from './nav/TopMenu';
 import Menu from '@/app/components/nav/Menu';
 import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
 import LargeRectangleAd from '@/app/components/ads/LargeRectangleAd';
 import Footer from '@/app/components/nav/Footer';
-
-
 
 export function loadData() {
     //const data = loadLocalStorage();
@@ -79,6 +72,7 @@ export default function Board() {
           
 
           <div className="grid3">
+          {boardSettings.mode === 2 && <About />}
             {boardSettings.mode === 3 && <Config />}
             {(boardSettings.mode === 0 || boardSettings.mode === 1) && boardSettings.categories.length > 0 && 
                 <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
