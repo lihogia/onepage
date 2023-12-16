@@ -165,5 +165,19 @@ li.menuItemPopup, .menuItemPopup a {
         border: 1px solid #009bd6;
     }
     
+    .aboutSection {
+        padding: 30px 10px 10px 10px;
+      }
+    
+      .aboutSection p {
+        margin: 10px 5px 5px 10px;
+      }
+    
+      .aboutSection ul {
+        list-style-type: disc;
+      }
+    
+    
+    
 }
 
