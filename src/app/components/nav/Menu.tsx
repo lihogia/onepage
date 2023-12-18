@@ -60,8 +60,9 @@ export default function Menu(
             {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
             {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
 
-            {!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>}
-            {isDonate && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
+            <li className="menuItemBottom"><a href="https://www.buymeacoffee.com/lilogia" target="_blank">Buy me a coffee</a></li>
+            {/*!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>*/}
+            {/*isDonate && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>*/}
         </ul>    
     </div>
     <div className="grid1m">
@@ -106,8 +107,9 @@ export default function Menu(
             {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
             {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => {boardContext.setMode(0) }}>Back to Categories</a></li>}
 
-            {!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>}
-            {isDonate && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
+            <li className="menuItemBottom"><a href="https://www.buymeacoffee.com/lilogia" target="_blank">Buy me a coffee</a></li>
+            {/*!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>*/}
+            {/*isDonate && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>*/}
 
         </ul>
     </div>

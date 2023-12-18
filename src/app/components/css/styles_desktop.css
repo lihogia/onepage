@@ -171,6 +171,7 @@ li.menuItemPopup, .menuItemPopup a {
     
       .aboutSection p {
         margin: 10px 5px 5px 10px;
+        text-wrap: pretty;
       }
     
       .aboutSection ul {

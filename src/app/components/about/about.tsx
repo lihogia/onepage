@@ -6,7 +6,7 @@ export default function About() {
             <p>This is the 1st step in my journey to fulfill the dream of developing cool & useful features.</p>
             <p><b>OnePage</b> is a Single Web Page Application which includes all entries to user&#39;s online resources.</p>
             <p>This will help user to save time and get to their daily work ASAP. And it is totally free.</p>
-            <p>Hope you all enjoy using it !!!</p>
+            <p>Hope you all enjoy using it !!! To support <b>OnePage</b>, you can <a href="https://www.buymeacoffee.com/lilogia">buy me a coffee</a>.</p>
             <p>All feedback are welcome! Please contact me at <a href="mailto:lilogia@gmail.com">lilogia</a>.</p>
             <br/>
             <h3>Releases</h3>
