@@ -1,6 +1,6 @@
 export const template001 = {
     "categories": [
-        { 
+        {
             "name": "Common",
             "subcategories": [
                 {
@@ -38,59 +38,92 @@ export const template001 = {
                             "title": "Proton Mail",
                             "url": "https://mail.proton.me/u/0/inbox"
                         }
-                    ] 
+                    ]
                 },
                 {
                     "name": "Search",
                     "utils": [
                         {
+                            "fieldname": "q",
                             "title": "Google",
-                            "url": "https://www.google.com/search",
-                            "fieldname": "q"
+                            "url": "https://www.google.com/search"
                         },
                         {
+                            "fieldname": "q",
                             "title": "Microsoft",
-                            "url": "https://www.bing.com/search",
-                            "fieldname": "q"
+                            "url": "https://www.bing.com/search"
                         },
                         {
+                            "fieldname": "p",
                             "title": "Yahoo!",
-                            "url": "https://search.yahoo.com/",
-                            "fieldname": "p"
+                            "url": "https://search.yahoo.com/"
                         },
                         {
+                            "fieldname": "q",
                             "title": "DuckDuckGo",
-                            "url": "https://duckduckgo.com/",
-                            "fieldname": "q"
+                            "url": "https://duckduckgo.com/"
                         },
                         {
                             "title": "百度",
                             "url": "https://www.baidu.com/"
                         }
-                    ] 
+                    ]
                 },
                 {
                     "name": "Dictionaries",
                     "utils": [
                         {
+                            "fieldname": "q",
                             "title": "Oxford Dictionary",
-                            "url": "https://www.oxfordlearnersdictionaries.com/search/english/direct/",
-                            "fieldname": "q"
+                            "url": "https://www.oxfordlearnersdictionaries.com/search/english/direct/"
                         },
                         {
-                            "title": 'Cambridge Dictionary',
-                            "url": 'https://dictionary.cambridge.org/dictionary/english/e.target.value',
-                            "fieldname": 'regexp',
-                            "pattern": "e.target.value|ig"
-                        },
-                        {
-                            "title": "Chinese Caligraphy",
-                            "url": "https://www.regularcalligraphy.com/character/e.target.value.html",
                             "fieldname": "regexp",
-                            "pattern": "e.target.value|ig"
+                            "pattern": "e.target.value|ig",
+                            "title": "Cambridge Dictionary",
+                            "url": "https://dictionary.cambridge.org/dictionary/english/e.target.value"
+                        },
+                        {
+                            "fieldname": "regexp",
+                            "pattern": "e.target.value|ig",
+                            "title": "Chinese Caligraphy",
+                            "url": "https://www.regularcalligraphy.com/character/e.target.value.html"
                         }
                     ]
                 },
+                {
+                    "name": "Translators",
+                    "utils": [
+                        {
+                            "title": "Google Translate",
+                            "url": "https://translate.google.com/"
+                        },
+                        {
+                            "title": "DeepL",
+                            "url": "https://www.deepl.com/en/translator"
+                        },
+                        {
+                            "title": "Translate with Cambridge",
+                            "url": "https://dictionary.cambridge.org/translate/"
+                        },
+                        {
+                            "title": "Reverso",
+                            "url": "https://www.reverso.net/text-translation"
+                        },
+                        {
+                            "title": "Quillbot",
+                            "url": "https://quillbot.com/translate"
+                        },
+                        {
+                            "title": "Online Translator",
+                            "url": "https://www.translate.com/"
+                        },
+                        {
+                            "title": "Microsoft Translator",
+                            "url": "https://www.bing.com/translator/"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -130,7 +163,7 @@ export const template001 = {
                         {
                             "title": "NBC News",
                             "url": "https://www.nbcnews.com/us-news"
-                        },
+                        }
                     ]
                 },
                 {
@@ -144,6 +177,123 @@ export const template001 = {
                             "title": "The Guardian",
                             "url": "https://www.theguardian.com/us-news"
                         },
+                        {
+                            "title": "The Times & Sunday Times",
+                            "url": "https://www.thetimes.co.uk/"
+                        },
+                        {
+                            "title": "The Independent",
+                            "url": "https://www.independent.co.uk/"
+                        },
+                        {
+                            "title": "The Telegraph",
+                            "url": "https://www.telegraph.co.uk/"
+                        },
+                        {
+                            "title": "Reaction - Independence Journalism in the UK",
+                            "url": "https://reaction.life/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Canada",
+                    "utils": [
+                        {
+                            "title": "Centre for International Governance Innovation",
+                            "url": "https://www.cigionline.org/"
+                        },
+                        {
+                            "title": "CBC",
+                            "url": "https://www.cbc.ca/"
+                        },
+                        {
+                            "title": "Global News",
+                            "url": "https://globalnews.ca/"
+                        },
+                        {
+                            "title": "National Post",
+                            "url": "https://nationalpost.com/"
+                        },
+                        {
+                            "title": "The Star",
+                            "url": "https://www.thestar.com/"
+                        },
+                        {
+                            "title": "CTV News",
+                            "url": "https://www.ctvnews.ca/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Australia",
+                    "utils": [
+                        {
+                            "title": "ABC",
+                            "url": "https://www.abc.net.au/"
+                        },
+                        {
+                            "title": "News.com.au",
+                            "url": "https://www.news.com.au/"
+                        },
+                        {
+                            "title": "Sky News ",
+                            "url": "https://www.skynews.com.au/"
+                        },
+                        {
+                            "title": "9News",
+                            "url": "https://www.9news.com.au/"
+                        },
+                        {
+                            "title": "The Australian",
+                            "url": "https://www.theaustralian.com.au/"
+                        },
+                        {
+                            "title": "Australian Breaking News Headlines",
+                            "url": "https://www.smh.com.au/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Asia",
+                    "utils": [
+                        {
+                            "title": "South China Morning Post",
+                            "url": "https://www.scmp.com/"
+                        },
+                        {
+                            "title": "Asia Nikkei",
+                            "url": "https://asia.nikkei.com/"
+                        },
+                        {
+                            "title": "Channel News Asia",
+                            "url": "https://www.channelnewsasia.com/asia"
+                        }
+                    ]
+                },
+                {
+                    "name": "Vietnam",
+                    "utils": [
+                        {
+                            "title": "Vnexpress.net",
+                            "url": "https://vnexpress.net/"
+                        },
+                        {
+                            "title": "Tuoi tre",
+                            "url": "https://tuoitre.vn/"
+                        },
+                        {
+                            "title": "Lao dong",
+                            "url": "https://laodong.vn/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Business",
+                    "utils": [
+                        {
+                            "title": "Bloomberg",
+                            "url": "https://www.bloomberg.com/"
+                        }
                     ]
                 }
             ]
@@ -157,10 +307,54 @@ export const template001 = {
                         {
                             "title": "Youtube",
                             "url": "https://www.youtube.com"
+                        },
+                        {
+                            "title": "Tiktok",
+                            "url": "https://www.tiktok.com/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Socials",
+                    "utils": [
+                        {
+                            "title": "Facebook",
+                            "url": "https://www.facebook.com/"
+                        },
+                        {
+                            "title": "Twitter",
+                            "url": "https://twitter.com/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Movies",
+                    "utils": [
+                        {
+                            "title": "IMDb",
+                            "url": "https://www.imdb.com/"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Technology",
+            "subcategories": [
+                {
+                    "name": "Vietnam",
+                    "utils": [
+                        {
+                            "title": "Tinhte.vn",
+                            "url": "https://tinhte.vn/"
+                        },
+                        {
+                            "title": "genk.vn",
+                            "url": "https://genk.vn/"
                         }
                     ]
                 }
             ]
         }
-    ]
+    ],
 }
