@@ -3,6 +3,7 @@ import type { UtilLink } from '@/app/data/types';
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
 import Image from 'next/image';
+import IconComponent from '@/app/components/iconComponent';
 
 export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilLink, stringIndex: string}) {
     const boardContext = useContext(BoardContext);
@@ -23,24 +24,8 @@ export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilL
     
     return (
         <>
-        {
-            //<img src={`${util.url.substring(0, util.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12' alt='logo'/>
-        //<img src={`${util.url.substring(0, util.url.indexOf('/', 8)+1)}favicon.ico`} width='15' height='15'/>
-
-        }
-        
-        
-        <a className="util" href={utilLink.url} target='_blank'>{utilLink.title}</a>
+            <IconComponent size={32} url={util.url}/>
+            <a className="util" href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );
 }
-
-/* 
-<ul><span class="subcategory">Google Suite</span>
-<li><a class="util" href="#">Mail</a></li>
-<li><a class="util" href="#">Calendar</a></li>
-<li><a class="util" href="#">Drive</a></li>
-<li><a class="util" href="#">Youtube</a></li>
-</ul>
-
-*/

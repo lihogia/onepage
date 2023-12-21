@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './component.module.css';
 import type { SubCategory, UtilLink, Util } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
@@ -8,7 +8,7 @@ import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
 import UtilEditor from './edit/UtilEditor';
 import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 
 
 export default function SubCategoryComponent(
@@ -19,7 +19,7 @@ export default function SubCategoryComponent(
     const [addingUtil, setAddingUtil] = useState(false);
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.boardSettings.isEdit;
+    const isEdit = boardContext.isEdit();
     
     const subCategory = subcate;
     
@@ -40,6 +40,7 @@ export default function SubCategoryComponent(
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;
+    
     const menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
@@ -94,7 +95,7 @@ export default function SubCategoryComponent(
             tooltip: 'Save & Back to View',
             handle: () => {
                 boardContext.saveToStorage();
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
@@ -103,20 +104,20 @@ export default function SubCategoryComponent(
             text: 'Back to View',
             tooltip: 'Back to View',
             handle: () => {
-                boardContext.setEdit(false);
+                boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
-
-
     ];
 
     if (isEdit) {
         return (            
             <ul>
-                <li className="subcategory">
-                    {!changingName && <a href="#" onClick={() => {
-                        showHideContextMenu(menuContextID);
+                <li className="subcategory" id={`subcate_${stringIndex}`}>
+                    {!changingName && <a href={`#subcate_${stringIndex}`} onClick={() => {
+                        const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+                        boardContext.updateContextMenus(contextMenusUpdated);
+
                         }}>{subCategory.name}</a>
                     }
                     {changingName && <NameEditor stringIndex={stringIndex} pName={subCategory.name} handleUpdateName={updateSubCategoryName} closeHandle={() => {
@@ -124,12 +125,12 @@ export default function SubCategoryComponent(
                     }}/>}
 
                     <div className='popupLi' id={menuContextID} >
-                        <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} />
+                        <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`#subcate_${stringIndex}`}/>
                     </div>
                 </li>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                     return (
-                        <li key={`${element.title}_${stringIndex}_${index}`}>
+                        <li key={`${element.title}_${stringIndex}_${index}`} id={`util_${stringIndex}_${index}`}>
                             <UtilEditor util={element} stringIndex={`${stringIndex}_${index}`} />
                         </li>
                     )
@@ -145,7 +146,7 @@ export default function SubCategoryComponent(
             <ul><span className="subcategory">{subCategory.name}</span>
             {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                 return (
-                    <li key={`${element.title}_${stringIndex}_${index}`}>
+                    <li key={`${element.title}_${stringIndex}_${index}`} className='utilLi'>
                         <UtilComponent util={element} stringIndex={`${stringIndex}_${index}`} />
                     </li>
                 )

@@ -128,9 +128,21 @@
         font-size: 10pt;
     }
     .menuItemBottom a:hover {
-        border-bottom: 1px solid #ffff;
+        border-bottom: 1px solid white;
+        font-size: 10pt;
     }
-
+    
+    a.menuItemBottomSelected{
+        color: #009bd6;
+        background-color: white;
+        padding: 3px;
+        font-weight: bolder;
+        /*text-shadow: 2px 2px 3px white;*/
+    }
+    a.menuItemBottomSelected:hover{
+        border: 0;
+    }    
+    
     /* Menu Context */
     .popupLiShow {
         padding: 0;
@@ -166,7 +178,57 @@
         width: 180px;
     }
     
+/* grid3  */
+.util {
+    font-size: 12pt;
+    text-decoration: none;
+    color: black;
+    border: 1px solid white;
+    padding: 0;
+    margin: 5px;
+}
+.util:hover {
+    border-bottom: 1px solid black;
+    /*text-decoration: underline;*/
+}
 
+.aboutSection {
+    padding: 30px 10px 10px 10px;
+  }
+
+  .aboutSection p {
+    margin: 10px 5px 5px 10px;
+    text-wrap: pretty;
+  }
+
+  .aboutSection ul {
+    list-style-type: disc;
+  }
+
+
+/*icon wrapper */
+.utilLi, .searchTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.searchTitle {
+    justify-content: flex-start;
+    align-content: center;
+    padding-left: 2px;
+}
+.utilTitle {
+    margin-top: 5px;
+}
+
+.iconWrapper {
+    background-color: #F5F5F5;/*#F2F3F4;*/
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #009bd6;
+}
 
 }
 

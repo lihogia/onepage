@@ -1,16 +1,23 @@
 import { createContext } from "react";
 import { Util, Category, BoardSettings } from '@/app/data/types';
 
+export const emptyBoardSettings = {
+  categories: [],
+  selectedIndex: 0,
+  mode: 0,
+  contextMenus: new Map(),
+};
+
 export const prototypeBoardContext = {
     boardSettings: {
       categories: [],
-      isEdit: false,
       selectedIndex: 0,
-      loadConfig: false
+      mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
+      contextMenus: new Map(),
     }, 
-    setEdit: (isEdit: boolean) => {},
+    isEdit: () => { return false },
     setSelectedCategoryIndex: (pCateIndex: number) => {},
-    setLoadConfig: (isConfig: boolean) => {},
+    setMode: (mode: number) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -20,7 +27,10 @@ export const prototypeBoardContext = {
     createUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     updateUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
-    saveToStorage: () => {}
+    updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
+    updateBoardSettings: (pBoardSettings: BoardSettings) => {},
+    saveToStorage: () => {},
+    loadFromStorage: () => {},
 };
 
 export function splitToNumber(stringOfIndex: string, separator: string) {
@@ -33,16 +43,15 @@ export function splitToNumber(stringOfIndex: string, separator: string) {
 export function createInitBoardContext(boardSettings: BoardSettings, handleSetBoardSettings: Function) {
     const initBoardContext = {
         boardSettings: boardSettings,
-        setEdit: (pIsEdit: boolean) => {
-          const newBoardSettings = {...boardSettings, isEdit: pIsEdit};
-          handleSetBoardSettings(newBoardSettings);
+        isEdit: () => {
+          return (boardSettings.mode === 1);
         },
         setSelectedCategoryIndex: (pCateIndex: number) => {
           const newBoardSettings = {...boardSettings, selectedIndex: pCateIndex};
           handleSetBoardSettings(newBoardSettings);
         },
-        setLoadConfig: (isConfig: boolean) => {
-          const newBoardSettings = {...boardSettings, loadConfig: isConfig};
+        setMode: (pMode: number) => {
+          const newBoardSettings = {...boardSettings, mode: pMode};
           handleSetBoardSettings(newBoardSettings);
         },
         createCategory: (pName: string) => {
@@ -131,18 +140,42 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
           handleSetBoardSettings(newBoardSettings);
 
         },
+        updateContextMenus: (contextMenus: Map<String, boolean>) => {
+
+          const newContextMenus = new Map(contextMenus);
+          const newBoardSettings = {...boardSettings, contextMenus: newContextMenus};
+          handleSetBoardSettings(newBoardSettings);
+        },
+        updateBoardSettings: (pBoardSettings: BoardSettings) => {
+          const newBoardSettings = {...pBoardSettings};
+          handleSetBoardSettings(newBoardSettings);
+        },
         saveToStorage: () => {
           const configOnePage = {
             categories: boardSettings.categories,
             version: process.env.version
           };
-          
+
           if (typeof window !== 'undefined') {
             // Perform localStorage action
             localStorage.setItem('onepage', JSON.stringify(configOnePage));
             console.log('Saved to localStorage.');
           }
-        
+
+        },
+        loadFromStorage: () => {
+          let categories = [];
+          if (typeof window !== 'undefined') {
+              // Perform localStorage action
+              const lStorage: any = localStorage;
+              const item = JSON.parse(lStorage.getItem('onepage'));
+              
+              if (item != null && item.categories.length > 0) {
+                  categories = item.categories;
+              }
+            }
+          const newBoardSettings = {...boardSettings, categories: categories};
+          handleSetBoardSettings(newBoardSettings);
         }
     };
 

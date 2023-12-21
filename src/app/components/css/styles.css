@@ -169,15 +169,6 @@ li.menuItemPopup a {
     margin-bottom: 15px;
 }
 
-.util {
-    font-size: 12pt;
-    text-decoration: none;
-    color: black;
-            
-}
-.util:hover {
-    border-bottom: 1px solid black;
-}
 
 /* Edit Mode */
 .utilEditSection {
@@ -260,7 +251,6 @@ li.menuItemPopup a {
   #formUploadConfigFile {
     margin: 30px 10px 30px 10px;
   }
-
 
 /* Footer */
 .grid5 {

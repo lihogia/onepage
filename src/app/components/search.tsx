@@ -2,12 +2,13 @@ import styles from './component.module.css';
 import { SimpleSearch } from "@/app/data/types";
 import { useContext, useState } from 'react';
 import { BoardContext } from './BoardContext';
+import IconComponent from '@/app/components/iconComponent';
 
 import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
 
 export default function UtilSimpleSearch({util, stringIndex = ''}: {util: SimpleSearch, stringIndex: string}) {
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.boardSettings.isEdit;
+    const isEdit = boardContext.isEdit();
 
     const search = util;
     const [utilSimpleSearch, setUtilSimpleSearch] = useState(search);
@@ -18,14 +19,8 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
     }
 
     return (
-        <section>
-            {
-         //   <img src={`${search.url.substring(0, search.url.indexOf('/', 8)+1)}favicon.ico`} width='12' height='12'/> {search.title}
-         //<img src={`${util.url.substring(0, util.url.indexOf('/', 8)+1)}favicon.ico`} width='15' height='15'/>
-        }
-            
-        &nbsp;
-            {search.title}
+        <section>        
+            <section className='searchTitle'><IconComponent size={32} url={util.url}/><span className='utilTitle'>{search.title}</span></section>
                 <form method='get' target='_blank' name={`form_${stringIndex}`} className={styles.formView}>
                     <input type='text' className={styles.input_text} name={search.fieldname} />
                     <button type='submit' className={styles.input_button} onClick={(e) => {

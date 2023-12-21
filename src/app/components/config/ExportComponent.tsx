@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
 import { BoardContext } from '@/app/components/BoardContext';
+import type { Category, OnePageSettings } from '@/app/data/types';
+import { template001 } from '@/app/data/templates';
+import { localStorageExist, loadFromLocalStorage, loadFromDefault } from './LocalStorage';
 
 export default function ExportComponent() {
     const strVersion = process.env.version?.replaceAll('.', '_');
@@ -8,19 +11,26 @@ export default function ExportComponent() {
     const boardContext = useContext(BoardContext);
 
     function closeForm() {
-        const form = document.getElementById('formExportConfigFile');
+        const form:any = document.getElementById('formExportConfigFile');
         form.reset();
-        boardContext.setLoadConfig(false);
+        boardContext.setMode(0);
     }
 
     function exportToJSON() {
-        const item = JSON.parse(localStorage.getItem('onepage'));
-        const categories = item;
+        let opSettings: OnePageSettings;
+        if (!localStorageExist()) {
+            const isOK = confirm('There is no data in local Storage. Do you want to export from default data ?');
+            if (!isOK) return;
+            opSettings = loadFromDefault();    
+        }else {
+            opSettings = loadFromLocalStorage();
+        }
+        const categories: Category[] = opSettings.categories;
         
         let link = document.createElement('a');
         link.download = fileName;
     
-        let blob = new Blob([JSON.stringify(categories)], {type: 'application/json'});
+        let blob = new Blob([JSON.stringify(opSettings)], {type: 'application/json'});
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);

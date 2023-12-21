@@ -1,6 +1,9 @@
 'use client';
 import { useContext } from 'react';
-import { BoardContext } from '@/app/components/BoardContext';
+import { BoardContext, emptyBoardSettings } from '@/app/components/BoardContext';
+import type { BoardSettings, Category } from '@/app/data/types';
+import { saveToLocalStorage } from './LocalStorage';
+
 export default function ImportComponent() {
 
     const boardContext = useContext(BoardContext);
@@ -8,7 +11,7 @@ export default function ImportComponent() {
     function closeForm() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
         uploadForm.reset();
-        boardContext.setLoadConfig(false);
+        boardContext.setMode(0);
     }
 
     function importFromJSON() {
@@ -24,17 +27,21 @@ export default function ImportComponent() {
             //console.log(content);
             let boardConfig;
             try {
-                boardConfig = JSON.parse(JSON.stringify(content));
-                // have to check the content
-                console.log(boardConfig);
-                localStorage.setItem('onepage', boardConfig);
+                boardConfig = JSON.parse(content);
+
+                saveToLocalStorage(boardConfig.categories);
+                console.log('Saved to localStorage successfully.');
+                uploadForm.reset();
+                const bSettings: BoardSettings = emptyBoardSettings;
+                bSettings.categories = boardConfig.categories;
+                boardContext.updateBoardSettings(bSettings);
+                console.log('Loaded from localStorage successfully.');
+        
             }catch (error) {
-                reader.onerror(Error('Not json file'));
+                reader.onerror(error);
+                console.log(error);
             }
         }
-
-        uploadForm.reset();
-        boardContext.setLoadConfig(false);
     }
 
     return (

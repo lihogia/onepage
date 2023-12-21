@@ -1,21 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { template001 } from '@/app/data/templates';
-import styles from './component.module.css';
-import { prototypeBoardContext, createInitBoardContext, BoardContext } from './BoardContext';
+import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
+import About from '@/app/components/about/about';
 import Config from '@/app/components/config/config';
 import CategoryComponent from '@/app/components/category';
-import SubCategoryComponent from './subcategory';
-import CreateNameButton from '@/app/components/edit/CreateNameButton';
-import LeftBar from './nav/LeftBar';
-import TopMenu from './nav/TopMenu';
 import Menu from '@/app/components/nav/Menu';
 import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
 import LargeRectangleAd from '@/app/components/ads/LargeRectangleAd';
 import Footer from '@/app/components/nav/Footer';
-
-
 
 export function loadData() {
     //const data = loadLocalStorage();
@@ -51,20 +44,14 @@ export default function Board() {
    
     const cates = loadData();
 
-    const [boardSettings, setBoardSettings] = useState({
-      categories: cates,
-      isEdit: false,
-      selectedIndex: 0,
-      loadConfig: false
-    });
+    const [boardSettings, setBoardSettings] = useState(emptyBoardSettings);
 
     useEffect(() => { // need to run once after 1st render
       let localCates = loadLocalStorage();
 
       if (localCates.length == 0 ) {
         localCates = template001.categories;
-        //saveLocalStorage(localCates);
-        console.log('No data in local storage, auto load default data. Click Edit > Menu > Save to storage or Import from Config.');
+        console.log('No data in local storage, default data will be loaded. Start to use your own data by Edit & Save to storage, or Import from Config.');
       }
 
       const newBoardSettings = {...boardSettings, categories: localCates};
@@ -85,8 +72,9 @@ export default function Board() {
           
 
           <div className="grid3">
-            {boardSettings.loadConfig && <Config />}
-            {!boardSettings.loadConfig && boardSettings.categories.length > 0 && 
+          {boardSettings.mode === 2 && <About />}
+            {boardSettings.mode === 3 && <Config />}
+            {(boardSettings.mode === 0 || boardSettings.mode === 1) && boardSettings.categories.length > 0 && 
                 <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
                 key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}
           </div>

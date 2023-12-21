@@ -32,6 +32,12 @@ export interface Category {
 
 export interface BoardSettings {
     categories: Category[],
-    isEdit: boolean,
-    selectedIndex: number
+    selectedIndex: number,
+    mode: number,
+    contextMenus: Map<string, boolean>, // true: show, false: hide the context Menu, key is the id of the Context Menu Item List
+}
+
+export interface OnePageSettings {
+    categories: Category[],
+    version: string
 }
