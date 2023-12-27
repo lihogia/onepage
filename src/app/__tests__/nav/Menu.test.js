@@ -11,7 +11,7 @@ describe(Menu, () => {
    
     it('Renders the main menu for Mobile with Categories text', () => {
         const cates = test001.categories;
-        const screen = render(<Menu categories={cates} selectedIndex={0}/>);
+        render(<Menu categories={cates} selectedIndex={0}/>);
         const theText = screen.getByText(/Categories/i);
         expect(theText).toBeInTheDocument();
     });

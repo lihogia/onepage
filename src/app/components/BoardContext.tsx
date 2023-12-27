@@ -1,11 +1,12 @@
 import { createContext } from "react";
-import { Util, Category, BoardSettings } from '@/app/data/types';
+import { Util, Category, BoardSettings, Notification } from '@/app/data/types';
 
 export const emptyBoardSettings = {
   categories: [],
   selectedIndex: 0,
   mode: 0,
   contextMenus: new Map(),
+  notice: null
 };
 
 export const prototypeBoardContext = {
@@ -14,10 +15,12 @@ export const prototypeBoardContext = {
       selectedIndex: 0,
       mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
       contextMenus: new Map(),
+      notice: null,
     }, 
     isEdit: () => { return false },
     setSelectedCategoryIndex: (pCateIndex: number) => {},
     setMode: (mode: number) => {},
+    setNotification: (notice: Notification) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -29,7 +32,7 @@ export const prototypeBoardContext = {
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
     updateBoardSettings: (pBoardSettings: BoardSettings) => {},
-    saveToStorage: () => {},
+    saveToStorage: (mode: number) => {},
     loadFromStorage: () => {},
 };
 
@@ -40,7 +43,16 @@ export function splitToNumber(stringOfIndex: string, separator: string) {
     return arrs;
   }  
 
-export function createInitBoardContext(boardSettings: BoardSettings, handleSetBoardSettings: Function) {
+export function createInitBoardContext(boardSettings: BoardSettings, setBoardSettings: Function) {
+    const handleSetBoardSettingsWithNotice = (pBoardSettings: BoardSettings) => {
+      setBoardSettings(pBoardSettings);
+    }
+
+    const handleSetBoardSettings = (pBoardSettings: BoardSettings) => {
+      const newBoardSettings = {...pBoardSettings, notice: null};
+      setBoardSettings(newBoardSettings);
+    }
+
     const initBoardContext = {
         boardSettings: boardSettings,
         isEdit: () => {
@@ -53,6 +65,10 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
         setMode: (pMode: number) => {
           const newBoardSettings = {...boardSettings, mode: pMode};
           handleSetBoardSettings(newBoardSettings);
+        },
+        setNotification: (notice: Notification) => {
+          const newBoardSettings = {...boardSettings, notice: notice};
+          handleSetBoardSettingsWithNotice(newBoardSettings);
         },
         createCategory: (pName: string) => {
           const newCates = [...boardSettings.categories];
@@ -141,16 +157,19 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
 
         },
         updateContextMenus: (contextMenus: Map<String, boolean>) => {
-
           const newContextMenus = new Map(contextMenus);
-          const newBoardSettings = {...boardSettings, contextMenus: newContextMenus};
+          const newBoardSettings: any = {...boardSettings, contextMenus: newContextMenus};
           handleSetBoardSettings(newBoardSettings);
         },
         updateBoardSettings: (pBoardSettings: BoardSettings) => {
           const newBoardSettings = {...pBoardSettings};
-          handleSetBoardSettings(newBoardSettings);
+          if (pBoardSettings.notice != null) {
+            handleSetBoardSettingsWithNotice(newBoardSettings);
+          }else {
+            handleSetBoardSettings(newBoardSettings);
+          }
         },
-        saveToStorage: () => {
+        saveToStorage: (pMode: number) => {
           const configOnePage = {
             categories: boardSettings.categories,
             version: process.env.version
@@ -160,8 +179,9 @@ export function createInitBoardContext(boardSettings: BoardSettings, handleSetBo
             // Perform localStorage action
             localStorage.setItem('onepage', JSON.stringify(configOnePage));
             console.log('Saved to localStorage.');
+            const newBoardSettings = {...boardSettings, mode: pMode, notice: {type: 'info', message: 'Data has been saved to local storage successfully.'}};
+            handleSetBoardSettingsWithNotice(newBoardSettings);
           }
-
         },
         loadFromStorage: () => {
           let categories = [];

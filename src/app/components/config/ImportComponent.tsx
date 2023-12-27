@@ -16,8 +16,9 @@ export default function ImportComponent() {
 
     function importFromJSON() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
-
-        let file = uploadForm.elements[0].files[0];
+        const fileInput = uploadForm.elements[0];
+        if (fileInput.value === '') return;
+        let file = fileInput.files[0];
         let reader: any = new FileReader();
         reader.readAsText(file);
         
@@ -32,8 +33,12 @@ export default function ImportComponent() {
                 saveToLocalStorage(boardConfig.categories);
                 console.log('Saved to localStorage successfully.');
                 uploadForm.reset();
-                const bSettings: BoardSettings = emptyBoardSettings;
+                const bSettings: any = emptyBoardSettings;
                 bSettings.categories = boardConfig.categories;
+                bSettings.notice = {
+                    type: 'info', 
+                    message: 'Saved & Loaded. Import successfully.'
+                };
                 boardContext.updateBoardSettings(bSettings);
                 console.log('Loaded from localStorage successfully.');
         

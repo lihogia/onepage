@@ -4,6 +4,7 @@ import { template001 } from '@/app/data/templates';
 import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
 import About from '@/app/components/about/about';
 import Config from '@/app/components/config/config';
+import NotificationComponent from '@/app/components/config/NotificationComponent';
 import CategoryComponent from '@/app/components/category';
 import Menu from '@/app/components/nav/Menu';
 import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
@@ -60,19 +61,14 @@ export default function Board() {
 
     const initBoardContext = createInitBoardContext(boardSettings, setBoardSettings); // end of initBoardContext
 
-    function selectACategory(categoryIndex) {
-      setCategoryIndex(categoryIndex);
-    }
-
     return (
       <BoardContext.Provider value={initBoardContext}>
         <div className="container" id="ContainerID">
           <Menu categories={boardSettings.categories} selectedIndex={boardSettings.selectedIndex}/>
           <LeaderboardAd />
-          
-
           <div className="grid3">
-          {boardSettings.mode === 2 && <About />}
+              <NotificationComponent />
+            {boardSettings.mode === 2 && <About />}
             {boardSettings.mode === 3 && <Config />}
             {(boardSettings.mode === 0 || boardSettings.mode === 1) && boardSettings.categories.length > 0 && 
                 <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 

@@ -21,6 +21,20 @@
     padding-left: 10px;
 }
 
+.grid3 {
+    display: flex;
+    flex-direction: column; 
+}
+.subcategories {
+    display: flex;
+    flex-direction: row; 
+}
+
+ul.utilities {
+    display: flex;
+    flex-direction: column; 
+}
+
 /* Menu */
 .grid1 {
     grid-row: 1 / span 3;

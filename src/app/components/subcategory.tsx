@@ -85,7 +85,7 @@ export default function SubCategoryComponent(
             text: 'Save & Continue',
             tooltip: 'Save to Local Storage',
             handle: () => {
-                boardContext.saveToStorage();
+                boardContext.saveToStorage(1);
             },
             stringIndex: stringIndex
         },
@@ -94,8 +94,7 @@ export default function SubCategoryComponent(
             text: 'Save & Back to View',
             tooltip: 'Save & Back to View',
             handle: () => {
-                boardContext.saveToStorage();
-                boardContext.setMode(0);
+                boardContext.saveToStorage(0);
             },
             stringIndex: stringIndex
         },
@@ -112,7 +111,7 @@ export default function SubCategoryComponent(
 
     if (isEdit) {
         return (            
-            <ul>
+            <ul className='utilities'>
                 <li className="subcategory" id={`subcate_${stringIndex}`}>
                     {!changingName && <a href={`#subcate_${stringIndex}`} onClick={() => {
                         const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
@@ -143,7 +142,7 @@ export default function SubCategoryComponent(
         );
     }else {
         return (
-            <ul><span className="subcategory">{subCategory.name}</span>
+            <ul className='utilities'><span className="subcategory">{subCategory.name}</span>
             {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                 return (
                     <li key={`${element.title}_${stringIndex}_${index}`} className='utilLi'>

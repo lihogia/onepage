@@ -56,7 +56,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             text: 'Save & Continue',
             tooltip: 'Save to Local Storage',
             handle: () => {
-                boardContext.saveToStorage();
+                boardContext.saveToStorage(1);
             },
             stringIndex: stringIndex
         },
@@ -65,8 +65,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             text: 'Save & Back to View',
             tooltip: 'Save & Back to View',
             handle: () => {
-                boardContext.saveToStorage();
-                boardContext.setMode(0);
+                boardContext.saveToStorage(0);
             },
             stringIndex: stringIndex
         },

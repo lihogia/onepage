@@ -7,12 +7,12 @@ export default function CategoryComponent(
 ) {
     
     return (
-        <>
+        <div className='subcategories'>
         {category.subcategories.length > 0 && category.subcategories.map((element, subindex) => {
             return (
                 <SubCategoryComponent subcate={element} key={`${element.name}_${subindex}`} stringIndex={`${index}_${subindex}`}/>
             );
         })}
-        </>
+        </div>
     );
 }

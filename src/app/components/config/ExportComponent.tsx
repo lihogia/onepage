@@ -34,7 +34,8 @@ export default function ExportComponent() {
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
-        console.log(`Export successfully ${link.download}.`);
+        boardContext.setNotification({type: 'info', message: `Export successfully ${link.download}.`});
+        //console.log(`Export successfully ${link.download}.`);
     }
 
     return (

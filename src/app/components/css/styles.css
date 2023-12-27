@@ -121,6 +121,25 @@ li.menuItemPopup a {
     border-bottom: 1px solid #5A5755;
     margin-bottom: 1px;
 }
+/* Notifcation Bar */
+.notificationBar-info, .notificationBar-warn, .notificationBar-error {
+    padding: 5px;
+}
+
+.notificationBar-info {
+    background-color: #8fca81;
+    color: black; 
+}
+
+.notificationBar-warn {
+    background-color: #f17718;
+    color: white;
+}
+
+.notificationBar-error {
+    background-color: #e60043;
+    color: white;
+}
 
 /* Content */
 .grid3 {
