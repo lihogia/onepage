@@ -6,8 +6,8 @@ import { BoardContext } from '@/app/components/BoardContext';
 import CategoryOnMenu from '@/app/components/categoryOnMenu';
 
 export default function Menu(
-    {categories, handleSelectACategory, selectedIndex}: 
-    {categories: Category[], handleSelectACategory: Function, selectedIndex: number}) {
+    {categories, selectedIndex}: 
+    {categories: Category[], selectedIndex: number}) {
 
     const boardContext = useContext(BoardContext);
     const isEdit = boardContext.isEdit();
@@ -27,7 +27,11 @@ export default function Menu(
             menuElement.className = isOpen ? 'grid1m_sub' : 'grid1m_sub_none';
         }
     }
-    
+
+    const switchMode = (mode: number) => {
+        boardContext.setMode(mode);
+    }
+
     return (
     <>
     <div className={'grid1'}>
@@ -51,14 +55,14 @@ export default function Menu(
             }
         </ul>
         <ul className="menuBottom">
-            {!isAbout && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(2) }}>About</a></li>}
-            {isAbout && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
+            {!isAbout && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(2) }}>About</a></li>}
+            {isAbout && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to Categories</a></li>}
 
-            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(1) }}>Edit</a></li>}
-            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to View</a></li>}
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(1) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to View</a></li>}
 
-            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
-            {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
+            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(3) }}>Config</a></li>}
+            {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to Categories</a></li>}
 
             <li className="menuItemBottom"><a href="https://www.buymeacoffee.com/lilogia" target="_blank">Buy me a coffee</a></li>
             {/*!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>*/}
@@ -98,14 +102,14 @@ export default function Menu(
 
         </ul>
         <ul className="menuBottom">
-            {!isAbout && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(2) }}>About</a></li>}
-            {isAbout && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to Categories</a></li>}
+            {!isAbout && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(2) }}>About</a></li>}
+            {isAbout && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to Categories</a></li>}
 
-            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(1) }}>Edit</a></li>}
-            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { boardContext.setMode(0) }}>Back to View</a></li>}
+            {!isEdit && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(1) }}>Edit</a></li>}
+            {isEdit && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to View</a></li>}
 
-            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(3) }}>Config</a></li>}
-            {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => {boardContext.setMode(0) }}>Back to Categories</a></li>}
+            {!isConfig && <li className="menuItemBottom"><a href="#" onClick={() => { switchMode(3) }}>Config</a></li>}
+            {isConfig && <li className="menuItemBottom"><a href="#" className='menuItemBottomSelected' onClick={() => { switchMode(0) }}>Back to Categories</a></li>}
 
             <li className="menuItemBottom"><a href="https://www.buymeacoffee.com/lilogia" target="_blank">Buy me a coffee</a></li>
             {/*!isDonate && <li className="menuItemBottom"><a href="#" onClick={() => { boardContext.setMode(4) }}>Donate</a></li>*/}

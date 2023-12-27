@@ -67,7 +67,7 @@ export default function Board() {
     return (
       <BoardContext.Provider value={initBoardContext}>
         <div className="container" id="ContainerID">
-          <Menu categories={boardSettings.categories} handleSelectACategory={selectACategory} selectedIndex={boardSettings.selectedIndex}/>
+          <Menu categories={boardSettings.categories} selectedIndex={boardSettings.selectedIndex}/>
           <LeaderboardAd />
           
 
