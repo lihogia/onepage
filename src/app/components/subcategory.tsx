@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import styles from './component.module.css';
-import type { SubCategory, UtilLink, Util } from '@/app/data/types';
+import type { SubCategory, UtilLink, Util, ConfirmModal } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
@@ -33,10 +33,15 @@ export default function SubCategoryComponent(
     }
 
     function deleteSubCategory() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteSubCategory(stringIndex);
-        }
+        const confirmModal: ConfirmModal = {
+            title: 'Confirm to Delete',
+            description: `Are you sure to remove this Sub-Category "${subcate.name}" ? `,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteSubCategory(stringIndex);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;

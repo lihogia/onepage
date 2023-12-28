@@ -141,6 +141,40 @@ li.menuItemPopup a {
     color: white;
 }
 
+/* Confirm Modal */
+#confirmModal {
+    display: inline-block;
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #63b7d3;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#confirmModal h3 {
+    font-size: larger;
+    margin-bottom: 20px;
+}
+
+#confirmModal ul{
+    list-style-type: none;
+}
+#confirmModal li:first-child{
+    margin-bottom: 10px;
+}
+
+#confirmModal li:nth-child(even){
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
 /* Content */
 .grid3 {
     display: grid;

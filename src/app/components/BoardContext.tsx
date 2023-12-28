@@ -1,12 +1,13 @@
 import { createContext } from "react";
-import { Util, Category, BoardSettings, Notification } from '@/app/data/types';
+import { Util, Category, BoardSettings, Notification, ConfirmModal } from '@/app/data/types';
 
 export const emptyBoardSettings = {
   categories: [],
   selectedIndex: 0,
   mode: 0,
   contextMenus: new Map(),
-  notice: null
+  notice: null,
+  confirmModal: null,
 };
 
 export const prototypeBoardContext = {
@@ -16,11 +17,13 @@ export const prototypeBoardContext = {
       mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
       contextMenus: new Map(),
       notice: null,
+      confirmModal: null,
     }, 
     isEdit: () => { return false },
     setSelectedCategoryIndex: (pCateIndex: number) => {},
     setMode: (mode: number) => {},
     setNotification: (notice: Notification) => {},
+    setConfirmModal: (confirmModal: ConfirmModal) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
@@ -69,6 +72,10 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
         setNotification: (notice: Notification) => {
           const newBoardSettings = {...boardSettings, notice: notice};
           handleSetBoardSettingsWithNotice(newBoardSettings);
+        },
+        setConfirmModal: (confirmModal: ConfirmModal) => {
+          const newBoardSettings = {...boardSettings, confirmModal: confirmModal};
+          handleSetBoardSettings(newBoardSettings);
         },
         createCategory: (pName: string) => {
           const newCates = [...boardSettings.categories];

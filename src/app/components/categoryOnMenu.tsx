@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import type { Category } from '@/app/data/types';
+import type { Category, ConfirmModal } from '@/app/data/types';
 import { BoardContext } from './BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateNameButton from '@/app/components/edit/CreateNameButton';
@@ -20,10 +20,15 @@ export default function CategoryOnMenu(
     }
 
     function deleteCategory() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteCategory(index);
-        }
+        const confirmModal: ConfirmModal = {
+            title: 'Confirm to Delete',
+            description: `Are you sure to remove this Category "${category.name}" ? `,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteCategory(index);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
     }
 
     const stringIndex = `${index}`;

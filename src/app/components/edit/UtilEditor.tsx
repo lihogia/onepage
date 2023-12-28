@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import UtilLinkComponent from '../link';
 import UtilSimpleSearch from '../search';
-import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
+import { Util, UtilLink, SimpleSearch, ConfirmModal } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
@@ -17,10 +17,15 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     }
 
     function deleteUtil() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteUtil(stringIndex);
-        }
+        const confirmModal: ConfirmModal = {
+            title: 'Confirm to Delete',
+            description: `Are you sure to remove this Utility "${util.title}" ? `,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteUtil(stringIndex);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
     }
 
     const menuContextID = `menuCxtUtil_${stringIndex}`;

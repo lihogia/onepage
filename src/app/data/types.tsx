@@ -35,6 +35,13 @@ export interface Notification {
     message: string
 }
 
+export interface ConfirmModal {
+    title: string,
+    description: string,
+    status: number, // 0: popup, 1: yes, 2: no,
+    handleClickOnYes: Function,
+}
+
 export interface BoardSettings {
     categories: Category[],
     selectedIndex: number,
