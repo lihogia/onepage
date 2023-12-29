@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import { useContext } from 'react';
+import { BoardContext } from '@/app/components/BoardContext';
 import type { MenuContextItem } from '@/app/data/menuContext';
 import { SEPARATOR } from '@/app/data/menuContext';
 
-
+/*
 export function showHideContextMenu(id: string, isShow: boolean) {
     const liElement = document.getElementById(id);
     if (liElement != null) {
@@ -12,7 +14,7 @@ export function showHideContextMenu(id: string, isShow: boolean) {
             liElement.className = 'popupLi';
         }
     }
-}
+}*/
 
 export function showHideOneAndCloseAllContextMenus(allContextMenus: Map<string, boolean>, id: string) {
     const updateContextMenus = new Map(allContextMenus);
@@ -21,17 +23,16 @@ export function showHideOneAndCloseAllContextMenus(allContextMenus: Map<string, 
         if (key === id) {
             const isShow = !value;
             updateContextMenus.set(key, isShow);
-            showHideContextMenu(key, isShow);
+            //showHideContextMenu(key, isShow);
         }else {
             updateContextMenus.set(key, false);
-            showHideContextMenu(key, false);
+            //showHideContextMenu(key, false);
         }
     });
     if (!updateContextMenus.has(id)) {
         updateContextMenus.set(id, true);
-        showHideContextMenu(id, true);
+        //showHideContextMenu(id, true);
     }
-
     return updateContextMenus;
 }
 
@@ -40,6 +41,8 @@ export function ContextMenu(
     {menuContextItems: MenuContextItem[], menuContextID: string, anchorId: string}
 ) {
 
+    const boardContext = useContext(BoardContext);
+    
     return (
         <ul className="popup">
             {menuContextItems.length > 0 && menuContextItems.map((element, index) => {
@@ -52,7 +55,9 @@ export function ContextMenu(
                         <li className="menuItemPopup" key={`${menuContextID}_${index}`}>
                             <Image src={element.iconURL} width={15} height={15} alt={element.tooltip} title={element.tooltip}/>&nbsp;
                             <a href={`#${anchorId}`} onClick={(e) => {
-                                showHideContextMenu(menuContextID, false);
+                                //showHideContextMenu(menuContextID, false);
+                                const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+                                boardContext.updateContextMenus(contextMenusUpdated);
                                 element.handle();
                             }}>{element.text}</a>
                         </li>

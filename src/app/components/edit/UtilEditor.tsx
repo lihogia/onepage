@@ -84,14 +84,22 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             stringIndex: stringIndex
         },
 
-
     ];
 
+    const contextMenus = boardContext.boardSettings.contextMenus;
+    let isShowContextMenu: boolean = false;
+
+    const value = contextMenus.get(menuContextID);
+    if (value === undefined) {
+        isShowContextMenu = false;
+    }else {
+        isShowContextMenu = value;
+    }
 
     return (
     <>
         {!changingUtil && <a className="util" href={`#util_${stringIndex}`} onClick={() => {
-            const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+            const contextMenusUpdated = showHideOneAndCloseAllContextMenus(contextMenus, menuContextID);
             boardContext.updateContextMenus(contextMenusUpdated);
 
             }}>{util.title}</a>
@@ -106,9 +114,10 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
                 setChangingUtil(false);
             }} />
         </>}
-        <section className='popupLi' id={menuContextID} >
+
+        {isShowContextMenu && <section className='popupLiShow' id={menuContextID} >
             <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`util_${stringIndex}`}/>
-        </section>
+        </section>}
     </>
     );
 }

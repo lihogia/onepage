@@ -25,7 +25,7 @@ export default function ExportComponent() {
         }else {
             opSettings = loadFromLocalStorage();
         }
-        const categories: Category[] = opSettings.categories;
+        //const categories: Category[] = opSettings.categories;
         
         let link = document.createElement('a');
         link.download = fileName;

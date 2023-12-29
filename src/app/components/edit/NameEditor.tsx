@@ -2,7 +2,7 @@ import styles from './component.module.css';
 import { useState } from 'react';
 import Image from 'next/image';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
-import { ContextMenu, showHideContextMenu} from '@/app/components/edit/ContextMenu';
+import { ContextMenu } from '@/app/components/edit/ContextMenu';
 
 export default function NameEditor(
     {stringIndex, pName, handleUpdateName, closeHandle}: 

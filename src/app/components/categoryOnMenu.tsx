@@ -15,26 +15,9 @@ export default function CategoryOnMenu(
     const boardContext = useContext(BoardContext);
     const isEdit = boardContext.isEdit();
 
-    function updateCategoryName(pName: string) {
-        boardContext.updateCategoryName(pName, index);
-    }
-
-    function deleteCategory() {
-        const confirmModal: ConfirmModal = {
-            title: 'Confirm to Delete',
-            description: `Are you sure to remove this Category "${category.name}" ? `,
-            status: 0,
-            handleClickOnYes: () => {
-                boardContext.deleteCategory(index);
-            }
-        };
-        boardContext.setConfirmModal(confirmModal);
-    }
-
     const stringIndex = `${index}`;
     const [changingName, setChangingName] = useState(false);
-    const menuContextID = `menuCxtCate_${index}`;
-    const menuContextID_m = `${menuContextID}_m`;
+    const menuContextID = isMobile ? `menuCxtCate_${index}_m` : `menuCxtCate_${index}`;
     const menuContextItems1: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
@@ -112,21 +95,47 @@ export default function CategoryOnMenu(
         menuContextItems = [...menuContextItems1,...menuContextItems2,...menuContextItems3];
     }
 
+    const contextMenus = boardContext.boardSettings.contextMenus;
+    let isShowContextMenu: boolean = false;
+    if (isEdit) {
+        const value = contextMenus.get(menuContextID);
+        if (value === undefined) {
+            isShowContextMenu = false;
+        }else {
+            isShowContextMenu = value;
+        }
+    }
+
+    function updateCategoryName(pName: string) {
+        boardContext.updateCategoryName(pName, index);
+    }
+
+    function deleteCategory() {
+        const confirmModal: ConfirmModal = {
+            title: 'Confirm to Delete',
+            description: `Are you sure to remove this Category "${category.name}" ? `,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteCategory(index);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
+    }
+
+    function showHideContextMenu() {
+        const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+        boardContext.updateContextMenus(contextMenusUpdated);
+    }
+
     if (isEdit) {
         return (
             <li className='menuItemSelected' id={`#cate_${stringIndex}`}>
-            {!changingName && <a href="#" className={isMobile ? 'menuItemSelected' : ''} onClick={
-                    () => {
-                        const currentMenuContextID: string = isMobile ? menuContextID_m : menuContextID;
-                        const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, currentMenuContextID);
-                        boardContext.updateContextMenus(contextMenusUpdated);
-                    }
-                }>{category.name}</a>}
+            {!changingName && <a href="#" className={isMobile ? 'menuItemSelected' : ''} onClick={showHideContextMenu}>{category.name}</a>}
             {changingName && <NameEditor stringIndex={stringIndex} pName={category.name} handleUpdateName={updateCategoryName} closeHandle={() => {
                     setChangingName(false);
                 }}/>}            
-            {isEdit &&  <div className='popupLi' id={isMobile ? menuContextID_m : menuContextID} key={`menuCtxLi_${index}_${category.name}`}>
-                    <ContextMenu menuContextItems={menuContextItems} menuContextID={isMobile ? menuContextID_m : menuContextID} anchorId={`#cate_${stringIndex}`}/>
+            {isShowContextMenu &&  <div className='popupLiShow' id={menuContextID} key={`menuCtxLi_${index}_${category.name}`}>
+                    <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`#cate_${stringIndex}`}/>
                 </div>}
             </li>
         );

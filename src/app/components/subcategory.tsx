@@ -114,6 +114,17 @@ export default function SubCategoryComponent(
         },
     ];
 
+    const contextMenus = boardContext.boardSettings.contextMenus;
+    let isShowContextMenu: boolean = false;
+    if (isEdit) {
+        const value = contextMenus.get(menuContextID);
+        if (value === undefined) {
+            isShowContextMenu = false;
+        }else {
+            isShowContextMenu = value;
+        }
+    }
+
     if (isEdit) {
         return (            
             <ul className='utilities'>
@@ -128,9 +139,9 @@ export default function SubCategoryComponent(
                         setChangingName(false);
                     }}/>}
 
-                    <div className='popupLi' id={menuContextID} >
+                    {isShowContextMenu && <div className='popupLiShow' id={menuContextID} >
                         <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`#subcate_${stringIndex}`}/>
-                    </div>
+                    </div>}
                 </li>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                     return (
