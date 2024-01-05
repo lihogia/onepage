@@ -48,7 +48,8 @@ export interface BoardSettings {
     mode: number, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
     contextMenus: Map<string, boolean>, // true: show, false: hide the context Menu, key is the id of the Context Menu Item List
     notice: Notification,
-    confirmModal: ConfirmModal
+    confirmModal: ConfirmModal,
+    locale: string, // en, vi, zh-CN, zh-TW
 }
 
 export interface OnePageSettings {

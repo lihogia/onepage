@@ -19,6 +19,7 @@ export const emptyBoardSettings: BoardSettings = {
   contextMenus: new Map<string, boolean>(),
   notice: emptyNotification,
   confirmModal: emptyConfirmModal,
+  locale: 'en'
 };
 
 export const prototypeBoardContext = {
@@ -40,7 +41,8 @@ export const prototypeBoardContext = {
     updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
     updateBoardSettings: (pBoardSettings: BoardSettings) => {},
     saveToStorage: (mode: number) => {},
-    loadFromStorage: () => {},
+//    loadFromStorage: () => {},
+    setLocale: (locale: string) => {},
 };
 
 export function splitToNumber(stringOfIndex: string, separator: string) {
@@ -51,15 +53,6 @@ export function splitToNumber(stringOfIndex: string, separator: string) {
   }  
 
 export function createInitBoardContext(boardSettings: BoardSettings, setBoardSettings: Function) {
-
-    const handleSetBoardSettingsWithNotice = (pBoardSettings: BoardSettings) => {
-      setBoardSettings(pBoardSettings);
-    }
-
-    const handleSetBoardSettings = (pBoardSettings: BoardSettings) => {
-      const newBoardSettings = {...pBoardSettings, notice: null};
-      setBoardSettings(newBoardSettings);
-    }
 
     const updateBoardSettings = (pBoardSettings: BoardSettings) => {
       const newBoardSettings = {...pBoardSettings};
@@ -228,6 +221,11 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           const newBoardSettings = {...boardSettings, categories: categories};
           handleSetBoardSettings(newBoardSettings);
         }*/
+        setLocale: (locale: string) => {
+          const newBoardSettings = {...boardSettings, locale: locale};
+          updateAndClearSupport(newBoardSettings);
+
+        },
     };
 
     return initBoardContext;

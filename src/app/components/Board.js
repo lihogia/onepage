@@ -2,15 +2,15 @@
 import { useState, useEffect } from 'react';
 import { template001 } from '@/app/data/templates';
 import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
-import About from '@/app/components/about/about';
-import Config from '@/app/components/config/config';
-import ConfirmModalComponent from '@/app/components/config/ConfirmModal';
-import NotificationComponent from '@/app/components/config/NotificationComponent';
-import CategoryComponent from '@/app/components/category';
-import Menu from '@/app/components/nav/Menu';
-import LeaderboardAd from '@/app/components/ads/LeaderBoardAd';
-import LargeRectangleAd from '@/app/components/ads/LargeRectangleAd';
-import Footer from '@/app/components/nav/Footer';
+import About from './about/about';
+import Config from './config/config';
+import ConfirmModalComponent from './config/ConfirmModal';
+import NotificationComponent from './config/NotificationComponent';
+import CategoryComponent from './category';
+import Menu from './nav/Menu';
+import LeaderboardAd from './ads/LeaderBoardAd';
+import LargeRectangleAd from './ads/LargeRectangleAd';
+import Footer from './nav/Footer';
 
 export function loadData() {
     //const data = loadLocalStorage();
@@ -56,7 +56,7 @@ export default function Board() {
         console.log('No data in local storage, default data will be loaded. Start to use your own data by Edit & Save to storage, or Import from Config.');
       }
 
-      const newBoardSettings = {...boardSettings, categories: localCates};
+      const newBoardSettings = {...boardSettings, categories: localCates, locale: 'vi'};
       setBoardSettings(newBoardSettings);
     }, []);
 

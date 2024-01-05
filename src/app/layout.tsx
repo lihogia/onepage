@@ -7,7 +7,7 @@ import '@/app/components/css/styles_mobile.css';
 import '@/app/components/css/styles_tablet.css';
 import '@/app/components/css/styles_desktop.css';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: `${process.env.productname}`,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
   children: React.ReactNode
 }) {
