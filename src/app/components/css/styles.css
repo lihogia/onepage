@@ -244,8 +244,15 @@ li.menuItemPopup a {
     height: 30px;
     margin: 3px;
     margin-right: 8px;
-    padding: 5px;
     flex-grow: 1;
+}
+
+.inputText, .inputTextShort {
+    padding: 5px;
+}
+
+.inputTextLong {
+    padding: 1%;
 }
 
 .inputText:focus, .inputTextLong:focus, .inputTextShort:focus {
@@ -293,11 +300,11 @@ li.menuItemPopup a {
   /* Config */
   .configSection {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
   }
-  #formExportConfigFile {
+  #formExportConfigFile, #formLocaleConfigForm {
     margin: 30px 10px 30px 10px;
   }
 

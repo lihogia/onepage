@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ComponentLocaleContainer from "@/app/components/ComponentLocaleContainer";
 import { BoardContext } from '@/app/components/BoardContext';
 

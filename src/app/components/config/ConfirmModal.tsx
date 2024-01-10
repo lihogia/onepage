@@ -1,11 +1,15 @@
 import { useContext } from 'react';
 import { ConfirmModal } from "@/app/data/types";
-
+import { useIntl } from 'react-intl';
 import { BoardContext } from '@/app/components/BoardContext';
 
 export default function ConfirmModalComponent() {
 
     const boardContext = useContext(BoardContext);
+
+    const intl = useIntl();
+    const butYes = intl.formatMessage({id: "edit.modal-yes"});
+    const butNo = intl.formatMessage({id: "edit.modal-no"});
 
     const modalComp: any = boardContext.boardSettings.confirmModal;
 
@@ -33,8 +37,8 @@ export default function ConfirmModalComponent() {
                 <h3>{modalComp.title}</h3>
                 <ul>
                     <li><span>{modalComp.description}</span></li>
-                    <li><input type='button' name='butYes' value='Yes' className='inputButtonBox' onClick={handleChooseYes}/>
-                    <input type='button' name='butCancel' value='No' className='inputButtonBox' onClick={handleChooseNo}/></li>
+                    <li><input type='button' name='butYes' value={butYes} className='inputButtonBox' onClick={handleChooseYes}/>
+                    <input type='button' name='butCancel' value={butNo} className='inputButtonBox' onClick={handleChooseNo}/></li>
                 </ul>
             </div>
     

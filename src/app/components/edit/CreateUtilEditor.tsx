@@ -5,19 +5,19 @@ import { Util, UtilLink, SimpleSearch, getUtilTypeName } from '@/app/data/types'
 
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from '@/app/components/edit/UtilSimpleSearchEditor';
-import { BoardContext } from '../BoardContext';
+import { useIntl } from 'react-intl';
 
-const DEFAULT_LINK = {
+let DEFAULT_LINK = {
     title: 'New Title',
     url: 'https://www.new-link.com'
 };
 
-const DEFAULT_SIMPLE_SEARCH = {
+let DEFAULT_SIMPLE_SEARCH = {
     ...DEFAULT_LINK,
     fieldname: 'q'
 };
 
-const DEFAULT_SIMPLE_SEARCH_REGEXP = {
+let DEFAULT_SIMPLE_SEARCH_REGEXP = {
     ...DEFAULT_LINK,
     url: `${DEFAULT_LINK.url}/e.target.value`,
     fieldname: 'regexp',
@@ -28,7 +28,18 @@ export default function CreateUtilEditor(
     {stringIndex, handleCreateUtil, handleClose}: 
     {stringIndex: string, handleCreateUtil: Function, handleClose: Function}) {
 
+    const intl = useIntl();
+    const formTitle = intl.formatMessage({id: 'edit.form-sel-title'});
+    const formFieldLink = intl.formatMessage({id: 'edit.form-sel-link'});
+    const formFieldSSearch = intl.formatMessage({id: 'edit.form-sel-ss'});
+    const formFieldSRexp = intl.formatMessage({id: 'edit.form-sel-ss-exp'});
+    const newTitle = intl.formatMessage({id: 'edit.form-new-title'});
+    DEFAULT_LINK.title = newTitle;
+    DEFAULT_SIMPLE_SEARCH.title = newTitle;
+    DEFAULT_SIMPLE_SEARCH_REGEXP.title = newTitle;
+
     const [editorState, setEditorState] = useState({util: DEFAULT_LINK, selected: 'link'});
+    
     
     function switchUtilType(pType: string) {
         
@@ -50,15 +61,15 @@ export default function CreateUtilEditor(
     return (
     <li>
       
-            <label>Select the type of Util:</label><br/>
+            <label>{formTitle}:</label><br/>
             <select name='selUtilType' defaultValue={editorState.selected} className={`${styles.input_text} ${styles.long}`} onChange={
                 (e) => {
                     switchUtilType(e.target.value);
                 }
                 }>
-                <option value='link'>Link</option>
-                <option value='ssearch'>Simple Search</option>
-                <option value='ssearchregexp'>Simple Search with RegExp</option>
+                <option value='link'>{formFieldLink}</option>
+                <option value='ssearch'>{formFieldSSearch}</option>
+                <option value='ssearchregexp'>{formFieldSRexp}</option>
             </select>
 
             {editorState.selected === 'link' && <UtilLinkEditor stringIndex={stringIndex} pLink={editorState.util} handleUpdate={

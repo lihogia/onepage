@@ -7,10 +7,24 @@ import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/components/edit/ContextMenu';
+import { useIntl } from 'react-intl';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
     const [changingUtil, setChangingUtil] = useState(false);
     const boardContext = useContext(BoardContext);
+
+    const intl = useIntl();
+    const ctxMnuEditUtil = intl.formatMessage({id: 'edit.edit-util'});
+    const ctxMnuDelUtil = intl.formatMessage({id: 'edit.del-util'});
+
+    const ctxMnuSaveContinue = intl.formatMessage({id: 'edit.save-continue'});
+    const ctxMnuSaveToLocal = intl.formatMessage({id: 'edit.save-to-local'});
+    const ctxMnuSaveBack = intl.formatMessage({id: 'edit.save-back-to-view'});
+    const ctxMnuBack = intl.formatMessage({id: 'edit.back-to-view'});
+
+    const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
+    const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
+
 
     function updateUtil(ulink: UtilLink) {
         boardContext.updateUtil(ulink, stringIndex);
@@ -18,8 +32,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     function deleteUtil() {
         const confirmModal: ConfirmModal = {
-            title: 'Confirm to Delete',
-            description: `Are you sure to remove this Utility "${util.title}" ? `,
+            title: modalDelTitle,
+            description: modalDelDesc,
             status: 0,
             handleClickOnYes: () => {
                 boardContext.deleteUtil(stringIndex);
@@ -33,8 +47,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     const menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
-            text: 'Edit Util',
-            tooltip: 'Edit Util',
+            text: ctxMnuEditUtil,
+            tooltip: ctxMnuEditUtil,
             handle: () => {
                 setChangingUtil(true);
             },
@@ -42,8 +56,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         },
         {
             iconURL: '/icons/deleteico.png',
-            text: 'Delete Util',
-            tooltip: 'Delete Util',
+            text: ctxMnuDelUtil,
+            tooltip: ctxMnuDelUtil,
             handle: deleteUtil,
             stringIndex: stringIndex
         },
@@ -58,8 +72,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         SEPARATOR,
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Continue',
-            tooltip: 'Save to Local Storage',
+            text: ctxMnuSaveContinue,
+            tooltip: ctxMnuSaveToLocal,
             handle: () => {
                 boardContext.saveToStorage(1);
             },
@@ -67,8 +81,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         },
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Back to View',
-            tooltip: 'Save & Back to View',
+            text: ctxMnuSaveBack,
+            tooltip: ctxMnuSaveBack,
             handle: () => {
                 boardContext.saveToStorage(0);
             },
@@ -76,8 +90,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         },
         {
             iconURL: '/icons/clickico.png',
-            text: 'Back to View',
-            tooltip: 'Back to View',
+            text: ctxMnuBack,
+            tooltip: ctxMnuBack,
             handle: () => {
                 boardContext.setMode(0);
             },

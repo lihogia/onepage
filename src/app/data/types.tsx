@@ -56,3 +56,8 @@ export interface OnePageSettings {
     categories: Category[],
     version: string
 }
+
+export interface I18n {
+    locale: string,
+    language: string
+}

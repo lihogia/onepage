@@ -1,3 +1,61 @@
 {
-    "footer.message": "© 2023. All right reserved. Version: {version}. Contact @<link>lilogia</link>."   
+    "footer.message": "© 2023. All right reserved. Version: {version}. Contact @<link>lilogia</link>.",
+
+    "menu.about": "About",
+    "menu.edit": "Edit",
+    "menu.config": "Config",
+    "menu.buymeacoffee": "Buy me a coffee",
+    "menu.backtoview": "Back to View",
+    "menu.backtocategories": "Back to Categories",
+
+    "config.cancel": "Cancel",
+    "config.export": "Export",
+    "config.export-title": "Export from local storage",
+    "config.export-label": "Filename to be saved",
+    "config.export-confirm": "There is no data in local Storage. Do you want to export from default data ?",
+    "config.export-notification": "Export successfully {link}.",
+
+    "config.import": "Import",
+    "config.import-title": "Import to local storage",
+    "config.import-label": "Upload Json config file",
+    "config.import-notification": "Saved & Loaded. Import successfully.",
+
+    "config.set": "Set",
+    "config.set-lang-title": "Set the language to see",
+    "config.language": "Language",
+
+    "edit.add-category": "Add Category",
+    "edit.new-category": "New Category",
+    "edit.edit-category": "Edit Category",
+    "edit.del-category": "Delete Category",
+    "edit.del-confirm-title": "Confirm to Delete",
+    "edit.del-cate-confirm-desc": "Are you sure to remove this Category \"{category}\" ?",
+    "edit.confirm-yes": "Yes",
+    "edit.confirm-no": "No",    
+    "edit.add-sub-category": "Add Sub Category",
+    "edit.new-sub-cate": "New Sub-Category",
+    "edit.save-continue": "Save & Continue",
+    "edit.save-to-local": "Save to Local Storage",
+    "edit.save-back-to-view": "Save & Back to View",
+    "edit.back-to-view": "Back to View",
+
+    "edit.edit-sub-category": "Edit Sub Category",
+    "edit.del-sub-category": "Delete Sub Category",
+    "edit.add-link": "Add Utility",
+    "edit.del-subcate-confirm-desc": "Are you sure to remove this Sub-Category \"{subcategory}\" ?",
+
+    "edit.edit-util": "Edit Utility",
+    "edit.del-util": "Delete Utility",
+    "edit.del-util-confirm-desc": "Are you sure to remove this Utility \"{util}\" ?",
+
+    "edit.modal-yes": "Yes",
+    "edit.modal-no": "No",
+
+    "edit.form-sel-title": "Select the type of Utility",
+    "edit.form-sel-link": "Link",
+    "edit.form-sel-ss": "Simple Search",
+    "edit.form-sel-ss-exp": "Simple Search with RegExp",
+    "edit.form-new-title": "New Title"
+
+
 }
