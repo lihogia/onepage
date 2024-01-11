@@ -1,3 +1,63 @@
 {
-    "footer.message": "© 2023. 版权所有. 版本: {version}. 接触 @<link>lilogia</link>."
+    "footer.message": "© 2023。保留所有权利。版本: {version}。接触 @<link>lilogia</link>.",
+
+    "menu.about": "关于",
+    "menu.edit": "编辑",
+    "menu.config": "配置",
+    "menu.buymeacoffee": "给我买杯咖啡",
+    "menu.backtoview": "返回查看",
+    "menu.backtocategories": "返回类别",
+
+    "config.cancel": "取消",
+    "config.export": "导出",
+    "config.export-title": "从本地存储导出",
+    "config.export-label": "要保存的文件名",
+    "config.export-confirm": "本地存储中没有数据。 您想导出默认数据吗？",
+    "config.export-notification": "导出成功 {link}。",
+
+    "config.import": "导入",
+    "config.import-title": "导入到本地存储",
+    "config.import-label": "上传 Json 配置文件",
+    "config.import-notification": "已保存并加载。 导入成功。",
+
+    "config.set": "设置",
+    "config.set-lang-title": "设置查看语言",
+    "config.language": "语言",
+
+    "edit.add-category": "添加类别",
+    "edit.new-category": "新类别",
+    "edit.edit-category": "编辑类别",
+    "edit.del-category": "删除类别",
+    "edit.del-confirm-title": "确认删除",
+    "edit.del-cate-confirm-desc": "您确定删除该类别？ \"{category}\" 吗?",
+    "edit.confirm-yes": "是",
+    "edit.confirm-no": "否",    
+    "edit.add-sub-category": "添加子类别",
+    "edit.new-sub-cate": "新子类别",
+    "edit.save-continue": "保存并继续",
+    "edit.save-to-local": "保存到本地存储",
+    "edit.save-back-to-view": "保存并返回查看",
+    "edit.back-to-view": "返回查看",
+
+    "edit.edit-sub-category": "编辑子类别",
+    "edit.del-sub-category": "删除子类别",
+    "edit.add-link": "添加实用程序",
+    "edit.del-subcate-confirm-desc": "您确定删除该子类别 \"{subcategory}\" 吗?",
+
+    "edit.edit-util": "编辑实用程序",
+    "edit.del-util": "删除实用程序",
+    "edit.del-util-confirm-desc": "您确定要删除此实用程序 \"{util}\" 吗?",
+
+    "edit.modal-yes": "是",
+    "edit.modal-no": "否",
+
+    "edit.form-sel-title": "选择实用程序类型",
+    "edit.form-sel-link": "关联",
+    "edit.form-sel-ss": "简单搜索",
+    "edit.form-sel-ss-exp": "使用 RegExp 进行简单搜索",
+    "edit.form-new-title": "新标题",
+
+    "notification.data-save-success": "数据已成功保存到本地存储。"
+
+
 }

@@ -55,7 +55,9 @@
     "edit.form-sel-link": "Liên kết",
     "edit.form-sel-ss": "Tìm kiếm đơn giản",
     "edit.form-sel-ss-exp": "Tìm kiếm với RegExp",
-    "edit.form-new-title": "Đề mục mới"
+    "edit.form-new-title": "Đề mục mới",
+
+    "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ cục bộ thành công."
 
 
 }

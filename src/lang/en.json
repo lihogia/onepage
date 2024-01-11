@@ -55,7 +55,8 @@
     "edit.form-sel-link": "Link",
     "edit.form-sel-ss": "Simple Search",
     "edit.form-sel-ss-exp": "Simple Search with RegExp",
-    "edit.form-new-title": "New Title"
+    "edit.form-new-title": "New Title",
 
+    "notification.data-save-success": "Data has been saved to local storage successfully."
 
 }

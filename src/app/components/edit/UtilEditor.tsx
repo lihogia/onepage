@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import UtilLinkComponent from '../link';
 import UtilSimpleSearch from '../search';
-import { Util, UtilLink, SimpleSearch, ConfirmModal } from '@/app/data/types';
+import { Util, UtilLink, SimpleSearch, ConfirmModal, Notification } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
@@ -24,6 +24,12 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
+
+    const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
+    const notice: Notification = {
+        type: 'info',
+        message: noticeSaveSuccess
+    };
 
 
     function updateUtil(ulink: UtilLink) {
@@ -75,7 +81,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             text: ctxMnuSaveContinue,
             tooltip: ctxMnuSaveToLocal,
             handle: () => {
-                boardContext.saveToStorage(1);
+                boardContext.saveToStorage(1, notice);
             },
             stringIndex: stringIndex
         },
@@ -84,7 +90,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             text: ctxMnuSaveBack,
             tooltip: ctxMnuSaveBack,
             handle: () => {
-                boardContext.saveToStorage(0);
+                boardContext.saveToStorage(0, notice);
             },
             stringIndex: stringIndex
         },

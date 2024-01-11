@@ -9,6 +9,9 @@
         border-bottom: 2px solid #009bd6;
     }
 
+    .grid3 {
+        border: 0px solid red
+    }
     .grid2 {
         height: 100px;
     }    
@@ -230,8 +233,16 @@
     border: 1px solid #009bd6;
 }
 
-}
+/* config */
+.configSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 
+  #formExportConfigFile, #formLocaleConfigForm, #formUploadConfigFile {
+    margin: 10px;
+  }
 
-        
-    
+}    

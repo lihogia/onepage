@@ -297,21 +297,6 @@ li.menuItemPopup a {
     background-color: #009bd6;
   }
 
-  /* Config */
-  .configSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  #formExportConfigFile, #formLocaleConfigForm {
-    margin: 30px 10px 30px 10px;
-  }
-
-  #formUploadConfigFile {
-    margin: 30px 10px 30px 10px;
-  }
-
 /* Footer */
 .grid5 {
     display: flex;

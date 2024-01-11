@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import type { SubCategory, Util, ConfirmModal } from '@/app/data/types';
+import type { SubCategory, Util, ConfirmModal, Notification } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
@@ -36,7 +36,11 @@ export default function SubCategoryComponent(
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-subcate-confirm-desc'}, {subcategory: subcate.name});
-
+    const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
+    const notice: Notification = {
+        type: 'info',
+        message: noticeSaveSuccess
+    };
 
     function updateSubCategoryName(pName: string) {
         boardContext.updateSubCategoryName(pName, stringIndex);
@@ -104,7 +108,7 @@ export default function SubCategoryComponent(
             text: ctxMnuSaveContinue,
             tooltip: ctxMnuSaveToLocal,
             handle: () => {
-                boardContext.saveToStorage(1);
+                boardContext.saveToStorage(1, notice);
             },
             stringIndex: stringIndex
         },
@@ -113,7 +117,7 @@ export default function SubCategoryComponent(
             text: ctxMnuSaveBack,
             tooltip: ctxMnuSaveBack,
             handle: () => {
-                boardContext.saveToStorage(0);
+                boardContext.saveToStorage(0, notice);
             },
             stringIndex: stringIndex
         },

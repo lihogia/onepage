@@ -191,8 +191,18 @@ li.menuItemPopup, .menuItemPopup a {
       .aboutSection ul {
         list-style-type: disc;
       }
-    
-    
-    
+
+    /* config */
+    .configSection {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #formExportConfigFile, #formLocaleConfigForm, #formUploadConfigFile {
+        margin: 30px 10px 30px 10px;
+    }
+       
 }
 

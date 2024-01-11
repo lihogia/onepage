@@ -40,7 +40,7 @@ export const prototypeBoardContext = {
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
     updateBoardSettings: (pBoardSettings: BoardSettings) => {},
-    saveToStorage: (mode: number) => {},
+    saveToStorage: (mode: number, notice: Notification) => {},
 //    loadFromStorage: () => {},
     setLocale: (locale: string) => {},
 };
@@ -193,7 +193,7 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           const newBoardSettings = {...pBoardSettings};
           updateBoardSettings(newBoardSettings);
         },
-        saveToStorage: (pMode: number) => {
+        saveToStorage: (pMode: number, pNotice: Notification) => {
           const configOnePage = {
             categories: boardSettings.categories,
             version: process.env.version
@@ -203,7 +203,8 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
             // Perform localStorage action
             localStorage.setItem('onepage', JSON.stringify(configOnePage));
             console.log('Saved to localStorage.');
-            const newBoardSettings = {...boardSettings, mode: pMode, notice: {type: 'info', message: 'Data has been saved to local storage successfully.'}};
+            //const newBoardSettings = {...boardSettings, mode: pMode, notice: {type: 'info', message: 'Data has been saved to local storage successfully.'}};
+            const newBoardSettings = {...boardSettings, mode: pMode, notice: pNotice};
             updateBoardSettings(newBoardSettings);
           }
         },

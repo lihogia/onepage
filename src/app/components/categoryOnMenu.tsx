@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import type { Category, ConfirmModal } from '@/app/data/types';
+import type { Category, ConfirmModal, Notification } from '@/app/data/types';
 import { BoardContext } from './BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
@@ -27,6 +27,11 @@ export default function CategoryOnMenu(
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-cate-confirm-desc'}, {category: category.name});
+    const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
+    const notice: Notification = {
+        type: 'info',
+        message: noticeSaveSuccess
+    };
 
     const stringIndex = `${index}`;
     const [changingName, setChangingName] = useState(false);
@@ -77,7 +82,7 @@ export default function CategoryOnMenu(
             text: ctxMnuSaveContinue,
             tooltip: ctxMnuSaveToLocal,
             handle: () => {
-                boardContext.saveToStorage(1);
+                boardContext.saveToStorage(1, notice);
             },
             stringIndex: stringIndex
         },
@@ -86,7 +91,7 @@ export default function CategoryOnMenu(
             text: ctxMnuSaveBack,
             tooltip: ctxMnuSaveBack,
             handle: () => {
-                boardContext.saveToStorage(0);
+                boardContext.saveToStorage(0, notice);
             },
             stringIndex: stringIndex
         },
