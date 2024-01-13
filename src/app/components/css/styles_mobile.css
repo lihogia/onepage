@@ -10,8 +10,11 @@
     }
 
     .grid3 {
-        border: 0px solid red
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
     }
+
     .grid2 {
         height: 100px;
     }    
@@ -182,6 +185,18 @@
     }
     
 /* grid3  */
+.subcategories {
+    display: flex;
+    flex-direction: column;
+    border: 0px solid green;
+}
+
+ul.utilities {
+    display: flex;
+    flex-direction: column; 
+    
+}
+
 .util {
     font-size: 12pt;
     text-decoration: none;
