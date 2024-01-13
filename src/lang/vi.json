@@ -1,7 +1,13 @@
 {
+    "about.h2": "Giới thiệu về ứng dụng",
+    "about.p1": "<bold>OnePage</bold> là một Ứng dụng Web Đơn chứa tất cả các mục nhập vào tài nguyên trực tuyến của người dùng.",
+    "about.p2": "Nó giúp người dùng tiết kiệm thời gian và bắt đầu công việc hàng ngày của họ nhanh chóng. Và nó hoàn toàn miễn phí.",
+    "about.p3": "Tôi hy vọng tất cả các bạn thích sử dụng nó !!! Để hỗ trợ <bold>OnePage</bold>, bạn có thể <link>mua cho tôi một ly cà phê</link>.",
+    "about.p4": "Mọi phản hồi đều được chào đón! Xin vui lòng liên hệ với tôi tại <link>lilogia</link>.",
+
     "footer.message": "© 2023. Bảo lưu mọi quyền. Phiên bản: {version}. Liên hệ @<link>lilogia</link>.",
 
-
+    "menu.categories": "Các danh mục",
     "menu.about": "Giới thiệu",
     "menu.edit": "Chỉnh sửa",
     "menu.config": "Cấu hình",
@@ -11,13 +17,13 @@
 
     "config.cancel": "Huỷ bỏ",
     "config.export": "Xuất",
-    "config.export-title": "Xuất từ bộ nhớ cục bộ",
+    "config.export-title": "Xuất từ bộ nhớ trình duyệt",
     "config.export-label": "Tên tập tin cần lưu",
-    "config.export-confirm": "Không có dữ liệu trong bộ nhớ cục bộ. Bạn có muốn dùng dữ liệu mặc định để xuất ?",
+    "config.export-confirm": "Không có dữ liệu trong bộ nhớ trình duyệt. Bạn có muốn dùng dữ liệu mặc định để xuất ?",
     "config.export-notification": "Xuất thành công {link}.",
 
-    "config.import": "Nhập",
-    "config.import-title": "Nhập vào bộ nhớ cục bộ",
+    "config.import": "Lưu",
+    "config.import-title": "Lưu vào bộ nhớ trình duyệt",
     "config.import-label": "Tải lên tệp cấu hình JSON",
     "config.import-notification": "Đã lưu và tải. Nhập thành công.",
 
@@ -41,23 +47,23 @@
 
     "edit.edit-sub-category": "Chỉnh sửa Danh mục con",
     "edit.del-sub-category": "Xoá Danh mục con",
-    "edit.add-link": "Thêm Ứng dụng",
+    "edit.add-link": "Thêm Tiện ích",
     "edit.del-subcate-confirm-desc": "Xác nhận bạn muốn xoá danh mục con \"{subcategory}\" ?",
 
-    "edit.edit-util": "Chỉnh sửa Ứng dụng",
-    "edit.del-util": "Xoá Ứng dụng",
-    "edit.del-util-confirm-desc": "Xác nhận bạn muốn xoá ứng dụng \"{util}\" ?",
+    "edit.edit-util": "Chỉnh sửa Tiện ích",
+    "edit.del-util": "Xoá Tiện ích",
+    "edit.del-util-confirm-desc": "Xác nhận bạn muốn xoá tiện ích \"{util}\" ?",
 
     "edit.modal-yes": "Đồng ý",
     "edit.modal-no": "Không",
 
-    "edit.form-sel-title": "Chọn loại ứng dụng",
+    "edit.form-sel-title": "Chọn loại tiện ích",
     "edit.form-sel-link": "Liên kết",
     "edit.form-sel-ss": "Tìm kiếm đơn giản",
     "edit.form-sel-ss-exp": "Tìm kiếm với RegExp",
     "edit.form-new-title": "Đề mục mới",
 
-    "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ cục bộ thành công."
+    "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ trình duyệt thành công."
 
 
 }

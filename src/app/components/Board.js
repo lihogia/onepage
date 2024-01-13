@@ -22,16 +22,22 @@ export function loadData() {
 }
 
 function loadLocalStorage() {
-    let categories = [];
+    //let categories = [];
+    let configOnePage = {
+      categories: [],
+      version: process.env.version,
+      locale: 'en'
+    };
+
     if (typeof window !== 'undefined') {
         // Perform localStorage action
-        const item = JSON.parse(localStorage.getItem('onepage'));
+        const configOnePageLocal = JSON.parse(localStorage.getItem('onepage'));
         
-        if (item != null && item.categories.length > 0) {
-            categories = item.categories;
+        if (configOnePageLocal != null && configOnePageLocal.categories.length > 0) {
+          configOnePage = configOnePageLocal;
         }
       }
-    return categories;
+    return configOnePage;
 }
 
 /** Board is container */
@@ -51,19 +57,22 @@ export default function Board() {
     const [boardSettings, setBoardSettings] = useState(emptyBoardSettings);
 
     useEffect(() => { // need to run once after 1st render
-      let localCates = loadLocalStorage();
+      let configOnePage = loadLocalStorage();
+      let useLocale = configOnePage.locale;
+      let localCates = configOnePage.categories;
 
       if (localCates.length == 0 ) {
         localCates = template001.categories;
         console.log('No data in local storage, default data will be loaded. Start to use your own data by Edit & Save to storage, or Import from Config.');
+  
       }
+      if (!useLocale) {
 
-      const langs = navigator.languages;
-      //console.log(langs);
-      let useLocale = 'en';
-      for (let i=0; i<langs.length; i++) {
-        if (isLanguageSupported(langs[i])) {
-          useLocale = langs[i];
+        const langs = navigator.languages;
+        for (let i=0; i<langs.length; i++) {
+          if (isLanguageSupported(langs[i])) {
+            useLocale = langs[i];
+          }
         }
       }
 

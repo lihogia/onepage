@@ -1,5 +1,13 @@
 {
+    "about.h2": "關於應用程式",
+    "about.p1": "<bold>OnePage</bold> 是一個單一網頁應用程序，它保存使用者線上資源的所有條目。",
+    "about.p2": "這將幫助用戶節省時間並儘快開始日常工作。 而且它是完全免費的。",
+    "about.p3": "希望大家使用愉快 !!! 為了支持 <bold>OnePage</bold>, 你可以 <link>買杯咖啡給我</link>。",
+    "about.p4": "歡迎所有回饋! 請透過 <link>lilogia</link> 與我聯繫。",
+    
     "footer.message": "© 2023. 版權所有. 版本: {version}. 接觸 @<link>lilogia</link>.",
+
+    "menu.categories": "類別",
     "menu.about": "關於",
     "menu.edit": "编辑",
     "menu.config": "配置",

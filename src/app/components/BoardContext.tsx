@@ -196,7 +196,8 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
         saveToStorage: (pMode: number, pNotice: Notification) => {
           const configOnePage = {
             categories: boardSettings.categories,
-            version: process.env.version
+            version: process.env.version,
+            locale: boardSettings.locale
           };
 
           if (typeof window !== 'undefined') {

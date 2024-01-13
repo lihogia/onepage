@@ -84,7 +84,7 @@ export default function Menu(
         <ul className="menuTitle">
             <li><a href="#" onClick={() => {
                 openMenu(true);
-            }}>Categories</a></li>
+            }}><FormattedMessage id='menu.categories' /></a></li>
         </ul>
     </div>
     <div className="grid1m_sub_none" id="MenuID">

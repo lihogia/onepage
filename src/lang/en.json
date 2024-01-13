@@ -1,6 +1,13 @@
 {
+    "about.h2": "About the App",
+    "about.p1": "<bold>OnePage</bold> is a Single Web Page Application which holds all entries to users' online resources.",
+    "about.p2": "This will help the user to save time and get on with their daily work ASAP. And it is totally free.",
+    "about.p3": "I hope you all enjoy using it !!! To support <bold>OnePage</bold>, you can <link>buy me a coffee</link>.",
+    "about.p4": "All feedback is welcome! Please contact me at <link>lilogia</link>.",
+
     "footer.message": "© 2023. All right reserved. Version: {version}. Contact @<link>lilogia</link>.",
 
+    "menu.categories": "Categories",
     "menu.about": "About",
     "menu.edit": "Edit",
     "menu.config": "Config",
