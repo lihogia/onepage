@@ -27,7 +27,8 @@
 }
 .subcategories {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 ul.utilities {
