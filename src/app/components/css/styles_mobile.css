@@ -23,11 +23,7 @@
         max-height: 280px;
     }
     
-    .grid5 {
-        
-    }
-    
-    /* Menu */
+        /* Menu */
     .grid1 {
         display: none;
     }
@@ -43,7 +39,7 @@
     }
     .grid1m {
         border-bottom: 1px solid #ffff;
-        max-height: 70px;
+        max-height: 100px;
     }
     .logo {
         width: 60px;
@@ -141,7 +137,7 @@
     a.menuItemBottomSelected{
         color: #009bd6;
         background-color: white;
-        padding: 3px;
+        padding: 3px 4px 1px 4px;
         font-weight: bolder;
         /*text-shadow: 2px 2px 3px white;*/
     }
