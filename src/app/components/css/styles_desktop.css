@@ -19,6 +19,9 @@
     justify-content: flex-start;
     align-items: center;
     padding-left: 10px;
+    background-color: #63b7d3;
+    color: black;
+    font-size: 10pt;
 }
 
 .grid3 {

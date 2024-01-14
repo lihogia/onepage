@@ -15,14 +15,17 @@ export default function Footer() {
   };
   const values: any = {
     version: strVersion,
-    link: (str: string) => <a href='mailto:lilogia@gmail.com'>{str}</a>
+    link: (str: string) => <a href='mailto:lilogia@gmail.com'>{str}</a>,
+    space: () => <span>&nbsp;</span>
   };
 
   return (
     <>
       <ComponentLocaleContainer locale={locale}>
         <div className="grid5">
-        <FormattedMessage id={descriptor.id} defaultMessage={descriptor.defaultMessage} description={descriptor.description} values={values}/>
+          <span>
+            <FormattedMessage id={descriptor.id} defaultMessage={descriptor.defaultMessage} description={descriptor.description} values={values}/>
+          </span>
         </div>
       </ComponentLocaleContainer>
     </>

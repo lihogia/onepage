@@ -5,7 +5,7 @@
     "about.p3": "I hope you all enjoy using it !!! To support <bold>OnePage</bold>, you can <link>buy me a coffee</link>.",
     "about.p4": "All feedback is welcome! Please contact me at <link>lilogia</link>.",
 
-    "footer.message": "© 2023. All right reserved. Version: {version}. Contact @<link>lilogia</link>.",
+    "footer.message": "© 2023. All right reserved. Version: {version}. Contact:<space></space><link>lilogia</link>.",
 
     "menu.categories": "Categories",
     "menu.about": "About",

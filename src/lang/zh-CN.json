@@ -5,7 +5,7 @@
     "about.p3": "希望大家使用愉快 !!! 为了支持 <bold>OnePage</bold>, 你可以 <link>给我买杯咖啡</link>。",
     "about.p4": "欢迎所有反馈! 请通过 <link>lilogia</link>与我联系。",
 
-    "footer.message": "© 2023。保留所有权利。版本: {version}。接触 @<link>lilogia</link>.",
+    "footer.message": "© 2023。保留所有权利。版本: {version}。接触:<space></space><link>lilogia</link>.",
 
     "menu.categories": "类别",
     "menu.about": "关于",
