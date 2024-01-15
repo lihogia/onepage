@@ -14,6 +14,7 @@
     "jest-preview": "jest-preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.1.1",
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
