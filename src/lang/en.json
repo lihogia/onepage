@@ -45,6 +45,8 @@
     "edit.save-to-local": "Save to Local Storage",
     "edit.save-back-to-view": "Save & Back to View",
     "edit.back-to-view": "Back to View",
+    "edit.move-to-prev": "Move to Previous",
+    "edit.move-to-next": "Move to Next",
 
     "edit.edit-sub-category": "Edit Sub Category",
     "edit.del-sub-category": "Delete Sub Category",

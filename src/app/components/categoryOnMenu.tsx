@@ -20,6 +20,10 @@ export default function CategoryOnMenu(
     const ctxMnuNewCate = intl.formatMessage({id: 'edit.new-category'});
     const ctxMnuAddSubCate = intl.formatMessage({id: 'edit.add-sub-category'});
     const ctxMnuNewSubCate = intl.formatMessage({id: 'edit.new-sub-cate'});
+
+    const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
+    const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
+
     const ctxMnuSaveContinue = intl.formatMessage({id: 'edit.save-continue'});
     const ctxMnuSaveToLocal = intl.formatMessage({id: 'edit.save-to-local'});
     const ctxMnuSaveBack = intl.formatMessage({id: 'edit.save-back-to-view'});
@@ -36,7 +40,7 @@ export default function CategoryOnMenu(
     const stringIndex = `${index}`;
     const [changingName, setChangingName] = useState(false);
     const menuContextID = isMobile ? `menuCxtCate_${index}_m` : `menuCxtCate_${index}`;
-    const menuContextItems1: MenuContextItem[]  = [
+    let menuContextItems1: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
             text: ctxMnuEditCate,
@@ -46,6 +50,29 @@ export default function CategoryOnMenu(
             },
             stringIndex: stringIndex
         },];
+    if (index > 0) {
+        menuContextItems1.push({
+            iconURL: '/icons/movprevico.png',
+            text: ctxMnuMovPreSubCate,
+            tooltip: ctxMnuMovPreSubCate,
+            handle: () => {
+                boardContext.moveCategory(index, index - 1);
+            },
+            stringIndex: stringIndex
+        });
+    }
+    if (index < boardContext.boardSettings.categories.length - 1) {
+        menuContextItems1.push({
+            iconURL: '/icons/movnextico.png',
+            text: ctxMnuMovNexSubCate,
+            tooltip: ctxMnuMovNexSubCate,
+            handle: () => {
+                boardContext.moveCategory(index, index + 1);
+            },
+            stringIndex: stringIndex
+        });
+    }
+
     const menuContextItems2: MenuContextItem[]  = [
         {
             iconURL: '/icons/deleteico.png',

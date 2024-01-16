@@ -44,6 +44,8 @@
     "edit.save-to-local": "Lưu vào lưu trữ của trình duyệt",
     "edit.save-back-to-view": "Lưu & Trở lại",
     "edit.back-to-view": "Trở lại",
+    "edit.move-to-prev": "Dời về trước",
+    "edit.move-to-next": "Dời về sau",
 
     "edit.edit-sub-category": "Chỉnh sửa Danh mục con",
     "edit.del-sub-category": "Xoá Danh mục con",

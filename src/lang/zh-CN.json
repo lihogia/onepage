@@ -45,6 +45,8 @@
     "edit.save-to-local": "保存到本地存储",
     "edit.save-back-to-view": "保存并返回查看",
     "edit.back-to-view": "返回查看",
+    "edit.move-to-prev": "移至上一个",
+    "edit.move-to-next": "移至下一个",
 
     "edit.edit-sub-category": "编辑子类别",
     "edit.del-sub-category": "删除子类别",

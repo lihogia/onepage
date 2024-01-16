@@ -31,12 +31,15 @@ export const prototypeBoardContext = {
     setConfirmModal: (confirmModal: ConfirmModal) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
+    moveCategory: (curIndex: number, newIndex: number) => {},
     deleteCategory: (pCateIndex: number) => {}, 
     createSubCategory: (pCateIndex: number, pSubCateName: string) => {},
     updateSubCategoryName: (pSubCateName: string, pStringIndex: string) => {},  //pStringIndex = cateIndex_subCateIndex
+    moveSubCategory: (curStringIndex: string, newStringIndex: string) => {}, // StringIndex = cateIndex_subCateIndex
     deleteSubCategory: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     createUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex
     updateUtil: (util: Util, pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
+    moveUtil: (curStringIndex: string, newStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     deleteUtil: (pStringIndex: string) => {}, // pStringIndex = cateIndex_subCateIndex_utilIndex
     updateContextMenus: (contextMenus: Map<string, boolean>) => {}, 
     updateBoardSettings: (pBoardSettings: BoardSettings) => {},
@@ -115,6 +118,16 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           const newBoardSettings = {...boardSettings, categories: newCates};
           updateAndClearSupport(newBoardSettings);
         },
+        moveCategory: (curIndex: number, newIndex: number) => {
+          const cates = boardSettings.categories;
+          if (curIndex === newIndex - 1 || curIndex === newIndex + 1) {
+            const newCates = [...cates];
+            const [curCate, newCate] = [newCates[curIndex], newCates[newIndex]];
+            [newCates[curIndex], newCates[newIndex]] = [newCate, curCate];
+            const newBoardSettings = {...boardSettings, categories: newCates};
+            updateAndClearSupport(newBoardSettings);  
+          }
+        },
         deleteCategory: (pCateIndex: number) => {
           const newCates = boardSettings.categories.filter((item, index) => index != pCateIndex);
           const newBoardSettings = {...boardSettings, categories: newCates};
@@ -140,7 +153,21 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           newSubCates[subCateIndex].name = pSubCateName;
           const newBoardSettings = {...boardSettings, categories: newCates};
           updateAndClearSupport(newBoardSettings);
-        },  
+        },
+        moveSubCategory: (curStringIndex: string, newStringIndex: string) => {  // StringIndex = cateIndex_subCateIndex
+          const cates = boardSettings.categories;
+          const [cur_cateIndex, cur_subCateIndex] = splitToNumber(curStringIndex, '_');
+          const [new_cateIndex, new_subCateIndex] = splitToNumber(newStringIndex, '_');
+          if (cur_cateIndex === new_cateIndex && (cur_subCateIndex === new_subCateIndex - 1 || cur_subCateIndex === new_subCateIndex + 1)) {
+            const newCates = [...cates];
+            const newSubCates = [...newCates[cur_cateIndex].subcategories];
+            const [curSubCate, newSubCate] = [newSubCates[cur_subCateIndex], newSubCates[new_subCateIndex]];
+            [newSubCates[cur_subCateIndex], newSubCates[new_subCateIndex]] = [newSubCate, curSubCate];
+            newCates[cur_cateIndex].subcategories = newSubCates;
+            const newBoardSettings = {...boardSettings, categories: newCates};
+            updateAndClearSupport(newBoardSettings);  
+          }
+        },
         deleteSubCategory: (pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex
           const [cateIndex, subCateIndex] = splitToNumber(pStringIndex, '_');
           const newCates = [...boardSettings.categories];
@@ -169,6 +196,23 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           newSubCates[subCateIndex].utils = newUtils;
           const newBoardSettings = {...boardSettings, categories: newCates};
           updateAndClearSupport(newBoardSettings);
+        }, 
+        moveUtil: (curStringIndex: string, newStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex_utilIndex
+          const cates = boardSettings.categories;
+          const [cateIndex, subCateIndex, utilIndex] = splitToNumber(curStringIndex, '_');
+          const [n_cateIndex, n_subCateIndex, n_utilIndex] = splitToNumber(newStringIndex, '_');
+          if (cateIndex === n_cateIndex && subCateIndex === n_subCateIndex && (utilIndex === n_utilIndex - 1 || utilIndex === n_utilIndex + 1)) {
+            const newCates = [...cates];
+            const newSubCates = [...newCates[cateIndex].subcategories];
+            const newUtils = newSubCates[subCateIndex].utils;
+            
+            const [curUtil, newUtil] = [newUtils[utilIndex], newUtils[n_utilIndex]];
+            [newUtils[utilIndex], newUtils[n_utilIndex]] = [newUtil, curUtil];
+            
+            newCates[cateIndex].subcategories = newSubCates;
+            const newBoardSettings = {...boardSettings, categories: newCates};
+            updateAndClearSupport(newBoardSettings);  
+          }
         }, 
         deleteUtil: (pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex_utilIndex
           const [cateIndex, subCateIndex, utilIndex] = splitToNumber(pStringIndex, '_');

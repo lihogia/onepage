@@ -14,6 +14,8 @@ export default function SubCategoryComponent(
     {subcate, stringIndex = ''}: 
     {subcate: SubCategory, stringIndex: string}) {
 
+    const [cateIndex, subCateIndex] = splitToNumber(stringIndex, '_');
+
     const [changingName, setChangingName] = useState(false);
     const [addingUtil, setAddingUtil] = useState(false);
 
@@ -26,6 +28,9 @@ export default function SubCategoryComponent(
     const ctxMnuDelSubCate = intl.formatMessage({id: 'edit.del-sub-category'});
     const ctxMnuAddSubCate = intl.formatMessage({id: 'edit.add-sub-category'});
     const ctxMnuNewSubCate = intl.formatMessage({id: 'edit.new-sub-cate'});
+
+    const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
+    const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
 
     const ctxMnuAddLink = intl.formatMessage({id: 'edit.add-link'});
     
@@ -64,7 +69,7 @@ export default function SubCategoryComponent(
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;
     
-    const menuContextItems: MenuContextItem[]  = [
+    let menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
             text: ctxMnuEditSubCate,
@@ -73,8 +78,31 @@ export default function SubCategoryComponent(
                 setChangingName(true);
             },
             stringIndex: stringIndex
-        },
-        {
+        }];
+    if (subCateIndex > 0) {
+        menuContextItems.push({
+            iconURL: '/icons/movprevico.png',
+            text: ctxMnuMovPreSubCate,
+            tooltip: ctxMnuMovPreSubCate,
+            handle: () => {
+                boardContext.moveSubCategory(`${cateIndex}_${subCateIndex}`, `${cateIndex}_${subCateIndex - 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+    if (subCateIndex < boardContext.boardSettings.categories[cateIndex].subcategories.length - 1) {
+        menuContextItems.push({
+            iconURL: '/icons/movnextico.png',
+            text: ctxMnuMovNexSubCate,
+            tooltip: ctxMnuMovNexSubCate,
+            handle: () => {
+                boardContext.moveSubCategory(`${cateIndex}_${subCateIndex}`, `${cateIndex}_${subCateIndex + 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+    menuContextItems.push(
+        ...[{
             iconURL: '/icons/deleteico.png',
             text: ctxMnuDelSubCate,
             tooltip: ctxMnuDelSubCate,
@@ -130,7 +158,7 @@ export default function SubCategoryComponent(
             },
             stringIndex: stringIndex
         },
-    ];
+    ]);
 
     const contextMenus = boardContext.boardSettings.contextMenus;
     let isShowContextMenu: boolean = false;

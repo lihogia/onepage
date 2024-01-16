@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import UtilLinkComponent from '../link';
 import UtilSimpleSearch from '../search';
 import { Util, UtilLink, SimpleSearch, ConfirmModal, Notification } from '@/app/data/types';
-import { BoardContext } from '@/app/components/BoardContext';
+import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
@@ -10,6 +10,8 @@ import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/component
 import { useIntl } from 'react-intl';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
+    const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringIndex, '_');
+
     const [changingUtil, setChangingUtil] = useState(false);
     const boardContext = useContext(BoardContext);
 
@@ -21,6 +23,9 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     const ctxMnuSaveToLocal = intl.formatMessage({id: 'edit.save-to-local'});
     const ctxMnuSaveBack = intl.formatMessage({id: 'edit.save-back-to-view'});
     const ctxMnuBack = intl.formatMessage({id: 'edit.back-to-view'});
+
+    const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
+    const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
@@ -50,7 +55,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     const menuContextID = `menuCxtUtil_${stringIndex}`;
     
-    const menuContextItems: MenuContextItem[]  = [
+    let menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
             text: ctxMnuEditUtil,
@@ -59,8 +64,31 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
                 setChangingUtil(true);
             },
             stringIndex: stringIndex
-        },
-        {
+        }];
+    if (utilIndex > 0) {
+        menuContextItems.push({
+            iconURL: '/icons/movprevico.png',
+            text: ctxMnuMovPreSubCate,
+            tooltip: ctxMnuMovPreSubCate,
+            handle: () => {
+                boardContext.moveUtil(`${cateIndex}_${subCateIndex}_${utilIndex}`, `${cateIndex}_${subCateIndex}_${utilIndex - 1}`);
+            },
+            stringIndex: stringIndex
+
+        });
+    }
+    if (utilIndex < boardContext.boardSettings.categories[cateIndex].subcategories[subCateIndex].utils.length - 1) {
+        menuContextItems.push({
+            iconURL: '/icons/movnextico.png',
+            text: ctxMnuMovNexSubCate,
+            tooltip: ctxMnuMovNexSubCate,
+            handle: () => {
+                boardContext.moveUtil(`${cateIndex}_${subCateIndex}_${utilIndex}`, `${cateIndex}_${subCateIndex}_${utilIndex + 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+        menuContextItems.push(...[{
             iconURL: '/icons/deleteico.png',
             text: ctxMnuDelUtil,
             tooltip: ctxMnuDelUtil,
@@ -104,7 +132,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
             stringIndex: stringIndex
         },
 
-    ];
+    ]);
 
     const contextMenus = boardContext.boardSettings.contextMenus;
     let isShowContextMenu: boolean = false;
