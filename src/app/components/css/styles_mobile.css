@@ -9,6 +9,12 @@
         border-bottom: 2px solid #009bd6;
     }
 
+    .grid3 {
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
+    }
+
     .grid2 {
         height: 100px;
     }    
@@ -16,12 +22,22 @@
     .grid4 {
         max-height: 280px;
     }
-    
+
+    /* Footer */
     .grid5 {
-        
-    }
-    
-    /* Menu */
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 10px;
+        background-color: #63b7d3;
+        color: black;
+        font-size: 10pt;
+        flex-flow: nowrap;
+        min-height: auto;
+    }    
+
+        /* Menu */
     .grid1 {
         display: none;
     }
@@ -37,7 +53,7 @@
     }
     .grid1m {
         border-bottom: 1px solid #ffff;
-        max-height: 70px;
+        max-height: 100px;
     }
     .logo {
         width: 60px;
@@ -135,7 +151,7 @@
     a.menuItemBottomSelected{
         color: #009bd6;
         background-color: white;
-        padding: 3px;
+        padding: 3px 4px 1px 4px;
         font-weight: bolder;
         /*text-shadow: 2px 2px 3px white;*/
     }
@@ -179,6 +195,18 @@
     }
     
 /* grid3  */
+.subcategories {
+    display: flex;
+    flex-direction: column;
+    border: 0px solid green;
+}
+
+ul.utilities {
+    display: flex;
+    flex-direction: column; 
+    
+}
+
 .util {
     font-size: 12pt;
     text-decoration: none;
@@ -230,8 +258,16 @@
     border: 1px solid #009bd6;
 }
 
-}
+/* config */
+.configSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 
+  #formExportConfigFile, #formLocaleConfigForm, #formUploadConfigFile {
+    margin: 10px;
+  }
 
-        
-    
+}    

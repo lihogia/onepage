@@ -1,7 +1,5 @@
-import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
-import styles from './component.module.css';
-import type { SubCategory, UtilLink, Util } from '@/app/data/types';
+import { useContext, useState } from 'react';
+import type { SubCategory, Util, ConfirmModal, Notification } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
@@ -9,20 +7,45 @@ import UtilEditor from './edit/UtilEditor';
 import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
+import { useIntl } from 'react-intl';
 
 
 export default function SubCategoryComponent(
     {subcate, stringIndex = ''}: 
     {subcate: SubCategory, stringIndex: string}) {
 
+    const [cateIndex, subCateIndex] = splitToNumber(stringIndex, '_');
+
     const [changingName, setChangingName] = useState(false);
     const [addingUtil, setAddingUtil] = useState(false);
 
     const boardContext = useContext(BoardContext);
-    const isEdit = boardContext.isEdit();
-    
+    const isEdit = boardContext.isEdit();        
     const subCategory = subcate;
+
+    const intl = useIntl();
+    const ctxMnuEditSubCate = intl.formatMessage({id: 'edit.edit-sub-category'});
+    const ctxMnuDelSubCate = intl.formatMessage({id: 'edit.del-sub-category'});
+    const ctxMnuAddSubCate = intl.formatMessage({id: 'edit.add-sub-category'});
+    const ctxMnuNewSubCate = intl.formatMessage({id: 'edit.new-sub-cate'});
+
+    const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
+    const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
+
+    const ctxMnuAddLink = intl.formatMessage({id: 'edit.add-link'});
     
+    const ctxMnuSaveContinue = intl.formatMessage({id: 'edit.save-continue'});
+    const ctxMnuSaveToLocal = intl.formatMessage({id: 'edit.save-to-local'});
+    const ctxMnuSaveBack = intl.formatMessage({id: 'edit.save-back-to-view'});
+    const ctxMnuBack = intl.formatMessage({id: 'edit.back-to-view'});
+
+    const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
+    const modalDelDesc = intl.formatMessage({id: 'edit.del-subcate-confirm-desc'}, {subcategory: subcate.name});
+    const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
+    const notice: Notification = {
+        type: 'info',
+        message: noticeSaveSuccess
+    };
 
     function updateSubCategoryName(pName: string) {
         boardContext.updateSubCategoryName(pName, stringIndex);
@@ -33,46 +56,74 @@ export default function SubCategoryComponent(
     }
 
     function deleteSubCategory() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteSubCategory(stringIndex);
-        }
+        const confirmModal: ConfirmModal = {
+            title: modalDelTitle,
+            description: modalDelDesc,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteSubCategory(stringIndex);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;
     
-    const menuContextItems: MenuContextItem[]  = [
+    let menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
-            text: 'Edit Sub Category',
-            tooltip: 'Edit Sub Category',
+            text: ctxMnuEditSubCate,
+            tooltip: ctxMnuEditSubCate,
             handle: () => {
                 setChangingName(true);
             },
             stringIndex: stringIndex
-        },
-        {
+        }];
+    if (subCateIndex > 0) {
+        menuContextItems.push({
+            iconURL: '/icons/movprevico.png',
+            text: ctxMnuMovPreSubCate,
+            tooltip: ctxMnuMovPreSubCate,
+            handle: () => {
+                boardContext.moveSubCategory(`${cateIndex}_${subCateIndex}`, `${cateIndex}_${subCateIndex - 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+    if (subCateIndex < boardContext.boardSettings.categories[cateIndex].subcategories.length - 1) {
+        menuContextItems.push({
+            iconURL: '/icons/movnextico.png',
+            text: ctxMnuMovNexSubCate,
+            tooltip: ctxMnuMovNexSubCate,
+            handle: () => {
+                boardContext.moveSubCategory(`${cateIndex}_${subCateIndex}`, `${cateIndex}_${subCateIndex + 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+    menuContextItems.push(
+        ...[{
             iconURL: '/icons/deleteico.png',
-            text: 'Delete Sub Category',
-            tooltip: 'Delete Sub Category',
+            text: ctxMnuDelSubCate,
+            tooltip: ctxMnuDelSubCate,
             handle: deleteSubCategory,
             stringIndex: stringIndex
         },
         {
             iconURL: '/icons/addsubcatico.png',
-            text: 'Add Sub Category',
-            tooltip: 'Add Sub Category',
+            text: ctxMnuAddSubCate,
+            tooltip: ctxMnuAddSubCate,
             handle: () => {
                 const [cateIndex, subCateIndex] = splitToNumber(stringIndex, '_');
-                boardContext.createSubCategory(cateIndex, 'New Sub Category');
+                boardContext.createSubCategory(cateIndex, ctxMnuNewSubCate);
             },
             stringIndex: stringIndex
         },
         SEPARATOR,
         {
             iconURL: '/icons/addlinkico.png',
-            text: 'Add Link',
-            tooltip: 'Add Link',
+            text: ctxMnuAddLink,
+            tooltip: ctxMnuAddLink,
             handle: () => {
                 setAddingUtil(true);
                 //boardContext.createUtil(util, stringIndex);
@@ -82,37 +133,47 @@ export default function SubCategoryComponent(
         SEPARATOR,
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Continue',
-            tooltip: 'Save to Local Storage',
+            text: ctxMnuSaveContinue,
+            tooltip: ctxMnuSaveToLocal,
             handle: () => {
-                boardContext.saveToStorage();
+                boardContext.saveToStorage(1, notice);
             },
             stringIndex: stringIndex
         },
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Back to View',
-            tooltip: 'Save & Back to View',
+            text: ctxMnuSaveBack,
+            tooltip: ctxMnuSaveBack,
             handle: () => {
-                boardContext.saveToStorage();
-                boardContext.setMode(0);
+                boardContext.saveToStorage(0, notice);
             },
             stringIndex: stringIndex
         },
         {
             iconURL: '/icons/clickico.png',
-            text: 'Back to View',
-            tooltip: 'Back to View',
+            text: ctxMnuBack,
+            tooltip: ctxMnuBack,
             handle: () => {
                 boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
-    ];
+    ]);
+
+    const contextMenus = boardContext.boardSettings.contextMenus;
+    let isShowContextMenu: boolean = false;
+    if (isEdit) {
+        const value = contextMenus.get(menuContextID);
+        if (value === undefined) {
+            isShowContextMenu = false;
+        }else {
+            isShowContextMenu = value;
+        }
+    }
 
     if (isEdit) {
         return (            
-            <ul>
+            <ul className='utilities'>
                 <li className="subcategory" id={`subcate_${stringIndex}`}>
                     {!changingName && <a href={`#subcate_${stringIndex}`} onClick={() => {
                         const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
@@ -124,9 +185,9 @@ export default function SubCategoryComponent(
                         setChangingName(false);
                     }}/>}
 
-                    <div className='popupLi' id={menuContextID} >
+                    {isShowContextMenu && <div className='popupLiShow' id={menuContextID} >
                         <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`#subcate_${stringIndex}`}/>
-                    </div>
+                    </div>}
                 </li>
                 {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                     return (
@@ -143,7 +204,7 @@ export default function SubCategoryComponent(
         );
     }else {
         return (
-            <ul><span className="subcategory">{subCategory.name}</span>
+            <ul className='utilities'><span className="subcategory">{subCategory.name}</span>
             {subCategory.utils.length > 0 && subCategory.utils.map((element, index) => {
                 return (
                     <li key={`${element.title}_${stringIndex}_${index}`} className='utilLi'>

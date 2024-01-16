@@ -1,12 +1,18 @@
 'use client';
 import { useContext } from 'react';
 import { BoardContext, emptyBoardSettings } from '@/app/components/BoardContext';
-import type { BoardSettings, Category } from '@/app/data/types';
 import { saveToLocalStorage } from './LocalStorage';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export default function ImportComponent() {
 
     const boardContext = useContext(BoardContext);
+
+    const intl = useIntl();
+    const notificationMsg = intl.formatMessage({id: 'config.import-notification'});
+    const butImport = intl.formatMessage({id: "config.import"});
+    const butCancel = intl.formatMessage({id: "config.cancel"});
+    const uploadJSONfile = intl.formatMessage({id: "config.import-label"});
 
     function closeForm() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
@@ -16,8 +22,9 @@ export default function ImportComponent() {
 
     function importFromJSON() {
         const uploadForm: any = document.getElementById('formUploadConfigFile');
-
-        let file = uploadForm.elements[0].files[0];
+        const fileInput = uploadForm.elements[0];
+        if (fileInput.value === '') return;
+        let file = fileInput.files[0];
         let reader: any = new FileReader();
         reader.readAsText(file);
         
@@ -32,8 +39,13 @@ export default function ImportComponent() {
                 saveToLocalStorage(boardConfig.categories);
                 console.log('Saved to localStorage successfully.');
                 uploadForm.reset();
-                const bSettings: BoardSettings = emptyBoardSettings;
+                const bSettings: any = emptyBoardSettings;
                 bSettings.categories = boardConfig.categories;
+                bSettings.notice = {
+                    type: 'info', 
+                    //message: 'Saved & Loaded. Import successfully.'
+                    message: notificationMsg
+                };
                 boardContext.updateBoardSettings(bSettings);
                 console.log('Loaded from localStorage successfully.');
         
@@ -46,12 +58,12 @@ export default function ImportComponent() {
 
     return (
         <form id='formUploadConfigFile'>
-            <h3>Import to local storage</h3>
+            <h3><FormattedMessage id='config.import-title'/></h3>
             <ul>
-                <li><span>Upload Json config file:</span></li>
-                <li><input type='file' name='fileJson' className='inputTextLong'/></li>
-                <li><input type='button' name='butUpload' value='Import' className='inputButtonBox' onClick={importFromJSON} />
-                <input type='button' name='butCancel' value='Cancel' className='inputButtonBox' onClick={closeForm} /></li>
+                <li><span>{uploadJSONfile}:</span></li>
+                <li><input type='file' id='fileJson' className='inputTextLong'/></li>
+                <li><input type='button' name='butUpload' value={butImport} className='inputButtonBox' onClick={importFromJSON} />
+                <input type='button' name='butCancel' value={butCancel} className='inputButtonBox' onClick={closeForm} /></li>
             </ul>
         </form>
     );

@@ -1,44 +1,97 @@
 import { useContext, useState } from 'react';
 import UtilLinkComponent from '../link';
 import UtilSimpleSearch from '../search';
-import { Util, UtilLink, SimpleSearch } from '@/app/data/types';
-import { BoardContext } from '@/app/components/BoardContext';
+import { Util, UtilLink, SimpleSearch, ConfirmModal, Notification } from '@/app/data/types';
+import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/components/edit/ContextMenu';
+import { useIntl } from 'react-intl';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
+    const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringIndex, '_');
+
     const [changingUtil, setChangingUtil] = useState(false);
     const boardContext = useContext(BoardContext);
+
+    const intl = useIntl();
+    const ctxMnuEditUtil = intl.formatMessage({id: 'edit.edit-util'});
+    const ctxMnuDelUtil = intl.formatMessage({id: 'edit.del-util'});
+
+    const ctxMnuSaveContinue = intl.formatMessage({id: 'edit.save-continue'});
+    const ctxMnuSaveToLocal = intl.formatMessage({id: 'edit.save-to-local'});
+    const ctxMnuSaveBack = intl.formatMessage({id: 'edit.save-back-to-view'});
+    const ctxMnuBack = intl.formatMessage({id: 'edit.back-to-view'});
+
+    const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
+    const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
+
+    const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
+    const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
+
+    const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
+    const notice: Notification = {
+        type: 'info',
+        message: noticeSaveSuccess
+    };
+
 
     function updateUtil(ulink: UtilLink) {
         boardContext.updateUtil(ulink, stringIndex);
     }
 
     function deleteUtil() {
-        const ret = confirm('Are you sure? (OK = Yes)');
-        if (ret) {
-            boardContext.deleteUtil(stringIndex);
-        }
+        const confirmModal: ConfirmModal = {
+            title: modalDelTitle,
+            description: modalDelDesc,
+            status: 0,
+            handleClickOnYes: () => {
+                boardContext.deleteUtil(stringIndex);
+            }
+        };
+        boardContext.setConfirmModal(confirmModal);
     }
 
     const menuContextID = `menuCxtUtil_${stringIndex}`;
     
-    const menuContextItems: MenuContextItem[]  = [
+    let menuContextItems: MenuContextItem[]  = [
         {
             iconURL: '/icons/editico.png',
-            text: 'Edit Util',
-            tooltip: 'Edit Util',
+            text: ctxMnuEditUtil,
+            tooltip: ctxMnuEditUtil,
             handle: () => {
                 setChangingUtil(true);
             },
             stringIndex: stringIndex
-        },
-        {
+        }];
+    if (utilIndex > 0) {
+        menuContextItems.push({
+            iconURL: '/icons/movprevico.png',
+            text: ctxMnuMovPreSubCate,
+            tooltip: ctxMnuMovPreSubCate,
+            handle: () => {
+                boardContext.moveUtil(`${cateIndex}_${subCateIndex}_${utilIndex}`, `${cateIndex}_${subCateIndex}_${utilIndex - 1}`);
+            },
+            stringIndex: stringIndex
+
+        });
+    }
+    if (utilIndex < boardContext.boardSettings.categories[cateIndex].subcategories[subCateIndex].utils.length - 1) {
+        menuContextItems.push({
+            iconURL: '/icons/movnextico.png',
+            text: ctxMnuMovNexSubCate,
+            tooltip: ctxMnuMovNexSubCate,
+            handle: () => {
+                boardContext.moveUtil(`${cateIndex}_${subCateIndex}_${utilIndex}`, `${cateIndex}_${subCateIndex}_${utilIndex + 1}`);
+            },
+            stringIndex: stringIndex
+        });
+    }
+        menuContextItems.push(...[{
             iconURL: '/icons/deleteico.png',
-            text: 'Delete Util',
-            tooltip: 'Delete Util',
+            text: ctxMnuDelUtil,
+            tooltip: ctxMnuDelUtil,
             handle: deleteUtil,
             stringIndex: stringIndex
         },
@@ -53,41 +106,48 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         SEPARATOR,
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Continue',
-            tooltip: 'Save to Local Storage',
+            text: ctxMnuSaveContinue,
+            tooltip: ctxMnuSaveToLocal,
             handle: () => {
-                boardContext.saveToStorage();
+                boardContext.saveToStorage(1, notice);
             },
             stringIndex: stringIndex
         },
         {
             iconURL: '/icons/saveico.png',
-            text: 'Save & Back to View',
-            tooltip: 'Save & Back to View',
+            text: ctxMnuSaveBack,
+            tooltip: ctxMnuSaveBack,
             handle: () => {
-                boardContext.saveToStorage();
-                boardContext.setMode(0);
+                boardContext.saveToStorage(0, notice);
             },
             stringIndex: stringIndex
         },
         {
             iconURL: '/icons/clickico.png',
-            text: 'Back to View',
-            tooltip: 'Back to View',
+            text: ctxMnuBack,
+            tooltip: ctxMnuBack,
             handle: () => {
                 boardContext.setMode(0);
             },
             stringIndex: stringIndex
         },
 
+    ]);
 
-    ];
+    const contextMenus = boardContext.boardSettings.contextMenus;
+    let isShowContextMenu: boolean = false;
 
+    const value = contextMenus.get(menuContextID);
+    if (value === undefined) {
+        isShowContextMenu = false;
+    }else {
+        isShowContextMenu = value;
+    }
 
     return (
     <>
         {!changingUtil && <a className="util" href={`#util_${stringIndex}`} onClick={() => {
-            const contextMenusUpdated = showHideOneAndCloseAllContextMenus(boardContext.boardSettings.contextMenus, menuContextID);
+            const contextMenusUpdated = showHideOneAndCloseAllContextMenus(contextMenus, menuContextID);
             boardContext.updateContextMenus(contextMenusUpdated);
 
             }}>{util.title}</a>
@@ -102,9 +162,10 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
                 setChangingUtil(false);
             }} />
         </>}
-        <section className='popupLi' id={menuContextID} >
+
+        {isShowContextMenu && <section className='popupLiShow' id={menuContextID} >
             <ContextMenu menuContextItems={menuContextItems} menuContextID={menuContextID} anchorId={`util_${stringIndex}`}/>
-        </section>
+        </section>}
     </>
     );
 }

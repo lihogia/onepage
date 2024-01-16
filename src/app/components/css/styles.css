@@ -121,6 +121,59 @@ li.menuItemPopup a {
     border-bottom: 1px solid #5A5755;
     margin-bottom: 1px;
 }
+/* Notifcation Bar */
+.notificationBar-info, .notificationBar-warn, .notificationBar-error {
+    padding: 5px;
+}
+
+.notificationBar-info {
+    background-color: #8fca81;
+    color: black; 
+}
+
+.notificationBar-warn {
+    background-color: #f17718;
+    color: white;
+}
+
+.notificationBar-error {
+    background-color: #e60043;
+    color: white;
+}
+
+/* Confirm Modal */
+#confirmModal {
+    display: inline-block;
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #63b7d3;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#confirmModal h3 {
+    font-size: larger;
+    margin-bottom: 20px;
+}
+
+#confirmModal ul{
+    list-style-type: none;
+}
+#confirmModal li:first-child{
+    margin-bottom: 10px;
+}
+
+#confirmModal li:nth-child(even){
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 
 /* Content */
 .grid3 {
@@ -191,8 +244,15 @@ li.menuItemPopup a {
     height: 30px;
     margin: 3px;
     margin-right: 8px;
-    padding: 5px;
     flex-grow: 1;
+}
+
+.inputText, .inputTextShort {
+    padding: 5px;
+}
+
+.inputTextLong {
+    padding: 1%;
 }
 
 .inputText:focus, .inputTextLong:focus, .inputTextShort:focus {
@@ -236,30 +296,3 @@ li.menuItemPopup a {
     cursor: pointer;
     background-color: #009bd6;
   }
-
-  /* Config */
-  .configSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  #formExportConfigFile {
-    margin: 30px 10px 30px 10px;
-  }
-
-  #formUploadConfigFile {
-    margin: 30px 10px 30px 10px;
-  }
-
-/* Footer */
-.grid5 {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 10px;
-    background-color: #63b7d3;
-    color: black;
-    font-size: 11pt;
-}
