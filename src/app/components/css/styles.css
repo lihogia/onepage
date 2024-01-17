@@ -296,3 +296,8 @@ li.menuItemPopup a {
     cursor: pointer;
     background-color: #009bd6;
   }
+
+  /* Ads */
+  .adsbygoogle {
+    display: block;
+  }

@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/data/templates.js", "src/app/components/util.tsx", "src/app/edit/EditContext.tsx", "src/app/edit/page.js", "src/app/page.tsx", "src/app/components/Board.js", "src/app/components/config/config1.js", "src/app/components/config/config.js", "src/app/components/config/ExportComponent.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/data/templates.js", "src/app/components/util.tsx", "src/app/edit/EditContext.tsx", "src/app/edit/page.js", "src/app/page.tsx", "src/app/components/Board.js", "src/app/components/config/config1.js", "src/app/components/config/config.js", "src/app/components/config/ExportComponent.tsx", "src/app/components/ads/LeaderBoardAd.js", "src/app/layout.js", "src/app/components/ads/LargeRectangleAd.js"],
   "exclude": ["node_modules"]
 }
