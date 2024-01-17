@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function LeaderBoardAd() {
+export default function LargeRectangleAd() {
 
     useEffect(() => {
         let adsbygoogle = window.adsbygoogle || [];
@@ -8,13 +8,13 @@ export default function LeaderBoardAd() {
             (adsbygoogle).push({});
         }
     });
+
     return (
-        <div className="grid2">
+        <div className="grid4">
             <ins className="adsbygoogle"
+                data-ad-format="autorelaxed"
                 data-ad-client="ca-pub-1714100900353848"
-                data-ad-slot="7434221550"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                data-ad-slot="6778264362"></ins>
         </div>
     );
 }
