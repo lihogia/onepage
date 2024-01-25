@@ -54,7 +54,8 @@ export interface BoardSettings {
 
 export interface OnePageSettings {
     categories: Category[],
-    version: string
+    version: string,
+    locale: string,
 }
 
 export interface I18n {

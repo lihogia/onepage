@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { Util, Category, BoardSettings, Notification, ConfirmModal } from '@/app/data/types';
+import { Util, Category, BoardSettings, Notification, ConfirmModal, OnePageSettings } from '@/app/data/types';
+import { saveToLocalStorage, loadFromLocalStorage } from "./config/LocalStorage";
 
 const emptyNotification: Notification = {
   type: 'none',
@@ -268,8 +269,20 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           handleSetBoardSettings(newBoardSettings);
         }*/
         setLocale: (locale: string) => {
-          const newBoardSettings = {...boardSettings, locale: locale};
-          updateAndClearSupport(newBoardSettings);
+          const configOnePage: OnePageSettings = loadFromLocalStorage();
+          configOnePage.locale = locale;
+          saveToLocalStorage(configOnePage);
+
+          const newBoardSettings = {
+            ...boardSettings, 
+            locale: locale, 
+            mode: 0, 
+            notice: {
+              type: 'info', 
+              message: 'Locale has been saved to local storage successfully.'
+            }
+          };
+          updateBoardSettings(newBoardSettings);
 
         },
     };

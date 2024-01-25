@@ -1,5 +1,6 @@
 'use client';
 import { useContext } from 'react';
+import type { Category, OnePageSettings } from '@/app/data/types';
 import { BoardContext, emptyBoardSettings } from '@/app/components/BoardContext';
 import { saveToLocalStorage } from './LocalStorage';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -35,8 +36,13 @@ export default function ImportComponent() {
             let boardConfig;
             try {
                 boardConfig = JSON.parse(content);
+                const onePageSettings: OnePageSettings = {
+                    categories: boardConfig.categories,
+                    version: boardConfig.version || process.env.version,
+                    locale: boardConfig.locale || boardContext.boardSettings.locale
+                }
 
-                saveToLocalStorage(boardConfig.categories);
+                saveToLocalStorage(onePageSettings);
                 console.log('Saved to localStorage successfully.');
                 uploadForm.reset();
                 const bSettings: any = emptyBoardSettings;
