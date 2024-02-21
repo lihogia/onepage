@@ -46,6 +46,7 @@
     "edit.back-to-view": "Trở lại",
     "edit.move-to-prev": "Dời về trước",
     "edit.move-to-next": "Dời về sau",
+    "edit.move-to": "Dời đến ...",
 
     "edit.edit-sub-category": "Chỉnh sửa Danh mục con",
     "edit.del-sub-category": "Xoá Danh mục con",
@@ -55,9 +56,13 @@
     "edit.edit-util": "Chỉnh sửa Tiện ích",
     "edit.del-util": "Xoá Tiện ích",
     "edit.del-util-confirm-desc": "Xác nhận bạn muốn xoá tiện ích \"{util}\" ?",
+    "edit.move-to-util-title": "Dời tiện ích \"{util}\" đến Danh mục con khác",
+    "edit.move-to-util-desc": "Chọn Danh mục con để chuyển đến:",
 
     "edit.modal-yes": "Đồng ý",
     "edit.modal-no": "Không",
+    "edit.dialog-move": "Dời",
+    "edit.dialog-cancel": "Huỷ",
 
     "edit.form-sel-title": "Chọn loại tiện ích",
     "edit.form-sel-link": "Liên kết",

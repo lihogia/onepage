@@ -47,6 +47,7 @@
     "edit.back-to-view": "Back to View",
     "edit.move-to-prev": "Move to Previous",
     "edit.move-to-next": "Move to Next",
+    "edit.move-to": "Move to ...",
 
     "edit.edit-sub-category": "Edit Sub Category",
     "edit.del-sub-category": "Delete Sub Category",
@@ -57,8 +58,13 @@
     "edit.del-util": "Delete Utility",
     "edit.del-util-confirm-desc": "Are you sure to remove this Utility \"{util}\" ?",
 
+    "edit.move-to-util-title": "Move this Utility \"{util}\" to another Sub-Category",
+    "edit.move-to-util-desc": "Choose a Sub-Category to move:",
+
     "edit.modal-yes": "Yes",
     "edit.modal-no": "No",
+    "edit.dialog-move": "Move",
+    "edit.dialog-cancel": "Cancel",
 
     "edit.form-sel-title": "Select the type of Utility",
     "edit.form-sel-link": "Link",

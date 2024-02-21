@@ -47,7 +47,7 @@
     "edit.back-to-view": "返回查看",
     "edit.move-to-prev": "移至上一个",
     "edit.move-to-next": "移至下一个",
-
+    "edit.move-to": "移動到 。。。",
     "edit.edit-sub-category": "编辑子类别",
     "edit.del-sub-category": "删除子类别",
     "edit.add-link": "添加实用程序",
@@ -56,9 +56,13 @@
     "edit.edit-util": "编辑实用程序",
     "edit.del-util": "删除实用程序",
     "edit.del-util-confirm-desc": "您确定要删除此实用程序 \"{util}\" 吗?",
+    "edit.move-to-util-title": "將此實用程式\"{util}\"移至另一個子類別",
+    "edit.move-to-util-desc": "选择要移动的子类别:",
 
     "edit.modal-yes": "是",
     "edit.modal-no": "否",
+    "edit.dialog-move": "移動",
+    "edit.dialog-cancel": "取消",
 
     "edit.form-sel-title": "选择实用程序类型",
     "edit.form-sel-link": "关联",
@@ -67,6 +71,5 @@
     "edit.form-new-title": "新标题",
 
     "notification.data-save-success": "数据已成功保存到本地存储。"
-
 
 }

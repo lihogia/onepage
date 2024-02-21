@@ -27,9 +27,13 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
     const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
+    const ctxMnuMovTo = intl.formatMessage({id: 'edit.move-to'});
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
+
+    const dialogMoveToTitle = intl.formatMessage({id: 'edit.move-to-util-title'}, {util: util.title});
+    const dialogMoveToDesc = intl.formatMessage({id: 'edit.move-to-util-desc'});
 
     const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
     const notice: Notification = {
@@ -61,8 +65,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     function moveUtil() {
         const moveDialog: Dialog = {
             type: SelectSubCategoryDialog.type,
-            title: `Move '${util.title}' to another Sub-Category`,
-            description: 'Choose a Sub-Category to move:',
+            title: dialogMoveToTitle,
+            description: dialogMoveToDesc,
             status: 0,
             inputValue: `${cateIndex}_${subCateIndex}`,
             handleClickOnYes: (selSubCateIndex: string) => {
@@ -109,8 +113,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     }
         menuContextItems.push(...[{
             iconURL: '/icons/movetoico.png',
-            text: 'Move to ...',
-            tooltip: 'Move to ...',
+            text: ctxMnuMovTo,
+            tooltip: ctxMnuMovTo,
             handle: moveUtil,
             stringIndex: stringIndex
         },

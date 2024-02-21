@@ -11,8 +11,8 @@ export default function SelectSubCategoryDialog(
     const [selectedSubCate, setSelectedSubCate] = useState(selectedIndex); 
     const [curcateIndex, cursubCateIndex] = splitToNumber(selectedIndex, '_');
     const intl = useIntl();
-    const butYes = 'Move';//intl.formatMessage({id: "edit.modal-yes"});
-    const butNo = 'Cancel';//intl.formatMessage({id: "edit.modal-no"});
+    const butYes = intl.formatMessage({id: "edit.dialog-move"});
+    const butNo = intl.formatMessage({id: "edit.dialog-cancel"});
 
     const boardContext = useContext(BoardContext);
 
