@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import type { SubCategory, Util, ConfirmModal, Notification } from '@/app/data/types';
+import type { SubCategory, Util, Dialog, Notification } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
@@ -8,7 +8,7 @@ import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 import { useIntl } from 'react-intl';
-
+import { ConfirmDialog, SelectSubCategoryDialog } from '@/app/components/dialogs/Dialog';
 
 export default function SubCategoryComponent(
     {subcate, stringIndex = ''}: 
@@ -56,15 +56,18 @@ export default function SubCategoryComponent(
     }
 
     function deleteSubCategory() {
-        const confirmModal: ConfirmModal = {
+        const confirmDelete: Dialog = {
+            type: ConfirmDialog.type,
             title: modalDelTitle,
             description: modalDelDesc,
             status: 0,
+            inputValue: '',
             handleClickOnYes: () => {
                 boardContext.deleteSubCategory(stringIndex);
             }
         };
-        boardContext.setConfirmModal(confirmModal);
+        boardContext.setDialog(confirmDelete);
+
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;

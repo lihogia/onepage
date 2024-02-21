@@ -141,8 +141,8 @@ li.menuItemPopup a {
     color: white;
 }
 
-/* Confirm Modal */
-#confirmModal {
+/* Dialog */
+#confirmDialog, #selDialog {
     display: inline-block;
     position: fixed;
     left: 20%;
@@ -156,24 +156,63 @@ li.menuItemPopup a {
     flex-direction: column;
 }
 
-#confirmModal h3 {
+#confirmDialog h3, #selDialog h3 {
     font-size: larger;
     margin-bottom: 20px;
 }
 
-#confirmModal ul{
+#confirmDialog ul, #selDialog ul{
     list-style-type: none;
 }
-#confirmModal li:first-child{
+#confirmDialog li:first-child{
     margin-bottom: 10px;
 }
 
-#confirmModal li:nth-child(even){
+#confirmDialog li:nth-child(even){
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
+.lstCates {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 2px;
+}
+
+.lstCates li {
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cateTitle {
+    color: #009bd6;
+    font-weight: bold;
+}
+
+.lstSubCates {
+    display: flex;
+    flex-direction: column;
+}
+
+.lstSubCates li {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.butLi {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.curSubCate {
+    color:#5A5755;
+}
 
 /* Content */
 .grid3 {

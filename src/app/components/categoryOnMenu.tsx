@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
-import type { Category, ConfirmModal, Notification } from '@/app/data/types';
+import type { Category, Dialog, Notification } from '@/app/data/types';
 import { BoardContext } from './BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { ConfirmDialog, SelectSubCategoryDialog } from '@/app/components/dialogs/Dialog';
 
 export default function CategoryOnMenu(
     {category, index, isMobile, isLast}:
@@ -156,15 +157,17 @@ export default function CategoryOnMenu(
     }
 
     function deleteCategory() {
-        const confirmModal: ConfirmModal = {
+        const confirmDelete: Dialog = {
+            type: ConfirmDialog.type,
             title: modalDelTitle,
             description: modalDelDesc,
             status: 0,
+            inputValue: '',
             handleClickOnYes: () => {
                 boardContext.deleteCategory(index);
             }
         };
-        boardContext.setConfirmModal(confirmModal);
+        boardContext.setDialog(confirmDelete);
     }
 
     function showHideContextMenu() {

@@ -1,15 +1,17 @@
 import { createContext } from "react";
-import { Util, Category, BoardSettings, Notification, ConfirmModal, OnePageSettings } from '@/app/data/types';
+import { Util, Category, BoardSettings, Notification, Dialog, OnePageSettings } from '@/app/data/types';
 import { saveToLocalStorage, loadFromLocalStorage } from "./config/LocalStorage";
 
 const emptyNotification: Notification = {
   type: 'none',
   message: ''
 }
-const emptyConfirmModal: ConfirmModal = {
+const emptyDialog: Dialog = {
+  type: 'ConfirmYesNo',
   title: '',
   description: '',
   status: -1, // -1: none, 0: popup, 1: yes, 2: no,
+  inputValue: '',
   handleClickOnYes: ()=>{},
 }
 
@@ -19,7 +21,7 @@ export const emptyBoardSettings: BoardSettings = {
   mode: 0, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
   contextMenus: new Map<string, boolean>(),
   notice: emptyNotification,
-  confirmModal: emptyConfirmModal,
+  dialog: emptyDialog,
   locale: 'en'
 };
 
@@ -29,7 +31,7 @@ export const prototypeBoardContext = {
     setSelectedCategoryIndex: (pCateIndex: number) => {},
     setMode: (mode: number) => {},
     setNotification: (notice: Notification) => {},
-    setConfirmModal: (confirmModal: ConfirmModal) => {},
+    setDialog: (dialog: Dialog) => {},
     createCategory: (pName: string) => {},
     updateCategoryName: (pName: string, pCateIndex: number) => {},
     moveCategory: (curIndex: number, newIndex: number) => {},
@@ -63,13 +65,13 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
       setBoardSettings(newBoardSettings);
     }
 
-    // Support here is included: ContextMenu, Notification, Confirm Modals
+    // Support here is included: ContextMenu, Notification, Dialogs
     const updateAndClearSupport = (pBoardSettings: BoardSettings) => {
       const newBoardSettings = {
         ...pBoardSettings,
         contextMenus: new Map(),
         notice: emptyNotification, 
-        confirmModal: emptyConfirmModal
+        dialog: emptyDialog
       };
       setBoardSettings(newBoardSettings);
     }
@@ -90,16 +92,16 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
         setNotification: (notice: Notification) => {
           const newBoardSettings = {...boardSettings, 
             contextMenus: new Map(),
-            confirmModal: emptyConfirmModal,
+            dialog: emptyDialog,
             notice: notice};
           updateBoardSettings(newBoardSettings);
         },
-        setConfirmModal: (confirmModal: ConfirmModal) => {
+        setDialog: (dialog: Dialog) => {
           const newBoardSettings = {
             ...boardSettings,
             contextMenus: new Map(),
             notice: emptyNotification,
-            confirmModal: confirmModal
+            dialog: dialog
           };
           updateBoardSettings(newBoardSettings);
         },
@@ -202,18 +204,30 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           const cates = boardSettings.categories;
           const [cateIndex, subCateIndex, utilIndex] = splitToNumber(curStringIndex, '_');
           const [n_cateIndex, n_subCateIndex, n_utilIndex] = splitToNumber(newStringIndex, '_');
-          if (cateIndex === n_cateIndex && subCateIndex === n_subCateIndex && (utilIndex === n_utilIndex - 1 || utilIndex === n_utilIndex + 1)) {
-            const newCates = [...cates];
-            const newSubCates = [...newCates[cateIndex].subcategories];
-            const newUtils = newSubCates[subCateIndex].utils;
-            
+
+          const newCates = [...cates];
+          const subCates = [...newCates[cateIndex].subcategories];
+          const newSubCates = [...newCates[n_cateIndex].subcategories];
+
+          if (cateIndex === n_cateIndex && subCateIndex === n_subCateIndex) { // same cate & subcate, move it to previouse or next
+            const newUtils = newSubCates[n_subCateIndex].utils;
             const [curUtil, newUtil] = [newUtils[utilIndex], newUtils[n_utilIndex]];
             [newUtils[utilIndex], newUtils[n_utilIndex]] = [newUtil, curUtil];
-            
+
             newCates[cateIndex].subcategories = newSubCates;
             const newBoardSettings = {...boardSettings, categories: newCates};
-            updateAndClearSupport(newBoardSettings);  
+            updateAndClearSupport(newBoardSettings);
+          }else { // not same cate & subcate, move it to the last position
+            const newUtils = [...newSubCates[n_subCateIndex].utils, subCates[subCateIndex].utils[utilIndex]];
+            newSubCates[n_subCateIndex].utils = newUtils;
+            subCates[subCateIndex].utils.splice(utilIndex, 1);
+
+            newCates[cateIndex].subcategories = subCates;
+            newCates[n_cateIndex].subcategories = newSubCates;
+            const newBoardSettings = {...boardSettings, categories: newCates};
+            updateAndClearSupport(newBoardSettings);
           }
+
         }, 
         deleteUtil: (pStringIndex: string) => { // pStringIndex = cateIndex_subCateIndex_utilIndex
           const [cateIndex, subCateIndex, utilIndex] = splitToNumber(pStringIndex, '_');
@@ -229,7 +243,7 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           const newContextMenus = new Map(contextMenus);
           const newBoardSettings: any = {...boardSettings, 
             notice: emptyNotification,
-            confirmModal: emptyConfirmModal,
+            dialog: emptyDialog,
             contextMenus: newContextMenus
           };
           updateBoardSettings(newBoardSettings);

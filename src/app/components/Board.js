@@ -4,7 +4,7 @@ import { template001 } from '@/app/data/templates';
 import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
 import About from './about/about';
 import Config from './config/config';
-import ConfirmModalComponent from './config/ConfirmModal';
+import DialogComponent from '@/app/components/dialogs/Dialog';
 import NotificationComponent from './config/NotificationComponent';
 import CategoryComponent from './category';
 import Menu from './nav/Menu';
@@ -88,7 +88,7 @@ export default function Board() {
           <div className="container" id="ContainerID">
             <Menu categories={boardSettings.categories} selectedIndex={boardSettings.selectedIndex}/>
             <LeaderboardAd />
-            <ConfirmModalComponent />
+            <DialogComponent />
             <div className="grid3">
                 <NotificationComponent />
               {boardSettings.mode === 2 && <About />}
