@@ -9,6 +9,7 @@ import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/components/edit/ContextMenu';
 import { useIntl } from 'react-intl';
 import { ConfirmDialog, SelectSubCategoryDialog } from '@/app/components/dialogs/Dialog';
+import IconComponent from '@/app/components/iconComponent';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
     const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringIndex, '_');
@@ -176,12 +177,15 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     return (
     <>
-        {!changingUtil && <a className="util" href={`#util_${stringIndex}`} onClick={() => {
+        <div className='utilEditWrapper'>
+        <IconComponent size={20} url={util.url} clsName={(Object.keys(util).length == 2) ? 'iconWrapper' : 'iconWrapperSquare'}/>
+        {!changingUtil && <a className="utilEdit" href={`#util_${stringIndex}`} onClick={() => {
             const contextMenusUpdated = showHideOneAndCloseAllContextMenus(contextMenus, menuContextID);
             boardContext.updateContextMenus(contextMenusUpdated);
 
             }}>{util.title}</a>
         }
+        </div>
         {(changingUtil && Object.keys(util).length == 2) && <>
             <UtilLinkEditor stringIndex={stringIndex} pLink={util} handleUpdate={updateUtil} handleClose={() => {
                 setChangingUtil(false);

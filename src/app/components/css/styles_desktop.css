@@ -160,8 +160,28 @@ li.menuItemPopup, .menuItemPopup a {
         border: 1px solid white;
         padding: 0;
         margin: 5px;
+        margin-left: 2px;
     }
-    .util:hover {
+
+    .utilEditWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: center;        
+    }
+
+    .utilEdit {
+        font-size: 12pt;
+        text-decoration: none;
+        color: black;
+        border: 1px solid white;
+        padding: 0;
+        margin-top: 0;
+        margin-left: 2px;
+
+    }
+
+    .util:hover, .utilEdit:hover {
         border-bottom: 1px solid black;
         /*text-decoration: underline;*/
     }
@@ -179,6 +199,13 @@ li.menuItemPopup, .menuItemPopup a {
     .iconWrapper {
         background-color: #F5F5F5;/*#F2F3F4;*/
         border-radius: 50%;
+        padding: 2px;
+        border: 1px solid #009bd6;
+    }
+
+    .iconWrapperSquare {
+        background-color: #F5F5F5;/*#F2F3F4;*/
+        border-radius: 30%;
         padding: 2px;
         border: 1px solid #009bd6;
     }
