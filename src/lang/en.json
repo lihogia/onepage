@@ -58,8 +58,8 @@
     "edit.del-util": "Delete Utility",
     "edit.del-util-confirm-desc": "Are you sure to remove this Utility \"{util}\" ?",
 
-    "edit.move-to-util-title": "Move this Utility \"{util}\" to another Sub-Category",
-    "edit.move-to-util-desc": "Choose a Sub-Category to move:",
+    "edit.move-to-util-title": "Choose a Sub-Category to move",
+    "edit.move-to-util-desc": "Move this Utility \"{util}\" to another Sub-Category",
 
     "edit.modal-yes": "Yes",
     "edit.modal-no": "No",

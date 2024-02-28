@@ -33,8 +33,8 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
 
-    const dialogMoveToTitle = intl.formatMessage({id: 'edit.move-to-util-title'}, {util: util.title});
-    const dialogMoveToDesc = intl.formatMessage({id: 'edit.move-to-util-desc'});
+    const dialogMoveToTitle = intl.formatMessage({id: 'edit.move-to-util-title'});
+    const dialogMoveToDesc = intl.formatMessage({id: 'edit.move-to-util-desc'}, {util: util.title});
 
     const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
     const notice: Notification = {
@@ -51,7 +51,7 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
         const confirmDelete: Dialog = {
             type: ConfirmDialog.type,
-            title: `${modalDelTitle} - ${ConfirmDialog.type}`,
+            title: `${modalDelTitle}`,
             description: modalDelDesc,
             status: 0,
             inputValue: '',

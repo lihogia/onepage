@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Util, Category, BoardSettings, Notification, Dialog, OnePageSettings } from '@/app/data/types';
 import { saveToLocalStorage, loadFromLocalStorage } from "./config/LocalStorage";
+import { template001 } from "../data/templates";
 
 const emptyNotification: Notification = {
   type: 'none',
@@ -49,6 +50,7 @@ export const prototypeBoardContext = {
     saveToStorage: (mode: number, notice: Notification) => {},
 //    loadFromStorage: () => {},
     setLocale: (locale: string) => {},
+    addUtilsFromLibrary: (subCateStringIndex: string, setOfUtilities: Set<string>) => {}
 };
 
 export function splitToNumber(stringOfIndex: string, separator: string) {
@@ -299,9 +301,32 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
           updateBoardSettings(newBoardSettings);
 
         },
+        addUtilsFromLibrary: (subCateStringIndex: string, setOfUtilities: Set<string>) => {
+          const [cateIndex, subCateIndex] = splitToNumber(subCateStringIndex, '_');
+          const newCates = [...boardSettings.categories];
+          const newSubCates = [...newCates[cateIndex].subcategories];
+          const newUtils = [...newSubCates[subCateIndex].utils];
+
+          setOfUtilities.forEach((value) => {
+            const util = getUtilFromLibrary(value);
+            newUtils.push(util);
+          })
+
+          newSubCates[subCateIndex].utils = newUtils;
+          const newBoardSettings = {...boardSettings, categories: newCates};
+          updateAndClearSupport(newBoardSettings);
+
+        }
     };
 
     return initBoardContext;
+}
+
+function getUtilFromLibrary(stringOfIndex: string) { // cateIndex_subCateIndex_utilIndex
+  const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringOfIndex, '_');
+  const categories = template001.categories;
+
+  return categories[cateIndex].subcategories[subCateIndex].utils[utilIndex];
 }
 
 export const BoardContext = createContext(prototypeBoardContext);

@@ -8,7 +8,7 @@ import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 import { useIntl } from 'react-intl';
-import { ConfirmDialog, SelectSubCategoryDialog } from '@/app/components/dialogs/Dialog';
+import { ConfirmDialog, SelectSubCategoryDialog, AddUtilitiesFromLibraryDialog } from '@/app/components/dialogs/Dialog';
 
 export default function SubCategoryComponent(
     {subcate, stringIndex = ''}: 
@@ -67,6 +67,20 @@ export default function SubCategoryComponent(
             }
         };
         boardContext.setDialog(confirmDelete);
+    }
+
+    function addUtilsFromLibrary() {
+        const addUtilsDialog: Dialog = {
+            type: AddUtilitiesFromLibraryDialog.type,
+            title: 'Add Utilities from Library',
+            description: `Choose the Utilities you would like to have in your Sub-Category "${subcate.name}":`,
+            status: 0,
+            inputValue: `${cateIndex}_${subCateIndex}`,
+            handleClickOnYes: (listSelectedUtils: Set<string>) => {
+                boardContext.addUtilsFromLibrary(stringIndex, listSelectedUtils);
+            }
+        };
+        boardContext.setDialog(addUtilsDialog);
 
     }
 
@@ -129,6 +143,16 @@ export default function SubCategoryComponent(
             tooltip: ctxMnuAddLink,
             handle: () => {
                 setAddingUtil(true);
+                //boardContext.createUtil(util, stringIndex);
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/addlinkico.png',
+            text: 'Add Utilities from Library',
+            tooltip: 'Add Utilities from Library',
+            handle: () => {
+                addUtilsFromLibrary();
                 //boardContext.createUtil(util, stringIndex);
             },
             stringIndex: stringIndex

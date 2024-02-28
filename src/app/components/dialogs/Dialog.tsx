@@ -3,6 +3,7 @@ import { Dialog } from "@/app/data/types";
 import { useIntl } from 'react-intl';
 import { BoardContext } from '@/app/components/BoardContext';
 import SelectSubCategoryDialogComponent from './SelectSubCategoryDialog';
+import AddUtilitiesFromLibraryDialogComponent from './AddUtilitiesFromLibraryDialog';
 
 const DefaultDialog: Dialog = {
     type: '',
@@ -19,6 +20,9 @@ ConfirmDialog.type = 'ConfirmYesNo';
 
 export const SelectSubCategoryDialog: Dialog = {...DefaultDialog};
 SelectSubCategoryDialog.type = 'SelectSubCategory';
+
+export const AddUtilitiesFromLibraryDialog: Dialog = {...DefaultDialog};
+AddUtilitiesFromLibraryDialog.type = 'AddUtilitiesFromLibrary';
 
 export default function DialogComponent() {
 
@@ -50,28 +54,32 @@ export default function DialogComponent() {
         boardContext.setDialog(newDialog);
     }
 
-    if (dialog != null && dialog.type === ConfirmDialog.type && dialog.status == 0) {
-        return (
-            <div id="confirmDialog">
-                <h3>{dialog.title}</h3>
-                <ul>
-                    <li><span>{dialog.description}</span></li>
-                    <li><input type='button' name='butYes' value={butYes} className='inputButtonBox' onClick={() => {
-                        handleChooseYes();
-                    }}/>
-                    <input type='button' name='butCancel' value={butNo} className='inputButtonBox' onClick={handleChooseNo}/></li>
-                </ul>
-            </div>    
-        );
-    }else if (dialog != null && dialog.type === SelectSubCategoryDialog.type && dialog.status == 0) {
-        return (
-            <SelectSubCategoryDialogComponent dialog={dialog} handleYes={handleChooseYes} handleNo={handleChooseNo} selectedIndex={dialog.inputValue.toString()}/>            
-        );    
-
+    if (dialog != null && dialog.status == 0 ) {
+        if (dialog.type === ConfirmDialog.type) {
+            return (
+                <div id="dialog">
+                    <h3 className='dialogTitle'>{dialog.title}</h3>
+                    <div className='dialogDesc'>{dialog.description}</div>
+                    <div className='dialogHandle'>
+                        <input type='button' name='butYes' value={butYes} className='inputButtonBox' onClick={() => {
+                            handleChooseYes();
+                        }}/>
+                        <input type='button' name='butCancel' value={butNo} className='inputButtonBox' onClick={handleChooseNo}/>
+                    </div>
+                </div>    
+            );    
+        }else if (dialog.type === SelectSubCategoryDialog.type) {
+            return (
+                <SelectSubCategoryDialogComponent dialog={dialog} handleYes={handleChooseYes} handleNo={handleChooseNo} selectedIndex={dialog.inputValue.toString()}/>            
+            );        
+        }else if (dialog.type === AddUtilitiesFromLibraryDialog.type) {
+            return (
+                <AddUtilitiesFromLibraryDialogComponent dialog={dialog} handleYes={handleChooseYes} handleNo={handleChooseNo} selectedIndex={dialog.inputValue.toString()}/>            
+            );    
+        }
     }else {
         return (
             <></>
         );
     }
-
 }

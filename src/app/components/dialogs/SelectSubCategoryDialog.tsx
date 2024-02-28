@@ -14,9 +14,15 @@ export default function SelectSubCategoryDialog(
     const butYes = intl.formatMessage({id: "edit.dialog-move"});
     const butNo = intl.formatMessage({id: "edit.dialog-cancel"});
 
+
+    const [selectedCateIndex, setSelectedCateIndex] = useState(curcateIndex);
+
     const boardContext = useContext(BoardContext);
 
-    const categories = boardContext.boardSettings.categories;
+    const cates = boardContext.boardSettings.categories;
+    const categories = cates.filter((cate, index) => {
+        return (cate.subcategories.length > 0);
+    })
 
     function handleChooseYes() {
 
@@ -30,46 +36,53 @@ export default function SelectSubCategoryDialog(
     }
 
     return (
-    <div id="selDialog">
-        <h3>{dialog.title}</h3>
-        <ul>
-            <li><span>{dialog.description}</span></li>
-            <li>&nbsp;</li>
-            <li>
-                <ul className='lstCates'>
-                    {categories.map((cate, cateIndex) => {
-                        return (
-                            <li key={`cate_${cateIndex}`}>
-                            {cate.subcategories.length == 0 && <></>}
-                            {cate.subcategories.length > 0 && <>
-                                <span className='cateTitle'>{cate.name}</span>
-                                <ul className='lstSubCates'>
-                                    {cate.subcategories.map((subcate, subCateIndex) => {
-                                        return (
-                                            <li key={`subCate_${subCateIndex}`}>
-                                            {(curcateIndex === cateIndex && cursubCateIndex === subCateIndex) && <></>}
-                                            {(curcateIndex !== cateIndex || cursubCateIndex !== subCateIndex) && <>
-                                                <input type='radio' value={`${cateIndex}_${subCateIndex}_${subcate.utils.length}`} name='subCateToChoose'
-                                                    onClick={(e) => {
-                                                        setSelectedSubCate(e.currentTarget.value);
-                                                    }}/>&nbsp;
-                                                <label htmlFor='subCateToChoose'>{subcate.name}</label>
-                                                </>}
-                                            </li>
-                                      );
-                                    })}
-                                </ul>
-                            </>}                          
-                            </li>
-                        );
-                    })}
-                </ul>
-            </li>
+        <div id="dialog">
+            <h3 className='dialogTitle'>{dialog.title}</h3>
+            <div className='dialogDesc'>{dialog.description}</div>
+            <ul className='dialogSelSubCate'>
+                <li>
+                    <label htmlFor='lstCates' className='labelCateName'>Categories:</label>&nbsp;&nbsp;
+                    <select className='selectCateName' value={selectedCateIndex} onChange={(e) => {
+                        setSelectedCateIndex(Number.parseInt(e.currentTarget.value));
+                    }}>
+                        {categories.map((cate, cateIndex) => {
+                            return (
+                                <option value={cateIndex} key={cateIndex}>{cate.name}</option>
+                            );
+                        })}
+                    </select>
+                </li>
+                <li>
+                    <ul className='listSubCates'>
+                        {categories[selectedCateIndex].subcategories.length > 0 && categories[selectedCateIndex].subcategories.map((subcate, subCateIndex) => {
+                            const isOldSelectedSubCate = curcateIndex === selectedCateIndex && cursubCateIndex === subCateIndex;
+                            const [selectingCateIndex, selectingSubCateIndex, selectingUtilIndex] = splitToNumber(selectedSubCate, '_');
+                            const isNewSelectedSubCate = selectingCateIndex === selectedCateIndex && selectingSubCateIndex === subCateIndex;
+                            return (
+                                <li key={`${selectedCateIndex}_${subCateIndex}`}>
+                                    <input type='radio' value={`${selectedCateIndex}_${subCateIndex}_${subcate.utils.length}`} name='subCateToChoose'
+                                        disabled={(isOldSelectedSubCate) ? true : false} checked={isNewSelectedSubCate ? true : false}
+                                        onChange={(e) => {
+                                            setSelectedSubCate(e.currentTarget.value);
+                                        }}/>&nbsp;
+                                    <label htmlFor='subCateToChoose' onClick={(e) => { 
+                                        if (isOldSelectedSubCate) return;
+                                        setSelectedSubCate(`${selectedCateIndex}_${subCateIndex}_${subcate.utils.length}`);
+                                    }}>{subcate.name}</label>
+                                </li>
+                            );
+                        })}
 
-            <li className='butLi'><input type='button' name='butYes' value={butYes} className='inputButtonBox' onClick={handleChooseYes}/>
-            <input type='button' name='butCancel' value={butNo} className='inputButtonBox' onClick={handleChooseNo}/></li>
-        </ul>
+                    </ul>
+                </li>
+            </ul>
+
+            <div className='dialogHandle'>
+                <input type='button' name='butYes' value={butYes} className='inputButtonBox' onClick={() => {
+                    handleChooseYes();
+                }}/>
+                <input type='button' name='butCancel' value={butNo} className='inputButtonBox' onClick={handleChooseNo}/>
+            </div>
     </div>
-
     );
 }

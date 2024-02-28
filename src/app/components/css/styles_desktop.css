@@ -234,6 +234,215 @@ li.menuItemPopup, .menuItemPopup a {
     #formExportConfigFile, #formLocaleConfigForm, #formUploadConfigFile {
         margin: 30px 10px 30px 10px;
     }
-       
+
+    /* Dialog */
+    #dialog {
+        display: inline-block;
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        z-index: 999;
+        padding: 0;
+        border-radius: 3px;
+        border: 3px solid #63b7d3;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dialogTitle {
+        font-size: medium;
+        padding: 5px 5px 5px 5px;
+        border-bottom: 3px solid #63b7d3;
+        color: black;
+    }
+
+    .dialogDesc {
+        margin: 10px;
+    }
+
+    .dialogHandle {
+        margin: 20px 10px 10px 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .dialogSelSubCate {
+        list-style-type: none;
+        margin: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .listSubCates, .listUtils {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 15px 0 0 10px;
+
+    }
+    .listSubCates li, .listUtils li {
+        margin: 5px;
+    }
+
+    .listUtils li.utilItem {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
+
+        border: 1px dotted #63b7d3;
+    }
+
+    .dialogSelCateRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .labelCateName {
+        color: #009bd6;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 150px;
+    }
+
+    .selectCateName {
+        border-radius: 3px;
+        border: 1px solid black;
+        height: 30px;
+        margin: 3px;
+        width: 200px;
+        padding-left: 5px;    
+        font-size: 14px;
+    }
+
+
+
+
+
+    #confirmDialog, #selDialog, #selUtilDialog {
+        display: inline-block;
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        z-index: 999;
+        padding: 0;
+        border-radius: 3px;
+        border: 3px solid #63b7d3;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #selDialog {
+        width: 40%;
+    }
+
+    #selUtilDialog {
+        left: 15%;
+        position: absolute;
+        width: 70%;
+    }
+
+    #confirmDialog h3, #selDialog h3, #selUtilDialog h3 {
+        font-size: medium;
+        padding: 5px 5px 5px 5px;
+        border-bottom: 3px solid #63b7d3;
+        color: black;
+    }
+
+    #confirmDialog ul, #selDialog ul, #selUtilDialog ul{
+        list-style-type: none;
+        margin: 10px;
+    }
+
+    #confirmDialog li:first-child {
+        margin-bottom: 10px;
+    }
+    #confirmDialog li:last-child {
+        margin-top: 20px;
+    }
+
+
+    #confirmDialog li:nth-child(even){
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .lstCates {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 2px;
+    }
+
+    .lstCates li {
+        margin: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+/*
+    .lstSubCates {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0 0 0 10px;
+    }
+
+    .lstSubCates li.lstSubCatesLi {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .lstSubCates li {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+    }
+    ul.lstSubCates span{
+        font-weight: bold;
+        font-size: 12pt;    
+        padding: 5px;
+    }
+
+    ul.lstUtils {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    ul.lstUtils li{
+        border-radius: 3px;
+        border: 1px dotted #009bd6;
+        margin: 2px;
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+    .butLi {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .curSubCate {
+        color:#5A5755;
+    }    
+    */   
 }
 

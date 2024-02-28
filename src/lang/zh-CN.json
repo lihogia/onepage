@@ -56,8 +56,9 @@
     "edit.edit-util": "编辑实用程序",
     "edit.del-util": "删除实用程序",
     "edit.del-util-confirm-desc": "您确定要删除此实用程序 \"{util}\" 吗?",
-    "edit.move-to-util-title": "將此實用程式\"{util}\"移至另一個子類別",
-    "edit.move-to-util-desc": "选择要移动的子类别:",
+
+    "edit.move-to-util-title": "选择要移动的子类别:",
+    "edit.move-to-util-desc": "將此實用程式\"{util}\"移至另一個子類別",
 
     "edit.modal-yes": "是",
     "edit.modal-no": "否",

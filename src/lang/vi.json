@@ -56,8 +56,9 @@
     "edit.edit-util": "Chỉnh sửa Tiện ích",
     "edit.del-util": "Xoá Tiện ích",
     "edit.del-util-confirm-desc": "Xác nhận bạn muốn xoá tiện ích \"{util}\" ?",
-    "edit.move-to-util-title": "Dời tiện ích \"{util}\" đến Danh mục con khác",
-    "edit.move-to-util-desc": "Chọn Danh mục con để chuyển đến:",
+    
+    "edit.move-to-util-title": "Chọn Danh mục con để chuyển đến:",
+    "edit.move-to-util-desc": "Dời tiện ích \"{util}\" đến Danh mục con khác",
 
     "edit.modal-yes": "Đồng ý",
     "edit.modal-no": "Không",
