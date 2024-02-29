@@ -64,12 +64,17 @@
     "edit.modal-no": "Không",
     "edit.dialog-move": "Dời",
     "edit.dialog-cancel": "Huỷ",
+    "edit.dialog-categories": "Các Danh mục",
+    "edit.dialog-sub-categories": "Các Danh mục con",
+    "edit.dialog-add": "Thêm",
 
     "edit.form-sel-title": "Chọn loại tiện ích",
     "edit.form-sel-link": "Liên kết",
     "edit.form-sel-ss": "Tìm kiếm đơn giản",
     "edit.form-sel-ss-exp": "Tìm kiếm với RegExp",
     "edit.form-new-title": "Đề mục mới",
+    "edit.add-utilities-from-library-title": "Thêm tiện ích từ thư viện",
+    "edit.choose-utilities-to-add-desc": "Chọn những tiện ích bạn muốn có trong danh mục con \"{subcategory}\":",
 
     "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ trình duyệt thành công."
 

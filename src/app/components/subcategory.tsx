@@ -41,6 +41,10 @@ export default function SubCategoryComponent(
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-subcate-confirm-desc'}, {subcategory: subcate.name});
+
+    const modalAddUtilitiesTitle = intl.formatMessage({id: 'edit.add-utilities-from-library-title'});
+    const modalAddUtilitiesDesc = intl.formatMessage({id: 'edit.choose-utilities-to-add-desc'}, {subcategory: subcate.name});
+
     const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
     const notice: Notification = {
         type: 'info',
@@ -72,8 +76,8 @@ export default function SubCategoryComponent(
     function addUtilsFromLibrary() {
         const addUtilsDialog: Dialog = {
             type: AddUtilitiesFromLibraryDialog.type,
-            title: 'Add Utilities from Library',
-            description: `Choose the Utilities you would like to have in your Sub-Category "${subcate.name}":`,
+            title: modalAddUtilitiesTitle,
+            description: modalAddUtilitiesDesc,
             status: 0,
             inputValue: `${cateIndex}_${subCateIndex}`,
             handleClickOnYes: (listSelectedUtils: Set<string>) => {
@@ -149,8 +153,8 @@ export default function SubCategoryComponent(
         },
         {
             iconURL: '/icons/addlinkico.png',
-            text: 'Add Utilities from Library',
-            tooltip: 'Add Utilities from Library',
+            text: modalAddUtilitiesTitle,
+            tooltip: modalAddUtilitiesTitle,
             handle: () => {
                 addUtilsFromLibrary();
                 //boardContext.createUtil(util, stringIndex);

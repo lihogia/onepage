@@ -62,12 +62,19 @@
 
     "edit.modal-yes": "是",
     "edit.modal-no": "否",
+    "edit.dialog-categories": "類別",
+    "edit.dialog-sub-categories": "子類別",
+    "edit.dialog-add": "添加",
+
 
     "edit.form-sel-title": "選擇實用程序類型",
     "edit.form-sel-link": "關聯",
     "edit.form-sel-ss": "簡單搜索",
     "edit.form-sel-ss-exp": "使用 RegExp 進行簡單搜索",
     "edit.form-new-title": "新標題",
+
+    "edit.add-utilities-from-library-title": "從庫中新增實用程式",
+    "edit.choose-utilities-to-add-desc": "選擇您想要在子類別\"{subcategory}\"中擁有的實用程式：",
 
     "notification.data-save-success": "資料已成功儲存至本機儲存。"
 

@@ -13,8 +13,10 @@ export default function AddUtilitiesFromLibraryDialog(
     const [selectedSubCate, setSelectedSubCate] = useState(selectedIndex); 
     const [curcateIndex, cursubCateIndex] = splitToNumber(selectedIndex, '_');
     const intl = useIntl();
-    const butYes = 'Add';//intl.formatMessage({id: "edit.dialog-move"});
+    const butYes = intl.formatMessage({id: "edit.dialog-add"});
     const butNo = intl.formatMessage({id: "edit.dialog-cancel"});
+    const labelCategories = intl.formatMessage({id: "edit.dialog-categories"});
+    const labelSubCategories = intl.formatMessage({id: "edit.dialog-sub-categories"});
 
     const [selectedCateIndex, setSelectedCateIndex] = useState(0);
     const [selectedSubCateIndex, setSelectedSubCateIndex] = useState(0);
@@ -45,7 +47,7 @@ export default function AddUtilitiesFromLibraryDialog(
 
         <ul className='dialogSelSubCate'>
             <li className='dialogSelCateRow'>
-                <label htmlFor='lstCates' className='labelCateName'>Categories:</label>
+                <label htmlFor='lstCates' className='labelCateName'>{labelCategories}:</label>
                 <select id='lstCates' className='selectCateName' value={selectedCateIndex} onChange={(e) => {
                     setSelectedCateIndex(Number.parseInt(e.currentTarget.value));
                     setSelectedSubCateIndex(0);
@@ -58,7 +60,7 @@ export default function AddUtilitiesFromLibraryDialog(
                 </select>
             </li>
             <li className='dialogSelCateRow' key={`cateIndex_${selectedCateIndex}`}>
-                <label htmlFor='lstSubCates' className='labelCateName'>Sub-Categories:</label>
+                <label htmlFor='lstSubCates' className='labelCateName'>{labelSubCategories}:</label>
                 <select id='lstSubCates' className='selectCateName' value={selectedSubCateIndex} onChange={(e) => {
                     setSelectedSubCateIndex(Number.parseInt(e.currentTarget.value));
                 }}>

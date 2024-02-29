@@ -64,12 +64,18 @@
     "edit.modal-no": "否",
     "edit.dialog-move": "移動",
     "edit.dialog-cancel": "取消",
+    "edit.dialog-categories": "类别",
+    "edit.dialog-sub-categories": "子类别",
+    "edit.dialog-add": "添加",
 
     "edit.form-sel-title": "选择实用程序类型",
     "edit.form-sel-link": "关联",
     "edit.form-sel-ss": "简单搜索",
     "edit.form-sel-ss-exp": "使用 RegExp 进行简单搜索",
     "edit.form-new-title": "新标题",
+
+    "edit.add-utilities-from-library-title": "从库中添加实用程序",
+    "edit.choose-utilities-to-add-desc": "选择您想要在子类别\"{subcategory}\"中拥有的实用程序：",
 
     "notification.data-save-success": "数据已成功保存到本地存储。"
 
