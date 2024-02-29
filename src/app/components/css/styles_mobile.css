@@ -339,7 +339,7 @@ ul.utilities {
         flex-direction: column;
     }
 
-    .listSubCates {
+    .listSubCates, .listUtils {
         list-style-type: none;
         display: flex;
         flex-direction: column;
@@ -348,13 +348,33 @@ ul.utilities {
         margin: 15px 0 0 10px;
 
     }
-    .listSubCates li {
+    .listSubCates li, .listUtils li {
         margin: 5px;
+    }
+
+    .listUtils li.utilItem {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
+
+        border: 1px dotted #63b7d3;
+    }
+
+    .dialogSelCateRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
     }
 
     .labelCateName {
         color: #009bd6;
         font-weight: bold;
+margin-right: 5px;
+        width: 150px;
     }
 
     .selectCateName {
@@ -365,47 +385,6 @@ ul.utilities {
         width: 200px;
         padding-left: 5px;    
         font-size: 14px;
-    }
-
-
-
-    #confirmDialog, #selDialog, #selUtilDialog {
-        display: inline-block;
-        position: fixed;
-        left: 5px;
-        right: 5px;
-        top: 30%;
-        z-index: 999;
-        padding: 10px;
-        border-radius: 10px;
-        border: 3px solid #63b7d3;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #confirmDialog h3, #selDialog h3, #selUtilDialog h3 {
-        font-size: larger;
-        margin-bottom: 20px;
-    }
-
-    #confirmDialog ul, #selDialog ul, #selUtilDialog ul{
-        list-style-type: none;
-    }
-
-    #selUtilDialog {
-        top: 15%;
-        position: absolute;
-    }
-
-    #confirmDialog li:first-child{
-        margin-bottom: 10px;
-    }
-
-    #confirmDialog li:nth-child(even){
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
     }
 
     .lstCates {
@@ -420,32 +399,6 @@ ul.utilities {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-    }
-
-    .cateTitle {
-        color: #009bd6;
-        font-weight: bold;
-    }
-
-    .lstSubCates {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .lstSubCates li {
-        display: flex;
-        flex-direction: row;
-
-    }
-
-    .butLi {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
-    .curSubCate {
-        color:#5A5755;
     }
 
 }

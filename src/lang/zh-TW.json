@@ -47,7 +47,7 @@
     "edit.back-to-view": "返回查看",
     "edit.move-to-prev": "移至上一個",
     "edit.move-to-next": "移至下一個",
-
+    "edit.move-to": "搬去 。。。",
     "edit.edit-sub-category": "編輯子類別",
     "edit.del-sub-category": "刪除子類別",
     "edit.add-link": "添加實用程序",
@@ -62,6 +62,8 @@
 
     "edit.modal-yes": "是",
     "edit.modal-no": "否",
+    "edit.dialog-move": "移動",
+    "edit.dialog-cancel": "取消",
     "edit.dialog-categories": "類別",
     "edit.dialog-sub-categories": "子類別",
     "edit.dialog-add": "添加",

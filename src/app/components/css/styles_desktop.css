@@ -323,61 +323,7 @@ li.menuItemPopup, .menuItemPopup a {
         font-size: 14px;
     }
 
-
-
-
-
-    #confirmDialog, #selDialog, #selUtilDialog {
-        display: inline-block;
-        position: fixed;
-        left: 20%;
-        top: 20%;
-        z-index: 999;
-        padding: 0;
-        border-radius: 3px;
-        border: 3px solid #63b7d3;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #selDialog {
-        width: 40%;
-    }
-
-    #selUtilDialog {
-        left: 15%;
-        position: absolute;
-        width: 70%;
-    }
-
-    #confirmDialog h3, #selDialog h3, #selUtilDialog h3 {
-        font-size: medium;
-        padding: 5px 5px 5px 5px;
-        border-bottom: 3px solid #63b7d3;
-        color: black;
-    }
-
-    #confirmDialog ul, #selDialog ul, #selUtilDialog ul{
-        list-style-type: none;
-        margin: 10px;
-    }
-
-    #confirmDialog li:first-child {
-        margin-bottom: 10px;
-    }
-    #confirmDialog li:last-child {
-        margin-top: 20px;
-    }
-
-
-    #confirmDialog li:nth-child(even){
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
-    .lstCates {
+   .lstCates {
         display: flex;
         flex-direction: row;
         list-style-type: none;
@@ -391,58 +337,4 @@ li.menuItemPopup, .menuItemPopup a {
         justify-content: flex-start;
     }
 
-/*
-    .lstSubCates {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        padding: 0;
-        margin: 0 0 0 10px;
-    }
-
-    .lstSubCates li.lstSubCatesLi {
-        display: flex;
-        flex-direction: column;
-        
-    }
-
-    .lstSubCates li {
-        display: flex;
-        flex-direction: row;
-        padding: 5px;
-    }
-    ul.lstSubCates span{
-        font-weight: bold;
-        font-size: 12pt;    
-        padding: 5px;
-    }
-
-    ul.lstUtils {
-        display: flex;
-        flex-direction: column;
-    }
-
-
-    ul.lstUtils li{
-        border-radius: 3px;
-        border: 1px dotted #009bd6;
-        margin: 2px;
-        padding: 5px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-content: center;
-    }
-
-    .butLi {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
-    .curSubCate {
-        color:#5A5755;
-    }    
-    */   
 }
-
