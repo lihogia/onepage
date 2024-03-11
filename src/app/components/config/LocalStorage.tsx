@@ -1,4 +1,4 @@
-import { template001 } from '@/app/data/templates';
+import { template } from '@/app/data/templates';
 import type { Category, OnePageSettings } from '@/app/data/types';
 
 const ONEPAGE_SETTINGS: OnePageSettings = {
@@ -39,6 +39,6 @@ export function loadFromLocalStorage() {
 export function loadFromDefault() {
     const opSettings = ONEPAGE_SETTINGS;
     
-    opSettings.categories = template001.categories;
+    opSettings.categories = template.categories;
     return opSettings;
 }

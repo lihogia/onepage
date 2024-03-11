@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { template001 } from '@/app/data/templates';
+import { template } from '@/app/data/templates';
 import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
 import About from './about/about';
 import Config from './config/config';
@@ -16,7 +16,7 @@ import { SUPPORT_LANGUAGES, isLanguageSupported } from '@/app/components/config/
 
 export function loadData() {
     //const data = loadLocalStorage();
-    const data = [];//template001.categories;
+    const data = [];
 
     return data;
 }
@@ -62,7 +62,7 @@ export default function Board() {
       let localCates = configOnePage.categories;
 
       if (localCates.length == 0 ) {
-        localCates = template001.categories;
+        localCates = template.categories;
         console.log('No data in local storage, default data will be loaded. Start to use your own data by Edit & Save to storage, or Import from Config.');
   
       }

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Util, Category, BoardSettings, Notification, Dialog, OnePageSettings } from '@/app/data/types';
 import { saveToLocalStorage, loadFromLocalStorage } from "./config/LocalStorage";
-import { template001 } from "../data/templates";
+import { template } from "../data/templates";
 
 const emptyNotification: Notification = {
   type: 'none',
@@ -324,7 +324,7 @@ export function createInitBoardContext(boardSettings: BoardSettings, setBoardSet
 
 function getUtilFromLibrary(stringOfIndex: string) { // cateIndex_subCateIndex_utilIndex
   const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringOfIndex, '_');
-  const categories = template001.categories;
+  const categories = template.categories;
 
   return categories[cateIndex].subcategories[subCateIndex].utils[utilIndex];
 }

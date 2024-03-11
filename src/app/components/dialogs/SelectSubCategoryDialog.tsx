@@ -13,21 +13,17 @@ export default function SelectSubCategoryDialog(
     const intl = useIntl();
     const butYes = intl.formatMessage({id: "edit.dialog-move"});
     const butNo = intl.formatMessage({id: "edit.dialog-cancel"});
+    const textNoSubCates = intl.formatMessage({id: "edit.no-sub-categories"});
 
 
     const [selectedCateIndex, setSelectedCateIndex] = useState(curcateIndex);
 
     const boardContext = useContext(BoardContext);
-
-    const cates = boardContext.boardSettings.categories;
-    const categories = cates.filter((cate, index) => {
-        return (cate.subcategories.length > 0);
-    })
+    const categories = boardContext.boardSettings.categories;
 
     function handleChooseYes() {
-
-        //const newPosition = `${selectedSubCate}`;
         if (selectedSubCate === selectedIndex) return;
+        //console.log(selectedSubCate)
         handleYes(selectedSubCate);
     }
 
@@ -45,15 +41,17 @@ export default function SelectSubCategoryDialog(
                     <select className='selectCateName' value={selectedCateIndex} onChange={(e) => {
                         setSelectedCateIndex(Number.parseInt(e.currentTarget.value));
                     }}>
-                        {categories.map((cate, cateIndex) => {
+                        {categories.map((cate, index) => {
                             return (
-                                <option value={cateIndex} key={cateIndex}>{cate.name}</option>
+                                <option value={index} key={index}>{cate.name}</option>
                             );
                         })}
                     </select>
                 </li>
                 <li>
                     <ul className='listSubCates'>
+                        {categories[selectedCateIndex].subcategories.length == 0 && <li>{textNoSubCates}</li>
+                        }
                         {categories[selectedCateIndex].subcategories.length > 0 && categories[selectedCateIndex].subcategories.map((subcate, subCateIndex) => {
                             const isOldSelectedSubCate = curcateIndex === selectedCateIndex && cursubCateIndex === subCateIndex;
                             const [selectingCateIndex, selectingSubCateIndex, selectingUtilIndex] = splitToNumber(selectedSubCate, '_');

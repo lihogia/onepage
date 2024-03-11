@@ -78,6 +78,8 @@
     "edit.add-utilities-from-library-title": "Add Utilities from Library",
     "edit.choose-utilities-to-add-desc": "Choose the Utilities you would like to have in your Sub-Category \"{subcategory}\":",
 
+    "edit.no-sub-categories": "There is no Sub-Categories.",
+
     "notification.data-save-success": "Data has been saved to local storage successfully."
 
 }

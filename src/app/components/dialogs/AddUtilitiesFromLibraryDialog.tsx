@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { Dialog } from "@/app/data/types";
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import UtilComponent from '@/app/components/util';
-import { template001 } from '@/app/data/templates';
+import { template } from '@/app/data/templates';
 
 export default function AddUtilitiesFromLibraryDialog(
     {dialog, handleYes, handleNo, selectedIndex}: 
@@ -23,7 +23,7 @@ export default function AddUtilitiesFromLibraryDialog(
     const [listSelectedUtils, setListSelectedUtils] = useState(new Set());
 
 //    const boardContext = useContext(BoardContext);
-    const cates = template001.categories;//boardContext.boardSettings.categories;
+    const cates = template.categories;//boardContext.boardSettings.categories;
     const categories = cates.filter((cate, index) => {
         return (cate.subcategories.length > 0);
     })

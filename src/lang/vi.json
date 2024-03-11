@@ -76,6 +76,8 @@
     "edit.add-utilities-from-library-title": "Thêm tiện ích từ thư viện",
     "edit.choose-utilities-to-add-desc": "Chọn những tiện ích bạn muốn có trong danh mục con \"{subcategory}\":",
 
+    "edit.no-sub-categories": "Không có Danhh mục con.",
+
     "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ trình duyệt thành công."
 
 
