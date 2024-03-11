@@ -5,7 +5,7 @@
     "about.p3": "I hope you all enjoy using it !!! To support <bold>OnePage</bold>, you can <link>buy me a coffee</link>.",
     "about.p4": "All feedback is welcome! Please contact me at <link>lilogia</link>.",
 
-    "footer.message": "© 2023. All right reserved. Version: {version}. Contact:<space></space><link>lilogia</link>.",
+    "footer.message": "© 2024. All right reserved. Version: {version}. Contact:<space></space><link>lilogia</link>.",
 
     "menu.categories": "Categories",
     "menu.about": "About",
@@ -47,6 +47,7 @@
     "edit.back-to-view": "Back to View",
     "edit.move-to-prev": "Move to Previous",
     "edit.move-to-next": "Move to Next",
+    "edit.move-to": "Move to ...",
 
     "edit.edit-sub-category": "Edit Sub Category",
     "edit.del-sub-category": "Delete Sub Category",
@@ -57,14 +58,27 @@
     "edit.del-util": "Delete Utility",
     "edit.del-util-confirm-desc": "Are you sure to remove this Utility \"{util}\" ?",
 
+    "edit.move-to-util-title": "Choose a Sub-Category to move",
+    "edit.move-to-util-desc": "Move this Utility \"{util}\" to another Sub-Category",
+
     "edit.modal-yes": "Yes",
     "edit.modal-no": "No",
+    "edit.dialog-move": "Move",
+    "edit.dialog-cancel": "Cancel",
+    "edit.dialog-categories": "Categories",
+    "edit.dialog-sub-categories": "Sub-Categories",
+    "edit.dialog-add": "Add",
 
     "edit.form-sel-title": "Select the type of Utility",
     "edit.form-sel-link": "Link",
     "edit.form-sel-ss": "Simple Search",
     "edit.form-sel-ss-exp": "Simple Search with RegExp",
     "edit.form-new-title": "New Title",
+
+    "edit.add-utilities-from-library-title": "Add Utilities from Library",
+    "edit.choose-utilities-to-add-desc": "Choose the Utilities you would like to have in your Sub-Category \"{subcategory}\":",
+
+    "edit.no-sub-categories": "There is no Sub-Categories.",
 
     "notification.data-save-success": "Data has been saved to local storage successfully."
 

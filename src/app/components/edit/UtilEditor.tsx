@@ -1,13 +1,15 @@
 import { useContext, useState } from 'react';
 import UtilLinkComponent from '../link';
 import UtilSimpleSearch from '../search';
-import { Util, UtilLink, SimpleSearch, ConfirmModal, Notification } from '@/app/data/types';
+import { Util, UtilLink, SimpleSearch, Dialog, Notification } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import UtilLinkEditor from '@/app/components/edit/UtilLinkEditor';
 import UtilSimpleSearchEditor from './UtilSimpleSearchEditor';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus } from '@/app/components/edit/ContextMenu';
 import { useIntl } from 'react-intl';
+import { ConfirmDialog, SelectSubCategoryDialog } from '@/app/components/dialogs/Dialog';
+import IconComponent from '@/app/components/iconComponent';
 
 export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex: string}) { // stringIndex = cateIndex_subCateIndex_utilIndex
     const [cateIndex, subCateIndex, utilIndex] = splitToNumber(stringIndex, '_');
@@ -26,9 +28,13 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     const ctxMnuMovPreSubCate = intl.formatMessage({id: 'edit.move-to-prev'});
     const ctxMnuMovNexSubCate = intl.formatMessage({id: 'edit.move-to-next'});
+    const ctxMnuMovTo = intl.formatMessage({id: 'edit.move-to'});
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-util-confirm-desc'}, {util: util.title});
+
+    const dialogMoveToTitle = intl.formatMessage({id: 'edit.move-to-util-title'});
+    const dialogMoveToDesc = intl.formatMessage({id: 'edit.move-to-util-desc'}, {util: util.title});
 
     const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
     const notice: Notification = {
@@ -42,15 +48,33 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
     }
 
     function deleteUtil() {
-        const confirmModal: ConfirmModal = {
-            title: modalDelTitle,
+
+        const confirmDelete: Dialog = {
+            type: ConfirmDialog.type,
+            title: `${modalDelTitle}`,
             description: modalDelDesc,
             status: 0,
+            inputValue: '',
             handleClickOnYes: () => {
                 boardContext.deleteUtil(stringIndex);
             }
         };
-        boardContext.setConfirmModal(confirmModal);
+        boardContext.setDialog(confirmDelete);
+
+    }
+
+    function moveUtil() {
+        const moveDialog: Dialog = {
+            type: SelectSubCategoryDialog.type,
+            title: dialogMoveToTitle,
+            description: dialogMoveToDesc,
+            status: 0,
+            inputValue: `${cateIndex}_${subCateIndex}`,
+            handleClickOnYes: (selSubCateIndex: string) => {
+                boardContext.moveUtil(stringIndex, selSubCateIndex);
+            }
+        };
+        boardContext.setDialog(moveDialog);
     }
 
     const menuContextID = `menuCxtUtil_${stringIndex}`;
@@ -89,6 +113,13 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
         });
     }
         menuContextItems.push(...[{
+            iconURL: '/icons/movetoico.png',
+            text: ctxMnuMovTo,
+            tooltip: ctxMnuMovTo,
+            handle: moveUtil,
+            stringIndex: stringIndex
+        },
+            {
             iconURL: '/icons/deleteico.png',
             text: ctxMnuDelUtil,
             tooltip: ctxMnuDelUtil,
@@ -146,12 +177,15 @@ export default function UtilEditor({util, stringIndex}: {util:Util, stringIndex:
 
     return (
     <>
-        {!changingUtil && <a className="util" href={`#util_${stringIndex}`} onClick={() => {
+        <div className='utilEditWrapper'>
+        <IconComponent size={20} url={util.url} clsName={(Object.keys(util).length == 2) ? 'iconWrapper' : 'iconWrapperSquare'}/>
+        {!changingUtil && <a className="utilEdit" href={`#util_${stringIndex}`} onClick={() => {
             const contextMenusUpdated = showHideOneAndCloseAllContextMenus(contextMenus, menuContextID);
             boardContext.updateContextMenus(contextMenusUpdated);
 
             }}>{util.title}</a>
         }
+        </div>
         {(changingUtil && Object.keys(util).length == 2) && <>
             <UtilLinkEditor stringIndex={stringIndex} pLink={util} handleUpdate={updateUtil} handleClose={() => {
                 setChangingUtil(false);

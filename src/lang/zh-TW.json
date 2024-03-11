@@ -5,7 +5,7 @@
     "about.p3": "希望大家使用愉快 !!! 為了支持 <bold>OnePage</bold>, 你可以 <link>買杯咖啡給我</link>。",
     "about.p4": "歡迎所有回饋! 請透過 <link>lilogia</link> 與我聯繫。",
     
-    "footer.message": "© 2023. 版權所有. 版本: {version}. 接觸:<space></space><link>lilogia</link>.",
+    "footer.message": "© 2024. 版權所有. 版本: {version}. 接觸:<space></space><link>lilogia</link>.",
 
     "menu.categories": "類別",
     "menu.about": "關於",
@@ -47,7 +47,7 @@
     "edit.back-to-view": "返回查看",
     "edit.move-to-prev": "移至上一個",
     "edit.move-to-next": "移至下一個",
-
+    "edit.move-to": "搬去 。。。",
     "edit.edit-sub-category": "編輯子類別",
     "edit.del-sub-category": "刪除子類別",
     "edit.add-link": "添加實用程序",
@@ -56,15 +56,27 @@
     "edit.edit-util": "編輯實用程序",
     "edit.del-util": "刪除實用程序",
     "edit.del-util-confirm-desc": "您確定要刪除此實用程序 \"{util}\" 嗎?",
+    "edit.move-to-util-title": "選擇要移動的子類別:",
+    "edit.move-to-util-desc": "将此实用程序\"{util}\"移动到另一个子类别",
+
 
     "edit.modal-yes": "是",
     "edit.modal-no": "否",
+    "edit.dialog-move": "移動",
+    "edit.dialog-cancel": "取消",
+    "edit.dialog-categories": "類別",
+    "edit.dialog-sub-categories": "子類別",
+    "edit.dialog-add": "添加",
+
 
     "edit.form-sel-title": "選擇實用程序類型",
     "edit.form-sel-link": "關聯",
     "edit.form-sel-ss": "簡單搜索",
     "edit.form-sel-ss-exp": "使用 RegExp 進行簡單搜索",
     "edit.form-new-title": "新標題",
+
+    "edit.add-utilities-from-library-title": "從庫中新增實用程式",
+    "edit.choose-utilities-to-add-desc": "選擇您想要在子類別\"{subcategory}\"中擁有的實用程式：",
 
     "notification.data-save-success": "資料已成功儲存至本機儲存。"
 

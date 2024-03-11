@@ -141,40 +141,6 @@ li.menuItemPopup a {
     color: white;
 }
 
-/* Confirm Modal */
-#confirmModal {
-    display: inline-block;
-    position: fixed;
-    left: 20%;
-    top: 20%;
-    z-index: 999;
-    padding: 10px;
-    border-radius: 10px;
-    border: 3px solid #63b7d3;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
-
-#confirmModal h3 {
-    font-size: larger;
-    margin-bottom: 20px;
-}
-
-#confirmModal ul{
-    list-style-type: none;
-}
-#confirmModal li:first-child{
-    margin-bottom: 10px;
-}
-
-#confirmModal li:nth-child(even){
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-
 /* Content */
 .grid3 {
     display: grid;
@@ -238,6 +204,15 @@ li.menuItemPopup a {
     align-items: center;
 }
 
+.selectLong {
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 30px;
+    margin: 3px;
+    width: 200px;
+    padding-left: 5px;
+}
+
 .inputText, .inputTextLong, .inputTextShort {
     border-radius: 3px;
     border: 1px solid black;
@@ -296,6 +271,7 @@ li.menuItemPopup a {
     cursor: pointer;
     background-color: #009bd6;
   }
+
 
   /* Ads */
   .adsbygoogle {

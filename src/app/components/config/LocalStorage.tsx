@@ -1,20 +1,21 @@
-import { template001 } from '@/app/data/templates';
+import { template } from '@/app/data/templates';
 import type { Category, OnePageSettings } from '@/app/data/types';
 
+const ONEPAGE_SETTINGS: OnePageSettings = {
+    categories: [],
+    version: process.env.version || '0.5.6',
+    locale: 'en'
+}
+
 const STORAGE_KEY = 'onepage';
-const VERSION = process.env.version || '0.4.5';
 
 /**
  * 
  * @param categories : Category[]
  * @param key : string
  */
-export function saveToLocalStorage(categories: Category[]) {
-    const opSettings: OnePageSettings = {
-        categories: categories,
-        version: VERSION
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(opSettings));
+export function saveToLocalStorage(onePageSettings: OnePageSettings) {//categories: Category[]) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(onePageSettings));
 }
 
 export function localStorageExist() {
@@ -23,25 +24,21 @@ export function localStorageExist() {
 }
 
 /**
- * @returns OnePageSettings {category[], version: string}
+ * @returns OnePageSettings {category[], version: string, locale: string}
  */
 export function loadFromLocalStorage() {
-    let opSettings: OnePageSettings = {
-        categories: [],
-        version: VERSION
-    }
+    let opSettings = ONEPAGE_SETTINGS;
+
     let localData = localStorage.getItem(STORAGE_KEY);
     if (localData != null) {
-        opSettings.categories = JSON.parse(localData).categories;
+        opSettings = JSON.parse(localData);
     }
     return opSettings;
 }
 
 export function loadFromDefault() {
-    const opSettings: OnePageSettings = {
-        categories: [],
-        version: VERSION
-    }
-    opSettings.categories = template001.categories;
+    const opSettings = ONEPAGE_SETTINGS;
+    
+    opSettings.categories = template.categories;
     return opSettings;
 }

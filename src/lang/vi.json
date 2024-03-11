@@ -5,7 +5,7 @@
     "about.p3": "Tôi hy vọng tất cả các bạn thích sử dụng nó !!! Để hỗ trợ <bold>OnePage</bold>, bạn có thể <link>mua cho tôi một ly cà phê</link>.",
     "about.p4": "Mọi phản hồi đều được chào đón! Xin vui lòng liên hệ với tôi tại <link>lilogia</link>.",
 
-    "footer.message": "© 2023. Bảo lưu mọi quyền. Phiên bản: {version}. Liên hệ:<space></space><link>lilogia</link>.",
+    "footer.message": "© 2024. Bảo lưu mọi quyền. Phiên bản: {version}. Liên hệ:<space></space><link>lilogia</link>.",
 
     "menu.categories": "Các danh mục",
     "menu.about": "Giới thiệu",
@@ -46,6 +46,7 @@
     "edit.back-to-view": "Trở lại",
     "edit.move-to-prev": "Dời về trước",
     "edit.move-to-next": "Dời về sau",
+    "edit.move-to": "Dời đến ...",
 
     "edit.edit-sub-category": "Chỉnh sửa Danh mục con",
     "edit.del-sub-category": "Xoá Danh mục con",
@@ -55,15 +56,27 @@
     "edit.edit-util": "Chỉnh sửa Tiện ích",
     "edit.del-util": "Xoá Tiện ích",
     "edit.del-util-confirm-desc": "Xác nhận bạn muốn xoá tiện ích \"{util}\" ?",
+    
+    "edit.move-to-util-title": "Chọn Danh mục con để chuyển đến:",
+    "edit.move-to-util-desc": "Dời tiện ích \"{util}\" đến Danh mục con khác",
 
     "edit.modal-yes": "Đồng ý",
     "edit.modal-no": "Không",
+    "edit.dialog-move": "Dời",
+    "edit.dialog-cancel": "Huỷ",
+    "edit.dialog-categories": "Các Danh mục",
+    "edit.dialog-sub-categories": "Các Danh mục con",
+    "edit.dialog-add": "Thêm",
 
     "edit.form-sel-title": "Chọn loại tiện ích",
     "edit.form-sel-link": "Liên kết",
     "edit.form-sel-ss": "Tìm kiếm đơn giản",
     "edit.form-sel-ss-exp": "Tìm kiếm với RegExp",
     "edit.form-new-title": "Đề mục mới",
+    "edit.add-utilities-from-library-title": "Thêm tiện ích từ thư viện",
+    "edit.choose-utilities-to-add-desc": "Chọn những tiện ích bạn muốn có trong danh mục con \"{subcategory}\":",
+
+    "edit.no-sub-categories": "Không có Danhh mục con.",
 
     "notification.data-save-success": "Dữ liệu đã được lưu vào bộ nhớ trình duyệt thành công."
 

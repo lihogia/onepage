@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import type { SubCategory, Util, ConfirmModal, Notification } from '@/app/data/types';
+import type { SubCategory, Util, Dialog, Notification } from '@/app/data/types';
 import { splitToNumber, BoardContext } from '@/app/components/BoardContext';
 import NameEditor from '@/app/components/edit/NameEditor';
 import CreateUtilEditor from '@/app/components/edit/CreateUtilEditor';
@@ -8,7 +8,7 @@ import UtilComponent from './util';
 import { MenuContextItem, SEPARATOR } from '@/app/data/menuContext';
 import { ContextMenu, showHideOneAndCloseAllContextMenus} from '@/app/components/edit/ContextMenu';
 import { useIntl } from 'react-intl';
-
+import { ConfirmDialog, SelectSubCategoryDialog, AddUtilitiesFromLibraryDialog } from '@/app/components/dialogs/Dialog';
 
 export default function SubCategoryComponent(
     {subcate, stringIndex = ''}: 
@@ -41,6 +41,10 @@ export default function SubCategoryComponent(
 
     const modalDelTitle = intl.formatMessage({id: 'edit.del-confirm-title'});
     const modalDelDesc = intl.formatMessage({id: 'edit.del-subcate-confirm-desc'}, {subcategory: subcate.name});
+
+    const modalAddUtilitiesTitle = intl.formatMessage({id: 'edit.add-utilities-from-library-title'});
+    const modalAddUtilitiesDesc = intl.formatMessage({id: 'edit.choose-utilities-to-add-desc'}, {subcategory: subcate.name});
+
     const noticeSaveSuccess = intl.formatMessage({id: 'notification.data-save-success'});
     const notice: Notification = {
         type: 'info',
@@ -56,15 +60,32 @@ export default function SubCategoryComponent(
     }
 
     function deleteSubCategory() {
-        const confirmModal: ConfirmModal = {
+        const confirmDelete: Dialog = {
+            type: ConfirmDialog.type,
             title: modalDelTitle,
             description: modalDelDesc,
             status: 0,
+            inputValue: '',
             handleClickOnYes: () => {
                 boardContext.deleteSubCategory(stringIndex);
             }
         };
-        boardContext.setConfirmModal(confirmModal);
+        boardContext.setDialog(confirmDelete);
+    }
+
+    function addUtilsFromLibrary() {
+        const addUtilsDialog: Dialog = {
+            type: AddUtilitiesFromLibraryDialog.type,
+            title: modalAddUtilitiesTitle,
+            description: modalAddUtilitiesDesc,
+            status: 0,
+            inputValue: `${cateIndex}_${subCateIndex}`,
+            handleClickOnYes: (listSelectedUtils: Set<string>) => {
+                boardContext.addUtilsFromLibrary(stringIndex, listSelectedUtils);
+            }
+        };
+        boardContext.setDialog(addUtilsDialog);
+
     }
 
     const menuContextID = `menuCxtSubCate_${stringIndex}`;
@@ -126,6 +147,16 @@ export default function SubCategoryComponent(
             tooltip: ctxMnuAddLink,
             handle: () => {
                 setAddingUtil(true);
+                //boardContext.createUtil(util, stringIndex);
+            },
+            stringIndex: stringIndex
+        },
+        {
+            iconURL: '/icons/addlinkico.png',
+            text: modalAddUtilitiesTitle,
+            tooltip: modalAddUtilitiesTitle,
+            handle: () => {
+                addUtilsFromLibrary();
                 //boardContext.createUtil(util, stringIndex);
             },
             stringIndex: stringIndex

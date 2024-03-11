@@ -19,7 +19,6 @@ export function getUtilTypeName(util: Util) {
     }
 }
 
-
 export interface SubCategory {
     name: string,
     utils: Util[]
@@ -35,10 +34,12 @@ export interface Notification {
     message: string
 }
 
-export interface ConfirmModal {
+export interface Dialog {
+    type: string, // Type of Dialog: ConfirmYesNo, SelectSubCategory
     title: string,
     description: string,
     status: number, // -1: none, 0: popup, 1: yes, 2: no,
+    inputValue: Object,
     handleClickOnYes: Function,
 }
 
@@ -48,13 +49,14 @@ export interface BoardSettings {
     mode: number, // 0: category view, 1: category edit, 2: about, 3: config, 4: donate
     contextMenus: Map<string, boolean>, // true: show, false: hide the context Menu, key is the id of the Context Menu Item List
     notice: Notification,
-    confirmModal: ConfirmModal,
+    dialog: Dialog,
     locale: string, // en, vi, zh-CN, zh-TW
 }
 
 export interface OnePageSettings {
     categories: Category[],
-    version: string
+    version: string,
+    locale: string,
 }
 
 export interface I18n {

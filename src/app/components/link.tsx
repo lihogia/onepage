@@ -24,7 +24,7 @@ export default function UtilLinkComponent({util, stringIndex = ''}: {util: UtilL
     
     return (
         <>
-            <IconComponent size={32} url={util.url}/>
+            <IconComponent size={32} url={util.url} clsName='iconWrapper'/>
             <a className="util" href={utilLink.url} target='_blank'>{utilLink.title}</a>
         </>
     );

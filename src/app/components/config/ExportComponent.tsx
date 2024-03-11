@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { BoardContext } from '@/app/components/BoardContext';
 import type { Category, OnePageSettings } from '@/app/data/types';
-import { template001 } from '@/app/data/templates';
+import { template } from '@/app/data/templates';
 import { localStorageExist, loadFromLocalStorage, loadFromDefault } from './LocalStorage';
 import { FormattedMessage, useIntl } from 'react-intl';
 

@@ -214,8 +214,28 @@ ul.utilities {
     border: 1px solid white;
     padding: 0;
     margin: 5px;
+    margin-left: 2px;
 }
-.util:hover {
+
+.utilEditWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;        
+}
+
+.utilEdit {
+    font-size: 12pt;
+    text-decoration: none;
+    color: black;
+    border: 1px solid white;
+    padding: 0;
+    margin-top: 0;
+    margin-left: 2px;
+
+}
+
+.util:hover, .utilEdit:hover {
     border-bottom: 1px solid black;
     /*text-decoration: underline;*/
 }
@@ -258,6 +278,13 @@ ul.utilities {
     border: 1px solid #009bd6;
 }
 
+.iconWrapperSquare {
+    background-color: #F5F5F5;/*#F2F3F4;*/
+    border-radius: 30%;
+    padding: 2px;
+    border: 1px solid #009bd6;
+}
+
 /* config */
 .configSection {
     display: flex;
@@ -270,4 +297,108 @@ ul.utilities {
     margin: 10px;
   }
 
-}    
+
+    /* Dialog */
+    #dialog {
+        display: inline-block;
+        position: fixed;
+        left: 5px;
+        right: 5px;
+        top: 20%;
+        z-index: 999;
+        padding: 0;
+        border-radius: 3px;
+        border: 3px solid #63b7d3;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dialogTitle {
+        font-size: medium;
+        padding: 5px 5px 5px 5px;
+        border-bottom: 3px solid #63b7d3;
+        color: black;
+    }
+
+    .dialogDesc {
+        margin: 10px;
+    }
+
+    .dialogHandle {
+        margin: 20px 10px 10px 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .dialogSelSubCate {
+        list-style-type: none;
+        margin: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .listSubCates, .listUtils {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 15px 0 0 10px;
+
+    }
+    .listSubCates li, .listUtils li {
+        margin: 5px;
+    }
+
+    .listUtils li.utilItem {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
+
+        border: 1px dotted #63b7d3;
+    }
+
+    .dialogSelCateRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .labelCateName {
+        color: #009bd6;
+        font-weight: bold;
+margin-right: 5px;
+        width: 150px;
+    }
+
+    .selectCateName {
+        border-radius: 3px;
+        border: 1px solid black;
+        height: 30px;
+        margin: 3px;
+        width: 200px;
+        padding-left: 5px;    
+        font-size: 14px;
+    }
+
+    .lstCates {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 2px;
+    }
+
+    .lstCates li {
+        margin: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+}
