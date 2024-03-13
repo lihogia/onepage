@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 export default function LeaderBoardAd() {
-
+/*
     useEffect(() => {
         let adsbygoogle = window.adsbygoogle || [];
         if (adsbygoogle.length == 0) {
@@ -17,4 +17,8 @@ export default function LeaderBoardAd() {
                 data-full-width-responsive="true"></ins>
         </div>
     );
+    */
+   return (
+        <div className="grid2"></div>
+   );
 }

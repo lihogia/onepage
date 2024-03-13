@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: `${process.env.productname}`,
-  description: `${process.env.tag}_${process.env.version}`,
-  googleAdsenseAccount: 'ca-pub-1714100900353848'
+  description: `${process.env.tag}_${process.env.version}`/*,
+  googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
 /*
 export default function RootLayout({
@@ -28,8 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* 
         <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1714100900353848' 
       crossOrigin="anonymous"></script>
+        */}
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
