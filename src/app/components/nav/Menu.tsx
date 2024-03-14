@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContext } from 'react';
 import type { Category } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
@@ -41,7 +42,7 @@ export default function Menu(
     return (
     <ComponentLocaleContainer locale={locale}>
     <div className={'grid1'}>
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
+        <section className="logo"><a href='/'><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></a></section>
         <ul className="menu">
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
@@ -86,7 +87,7 @@ export default function Menu(
         </ul>    
     </div>
     <div className="grid1m">
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
+        <section className="logo"><a href='/'><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></a></section>
         <ul className="menuTitle">
             <li><a href="#" onClick={() => {
                 openMenu(true);
