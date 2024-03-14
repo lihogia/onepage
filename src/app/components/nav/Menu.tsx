@@ -18,6 +18,9 @@ export default function Menu(
     const isAbout = boardContext.boardSettings.mode === 2;
     const isDonate = boardContext.boardSettings.mode === 4;
 
+    const selectedCate: Category = {...categories[selectedIndex]};
+    let selectedName = selectedCate.name;
+
     /** Use in mobile view */
     function openMenu(isOpen: boolean) {
         const containerElement = document.getElementById('ContainerID');
@@ -47,7 +50,10 @@ export default function Menu(
                     );
                 }else {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                        <li key={`${index}_${element.name}`} className='menuItem' onClick={() => {
+                            boardContext.setSelectedCategoryIndex(index);
+                        }
+                        }><a href="#" onClick={
                             () => {
                                 boardContext.setSelectedCategoryIndex(index);
                             }
@@ -84,7 +90,7 @@ export default function Menu(
         <ul className="menuTitle">
             <li><a href="#" onClick={() => {
                 openMenu(true);
-            }}><FormattedMessage id='menu.categories' /></a></li>
+            }}><FormattedMessage id='menu.categories' /></a> <span>&nbsp;&gt;&nbsp; {selectedName}</span></li>
         </ul>
     </div>
     <div className="grid1m_sub_none" id="MenuID">
@@ -96,7 +102,12 @@ export default function Menu(
                     );
                 }else {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                        <li key={`${index}_${element.name}`} className='menuItem' onClick={() => {
+                            if (!isEdit) {
+                                openMenu(false);
+                            }
+                            boardContext.setSelectedCategoryIndex(index);
+                        }}><a href="#" onClick={
                             () => {
                                 if (!isEdit) {
                                     openMenu(false);
