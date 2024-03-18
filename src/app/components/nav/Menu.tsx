@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContext } from 'react';
 import type { Category } from '@/app/data/types';
 import { BoardContext } from '@/app/components/BoardContext';
@@ -17,6 +18,9 @@ export default function Menu(
     const isConfig = boardContext.boardSettings.mode === 3;
     const isAbout = boardContext.boardSettings.mode === 2;
     const isDonate = boardContext.boardSettings.mode === 4;
+
+    const selectedCate: Category = {...categories[selectedIndex]};
+    let selectedName = selectedCate.name;
 
     /** Use in mobile view */
     function openMenu(isOpen: boolean) {
@@ -38,7 +42,7 @@ export default function Menu(
     return (
     <ComponentLocaleContainer locale={locale}>
     <div className={'grid1'}>
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
+        <section className="logo"><a href='/'><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></a></section>
         <ul className="menu">
             {categories.map((element, index) => {
                  if (index === selectedIndex) {
@@ -47,7 +51,10 @@ export default function Menu(
                     );
                 }else {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                        <li key={`${index}_${element.name}`} className='menuItem' onClick={() => {
+                            boardContext.setSelectedCategoryIndex(index);
+                        }
+                        }><a href="#" onClick={
                             () => {
                                 boardContext.setSelectedCategoryIndex(index);
                             }
@@ -80,11 +87,11 @@ export default function Menu(
         </ul>    
     </div>
     <div className="grid1m">
-        <section className="logo"><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></section>
+        <section className="logo"><a href='/'><Image src='/onepage.png' alt='OnePage' width="90" height="90" priority={true}/></a></section>
         <ul className="menuTitle">
             <li><a href="#" onClick={() => {
                 openMenu(true);
-            }}><FormattedMessage id='menu.categories' /></a></li>
+            }}><FormattedMessage id='menu.categories' /></a> <span>&nbsp;&gt;&nbsp; {selectedName}</span></li>
         </ul>
     </div>
     <div className="grid1m_sub_none" id="MenuID">
@@ -96,7 +103,12 @@ export default function Menu(
                     );
                 }else {
                     return (
-                        <li key={`${index}_${element.name}`} className='menuItem'><a href="#" onClick={
+                        <li key={`${index}_${element.name}`} className='menuItem' onClick={() => {
+                            if (!isEdit) {
+                                openMenu(false);
+                            }
+                            boardContext.setSelectedCategoryIndex(index);
+                        }}><a href="#" onClick={
                             () => {
                                 if (!isEdit) {
                                     openMenu(false);
