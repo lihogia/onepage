@@ -36,11 +36,15 @@ export default function About() {
             <p>{msgP3}</p>
             <p>{msgP4}</p>
             <br/>
-            <h4>Find me at the following to get upcoming updates.</h4>
-            <br/>
-            <p><a href="https://www.facebook.com/profile.php?id=61557501233278" className="fa fa-facebook" target='_blank'></a>&nbsp;&nbsp;&nbsp;
-            <a href="https://twitter.com/OnePage_Lilola" className="fa fa-twitter" target='_blank'></a>&nbsp;&nbsp;&nbsp;
-            <a href="https://www.instagram.com/onepage.lilola" className="fa fa-instagram" target='_blank'></a></p>
+            <ul>
+                <li>
+                    <h4>Find me at the following to get upcoming updates.</h4>
+                    <br/>
+                    <p><a href="https://www.facebook.com/profile.php?id=61557501233278" className="fa fa-facebook" target='_blank'></a>&nbsp;&nbsp;&nbsp;
+                    <a href="https://twitter.com/OnePage_Lilola" className="fa fa-twitter" target='_blank'></a>&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.instagram.com/onepage.lilola" className="fa fa-instagram" target='_blank'></a></p>
+                </li>
+            </ul>
 {/*
             <h3>Releases</h3>
             <h4>Delta 0.5.0 - 2023.November</h4>

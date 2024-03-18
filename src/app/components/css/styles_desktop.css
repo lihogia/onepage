@@ -220,7 +220,7 @@ li.menuItemPopup, .menuItemPopup a {
       }
     
       .aboutSection ul {
-        list-style-type: disc;
+        list-style-type: none;
       }
 
     /* config */
