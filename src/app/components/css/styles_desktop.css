@@ -10,6 +10,23 @@
     grid-row: 1;
     grid-column: 2 / span 2;
     border-bottom: 2px solid #009bd6;
+    border-left: 4px solid white;
+    background: url('/imgs/LeaderboardAd_desktop.png') no-repeat fixed right top;    
+}
+
+.grid2 h1 {
+    color: gold;
+    margin: 20px 50px;
+    font-size: 3vh;
+}
+
+.grid4 {
+    background: url('/imgs/LargeRectangleAd_desktop.png') repeat-y fixed right top;
+}
+
+.grid4 h4 {
+    margin: 10px 20px;
+    color: white;
 }
 
 .grid5 {
@@ -99,8 +116,10 @@ ul.utilities {
 }
 
 a.menuItemBottomSelected{
-    color: #009bd6;
-    background-color: white;
+    /*color: #009bd6;
+    background-color: white;*/
+    color: navy;
+    background-color: gold;
     padding: 3px;
     font-weight: bolder;
     /*text-shadow: 2px 2px 3px white;*/

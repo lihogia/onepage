@@ -19,6 +19,8 @@ export default function LeaderBoardAd() {
     );
     */
    return (
-        <div className="grid2"></div>
+        <div className="grid2">
+            <h1>Edit to Make your own Page. Everything in your local.</h1>
+        </div>
    );
 }

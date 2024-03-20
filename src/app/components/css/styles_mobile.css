@@ -9,18 +9,29 @@
         border-bottom: 2px solid #009bd6;
     }
 
-    .grid3 {
-        border: 0px solid red;
-        display: flex;
-        flex-direction: column;
-    }
-
     .grid2 {
+        background: url('/imgs/LeaderboardAd_mobile.png') repeat-x scroll right top;
         height: 100px;
+    }
+    .grid2 h1 {
+        color: gold;
+        margin: 20px 20px;
+        font-size: 2vh;
     }    
 
     .grid4 {
+        background: url('/imgs/LargeRectangleAd_mobile.png') repeat-x scroll right top;
         max-height: 280px;
+    }
+    .grid4 h4 {
+        margin: 10px 20px;
+        color: ffff;
+    }    
+
+    .grid3 {
+        
+        display: flex;
+        flex-direction: column;
     }
 
     /* Footer */
@@ -149,8 +160,11 @@
     }
     
     a.menuItemBottomSelected{
-        color: #009bd6;
+/*        color: #009bd6;
         background-color: white;
+*/
+        color: navy;
+        background-color: gold;    
         padding: 3px 4px 1px 4px;
         font-weight: bolder;
         /*text-shadow: 2px 2px 3px white;*/
