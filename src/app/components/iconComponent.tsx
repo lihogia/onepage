@@ -12,7 +12,9 @@ export default function IconComponent({size, url, clsName}: {size: number, url: 
 
     return (
         <>
-            <img src={iconUrl} width={size} height={size} alt={''} className={clsName}/>&nbsp;
+            <a href={url} target='_blank'>
+                <img src={iconUrl} width={size} height={size} alt={''} className={clsName}/>
+            </a>&nbsp;
         </>
     );
 }
