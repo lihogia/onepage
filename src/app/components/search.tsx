@@ -24,10 +24,8 @@ export default function UtilSimpleSearch({util, stringIndex = ''}: {util: Simple
     return (
         <section>        
             <section className='searchTitle'>
-                <IconComponent size={32} url={util.url} clsName='iconWrapperSquare'/>
-                
-                    <a className="util" href={urlOrigin} target='_blank'>{search.title}</a>
-                
+                <IconComponent size={32} url={urlOrigin} clsName='iconWrapperSquare'/>
+                <a className="util" href={urlOrigin} target='_blank'>{search.title}</a>
             </section>
             <form method='get' target='_blank' name={`form_${stringIndex}`} className={styles.formView}>
                 <input type='text' className={styles.input_text} name={search.fieldname} />

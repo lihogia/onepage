@@ -10,6 +10,25 @@
     grid-row: 1;
     grid-column: 2 / span 2;
     border-bottom: 2px solid #009bd6;
+    margin-left: 4px;
+    /*background: url('/imgs/LeaderboardAd_desktop.png') no-repeat fixed right top; */
+    background: url('/ads/000/LeaderboardAd_desktop.jpg') no-repeat fixed right top;
+}
+
+.grid2 h1 {
+    color: gold;
+    margin: 25px 50px;
+    font-size: 3vh;
+}
+
+.grid4 {
+    /*background: url('/imgs/LargeRectangleAd_desktop.png') repeat-y fixed right top;*/
+    background: url('/ads/000/LargeRectangleAd_desktop.jpg') repeat-y fixed right center;
+}
+
+.grid4 h4 {
+    margin: 10px 20px;
+    color: gold;
 }
 
 .grid5 {
@@ -99,8 +118,10 @@ ul.utilities {
 }
 
 a.menuItemBottomSelected{
-    color: #009bd6;
-    background-color: white;
+    /*color: #009bd6;
+    background-color: white;*/
+    color: navy;
+    background-color: gold;
     padding: 3px;
     font-weight: bolder;
     /*text-shadow: 2px 2px 3px white;*/
@@ -182,8 +203,8 @@ li.menuItemPopup, .menuItemPopup a {
     }
 
     .util:hover, .utilEdit:hover {
-        border-bottom: 1px solid black;
-        /*text-decoration: underline;*/
+        /*border-bottom: 1px solid black;*/
+        text-decoration: underline solid #009bd6;
     }
 
     /* icon wrapper */

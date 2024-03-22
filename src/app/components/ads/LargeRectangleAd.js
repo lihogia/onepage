@@ -20,6 +20,9 @@ export default function LargeRectangleAd() {
     */
 
     return (
-        <div className='grid4'></div>
+        <div className='grid4'>
+            <h4>Have a great day!</h4>
+            <h4>Let&#39;s start here.</h4>
+        </div>
     );
 }
