@@ -205,6 +205,7 @@ li.menuItemPopup, .menuItemPopup a {
     .util:hover, .utilEdit:hover {
         /*border-bottom: 1px solid black;*/
         text-decoration: underline solid #009bd6;
+        text-underline-offset: 4px;
     }
 
     /* icon wrapper */
