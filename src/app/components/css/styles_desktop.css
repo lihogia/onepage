@@ -17,13 +17,13 @@
 
 .grid2 h1 {
     color: gold;
-    margin: 20px 50px;
-    font-size: 2vh;
+    margin: 25px 50px;
+    font-size: 3vh;
 }
 
 .grid4 {
     /*background: url('/imgs/LargeRectangleAd_desktop.png') repeat-y fixed right top;*/
-    background: url('/ads/000/LargeRectangleAd_desktop.jpg') repeat-y fixed right bottom;
+    background: url('/ads/000/LargeRectangleAd_desktop.jpg') repeat-y fixed right center;
 }
 
 .grid4 h4 {
