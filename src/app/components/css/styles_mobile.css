@@ -10,22 +10,24 @@
     }
 
     .grid2 {
-        background: url('/imgs/LeaderboardAd_mobile.png') repeat-x scroll right top;
+        /* background: url('/imgs/LeaderboardAd_mobile.png') repeat-x scroll right top; */
+        background: url('/ads/000/LeaderboardAd_mobile.jpg') repeat-x scroll right top;
         height: 100px;
     }
     .grid2 h1 {
-        color: gold;
+        color: gold;        
         margin: 20px 20px;
         font-size: 2vh;
     }    
 
     .grid4 {
-        background: url('/imgs/LargeRectangleAd_mobile.png') repeat-x scroll right top;
+        /* background: url('/imgs/LargeRectangleAd_mobile.png') repeat-x scroll right top; */
+        background: url('/ads/000/LargeRectangleAd_mobile.jpg') repeat-x scroll left top;
         max-height: 280px;
     }
     .grid4 h4 {
         margin: 10px 20px;
-        color: ffff;
+        color: gold;
     }    
 
     .grid3 {
@@ -250,8 +252,8 @@ ul.utilities {
 }
 
 .util:hover, .utilEdit:hover {
-    border-bottom: 1px solid black;
-    /*text-decoration: underline;*/
+    /* border-bottom: 1px solid black; */
+    text-decoration: underline solid #009bd6;
 }
 
 .aboutSection {

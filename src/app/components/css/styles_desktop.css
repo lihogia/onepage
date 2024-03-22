@@ -10,23 +10,25 @@
     grid-row: 1;
     grid-column: 2 / span 2;
     border-bottom: 2px solid #009bd6;
-    border-left: 4px solid white;
-    background: url('/imgs/LeaderboardAd_desktop.png') no-repeat fixed right top;    
+    margin-left: 4px;
+    /*background: url('/imgs/LeaderboardAd_desktop.png') no-repeat fixed right top; */
+    background: url('/ads/000/LeaderboardAd_desktop.jpg') no-repeat fixed right top;
 }
 
 .grid2 h1 {
     color: gold;
     margin: 20px 50px;
-    font-size: 3vh;
+    font-size: 2vh;
 }
 
 .grid4 {
-    background: url('/imgs/LargeRectangleAd_desktop.png') repeat-y fixed right top;
+    /*background: url('/imgs/LargeRectangleAd_desktop.png') repeat-y fixed right top;*/
+    background: url('/ads/000/LargeRectangleAd_desktop.jpg') repeat-y fixed right bottom;
 }
 
 .grid4 h4 {
     margin: 10px 20px;
-    color: white;
+    color: gold;
 }
 
 .grid5 {
@@ -201,8 +203,8 @@ li.menuItemPopup, .menuItemPopup a {
     }
 
     .util:hover, .utilEdit:hover {
-        border-bottom: 1px solid black;
-        /*text-decoration: underline;*/
+        /*border-bottom: 1px solid black;*/
+        text-decoration: underline solid #009bd6;
     }
 
     /* icon wrapper */

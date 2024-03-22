@@ -21,7 +21,7 @@ export default function LargeRectangleAd() {
 
     return (
         <div className='grid4'>
-            <h4>All start from here.</h4>
+            <h4>Start from here.</h4>
         </div>
     );
 }

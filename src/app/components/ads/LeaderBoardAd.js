@@ -17,10 +17,12 @@ export default function LeaderBoardAd() {
                 data-full-width-responsive="true"></ins>
         </div>
     );
+
+    <h1>Remember to click on Save before back to View mode.</h1>
     */
    return (
         <div className="grid2">
-            <h1>Edit to Make your own Page. Everything in your local.</h1>
+            <h1>Edit & Save to customize your Page. Export & Import to save your Data.</h1>
         </div>
    );
 }
