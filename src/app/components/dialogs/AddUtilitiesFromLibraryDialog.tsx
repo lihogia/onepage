@@ -41,7 +41,7 @@ export default function AddUtilitiesFromLibraryDialog(
     }
 
     return (
-    <div id="dialog">
+    <div id="dialog" className='bigDialog'>
         <h3 className='dialogTitle'>{dialog.title}</h3>
         <div className='dialogDesc'>{dialog.description}</div>
 

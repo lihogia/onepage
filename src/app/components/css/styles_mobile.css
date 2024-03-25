@@ -330,6 +330,10 @@ ul.utilities {
         display: flex;
         flex-direction: column;
     }
+    .bigDialog {
+        height: 500px;
+        overflow: auto;
+    }
 
     .dialogTitle {
         font-size: medium;
