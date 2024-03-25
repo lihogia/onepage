@@ -10,12 +10,12 @@ export default function Footer() {
   
   const descriptor = {
     id: 'footer.message', 
-    defaultMessage: '© 2023. All right reserved. Version: {version}. Contact: @<link>lilogia</link>.', 
+    defaultMessage: '© 2023. All right reserved. Version: {version}. Contact: @<link>onepage.lilola</link>.', 
     description: 'Footer sentence: copyright, version & contact.'    
   };
   const values: any = {
     version: strVersion,
-    link: (str: string) => <a href='mailto:lilogia@gmail.com'>{str}</a>,
+    link: (str: string) => <a href='mailto:onepage.lilola@gmail.com'>{str}</a>,
     space: () => <span>&nbsp;</span>
   };
 

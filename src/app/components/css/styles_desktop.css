@@ -205,6 +205,7 @@ li.menuItemPopup, .menuItemPopup a {
     .util:hover, .utilEdit:hover {
         /*border-bottom: 1px solid black;*/
         text-decoration: underline solid #009bd6;
+        text-underline-offset: 4px;
     }
 
     /* icon wrapper */
@@ -261,14 +262,19 @@ li.menuItemPopup, .menuItemPopup a {
         display: inline-block;
         position: fixed;
         left: 20%;
-        top: 20%;
+        top: 13%;
         z-index: 999;
         padding: 0;
         border-radius: 3px;
         border: 3px solid #63b7d3;
         background-color: white;
-        display: flex;
+        
         flex-direction: column;
+    }
+
+    .bigDialog {
+        height: 800px;
+        overflow: auto;
     }
 
     .dialogTitle {

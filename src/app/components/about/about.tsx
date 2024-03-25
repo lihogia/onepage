@@ -12,7 +12,7 @@ export default function About() {
         link: (str2: string) => <a href='https://www.buymeacoffee.com/lilogia'>{str2}</a>
     };
     const value4: any = {
-        link: (str: string) => <a href='mailto:lilogia@gmail.com'>{str}</a>
+        link: (str: string) => <a href='mailto:onepage.lilola@gmail.com'>{str}</a>
     };
     const msgP1 = intl.formatMessage({id: 'about.p1'}, value1);
     const msgP2 = intl.formatMessage({id: 'about.p2'});

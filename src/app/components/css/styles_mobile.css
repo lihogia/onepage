@@ -254,6 +254,7 @@ ul.utilities {
 .util:hover, .utilEdit:hover {
     /* border-bottom: 1px solid black; */
     text-decoration: underline solid #009bd6;
+    text-underline-offset: 4px;
 }
 
 .aboutSection {
@@ -328,6 +329,10 @@ ul.utilities {
         background-color: white;
         display: flex;
         flex-direction: column;
+    }
+    .bigDialog {
+        height: 500px;
+        overflow: auto;
     }
 
     .dialogTitle {
