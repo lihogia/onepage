@@ -284,6 +284,14 @@ li.menuItemPopup, .menuItemPopup a {
         color: black;
     }
 
+    .dialogTitleBig {
+        font-size: larger;
+        padding: 10px;
+        border-bottom: 3px solid #63b7d3;
+        color: black;
+
+    }
+
     .dialogDesc {
         margin: 10px;
     }
@@ -362,6 +370,15 @@ li.menuItemPopup, .menuItemPopup a {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+    }
+
+    ul.dialogWelcomeOption {
+        list-style-type: none;
+        margin: 20px;
+    }
+
+    .dialogWelcomeOption li {
+        margin: 10px;
     }
 
 }

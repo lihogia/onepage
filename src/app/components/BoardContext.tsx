@@ -7,7 +7,7 @@ const emptyNotification: Notification = {
   type: 'none',
   message: ''
 }
-const emptyDialog: Dialog = {
+export const emptyDialog: Dialog = {
   type: 'ConfirmYesNo',
   title: '',
   description: '',
