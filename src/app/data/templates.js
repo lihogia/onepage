@@ -753,7 +753,7 @@ const template002 = {
   ]
 }
 
-const template001 = {
+export const template001 = {
     "categories": [
         {
             "name": "Common",
@@ -860,22 +860,6 @@ const template001 = {
                         {
                             "title": "Translate with Cambridge",
                             "url": "https://dictionary.cambridge.org/translate/"
-                        },
-                        {
-                            "title": "Reverso",
-                            "url": "https://www.reverso.net/text-translation"
-                        },
-                        {
-                            "title": "Quillbot",
-                            "url": "https://quillbot.com/translate"
-                        },
-                        {
-                            "title": "Online Translator",
-                            "url": "https://www.translate.com/"
-                        },
-                        {
-                            "title": "Microsoft Translator",
-                            "url": "https://www.bing.com/translator/"
                         }
                     ]
                 }
@@ -940,23 +924,11 @@ const template001 = {
                             "title": "The Independent",
                             "url": "https://www.independent.co.uk/"
                         },
-                        {
-                            "title": "The Telegraph",
-                            "url": "https://www.telegraph.co.uk/"
-                        },
-                        {
-                            "title": "Reaction - Independence Journalism in the UK",
-                            "url": "https://reaction.life/"
-                        }
                     ]
                 },
                 {
                     "name": "Canada",
                     "utils": [
-                        {
-                            "title": "Centre for International Governance Innovation",
-                            "url": "https://www.cigionline.org/"
-                        },
                         {
                             "title": "CBC",
                             "url": "https://www.cbc.ca/"
@@ -969,14 +941,6 @@ const template001 = {
                             "title": "National Post",
                             "url": "https://nationalpost.com/"
                         },
-                        {
-                            "title": "The Star",
-                            "url": "https://www.thestar.com/"
-                        },
-                        {
-                            "title": "CTV News",
-                            "url": "https://www.ctvnews.ca/"
-                        }
                     ]
                 },
                 {
@@ -994,18 +958,6 @@ const template001 = {
                             "title": "Sky News ",
                             "url": "https://www.skynews.com.au/"
                         },
-                        {
-                            "title": "9News",
-                            "url": "https://www.9news.com.au/"
-                        },
-                        {
-                            "title": "The Australian",
-                            "url": "https://www.theaustralian.com.au/"
-                        },
-                        {
-                            "title": "Australian Breaking News Headlines",
-                            "url": "https://www.smh.com.au/"
-                        }
                     ]
                 },
                 {
@@ -1092,26 +1044,39 @@ const template001 = {
                     ]
                 }
             ]
-        },
-        {
-            "name": "Technology",
-            "subcategories": [
-                {
-                    "name": "Vietnam",
-                    "utils": [
-                        {
-                            "title": "Tinhte.vn",
-                            "url": "https://tinhte.vn/"
-                        },
-                        {
-                            "title": "genk.vn",
-                            "url": "https://genk.vn/"
-                        }
-                    ]
-                }
-            ]
         }
     ],
+}
+
+export const template000 = {
+  "categories": [
+    {
+      "name": "New Category",
+      "subcategories": [
+        {
+          "name": "New Sub-Category",
+          "utils": [
+            {
+              "title": "New Link",
+              "url": "https://www.new-link.com"
+            },
+            {
+              "fieldname": "q",
+              "title": "Simple Search Form",
+              "url": "https://www.new-link.com/search"
+            },
+            {
+              "fieldname": "regexp",
+              "pattern": "e.target.value|ig",
+              "title": "Search Form with RegExp",
+              "url": "https://www.new-link.com/search/e.target.value.html"
+              
+            }
+          ]
+        }
+      ]
+    }
+  ],
 }
 
 export const template = template002;

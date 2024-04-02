@@ -341,7 +341,13 @@ ul.utilities {
         border-bottom: 3px solid #63b7d3;
         color: black;
     }
+    .dialogTitleBig {
+        font-size: larger;
+        padding: 10px;
+        border-bottom: 3px solid #63b7d3;
+        color: black;
 
+    }
     .dialogDesc {
         margin: 10px;
     }
@@ -394,7 +400,7 @@ ul.utilities {
     .labelCateName {
         color: #009bd6;
         font-weight: bold;
-margin-right: 5px;
+        margin-right: 5px;
         width: 150px;
     }
 
@@ -422,4 +428,12 @@ margin-right: 5px;
         justify-content: flex-start;
     }
 
+    ul.dialogWelcomeOption {
+        list-style-type: none;
+        margin: 10px;
+    }
+
+    .dialogWelcomeOption li {
+        margin: 5px;
+    }
 }

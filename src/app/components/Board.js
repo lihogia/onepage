@@ -1,10 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { template } from '@/app/data/templates';
-import { createInitBoardContext, BoardContext, emptyBoardSettings } from './BoardContext';
+import { createInitBoardContext, BoardContext, emptyBoardSettings, emptyDialog } from './BoardContext';
 import About from './about/about';
 import Config from './config/config';
-import DialogComponent from '@/app/components/dialogs/Dialog';
+import DialogComponent, { WelcomeDialog } from '@/app/components/dialogs/Dialog';
 import NotificationComponent from './config/NotificationComponent';
 import CategoryComponent from './category';
 import Menu from './nav/Menu';
@@ -60,10 +60,22 @@ export default function Board() {
       let configOnePage = loadLocalStorage();
       let useLocale = configOnePage.locale;
       let localCates = configOnePage.categories;
+      let dialog = emptyDialog;
 
       if (localCates.length == 0 ) {
         localCates = template.categories;
         console.log('No data in local storage, default data will be loaded. Start to use your own data by Edit & Save to storage, or Import from Config.');
+
+        const welcomeDialog = {
+          type: WelcomeDialog.type,
+          title: 'Welcome to OnePage',
+          description: 'Start to use the Board by choosing one of following options:',
+          status: 0,
+          inputValue: ``,
+          handleClickOnYes: () => {
+          }
+        };
+        dialog = welcomeDialog;
   
       }
       if (!useLocale) {
@@ -76,7 +88,7 @@ export default function Board() {
         }
       }
 
-      const newBoardSettings = {...boardSettings, categories: localCates, locale: useLocale};
+      const newBoardSettings = {...boardSettings, categories: localCates, locale: useLocale, dialog: dialog};
       setBoardSettings(newBoardSettings);
     }, []);
 

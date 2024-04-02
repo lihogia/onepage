@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { BoardContext } from '@/app/components/BoardContext';
 import SelectSubCategoryDialogComponent from './SelectSubCategoryDialog';
 import AddUtilitiesFromLibraryDialogComponent from './AddUtilitiesFromLibraryDialog';
+import WelcomeDialogComponent from './WelcomeDialog';
 
 const DefaultDialog: Dialog = {
     type: '',
@@ -23,6 +24,9 @@ SelectSubCategoryDialog.type = 'SelectSubCategory';
 
 export const AddUtilitiesFromLibraryDialog: Dialog = {...DefaultDialog};
 AddUtilitiesFromLibraryDialog.type = 'AddUtilitiesFromLibrary';
+
+export const WelcomeDialog: Dialog = {...DefaultDialog};
+WelcomeDialog.type = 'Welcome';
 
 export default function DialogComponent() {
 
@@ -76,6 +80,10 @@ export default function DialogComponent() {
             return (
                 <AddUtilitiesFromLibraryDialogComponent dialog={dialog} handleYes={handleChooseYes} handleNo={handleChooseNo} selectedIndex={dialog.inputValue.toString()}/>            
             );    
+        }else if (dialog.type === WelcomeDialog.type) {
+            return (
+                <WelcomeDialogComponent />
+            );
         }
     }else {
         return (
