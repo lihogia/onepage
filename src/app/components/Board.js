@@ -4,6 +4,7 @@ import { template } from '@/app/data/templates';
 import { createInitBoardContext, BoardContext, emptyBoardSettings, emptyDialog } from './BoardContext';
 import About from './about/about';
 import Config from './config/config';
+import Donate from './donate/donate';
 import DialogComponent, { WelcomeDialog } from '@/app/components/dialogs/Dialog';
 import NotificationComponent from './config/NotificationComponent';
 import CategoryComponent from './category';
@@ -105,6 +106,7 @@ export default function Board() {
                 <NotificationComponent />
               {boardSettings.mode === 2 && <About />}
               {boardSettings.mode === 3 && <Config />}
+              {boardSettings.mode === 4 && <Donate />}
               {(boardSettings.mode === 0 || boardSettings.mode === 1) && boardSettings.categories.length > 0 && 
                   <CategoryComponent category={boardSettings.categories[boardSettings.selectedIndex]} 
                   key={`${boardSettings.selectedIndex}_${boardSettings.categories[boardSettings.selectedIndex].name}`} index={boardSettings.selectedIndex}/>}

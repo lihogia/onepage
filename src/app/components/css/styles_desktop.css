@@ -232,17 +232,26 @@ li.menuItemPopup, .menuItemPopup a {
         border: 1px solid #009bd6;
     }
     
-    .aboutSection {
+    .aboutSection, .donateSection {
         padding: 30px 10px 10px 10px;
       }
     
-      .aboutSection p {
+      .aboutSection p, .donateSection p {
         margin: 10px 5px 5px 10px;
         text-wrap: pretty;
       }
     
       .aboutSection ul {
         list-style-type: none;
+      }
+
+      ul.qrSection {
+        display: flex;
+        flex-direction: row;
+      }
+      ul.qrSection li {
+        margin: 10px 50px;
+        padding: 5px;
       }
 
     /* config */
