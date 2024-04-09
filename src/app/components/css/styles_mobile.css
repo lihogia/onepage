@@ -257,11 +257,11 @@ ul.utilities {
     text-underline-offset: 4px;
 }
 
-.aboutSection {
+.aboutSection, .donateSection {
     padding: 30px 10px 10px 10px;
   }
 
-  .aboutSection p {
+  .aboutSection p, .donateSection p {
     margin: 10px 5px 5px 10px;
     text-wrap: pretty;
   }
@@ -269,6 +269,16 @@ ul.utilities {
   .aboutSection ul {
     list-style-type: disc;
   }
+
+  ul.qrSection {
+    display: flex;
+    flex-direction: column;
+  }
+  ul.qrSection li {
+    margin: 10px;
+    padding: 5px;
+  }
+
 
 
 /*icon wrapper */
