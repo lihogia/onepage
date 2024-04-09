@@ -6,11 +6,11 @@ import '@/app/components/css/styles_mobile.css';
 import '@/app/components/css/styles_tablet.css';
 import '@/app/components/css/styles_desktop.css';
 import { Analytics } from '@vercel/analytics/react';
-
+ 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: `${process.env.productname}`,
+  title: `${process.env.productname} - Bookmarks Management Tool`,
   description: `${process.env.tag}_${process.env.version}`/*,
   googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
