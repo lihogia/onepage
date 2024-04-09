@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: `${process.env.productname} - Bookmarks Management Tool`,
-  description: `${process.env.tag}_${process.env.version}`/*,
+  description: `A Single Page Application manages bookmarks and utilities. A OnePage serves as Homepage on browser.`/*,
   googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
 /*
