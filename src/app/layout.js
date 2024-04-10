@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: `${process.env.productname} - Bookmarks Management Tool`,
-  description: `A Single Page Application manages bookmarks and utilities. A OnePage serves as Homepage on browser.`/*,
+  description: `A bookmarks management tool supports to save and edit (CRUD) links, utilities by categories and sub-categories. A Single Page Application serves as Homepage on browser.`/*,
   googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
 /*
