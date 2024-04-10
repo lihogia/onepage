@@ -11,7 +11,9 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: `${process.env.productname} - Bookmarks Management Tool`,
-  description: `A bookmarks management tool supports saving and editing links, utilities by categories and sub-categories. A Single Page Application serves as Homepage on browser.`/*,
+  description: `A bookmarks management tool supports saving and editing links, utilities by categories and sub-categories. A Single Page Application serves as Homepage on browser.`,
+  keywords: 'bookmarks, management, editable, saving, links, categories, utilities, page, sub-categories',
+  /*,
   googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
 /*
