@@ -10,7 +10,7 @@ export default function Footer() {
   
   const descriptor = {
     id: 'footer.message', 
-    defaultMessage: '© 2023. All right reserved. Version: {version}. Contact: @<link>onepage.lilola</link>.', 
+    defaultMessage: '© 2024. All right reserved. Version: {version}. Contact: @<link>onepage.lilola</link>.', 
     description: 'Footer sentence: copyright, version & contact.'    
   };
   const values: any = {

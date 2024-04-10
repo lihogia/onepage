@@ -6,12 +6,12 @@ import '@/app/components/css/styles_mobile.css';
 import '@/app/components/css/styles_tablet.css';
 import '@/app/components/css/styles_desktop.css';
 import { Analytics } from '@vercel/analytics/react';
-
+ 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: `${process.env.productname}`,
-  description: `${process.env.tag}_${process.env.version}`/*,
+  title: `${process.env.productname} - Bookmarks Management Tool`,
+  description: `A Single Page Application manages bookmarks and utilities. A OnePage serves as Homepage on browser.`/*,
   googleAdsenseAccount: 'ca-pub-1714100900353848'*/
 }
 /*
