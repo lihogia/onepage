@@ -254,6 +254,13 @@ li.menuItemPopup, .menuItemPopup a {
         padding: 5px;
       }
 
+    /* Notification bar */
+    .notificationBar-info, .notificationBar-warn, .notificationBar-error {
+        margin-left: 4px;
+        margin-top: 2px;
+    }
+    
+
     /* config */
     .configSection {
         display: flex;

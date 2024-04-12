@@ -312,6 +312,12 @@ ul.utilities {
     border: 1px solid #009bd6;
 }
 
+/* Notification bar */
+.notificationBar-info, .notificationBar-warn, .notificationBar-error {
+    margin-top: 2px;
+}
+
+
 /* config */
 .configSection {
     display: flex;
