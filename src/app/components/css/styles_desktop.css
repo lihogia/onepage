@@ -245,14 +245,27 @@ li.menuItemPopup, .menuItemPopup a {
         list-style-type: none;
       }
 
+      .donateSection ul {
+        list-style-type: circle;
+      }
+    
+
       ul.qrSection {
         display: flex;
         flex-direction: row;
+        list-style-type: none;
       }
       ul.qrSection li {
         margin: 10px 50px;
         padding: 5px;
       }
+
+    /* Notification bar */
+    .notificationBar-info, .notificationBar-warn, .notificationBar-error {
+        margin-left: 4px;
+        margin-top: 2px;
+    }
+    
 
     /* config */
     .configSection {
