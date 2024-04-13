@@ -266,6 +266,10 @@ ul.utilities {
     text-wrap: pretty;
   }
 
+  .donateSection ul {
+    list-style-type: circle;
+  }
+
   .aboutSection ul {
     list-style-type: disc;
   }
@@ -273,6 +277,7 @@ ul.utilities {
   ul.qrSection {
     display: flex;
     flex-direction: column;
+    list-style-type: none;
   }
   ul.qrSection li {
     margin: 10px;
